@@ -1,189 +1,116 @@
 package GraphGenerators;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.function.Supplier;
+import java.util.ArrayList;
 
-public class Graphs implements Graph {
 
-	@Override
-	public Set getAllEdges(Object sourceVertex, Object targetVertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Object getEdge(Object sourceVertex, Object targetVertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class Graphs implements Graph<Vertex, Edge> {
 
-	@Override
-	public Supplier getVertexSupplier() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Supplier getEdgeSupplier() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object addEdge(Object sourceVertex, Object targetVertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean addEdge(Object sourceVertex, Object targetVertex, Object e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Object addVertex() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean addVertex(Object v) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsEdge(Object sourceVertex, Object targetVertex) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsEdge(Object e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsVertex(Object v) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Set edgeSet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int degreeOf(Object vertex) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Set edgesOf(Object vertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int inDegreeOf(Object vertex) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Set incomingEdgesOf(Object vertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int outDegreeOf(Object vertex) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Set outgoingEdgesOf(Object vertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean removeAllEdges(Collection edges) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Set removeAllEdges(Object sourceVertex, Object targetVertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean removeAllVertices(Collection vertices) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Object removeEdge(Object sourceVertex, Object targetVertex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean removeEdge(Object e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean removeVertex(Object v) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Set vertexSet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object getEdgeSource(Object e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object getEdgeTarget(Object e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GraphType getType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double getEdgeWeight(Object e) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setEdgeWeight(Object e, double weight) {
-		// TODO Auto-generated method stub
+	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
+	ArrayList<Edge> edges = new ArrayList<Edge>();
+	
+	public Graphs() {
 		
+	}
+	
+	
+
+	@Override
+	public Edge getEdge(Vertex sourceVertex, Vertex targetVertex) {
+		Edge x = new Edge(sourceVertex,targetVertex,0);
+          if(edges.contains(x)) {return x;}
+          return null;
+	}
+
+
+	@Override
+	public Edge addEdge(Vertex sourceVertex, Vertex targetVertex) {
+		edges.add(new Edge(sourceVertex, targetVertex, 0));
+		return null;
+	}
+
+	@Override
+	public boolean addEdge(Vertex sourceVertex, Vertex targetVertex, Edge e) {
+		edges.add(new Edge(sourceVertex, targetVertex, 0));
+		return false;
+	}
+
+
+	@Override
+	public boolean addVertex(Vertex v) {
+		vertices.add(v);
+		return true;
+	}
+
+	@Override
+	public boolean containsEdge(Edge e) {
+		return edges.contains(e);
+	}
+
+	@Override
+	public boolean containsVertex(Vertex v) {
+		return vertices.contains(v);
+	}
+
+	
+	@Override
+	public int degreeOf(Vertex vertex) {
+		  int counter=0; 
+	        for(int i=0; i<edges.size() ; i++) {
+	        	if(edges.get(i).getFrom().equals(vertex)) {counter++;}
+	        	      	
+	        }
+	       
+			return counter;
+	}
+
+
+	@Override
+	public boolean removeEdge(Edge e) {
+        edges.remove(e);
+		return true;
+	}
+
+	@Override
+	public boolean removeVertex(Vertex v) {
+		vertices.remove(v);
+		return true;
+	}
+
+
+	@Override
+	public double getEdgeWeight(Edge e) {
+		return e.getWeight();
+	}
+
+	@Override
+	public void setEdgeWeight(Edge e, double weight) {
+		e.setWeight(weight);
+
+	}
+
+	@Override
+	public boolean containsEdge(Vertex sourceVertex, Vertex targetVertex) {
+        Edge e = new Edge(sourceVertex,targetVertex,0);
+		return edges.contains(e);
+	}
+	
+
+
+	public ArrayList<Vertex> getVertices() {
+		return vertices;
+	}
+
+	public void setVertices(ArrayList<Vertex> vertices) {
+		this.vertices = vertices;
+	}
+
+	public ArrayList<Edge> getEdges() {
+		return edges;
+	}
+
+	public void setEdges(ArrayList<Edge> edges) {
+		this.edges = edges;
 	}
 
 }

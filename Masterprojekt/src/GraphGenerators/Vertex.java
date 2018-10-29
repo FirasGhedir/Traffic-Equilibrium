@@ -3,9 +3,8 @@ package GraphGenerators;
 public class Vertex {
 	int id;
 
-	
-	public Vertex() {
-		super();
+	public Vertex(int id) {
+		this.id = id;
 	}
 
 	public int getId() {
@@ -14,6 +13,6 @@ public class Vertex {
 
 	public void setId(int id) {
 		this.id = id;
-	} 
-	
+	}
+
 }

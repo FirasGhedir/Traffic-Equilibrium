@@ -2,7 +2,7 @@ package GraphGenerators;
 
 import java.util.*;
 
-public class GridGraphGenerator <V,E> implements GraphGenerator<V,E,V> {
+public  class GridGraphGenerator implements GraphGenerator<Vertex,Edge,Vertex> {
 
 	/**
      * Role for the vertices at the corners.
@@ -34,14 +34,15 @@ public class GridGraphGenerator <V,E> implements GraphGenerator<V,E,V> {
 
   
     @Override
-    public void generateGraph(Graph<V, E> target, Map<String, V> resultMap)
+    public void generateGraph(Graph<Vertex, Edge> target, Map<String, Vertex> resultMap)
     {
-        Map<Integer, V> map = new TreeMap<>();
+        Map<Integer, Vertex> map = new TreeMap<>();
 
         // Adding all vertices to the set
         int cornerCtr = 0;
         for (int i = 0; i < rows * cols; i++) {
-            V vertex = target.addVertex();
+            Vertex vertex = new Vertex(i+1);
+            target.addVertex(vertex);
             map.put(i + 1, vertex);
 
             boolean isCorner = (i == 0) || (i == (cols - 1)) || (i == (cols * (rows - 1)))
@@ -60,11 +61,14 @@ public class GridGraphGenerator <V,E> implements GraphGenerator<V,E,V> {
             for (int j : map.keySet()) {
                 if ((((i % cols) > 0) && ((i + 1) == j)) || ((i + cols) == j)) {
                     target.addEdge(map.get(i), map.get(j));
-                    target.addEdge(map.get(j), map.get(i));
+                 //   target.addEdge(map.get(j), map.get(i));
                 }
             }
         }
 }
+
+
+	
     
 }
 
