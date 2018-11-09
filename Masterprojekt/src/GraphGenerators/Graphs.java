@@ -1,6 +1,7 @@
 package GraphGenerators;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Universität Ulm
@@ -117,6 +118,24 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	public void setEdges(ArrayList<Edge> edges) {
 		this.edges = edges;
+	}
+
+	@Override
+	public Vertex addVertex() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GraphType getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Vertex> vertexSet() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
