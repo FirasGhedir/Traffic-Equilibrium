@@ -2,26 +2,36 @@ package GraphGenerators;
 
 import java.util.ArrayList;
 
-
-
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ */
 public class Graphs implements Graph<Vertex, Edge> {
 
 	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 	ArrayList<Edge> edges = new ArrayList<Edge>();
-	
+
+	/**
+	 * Empty constructor
+	 */
 	public Graphs() {
-		
+
 	}
-	
-	
 
 	@Override
 	public Edge getEdge(Vertex sourceVertex, Vertex targetVertex) {
-		Edge x = new Edge(sourceVertex,targetVertex,0);
-          if(edges.contains(x)) {return x;}
-          return null;
+		Edge x = new Edge(sourceVertex, targetVertex, 0);
+		if (edges.contains(x)) {
+			return x;
+		}
+		return null;
 	}
-
 
 	@Override
 	public Edge addEdge(Vertex sourceVertex, Vertex targetVertex) {
@@ -34,7 +44,6 @@ public class Graphs implements Graph<Vertex, Edge> {
 		edges.add(new Edge(sourceVertex, targetVertex, 0));
 		return false;
 	}
-
 
 	@Override
 	public boolean addVertex(Vertex v) {
@@ -52,22 +61,22 @@ public class Graphs implements Graph<Vertex, Edge> {
 		return vertices.contains(v);
 	}
 
-	
 	@Override
 	public int degreeOf(Vertex vertex) {
-		  int counter=0; 
-	        for(int i=0; i<edges.size() ; i++) {
-	        	if(edges.get(i).getFrom().equals(vertex)) {counter++;}
-	        	      	
-	        }
-	       
-			return counter;
-	}
+		int counter = 0;
+		for (int i = 0; i < edges.size(); i++) {
+			if (edges.get(i).getFrom().equals(vertex)) {
+				counter++;
+			}
 
+		}
+
+		return counter;
+	}
 
 	@Override
 	public boolean removeEdge(Edge e) {
-        edges.remove(e);
+		edges.remove(e);
 		return true;
 	}
 
@@ -76,7 +85,6 @@ public class Graphs implements Graph<Vertex, Edge> {
 		vertices.remove(v);
 		return true;
 	}
-
 
 	@Override
 	public double getEdgeWeight(Edge e) {
@@ -91,11 +99,9 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	@Override
 	public boolean containsEdge(Vertex sourceVertex, Vertex targetVertex) {
-        Edge e = new Edge(sourceVertex,targetVertex,0);
+		Edge e = new Edge(sourceVertex, targetVertex, 0);
 		return edges.contains(e);
 	}
-	
-
 
 	public ArrayList<Vertex> getVertices() {
 		return vertices;

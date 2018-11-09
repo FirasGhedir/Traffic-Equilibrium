@@ -1,57 +1,50 @@
 package GraphGenerators;
 
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ */
+public interface GraphType {
 
-public interface GraphType
-{
-   
-    boolean isDirected();
+	boolean isDirected();
 
-    
-    boolean isUndirected();
+	boolean isUndirected();
 
-   
-    boolean isMixed();
+	boolean isMixed();
 
-    
-    boolean isAllowingMultipleEdges();
+	boolean isAllowingMultipleEdges();
 
-    
-    boolean isAllowingSelfLoops();
+	boolean isAllowingSelfLoops();
 
-  
-    boolean isAllowingCycles();
+	boolean isAllowingCycles();
 
-  
-    boolean isWeighted();
+	boolean isWeighted();
 
-   
-    boolean isSimple();
+	boolean isSimple();
 
+	boolean isPseudograph();
 
-    boolean isPseudograph();
+	boolean isMultigraph();
 
-  
-    boolean isMultigraph();
-    
-    boolean isModifiable();
+	boolean isModifiable();
 
-   
-    GraphType asDirected();
+	GraphType asDirected();
 
-   
-    GraphType asUndirected();
+	GraphType asUndirected();
 
+	GraphType asMixed();
 
-    GraphType asMixed();
+	GraphType asUnweighted();
 
-  
-    GraphType asUnweighted();
+	GraphType asWeighted();
 
-    GraphType asWeighted();
+	GraphType asModifiable();
 
-  
-    GraphType asModifiable();
-
-   
-    GraphType asUnmodifiable();
+	GraphType asUnmodifiable();
 }
