@@ -6,13 +6,13 @@ import java.util.LinkedList;
 
 import javax.swing.JFrame;
 
-//import org.apache.commons.collections15.Transformer;
-//import edu.uci.ics.jung.algorithms.layout.CircleLayout;
-//import edu.uci.ics.jung.graph.DirectedSparseGraph;
-//import edu.uci.ics.jung.graph.Graph;
-//import edu.uci.ics.jung.graph.util.EdgeType;
-//import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import org.apache.commons.collections15.Transformer;
 
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.util.EdgeType;
+import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 
 /**
  * Universität Ulm
@@ -33,9 +33,18 @@ public class GraphVisualizer {
 	static int edgeCount_Directed = 0; // This works with the inner MyEdge class
 
 	/**
+	 * Universität Ulm
 	 * 
-	 * @author julia
-	 *
+	 * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+	 * 
+	 * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+	 * @author Julian Bestler (julian.bestler@uni-ulm.de)
+	 * 
+	 * @version 1.0
+	 * 
+	 *          _____________________________________________
+	 * 
+	 *          Class MyNode
 	 */
 	class MyNode {
 
@@ -103,19 +112,13 @@ public class GraphVisualizer {
 			LinkedList<String> target_vertex, LinkedList<Double> Edge_Weight, LinkedList<String> Edge_Label) {
 
 		// CREATING weighted directed graph
-
 		Graph<MyNode, MyLink> g = new DirectedSparseGraph<GraphVisualizer.MyNode, GraphVisualizer.MyLink>();
 
 		// create node objects
-
 		Hashtable<String, MyNode> Graph_Nodes = new Hashtable<String, GraphVisualizer.MyNode>();
-
-		LinkedList<MyNode> Source_Node = new LinkedList<GraphVisualizer>();
-
-		LinkedList<MyNode> Target_Node = new LinkedList<GraphVisualizer>();
-
+		LinkedList<MyNode> Source_Node = new LinkedList<GraphVisualizer.MyNode>();
+		LinkedList<MyNode> Target_Node = new LinkedList<GraphVisualizer.MyNode>();
 		LinkedList<MyNode> Graph_Nodes_Only = new LinkedList<GraphVisualizer.MyNode>();
-
 		// LinkedList<MyLink> Graph_Links = new LinkedList<Graph_Algos.MyLink>();
 
 		// create graph nodes
@@ -252,34 +255,6 @@ public class GraphVisualizer {
 
 		GA1.Visualize_Directed_Graph(Distinct_Vertex, Source_Vertex, Target_Vertex, Edge_Weight, Edge_Label);
 
-	}
-
-	/**
-	 * Universität Ulm
-	 * 
-	 * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
-	 * 
-	 * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
-	 * @author Julian Bestler (julian.bestler@uni-ulm.de)
-	 * 
-	 * @version 1.0
-	 * 
-	 *          _____________________________________________
-	 * 
-	 *          The interface Transformer transforms input objects into some output
-	 *          objects.
-	 */
-	public interface Transformer<I, O> {
-
-		/**
-		 * Transforms the input object (leaving it unchanged) into some output object.
-		 * 
-		 * @param input
-		 *            the object to be transformed, should be left unchanged
-		 * 
-		 * @return a transformed object
-		 */
-		public O transform(I input);
 	}
 
 }
