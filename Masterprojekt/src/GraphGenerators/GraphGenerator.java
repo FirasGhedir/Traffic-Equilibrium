@@ -11,20 +11,19 @@ import java.util.*;
  * @author Julian Bestler (julian.bestler@uni-ulm.de)
  * 
  * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          An interface for generating new graph structure with V (the graph
+ *          vertex type), E (the graph edge type) and T ( type for returning
+ *          implementation-specific mappings)
  */
 public interface GraphGenerator<V, E, T> {
-	/*
-	 *
-	 * @param <V> the graph vertex type
-	 * 
-	 * @param <E> the graph edge type
-	 * 
-	 * @param <T> type for returning implementation-specific mappings
-	 *
-	 */
 
 	/**
 	 * Generates a graph structure
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param target
 	 *            receives the generated edges and vertices
@@ -34,6 +33,9 @@ public interface GraphGenerator<V, E, T> {
 	void generateGraph(Graph<V, E> target, Map<String, T> resultMap);
 
 	/**
+	 * Generates a graph structure
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param target
 	 *            receives the generated edges and vertices

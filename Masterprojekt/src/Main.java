@@ -16,11 +16,18 @@ import GraphGenerators.Vertex;
  * @author Julian Bestler (julian.bestler@uni-ulm.de)
  * 
  * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          In the Main class you can create new graphs, test and work with
+ *          them.
  */
 public class Main {
 
 	/**
 	 * The main method
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param args
 	 *            the command line arguments
@@ -34,16 +41,18 @@ public class Main {
 		test.generateGraph(graph, map);
 
 		// --- Test for RandomGraph ---
-//		Map<String, Vertex> map2 = new TreeMap<>();
-//		Graphs graph2 = new Graphs();
-//		RandomGraphGenerator<Vertex, Edge> test2 = new RandomGraphGenerator<Vertex, Edge>(3, 2);
-//		test2.generateGraph(graph2, map2);
-		
+		// Map<String, Vertex> map2 = new TreeMap<>();
+		// Graphs graph2 = new Graphs();
+		// RandomGraphGenerator<Vertex, Edge> test2 = new RandomGraphGenerator<Vertex,
+		// Edge>(3, 2);
+		// test2.generateGraph(graph2, map2);
+
 		// === console ===
 		System.out.println(
 				"Gridgraph:\n #edges:    " + graph.getEdges().size() + "\n #vertices: " + graph.getVertices().size());
-//		System.out.println(
-//				"RandomGraph:\n #edges:    " + graph2.getEdges().size() + "\n #vertices: " + graph2.getVertices().size());
+		// System.out.println(
+		// "RandomGraph:\n #edges: " + graph2.getEdges().size() + "\n #vertices: " +
+		// graph2.getVertices().size());
 
 	}
 

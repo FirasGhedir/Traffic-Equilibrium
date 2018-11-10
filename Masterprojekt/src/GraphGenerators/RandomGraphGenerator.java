@@ -2,6 +2,21 @@ package GraphGenerators;
 
 import java.util.*;
 
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          In the class RandomGraphGenerator you can create a random graph of
+ *          any size
+ */
 public class RandomGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 
 	private final int n; // the number of nodes
@@ -12,6 +27,8 @@ public class RandomGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 
 	/**
 	 * Constructor to create a random graph generator without self-loops.
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param n
 	 *            the number of nodes
@@ -24,6 +41,8 @@ public class RandomGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 
 	/**
 	 * Constructor to create a random graph generator without self-loops.
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param n
 	 *            the number of nodes
@@ -38,6 +57,8 @@ public class RandomGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 
 	/**
 	 * Constructor to create a random graph generator without self-loops.
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param n
 	 *            the number of nodes
@@ -54,6 +75,8 @@ public class RandomGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 
 	/**
 	 * Constructor to create a random graph generator without self-loops.
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param n
 	 *            the number of nodes
@@ -78,7 +101,9 @@ public class RandomGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 	}
 
 	/**
-	 * Generates a random graph based on the $G(n, p)$ model.
+	 * Generates a random graph based on the G(n, p) model
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param target
 	 *            the target graph
@@ -91,12 +116,11 @@ public class RandomGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 		if (n == 0) {
 			return;
 		}
-
 		// check whether to also create loops
 		// if (createLoops && !target.getType().size()) {
-		// throw new IllegalArgumentException("Provided graph does not support
-		// self-loops");
-		// }
+		if (createLoops) {
+			throw new IllegalArgumentException("Provided graph does not support self-loops");
+		}
 
 		// create vertices
 		int previousVertexSetSize = target.vertexSet().size();

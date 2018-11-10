@@ -9,19 +9,29 @@ package GraphGenerators;
  * @author Julian Bestler (julian.bestler@uni-ulm.de)
  * 
  * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          In the Edge class new Edge objects get built with start vertices,
+ *          end vertices and edge weights.
  */
 public class Edge {
 
-	Vertex from;
-	Vertex to;
-	double weight;
+	Vertex from; // Start vertex
+	Vertex to; // End vertex
+	double weight; // edge weight
 
 	/**
 	 * Constructor to create a new edge
 	 * 
-	 * @param from   where the edge of the vertex starts
-	 * @param to     where the edge of the vertex ends
-	 * @param weight the value of the edge weight
+	 * --------------------------------------------
+	 * 
+	 * @param from
+	 *            where the edge of the vertex starts
+	 * @param to
+	 *            where the edge of the vertex ends
+	 * @param weight
+	 *            the value of the edge weight
 	 */
 	public Edge(Vertex from, Vertex to, int weight) {
 		super();
@@ -42,7 +52,8 @@ public class Edge {
 	/**
 	 * Setter method for the 'from' value
 	 * 
-	 * @param from, the beginning node of the vertex
+	 * @param from,
+	 *            the beginning node of the vertex
 	 */
 	public void setFrom(Vertex from) {
 		this.from = from;
@@ -60,7 +71,8 @@ public class Edge {
 	/**
 	 * Setter method for the 'to' value
 	 * 
-	 * @param to, the node at the end of the vertex
+	 * @param to,
+	 *            the node at the end of the vertex
 	 */
 	public void setTo(Vertex to) {
 		this.to = to;
@@ -78,7 +90,8 @@ public class Edge {
 	/**
 	 * Setter method for the 'weight' value
 	 * 
-	 * @param weight, the edge weight
+	 * @param weight,
+	 *            the edge weight
 	 */
 	public void setWeight(double weight) {
 		this.weight = weight;

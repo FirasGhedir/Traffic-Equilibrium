@@ -11,22 +11,28 @@ import java.util.*;
  * @author Julian Bestler (julian.bestler@uni-ulm.de)
  * 
  * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          In the class GridGraphGenerator you can create a grid graph of any
+ *          size
  */
 public class GridGraphGenerator implements GraphGenerator<Vertex, Edge, Vertex> {
 
-	/**
-	 * Role for the vertices at the corners.
-	 */
-	public static final String CORNER_VERTEX = "Corner Vertex";
+	public static final String CORNER_VERTEX = "Corner Vertex"; // Role for the vertices at the corners.
 
-	private final int rows;
-	private final int cols;
+	private final int rows; // the number of rows
+	private final int cols; // the number of columns
 
 	/**
-	 * Creates a new GridGraphGenerator object with rows x cols dimension.
-	 *
-	 * @param rows the number of rows
-	 * @param cols the number of columns
+	 * Creates a new GridGraphGenerator object with (rows x cols)-dimension.
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param rows
+	 *            the number of rows
+	 * @param cols
+	 *            the number of columns
 	 */
 	public GridGraphGenerator(int rows, int cols) {
 		if (rows < 2) {

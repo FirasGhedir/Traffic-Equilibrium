@@ -9,15 +9,21 @@ package GraphGenerators;
  * @author Julian Bestler (julian.bestler@uni-ulm.de)
  * 
  * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          In the Vertex class new Vertex objects get built with unique
+ *          identification numbers for each object.
  */
 public class Vertex {
 
-	int id;
+	int id; // vertex identification number
 
 	/**
 	 * Constructor, creates a new vertex
 	 * 
-	 * @param id, the identifier number of the vertex
+	 * @param id,
+	 *            the identifier number of the vertex
 	 */
 	public Vertex(int id) {
 		this.id = id;
@@ -35,7 +41,8 @@ public class Vertex {
 	/**
 	 * Setter method for the id
 	 * 
-	 * @param id, the identifier number of the vertex
+	 * @param id,
+	 *            the identifier number of the vertex
 	 */
 	public void setId(int id) {
 		this.id = id;

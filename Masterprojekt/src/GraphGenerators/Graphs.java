@@ -12,15 +12,16 @@ import java.util.Set;
  * @author Julian Bestler (julian.bestler@uni-ulm.de)
  * 
  * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          A collection of utilities to assist with graph manipulation.
  */
 public class Graphs implements Graph<Vertex, Edge> {
 
 	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 
-	/**
-	 * Empty constructor
-	 */
 	public Graphs() {
 
 	}
@@ -122,19 +123,16 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	@Override
 	public Vertex addVertex() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public GraphType getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Set<Vertex> vertexSet() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
