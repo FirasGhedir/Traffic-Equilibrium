@@ -1,14 +1,17 @@
-package GraphGenerators;
+package GraphVisualizer;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 import org.apache.commons.collections15.Transformer;
 
-import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.ISOMLayout;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -107,7 +110,9 @@ public class GraphVisualizer {
 		}
 	}
 
-	// used to construct graph and call graph algorithm used in JUNG
+	/**
+	 * used to construct graph and call graph algorithm used in JUNG
+	 */
 	public void Visualize_Directed_Graph(LinkedList<String> Distinct_nodes, LinkedList<String> source_vertex,
 			LinkedList<String> target_vertex, LinkedList<Double> Edge_Weight, LinkedList<String> Edge_Label) {
 
@@ -119,7 +124,7 @@ public class GraphVisualizer {
 		LinkedList<MyNode> Source_Node = new LinkedList<GraphVisualizer.MyNode>();
 		LinkedList<MyNode> Target_Node = new LinkedList<GraphVisualizer.MyNode>();
 		LinkedList<MyNode> Graph_Nodes_Only = new LinkedList<GraphVisualizer.MyNode>();
-		// LinkedList<MyLink> Graph_Links = new LinkedList<Graph_Algos.MyLink>();
+		// l LinkedList<MyLink> Graph_Links = new LinkedList<Graph_Algos.MyLink>();
 
 		// create graph nodes
 		for (int i = 0; i < Distinct_nodes.size(); i++) {
@@ -142,7 +147,7 @@ public class GraphVisualizer {
 		}
 
 		// -------------
-		CircleLayout<MyNode, MyLink> layout1 = new CircleLayout<MyNode, MyLink>(g);
+		ISOMLayout<MyNode, MyLink> layout1 = new ISOMLayout<MyNode, MyLink>(g);
 		layout1.setSize(new Dimension(600, 600));
 		BasicVisualizationServer<MyNode, MyLink> viz = new BasicVisualizationServer<MyNode, MyLink>(layout1);
 		viz.setPreferredSize(new Dimension(600, 600));
@@ -157,7 +162,8 @@ public class GraphVisualizer {
 		Transformer<MyLink, String> edgeLabelTransformer = new Transformer<MyLink, String>() {
 
 			public String transform(MyLink edge) {
-				return "[ " + edge.Link_Property() + " ]: Wt = " + edge.Link_Property_wt();
+				// return "[ " + edge.Link_Property() + " ]: Wt = " + edge.Link_Property_wt();
+				return "costs = " + edge.Link_Property_wt();
 			}
 
 		};
@@ -165,11 +171,17 @@ public class GraphVisualizer {
 		viz.getRenderContext().setEdgeLabelTransformer(edgeLabelTransformer);
 		viz.getRenderContext().setVertexLabelTransformer(vertexLabelTransformer);
 
-		JFrame frame = new JFrame("A Directed Graph Visualization... demo code");
+		JFrame frame = new JFrame(" + + + graph visualizer + + + ");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(viz);
 		frame.pack();
 		frame.setVisible(true);
+        frame.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.RED));
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (Exception e) {
+			System.out.println("Error setting native LAF: " + e);
+		}
 	}
 
 	/**
@@ -177,13 +189,11 @@ public class GraphVisualizer {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args
-	 *            the command line arguments
+	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
 		// let the nodes of graph are: {A, B, C, D, E, F, G}
-		// Directed edges are: {AB=0.7, BC=0.9, CD=0.57, DB=1.0, CA=1.3, AD=0.3, DF=0.2,
-		// EG=0.4, FE=0.6, GF=0.2}
+		// Directed edges are: {AB=0.7, BC=0.9, CD=0.57, DB=1.0, CA=1.3, AD=0.3}
 		GraphVisualizer GA1 = new GraphVisualizer();
 		LinkedList<String> Distinct_Vertex = new LinkedList<String>();// used to enter vertexes
 		LinkedList<String> Source_Vertex = new LinkedList<String>();
@@ -196,9 +206,6 @@ public class GraphVisualizer {
 		Distinct_Vertex.add("B");
 		Distinct_Vertex.add("C");
 		Distinct_Vertex.add("D");
-		Distinct_Vertex.add("E");
-		Distinct_Vertex.add("F");
-		Distinct_Vertex.add("G");
 
 		Source_Vertex.add("A");
 		Target_Vertex.add("B");
@@ -215,43 +222,10 @@ public class GraphVisualizer {
 		Edge_Weight.add(0.57);
 		Edge_Label.add("CD");
 
-		Source_Vertex.add("D");
-		Target_Vertex.add("B");
-		Edge_Weight.add(1.0);
-		Edge_Label.add("DB");
-
-		Source_Vertex.add("C");
-		Target_Vertex.add("A");
-		Edge_Weight.add(1.3);
-		Edge_Label.add("CA");
-
 		Source_Vertex.add("A");
 		Target_Vertex.add("D");
 		Edge_Weight.add(0.3);
 		Edge_Label.add("AD");
-
-		Source_Vertex.add("D");
-		Target_Vertex.add("F");
-		Edge_Weight.add(0.2);
-		Edge_Label.add("DF");
-
-		// Source_Vertex.add("D"); Target_Vertex.add("E");
-		// Edge_Weight.add(0.8);Edge_Label.add("AB");
-
-		Source_Vertex.add("E");
-		Target_Vertex.add("G");
-		Edge_Weight.add(0.4);
-		Edge_Label.add("EG");
-
-		Source_Vertex.add("F");
-		Target_Vertex.add("E");
-		Edge_Weight.add(0.6);
-		Edge_Label.add("FE");
-
-		Source_Vertex.add("G");
-		Target_Vertex.add("F");
-		Edge_Weight.add(0.2);
-		Edge_Label.add("GF");
 
 		GA1.Visualize_Directed_Graph(Distinct_Vertex, Source_Vertex, Target_Vertex, Edge_Weight, Edge_Label);
 
