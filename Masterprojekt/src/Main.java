@@ -35,6 +35,9 @@ public class Main {
 	};
 
 	/**
+	 * Prints a 2D array
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param matrix     the given matrix
 	 * @param rowPrinter prints each row of the matrix
@@ -44,14 +47,25 @@ public class Main {
 	}
 
 	/**
+	 * Prints a 1D array
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param vector the given vector
+	 */
+	public static void printVector(int[] vector) {
+		System.out.println(Arrays.toString(vector));
+	}
+
+	/**
 	 * The main method
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args the command line arguments
-	 * @param adjacency_matrix 
+	 * @param args             the command line arguments
+	 * @param adjacency_matrix
 	 */
-	public static void main(String[] args, int[][] adjacency_matrix) {
+	public static void main(String[] args) {
 
 		try {
 
@@ -75,20 +89,25 @@ public class Main {
 			ArrayList<Vertex> listOut = graph.getInNeighbors(graph.getVertices().get(1), adjacency_matrix1);
 
 			// print ingoing edges of of vertex with ID = 1
-			for (int i = 0; i < listOut.size(); i++) {
-				System.out.println("----------------------------------------\n # ingoing edges:" + listOut.get(i).getId());
+			System.out.println("----------------------------------------\n in:");
+			for (int i = 0; i < listIn.size(); i++) {
+				System.out.println(listIn.get(i).getId());
 			}
 
-			// print outgoing edges of vertex 2
-			for (int i = 0; i < listIn.size(); i++) {
-				System.out.println();
-				System.out.println(
-						"----------------------------------------\n # outgoing edges:" + listIn.get(i).getId() + "\n");
+			// print outgoing edges of vertex 2 with ID = 1
+			System.out.println("----------------------------------------\n out:");
+			for (int i = 0; i < listOut.size(); i++) {
+				System.out.println(listOut.get(i).getId());
 			}
 
 			// print adjacency matrix
 			System.out.println("----------------------------------------\n adjacency matrix:\n");
 			printMatrix(adjacency_matrix1, likeAList);
+
+			// print node potential vector
+			System.out.println("\n----------------------------------------\n node potential vector:\n");
+			int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
+			printVector(nodePotentialVector);
 
 		} catch (Exception e) {
 			e.printStackTrace();

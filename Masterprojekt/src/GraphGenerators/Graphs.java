@@ -231,7 +231,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 			for (int j = 0; j < adjacencymatrix.length; j++) {
 				tmp += adjacencymatrix[j][i] + adjacencymatrix[i][j];
 			}
-			i = tmp;
+			nodePotentialVector[i] = tmp;
 		}
 
 		return nodePotentialVector;
