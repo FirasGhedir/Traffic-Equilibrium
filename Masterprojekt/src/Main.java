@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 
 import GraphGenerators.Graphs;
 import GraphGenerators.GridGraphGenerator;
-import GraphGenerators.Player;
 import GraphGenerators.Vertex;
+import Player.Player;
 import ilog.cplex.IloCplex;
 import ilog.concert.IloNumVar;
 import ilog.concert.IloException;
@@ -43,10 +43,8 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param matrix
-	 *            the given matrix
-	 * @param rowPrinter
-	 *            prints each row of the matrix
+	 * @param matrix     the given matrix
+	 * @param rowPrinter prints each row of the matrix
 	 */
 	public static void printMatrix(int[][] matrix, Consumer<int[]> rowPrinter) {
 		Arrays.stream(matrix).forEach((row) -> rowPrinter.accept(row));
@@ -57,8 +55,7 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param vector
-	 *            the given vector
+	 * @param vector the given vector
 	 */
 	public static void printVector(int[] vector) {
 		System.out.println(Arrays.toString(vector));
@@ -69,8 +66,7 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args
-	 *            the command line arguments
+	 * @param args             the command line arguments
 	 * @param adjacency_matrix
 	 */
 	public static void main(String[] args) throws IloException {
@@ -117,6 +113,9 @@ public class Main {
 			int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
 			printVector(nodePotentialVector);
 
+			/*
+			 * Test for players
+			 */
 			Player player1 = new Player(1);
 			Player player2 = new Player(2);
 			player1.setSource(graph.getVertices().get(0));
@@ -138,23 +137,22 @@ public class Main {
 			IloNumVar f7 = cplex.numVar(0, Double.MAX_VALUE, "f7");
 			IloNumVar f8 = cplex.numVar(0, Double.MAX_VALUE, "f8");
 
-		/*	cplex.prod(cplex.sum(f1, f2), cplex.sum(cplex.prod(2, f1), cplex.prod(2, f2))); // (2f1+2f2)(f1+f2)
-			cplex.prod(cplex.sum(f3, f4), cplex.sum(cplex.prod(3, f3), cplex.prod(3, f4))); // (3f3+3f4)(f3+f4)
-			cplex.prod(cplex.sum(f5, f6), cplex.sum(cplex.prod(4, f5), cplex.prod(4, f6)));
-			cplex.prod(cplex.sum(f7, f8), cplex.sum(cplex.prod(5, f7), cplex.prod(5, f8)));
-			
-			
-*/
-			cplex.addMinimize(cplex.sum(cplex.prod(cplex.sum(f1, f2), cplex.sum(cplex.prod(2, f1), cplex.prod(2, f2),cplex.constant(1))),
+//			cplex.prod(cplex.sum(f1, f2), cplex.sum(cplex.prod(2, f1), cplex.prod(2, f2))); // (2f1+2f2)(f1+f2)
+//			cplex.prod(cplex.sum(f3, f4), cplex.sum(cplex.prod(3, f3), cplex.prod(3, f4))); // (3f3+3f4)(f3+f4)
+//			cplex.prod(cplex.sum(f5, f6), cplex.sum(cplex.prod(4, f5), cplex.prod(4, f6)));
+//			cplex.prod(cplex.sum(f7, f8), cplex.sum(cplex.prod(5, f7), cplex.prod(5, f8)));
+
+			cplex.addMinimize(cplex.sum(
+					cplex.prod(cplex.sum(f1, f2), cplex.sum(cplex.prod(2, f1), cplex.prod(2, f2), cplex.constant(1))),
 					cplex.prod(cplex.sum(f3, f4), cplex.sum(cplex.prod(3, f3), cplex.prod(3, f4))),
 					cplex.prod(cplex.sum(f5, f6), cplex.sum(cplex.prod(4, f5), cplex.prod(4, f6))),
 					cplex.prod(cplex.sum(f7, f8), cplex.sum(cplex.prod(5, f7), cplex.prod(5, f8)))));
-			
-				cplex.addEq(0, cplex.min(cplex.sum(f7,f8),cplex.sum(f3,f4)));
-                cplex.addEq(player1.getDemand(),f1);
-                cplex.addEq(player2.getDemand(),f6);
-	     		//cplex.addEq(-player2.getDemand(),cplex.min(cplex.sum(f7,f8),cplex.sum(f1, f2)));	
-				//cplex.addEq(player1.getDemand(),cplex.sum(f7,f8,cplex.sum(f5, f6)));	
+
+			cplex.addEq(0, cplex.min(cplex.sum(f7, f8), cplex.sum(f3, f4)));
+			cplex.addEq(player1.getDemand(), f1);
+			cplex.addEq(player2.getDemand(), f6);
+//			cplex.addEq(-player2.getDemand(), cplex.min(cplex.sum(f7, f8), cplex.sum(f1, f2)));
+//			cplex.addEq(player1.getDemand(), cplex.sum(f7, f8, cplex.sum(f5, f6)));
 
 			if (cplex.solve()) {
 				System.out.println("obj: " + cplex.getObjValue());

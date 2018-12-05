@@ -1,6 +1,8 @@
-package GraphGenerators;
+package Player;
 
 import java.util.ArrayList;
+
+import GraphGenerators.Vertex;
 
 /**
  * Universität Ulm
