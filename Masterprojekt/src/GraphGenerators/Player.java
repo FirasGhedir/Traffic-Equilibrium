@@ -1,5 +1,7 @@
 package GraphGenerators;
 
+import java.util.ArrayList;
+
 /**
  * Universität Ulm
  * 
@@ -21,10 +23,11 @@ public class Player {
 	Vertex sink;
 	int demand;
 	int id;
+    ArrayList<Integer> f;
     
 	public Player(int id) {
 		this.id = id;
-
+		f = new ArrayList<Integer>();
 	}
 
 	public Vertex getSource() {
