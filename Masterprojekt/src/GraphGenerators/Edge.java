@@ -20,7 +20,8 @@ public class Edge {
 	Vertex from; // Start vertex
 	Vertex to; // End vertex
 	double weight; // edge weight
-
+	int c; //cost
+    
 	/**
 	 * Constructor to create a new edge
 	 * 
@@ -95,6 +96,10 @@ public class Edge {
 	 */
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+	
+	public void setCost(int x) {
+		c=(2*x)+1;
 	}
 
 }

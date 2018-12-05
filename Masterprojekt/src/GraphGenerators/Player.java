@@ -21,7 +21,7 @@ public class Player {
 	Vertex sink;
 	int demand;
 	int id;
-
+    
 	public Player(int id) {
 		this.id = id;
 

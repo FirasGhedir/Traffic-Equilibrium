@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 import GraphGenerators.Graphs;
 import GraphGenerators.GridGraphGenerator;
+import GraphGenerators.Player;
 import GraphGenerators.Vertex;
 import ilog.cplex.IloCplex;
 import ilog.concert.IloNumVar;
@@ -86,10 +87,10 @@ public class Main {
 			int[][] adjacency_matrix1 = graph.getAdjacencyMatrix();
 
 			// --- get number of ingoing edges of vertex with ID = 1 ---
-			ArrayList<Vertex> listIn = graph.getOutNeighbors(graph.getVertices().get(1), adjacency_matrix1);
+			ArrayList<Vertex> listIn = graph.getInNeighbors(graph.getVertices().get(1), adjacency_matrix1);
 
 			// --- get number of outgoing edges of vertex with ID = 1 ---
-			ArrayList<Vertex> listOut = graph.getInNeighbors(graph.getVertices().get(1), adjacency_matrix1);
+			ArrayList<Vertex> listOut = graph.getOutNeighbors(graph.getVertices().get(1), adjacency_matrix1);
 
 			// print ingoing edges of of vertex with ID = 1
 			System.out.println("----------------------------------------\n in:");
@@ -116,6 +117,11 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		Player player1= new Player(1);
+		Player player2= new Player(2);
+		
+		
+	/*	
 		IloCplex cplex = new IloCplex();
 		IloNumVar x1 = cplex.numVar(0, 40,"x1");
 		IloNumVar x2 = cplex.numVar(0, Double.MAX_VALUE,"x2");
@@ -135,7 +141,9 @@ public class Main {
 			throw new IllegalStateException("Problem not solved.");
 		}
 		
-
+*/
+		
+		
 	}
 
 }
