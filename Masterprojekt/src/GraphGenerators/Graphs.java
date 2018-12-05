@@ -196,18 +196,30 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 		int[][] adjacencyMatrix = new int[vertices.size()][vertices.size()];
 
-		// fill each rows with zeros
-		for (int[] row : adjacencyMatrix) {
-			Arrays.fill(row, 0);
-		}
+		try {
 
-		// fill adjacency matrix
-		for (int i = 0; i < vertices.size(); i++) {
-			for (int j = 0; j < edges.size(); j++) {
-				if (edges.get(j).getFrom().equals(vertices.get(i))) {
-					adjacencyMatrix[i][edges.get(j).getTo().getId()] = 1;
+			// fill each rows with zeros
+			for (int[] row : adjacencyMatrix) {
+				Arrays.fill(row, 0);
+			}
+
+			// fill adjacency matrix
+			for (int i = 0; i < vertices.size(); i++) {
+				for (int j = 0; j < edges.size(); j++) {
+					if (edges.get(j).getFrom().equals(vertices.get(i))) {
+						adjacencyMatrix[i][edges.get(j).getTo().getId()] = 1;
+					}
+
 				}
+			}
 
+		} catch (Exception e) {
+			if (this.getEdges().size() > (long) this.getVertices().size() * (this.getVertices().size() - 1) / 2
+					+ this.getVertices().size()) {
+				throw new IllegalArgumentException("Too many edges");
+			}
+			if (this.getEdges().size() < 0) {
+				throw new IllegalArgumentException("Too few edges");
 			}
 		}
 		return adjacencyMatrix;
@@ -226,12 +238,14 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 		int[] nodePotentialVector = new int[adjacencymatrix.length];
 
+		int index = 0;
 		for (int i : nodePotentialVector) {
 			int tmp = 0;
 			for (int j = 0; j < adjacencymatrix.length; j++) {
 				tmp += adjacencymatrix[j][i] + adjacencymatrix[i][j];
 			}
-			nodePotentialVector[i] = tmp;
+			nodePotentialVector[index] = tmp;
+			++index;
 		}
 
 		return nodePotentialVector;
