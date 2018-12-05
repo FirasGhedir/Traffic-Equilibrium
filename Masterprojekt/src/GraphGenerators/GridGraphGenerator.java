@@ -29,10 +29,8 @@ public class GridGraphGenerator implements GraphGenerator<Vertex, Edge, Vertex> 
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param rows
-	 *            the number of rows
-	 * @param cols
-	 *            the number of columns
+	 * @param rows the number of rows
+	 * @param cols the number of columns
 	 */
 	public GridGraphGenerator(int rows, int cols) {
 		if (rows < 2) {
@@ -54,7 +52,7 @@ public class GridGraphGenerator implements GraphGenerator<Vertex, Edge, Vertex> 
 		for (int i = 0; i < rows * cols; i++) {
 			Vertex vertex = new Vertex(i);
 			target.addVertex(vertex);
-			map.put(i+1 , vertex);
+			map.put(i + 1, vertex);
 
 			boolean isCorner = (i == 0) || (i == (cols - 1)) || (i == (cols * (rows - 1)))
 					|| (i == ((rows * cols) - 1));
@@ -73,7 +71,7 @@ public class GridGraphGenerator implements GraphGenerator<Vertex, Edge, Vertex> 
 				if ((((i % cols) > 0) && ((i + 1) == j)) || ((i + cols) == j)) {
 					target.addEdge(map.get(i), map.get(j));
 					// --- uncomment the following statement to get a directed graph ---
-				// target.addEdge(map.get(j), map.get(i));
+					target.addEdge(map.get(j), map.get(i));
 				}
 			}
 		}

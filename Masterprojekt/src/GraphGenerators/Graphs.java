@@ -1,6 +1,7 @@
 package GraphGenerators;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -136,10 +137,20 @@ public class Graphs implements Graph<Vertex, Edge> {
 		return null;
 	}
 
-	public ArrayList<Vertex> getoutNeighbors(Vertex v, int[][] adjazenz) {
+	/**
+	 * Return the in going neighbors of the specified vertex
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param vertex          the given vertex
+	 * @param adjacencymatrix the given adjacency matrix
+	 * 
+	 * @return an Arraylist of verteces with all ingoing edges for each vertex
+	 */
+	public ArrayList<Vertex> getOutNeighbors(Vertex vertex, int[][] adjacencymatrix) {
 		ArrayList<Vertex> tmp = new ArrayList<>();
-		for (int i = 0; i < adjazenz[v.getId()].length; i++) {
-			if (adjazenz[v.getId()][i] == 1) {
+		for (int i = 0; i < adjacencymatrix[vertex.getId()].length; i++) {
+			if (adjacencymatrix[vertex.getId()][i] == 1) {
 				tmp.add(this.vertices.get(i));
 			}
 
@@ -149,37 +160,81 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	}
 
-	
-	public ArrayList<Vertex> getinNeighbors(Vertex v,int[][] adjazenz){
-		ArrayList<Vertex> tmp = new ArrayList<>();
-        for(int i = 0 ; i < adjazenz.length ; i++) {
-        	if(i == v.getId()) continue ;
-        		if(adjazenz[i][v.getId()]==1) tmp.add(this.vertices.get(i));
-        		        		       	       	
-        }
-		
-		return tmp;
-	}
-	public int[][] adjazenzmatrix() {
-		int[][] adj = new int[vertices.size()][vertices.size()];
+	/**
+	 * Return the out going neighbors of the specified vertex
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param vertex          the given vertex
+	 * @param adjacencymatrix the given adjacency matrix
+	 * 
+	 * @return return an Arraylist of verteces with all outgoing edges for each
+	 *         vertex
+	 */
+	public ArrayList<Vertex> getInNeighbors(Vertex vertex, int[][] adjacencymatrix) {
 
-		for (int i = 0; i < vertices.size(); i++) {
-			for (int j = 0; j < vertices.size(); j++) {
-				adj[i][j] = 0;
-				adj[j][i] = 0;
-			}
+		ArrayList<Vertex> list = new ArrayList<>();
+
+		for (int i = 0; i < adjacencymatrix.length; i++) {
+			if (i == vertex.getId())
+				continue;
+			if (adjacencymatrix[i][vertex.getId()] == 1)
+				list.add(this.vertices.get(i));
+
 		}
 
+		return list;
+	}
+
+	/**
+	 * Creates and fills a adjacency matrix of a graph
+	 * --------------------------------------------
+	 * 
+	 * @return the adjacency matrix of the graph
+	 */
+	public int[][] getAdjacencyMatrix() {
+
+		int[][] adjacencyMatrix = new int[vertices.size()][vertices.size()];
+
+		// fill each rows with zeros
+		for (int[] row : adjacencyMatrix) {
+			Arrays.fill(row, 0);
+		}
+
+		// fill adjacency matrix
 		for (int i = 0; i < vertices.size(); i++) {
 			for (int j = 0; j < edges.size(); j++) {
 				if (edges.get(j).getFrom().equals(vertices.get(i))) {
-					adj[i][edges.get(j).getTo().getId()] = 1;
+					adjacencyMatrix[i][edges.get(j).getTo().getId()] = 1;
 				}
 
 			}
 		}
-		return adj;
+		return adjacencyMatrix;
 
+	}
+
+	/**
+	 * Creates the node potential vector for a given graph
+	 * --------------------------------------------
+	 * 
+	 * @param adjacencymatrix the given adjacency matrix
+	 * 
+	 * @return the node potential vector out of the adjacency matrix
+	 */
+	public int[] getNodePotentialVector(int[][] adjacencymatrix) {
+
+		int[] nodePotentialVector = new int[adjacencymatrix.length];
+
+		for (int i : nodePotentialVector) {
+			int tmp = 0;
+			for (int j = 0; j < adjacencymatrix.length; j++) {
+				tmp += adjacencymatrix[j][i] + adjacencymatrix[i][j];
+			}
+			i = tmp;
+		}
+
+		return nodePotentialVector;
 	}
 
 }

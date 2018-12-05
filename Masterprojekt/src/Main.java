@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 
 import GraphGenerators.Graphs;
 import GraphGenerators.GridGraphGenerator;
-//import GraphGenerators.RandomGraphGenerator;
 import GraphGenerators.Vertex;
 
 /**
@@ -25,64 +26,72 @@ import GraphGenerators.Vertex;
 public class Main {
 
 	/**
+	 * Delimiter | for each row when printing matrix
+	 */
+	static Consumer<int[]> likeAList = (row) -> {
+		System.out.print("|");
+		Arrays.stream(row).forEach((el) -> System.out.print(" " + el + " "));
+		System.out.println("|");
+	};
+
+	/**
+	 * 
+	 * @param matrix     the given matrix
+	 * @param rowPrinter prints each row of the matrix
+	 */
+	public static void printMatrix(int[][] matrix, Consumer<int[]> rowPrinter) {
+		Arrays.stream(matrix).forEach((row) -> rowPrinter.accept(row));
+	}
+
+	/**
 	 * The main method
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args
-	 *            the command line arguments
+	 * @param args the command line arguments
+	 * @param adjacency_matrix 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args, int[][] adjacency_matrix) {
 
-		// --- Test for GridGraph ---
-		Map<String, Vertex> map = new TreeMap<>();
-		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(2, 2);
-		test.generateGraph(graph, map);
+		try {
 
-		// --- Test for RandomGraph ---
-		// Map<String, Vertex> map2 = new TreeMap<>();
-		// Graphs graph2 = new Graphs();
-		// RandomGraphGenerator<Vertex, Edge> test2 = new RandomGraphGenerator<Vertex,
-		// Edge>(3, 2);
-		// test2.generateGraph(graph2, map2);
+			// --- Test for GridGraph ---
+			Map<String, Vertex> map = new TreeMap<>();
+			Graphs graph = new Graphs();
+			GridGraphGenerator test = new GridGraphGenerator(2, 2);
+			test.generateGraph(graph, map);
 
-		// === console ===
-		System.out.println(
-				"Gridgraph:\n #edges:    " + graph.getEdges().size() + "\n #vertices: " + graph.getVertices().size());
-		// System.out.println(
-		// "RandomGraph:\n #edges: " + graph2.getEdges().size() + "\n #vertices: " +
-		// graph2.getVertices().size());
+			// === console ===
+			System.out.println("Gridgraph:\n #edges:    " + graph.getEdges().size() + "\n #vertices: "
+					+ graph.getVertices().size() + "\n");
 
-		int[][] array = graph.adjazenzmatrix();
-		ArrayList<Vertex> tmp = graph.getoutNeighbors(graph.getVertices().get(1), array);
-		ArrayList<Vertex> tmp1 = graph.getinNeighbors(graph.getVertices().get(1), array);
-		
-		System.out.println("----------------------------------------");
+			// --- create adjacency matrix for the graph
+			int[][] adjacency_matrix1 = graph.getAdjacencyMatrix();
 
-		System.out.println("in");
+			// --- get number of ingoing edges of vertex with ID = 1 ---
+			ArrayList<Vertex> listIn = graph.getOutNeighbors(graph.getVertices().get(1), adjacency_matrix1);
 
-		for(int i=0; i<tmp1.size() ; i++) {
-			System.out.println(tmp1.get(i).getId());
-		}
-		
-		System.out.println("----------------------------------------");
-		System.out.println("out");
+			// --- get number of outgoing edges of vertex with ID = 1 ---
+			ArrayList<Vertex> listOut = graph.getInNeighbors(graph.getVertices().get(1), adjacency_matrix1);
 
-		for(int i=0; i<tmp.size() ; i++) {
-			System.out.println(tmp.get(i).getId());
-		}
-		
-		System.out.println("----------------------------------------");
-
-
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array.length; j++) {
-				System.out.print(array[i][j] + " ");
-
+			// print ingoing edges of of vertex with ID = 1
+			for (int i = 0; i < listOut.size(); i++) {
+				System.out.println("----------------------------------------\n # ingoing edges:" + listOut.get(i).getId());
 			}
-			System.out.println();
 
+			// print outgoing edges of vertex 2
+			for (int i = 0; i < listIn.size(); i++) {
+				System.out.println();
+				System.out.println(
+						"----------------------------------------\n # outgoing edges:" + listIn.get(i).getId() + "\n");
+			}
+
+			// print adjacency matrix
+			System.out.println("----------------------------------------\n adjacency matrix:\n");
+			printMatrix(adjacency_matrix1, likeAList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
