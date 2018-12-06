@@ -1,14 +1,15 @@
+package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
-import GraphGenerators.Graphs;
-import GraphGenerators.GridGraphGenerator;
-import GraphGenerators.Vertex;
-import Player.Player;
+import graphGenerator.GridGraphGenerator;
+import graphModel.Graphs;
+import graphModel.Vertex;
 import ilog.cplex.IloCplex;
+import player.Player;
 import ilog.concert.IloNumVar;
 import ilog.concert.IloException;
 
@@ -116,6 +117,7 @@ public class Main {
 			/*
 			 * Test for players
 			 */
+			System.out.println("\n----------------------------------------\n CPLEX example:\n");
 			Player player1 = new Player(1);
 			Player player2 = new Player(2);
 			player1.setSource(graph.getVertices().get(0));

@@ -1,4 +1,4 @@
-package GraphGenerators;
+package graphModel;
 
 import java.util.Set;
 

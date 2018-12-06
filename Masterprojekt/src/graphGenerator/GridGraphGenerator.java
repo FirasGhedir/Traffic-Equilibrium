@@ -1,6 +1,10 @@
-package GraphGenerators;
+package graphGenerator;
 
 import java.util.*;
+
+import graphModel.Edge;
+import graphModel.Graph;
+import graphModel.Vertex;
 
 /**
  * Universität Ulm
