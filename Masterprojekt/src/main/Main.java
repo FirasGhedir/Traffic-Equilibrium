@@ -45,10 +45,8 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param matrix
-	 *            the given matrix
-	 * @param rowPrinter
-	 *            prints each row of the matrix
+	 * @param matrix     the given matrix
+	 * @param rowPrinter prints each row of the matrix
 	 */
 	public static void printMatrix(int[][] matrix, Consumer<int[]> rowPrinter) {
 		Arrays.stream(matrix).forEach((row) -> rowPrinter.accept(row));
@@ -59,8 +57,7 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param vector
-	 *            the given vector
+	 * @param vector the given vector
 	 */
 	public static void printVector(int[] vector) {
 		System.out.println(Arrays.toString(vector));
@@ -71,8 +68,7 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args
-	 *            the command line arguments
+	 * @param args             the command line arguments
 	 * @param adjacency_matrix
 	 */
 	public static void main(String[] args) throws IloException {
@@ -158,18 +154,17 @@ public class Main {
 					cplex.prod(cplex.sum(f5, f6), cplex.sum(cplex.prod(4, f5), cplex.prod(4, f6))),
 					cplex.prod(cplex.sum(f7, f8), cplex.sum(cplex.prod(5, f7), cplex.prod(5, f8)))));
 
-			cplex.addEq(0, cplex.sum(f7,cplex.prod(-1, f5)));
-			cplex.addEq(0, cplex.sum(f6,cplex.prod(-1, f8)));
-			cplex.addEq(0, cplex.sum(f1,cplex.prod(-1, f3)));
-			cplex.addEq(0, cplex.sum(f2,f6));
-			
+			cplex.addEq(0, cplex.sum(f7, cplex.prod(-1, f5)));
+			cplex.addEq(0, cplex.sum(f6, cplex.prod(-1, f8)));
+			cplex.addEq(0, cplex.sum(f1, cplex.prod(-1, f3)));
+			cplex.addEq(0, cplex.sum(f2, f6));
 
-			cplex.addEq(player1.getDemand(), cplex.sum(f1,f5));
+			cplex.addEq(player1.getDemand(), cplex.sum(f1, f5));
 			cplex.addEq(player2.getDemand(), f4);
-			
-            cplex.addEq(player1.getDemand(), cplex.sum(f7,f3));
-            cplex.addEq(player2.getDemand(), cplex.sum(f4,f8));
-            
+
+			cplex.addEq(player1.getDemand(), cplex.sum(f7, f3));
+			cplex.addEq(player2.getDemand(), cplex.sum(f4, f8));
+
 			if (cplex.solve()) {
 				System.out.println("obj: " + cplex.getObjValue());
 				System.out.println("f1: " + cplex.getValue(f1));
