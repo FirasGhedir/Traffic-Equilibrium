@@ -20,9 +20,13 @@ import java.util.Set;
  */
 public class Graphs implements Graph<Vertex, Edge> {
 
+	private static final Iterable<Integer>[] AdjacencyList = null;
 	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 
+	/**
+	 * 
+	 */
 	public Graphs() {
 
 	}
@@ -209,7 +213,6 @@ public class Graphs implements Graph<Vertex, Edge> {
 					if (edges.get(j).getFrom().equals(vertices.get(i))) {
 						adjacencyMatrix[i][edges.get(j).getTo().getId()] = 1;
 					}
-
 				}
 			}
 
@@ -222,8 +225,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 				throw new IllegalArgumentException("Too few edges");
 			}
 		}
-		return adjacencyMatrix;
 
+		return adjacencyMatrix;
 	}
 
 	/**
@@ -249,6 +252,56 @@ public class Graphs implements Graph<Vertex, Edge> {
 		}
 
 		return nodePotentialVector;
+
 	}
 
+	/**
+	 * Creates and fills a adjacency list of a graph
+	 * --------------------------------------------
+	 * 
+	 * @return the adjacency list of the graph
+	 */
+	public ArrayList<ArrayList<Integer>> getAdjacencyList() {
+
+		// create empty adjacency lists - one for each node
+		ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>();
+
+		try {
+
+			for (int i = 0; i < vertices.size(); i++) {
+				adjList.add(new ArrayList<Integer>());
+			}
+
+			// fill adjacency list
+			for (int i = 0; i < vertices.size(); i++) {
+				for (int j = 0; j < edges.size(); j++) {
+					if (edges.get(j).getFrom().equals(vertices.get(i))) {
+						adjList.get(i).add(j);
+					}
+				}
+			}
+
+		} catch (Exception e) {
+			if (this.getEdges().size() > (long) this.getVertices().size() * (this.getVertices().size() - 1) / 2
+					+ this.getVertices().size()) {
+				throw new IllegalArgumentException("Too many edges");
+			}
+			if (this.getEdges().size() < 0) {
+				throw new IllegalArgumentException("Too few edges");
+			}
+		}
+
+		return adjList;
+	}
+
+	/**
+	 * Gets the vertices adjacent to the specified vertex.
+	 *
+	 * @param vertex The vertex to get adjacent vertices for.
+	 *
+	 * @return The vertices adjacent to the specified vertex.
+	 */
+	public Iterable<Integer> adjacentTo(int vertex) {
+		return AdjacencyList[vertex];
+	}
 }
