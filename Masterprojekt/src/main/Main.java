@@ -118,9 +118,16 @@ public class Main {
 			printVector(nodePotentialVector);
 	
 			//graph.setPlayers(2);
-			graph.getPlayers().add(new Player(0,graph.getVertices().get(0),graph.getVertices().get(2),5));
+			graph.getPlayers().add(new Player(0,graph.getVertices().get(0),graph.getVertices().get(3),5));
 			graph.getPlayers().add(new Player(1,graph.getVertices().get(1),graph.getVertices().get(3),4));
-
+            graph.getEdges().get(0).setA(2);
+            graph.getEdges().get(0).setB(0);
+            graph.getEdges().get(1).setA(4);
+            graph.getEdges().get(1).setB(0);
+            graph.getEdges().get(2).setA(3);
+            graph.getEdges().get(2).setB(0);
+            graph.getEdges().get(3).setA(5);
+            graph.getEdges().get(3).setB(0);
 			new Socialoptimum();
 			Socialoptimum.step1(graph);
 			

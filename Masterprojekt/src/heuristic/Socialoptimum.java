@@ -10,10 +10,9 @@ import ilog.concert.IloNumVar;
 import ilog.cplex.IloCplex;
 
 public class Socialoptimum {
-	
+
 	public Socialoptimum() {
-		
-		
+
 	}
 
 	static ArrayList<IloNumExpr> s1 = new ArrayList<>();
@@ -34,6 +33,12 @@ public class Socialoptimum {
 					cplex.prod(cplex.constant(graph.getEdges().get(i).getA()), tmp));
 			IloNumExpr tmp2 = cplex.prod(tmp, tmp1);
 			s1.add(tmp2);
+
+		}
+
+		for (int i = 0; i < graph.getEdges().size(); i++) {
+			System.out.println("Source : " + graph.getEdges().get(i).getFrom().getId() + " To : "
+					+ graph.getEdges().get(i).getTo().getId());
 
 		}
 
@@ -60,12 +65,13 @@ public class Socialoptimum {
 				IloNumVar[] x1 = in.toArray(new IloNumVar[in.size()]);
 				IloNumVar[] y1 = out.toArray(new IloNumVar[out.size()]);
 
+                 System.out.println(in.size() + " " + out.size());
 				in.clear();
 				out.clear();
-
-				IloNumExpr samara = cplex.sum(cplex.sum(x1), cplex.prod(-1, cplex.sum(y1)));
+				
+				IloNumExpr samara = cplex.sum(cplex.sum(y1), cplex.prod(-1, cplex.sum(x1)));
 				IloAddable amg;
-			if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSource())) {
+				if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSource())) {
 					amg = cplex.addEq(graph.getPlayers().get(i).getDemand(), samara);
 				}
 
@@ -73,31 +79,28 @@ public class Socialoptimum {
 					amg = cplex.addEq(-graph.getPlayers().get(i).getDemand(), samara);
 
 				}
-				
+
 				else {
-					 amg = cplex.addEq(0, samara);
+					amg = cplex.addEq(0, samara);
 
 				}
+				
 
 				s2.add(amg);
-				
-				
+
 			}
 
 		}
-		
+
 		System.out.println(s1.size());
 		System.out.println(s2.size());
-		
+
 		IloNumExpr[] alpha = s1.toArray(new IloNumExpr[s1.size()]);
 		IloAddable[] beta = s2.toArray(new IloAddable[s2.size()]);
 
-		
-        
 		cplex.addMinimize(cplex.sum(alpha));
 		cplex.add(beta);
-		       
-		
+
 		if (cplex.solve()) {
 			System.out.println("obj: " + cplex.getObjValue());
 
