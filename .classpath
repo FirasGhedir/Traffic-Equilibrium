@@ -2,12 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Masterprojekt/src"/>
-	<classpathentry kind="lib" path="Masterprojekt/collections-generic-4.01.jar"/>
-	<classpathentry kind="lib" path="Masterprojekt/jung-algorithms-2.0.jar"/>
-	<classpathentry kind="lib" path="Masterprojekt/jung-api-2.0.jar"/>
-	<classpathentry kind="lib" path="Masterprojekt/jung-graph-impl-2.0.jar"/>
-	<classpathentry kind="lib" path="Masterprojekt/jung-visualization-2.0.jar"/>
-	<classpathentry kind="lib" path="Masterprojekt/jung.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/IBM/ILOG/CPLEX_Studio128/cplex/lib/cplex.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Program Files/IBM/ILOG/CPLEX_Studio128/cplex/bin/x64_win64"/>

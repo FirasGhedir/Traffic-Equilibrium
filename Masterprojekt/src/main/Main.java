@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
@@ -114,19 +115,17 @@ public class Main {
 			System.out.println("\n----------------------------------------\n node potential vector:\n");
 			int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
 			printVector(nodePotentialVector);
-
+	
+			
+			
 			/*
 			 * Test for players
 			 */
+			
 			System.out.println("\n----------------------------------------\n CPLEX example:\n");
-			Player player1 = new Player(1);
-			Player player2 = new Player(2);
-			player1.setSource(graph.getVertices().get(0));
-			player1.setSink(graph.getVertices().get(3));
-			player2.setSource(graph.getVertices().get(1));
-			player2.setSink(graph.getVertices().get(3));
-			player1.setDemand(5);
-			player2.setDemand(4);
+			Player player1 = new Player(1,graph.getVertices().get(0),graph.getVertices().get(3),5);
+			Player player2 = new Player(2,graph.getVertices().get(1),graph.getVertices().get(3),4);
+			
 
 			IloCplex cplex = new IloCplex();
 
@@ -184,6 +183,10 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	
+	 
+		
+		
 
 	}
 

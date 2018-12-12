@@ -1,5 +1,10 @@
 package graphModel;
 
+import ilog.concert.IloNumVar;
+
+import java.util.ArrayList;
+
+
 /**
  * Universität Ulm
  * 
@@ -20,7 +25,8 @@ public class Edge {
 	Vertex from; // Start vertex
 	Vertex to; // End vertex
 	double weight; // edge weight
-	int c; //cost
+	int a,b; //cost
+	ArrayList<IloNumVar> players;
     
 	/**
 	 * Constructor to create a new edge
@@ -98,8 +104,32 @@ public class Edge {
 		this.weight = weight;
 	}
 	
-	public void setCost(int x) {
-		c=(2*x)+1;
+
+
+	public ArrayList<IloNumVar> getPlayers() {
+		return players;
 	}
+
+	public void setPlayers(ArrayList<IloNumVar> players) {
+		this.players = players;
+	}
+
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
+
+	public int getB() {
+		return b;
+	}
+
+	public void setB(int b) {
+		this.b = b;
+	}
+	
+	
 
 }

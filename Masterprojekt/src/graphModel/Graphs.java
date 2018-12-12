@@ -2,7 +2,10 @@ package graphModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Set;
+
+import player.Player;
 
 /**
  * Universität Ulm
@@ -23,6 +26,9 @@ public class Graphs implements Graph<Vertex, Edge> {
 	private static final Iterable<Integer>[] AdjacencyList = null;
 	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 	ArrayList<Edge> edges = new ArrayList<Edge>();
+	ArrayList<Player> players= new ArrayList<>();
+	Scanner scan=new Scanner(System.in);
+
 
 	/**
 	 * 
@@ -303,5 +309,21 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 */
 	public Iterable<Integer> adjacentTo(int vertex) {
 		return AdjacencyList[vertex];
+	}
+	
+	public void setPlayers(int n) {
+		int x,y,z;
+		x=0;
+		y=0;
+		z=0;
+		for(int i=0;i<n ; i++) {
+			System.out.println("Please insert the Source of Player "+ i + " : ");
+			x=scan.nextInt();
+			System.out.println("Please insert the sink of Player "+ i + " : ");
+			y=scan.nextInt();
+			System.out.println("Please insert the demand of player " + i + " : ");
+			z=scan.nextInt();
+			players.add(i,new Player(i,this.getVertices().get(x),this.getVertices().get(y),z));
+		}
 	}
 }

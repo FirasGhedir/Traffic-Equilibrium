@@ -25,11 +25,12 @@ public class Player {
 	Vertex sink;
 	int demand;
 	int id;
-    ArrayList<Integer> f;
     
-	public Player(int id) {
+	public Player(int id,Vertex source,Vertex sink,int demand) {
 		this.id = id;
-		f = new ArrayList<Integer>();
+		this.source=source;
+		this.sink=sink;
+		this.demand=demand;
 	}
 
 	public Vertex getSource() {
