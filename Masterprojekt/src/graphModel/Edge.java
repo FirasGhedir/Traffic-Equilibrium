@@ -26,7 +26,7 @@ public class Edge {
 	Vertex to; // End vertex
 	double weight; // edge weight
 	int a,b; //cost
-	ArrayList<IloNumVar> players;
+	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
     
 	/**
 	 * Constructor to create a new edge
@@ -130,6 +130,9 @@ public class Edge {
 		this.b = b;
 	}
 	
+	public IloNumVar[] convertarray(){
+		return players.toArray(new IloNumVar[players.size()]);
+	}
 	
 
 }

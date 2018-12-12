@@ -326,4 +326,10 @@ public class Graphs implements Graph<Vertex, Edge> {
 			players.add(i,new Player(i,this.getVertices().get(x),this.getVertices().get(y),z));
 		}
 	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+	
+	
 }
