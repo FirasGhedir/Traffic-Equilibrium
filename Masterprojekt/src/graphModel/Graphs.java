@@ -2,8 +2,12 @@ package graphModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 import player.Player;
 
@@ -23,12 +27,12 @@ import player.Player;
  */
 public class Graphs implements Graph<Vertex, Edge> {
 
-	private static final Iterable<Integer>[] AdjacencyList = null;
 	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 	ArrayList<Edge> edges = new ArrayList<Edge>();
-	ArrayList<Player> players= new ArrayList<>();
-	Scanner scan=new Scanner(System.in);
-
+	ArrayList<Player> players = new ArrayList<>();
+	Scanner scan = new Scanner(System.in);
+	int n;
+	List<Integer>[] adj;
 
 	/**
 	 * 
@@ -198,6 +202,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	/**
 	 * Creates and fills a adjacency matrix of a graph
+	 * 
 	 * --------------------------------------------
 	 * 
 	 * @return the adjacency matrix of the graph
@@ -236,6 +241,34 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	/**
+	 * Creates and fills a adjacency matrix of a graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the adjacency matrix of the graph
+	 */
+	public List<Integer>[] getAdjacencyList() {
+
+		try {
+
+			/*
+			 * TODO
+			 */
+
+		} catch (Exception e) {
+			if (this.getEdges().size() > (long) this.getVertices().size() * (this.getVertices().size() - 1) / 2
+					+ this.getVertices().size()) {
+				throw new IllegalArgumentException("Too many edges");
+			}
+			if (this.getEdges().size() < 0) {
+				throw new IllegalArgumentException("Too few edges");
+			}
+		}
+
+		return adj;
+	}
+
+	/**
 	 * Creates the node potential vector for a given graph
 	 * --------------------------------------------
 	 * 
@@ -258,78 +291,53 @@ public class Graphs implements Graph<Vertex, Edge> {
 		}
 
 		return nodePotentialVector;
-
 	}
 
 	/**
-	 * Creates and fills a adjacency list of a graph
+	 * Return an iterator over the neighbors of Vertex named v
+	 * 
+	 * --------------------------------------------
+	 *
+	 * @param v the int number of a Vertex
+	 * @return an Iterator over Vertices that are adjacent to the Vertex named v,
+	 *         empty set if v is not in graph
+	 */
+	public Iterable<Integer> adjacentTo(int v) {
+		return adj[v];
+	}
+
+	/**
+	 * Sets the players for a given number
+	 * 
 	 * --------------------------------------------
 	 * 
-	 * @return the adjacency list of the graph
+	 * @param n the number of players
 	 */
-	public ArrayList<ArrayList<Integer>> getAdjacencyList() {
-
-		// create empty adjacency lists - one for each node
-		ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>();
-
-		try {
-
-			for (int i = 0; i < vertices.size(); i++) {
-				adjList.add(new ArrayList<Integer>());
-			}
-
-			// fill adjacency list
-			for (int i = 0; i < vertices.size(); i++) {
-				for (int j = 0; j < edges.size(); j++) {
-					if (edges.get(j).getFrom().equals(vertices.get(i))) {
-						adjList.get(i).add(j);
-					}
-				}
-			}
-
-		} catch (Exception e) {
-			if (this.getEdges().size() > (long) this.getVertices().size() * (this.getVertices().size() - 1) / 2
-					+ this.getVertices().size()) {
-				throw new IllegalArgumentException("Too many edges");
-			}
-			if (this.getEdges().size() < 0) {
-				throw new IllegalArgumentException("Too few edges");
-			}
+	public void setPlayers(int n) {
+		int x, y, z;
+		x = 0;
+		y = 0;
+		z = 0;
+		for (int i = 0; i < n; i++) {
+			System.out.println("Please insert the Source of Player " + i + " : ");
+			x = scan.nextInt();
+			System.out.println("Please insert the sink of Player " + i + " : ");
+			y = scan.nextInt();
+			System.out.println("Please insert the demand of player " + i + " : ");
+			z = scan.nextInt();
+			players.add(i, new Player(i, this.getVertices().get(x), this.getVertices().get(y), z));
 		}
-
-		return adjList;
 	}
 
 	/**
-	 * Gets the vertices adjacent to the specified vertex.
-	 *
-	 * @param vertex The vertex to get adjacent vertices for.
-	 *
-	 * @return The vertices adjacent to the specified vertex.
+	 * Return the current players as ArrayList
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the current players as ArrayList
 	 */
-	public Iterable<Integer> adjacentTo(int vertex) {
-		return AdjacencyList[vertex];
-	}
-	
-	public void setPlayers(int n) {
-		int x,y,z;
-		x=0;
-		y=0;
-		z=0;
-		for(int i=0;i<n ; i++) {
-			System.out.println("Please insert the Source of Player "+ i + " : ");
-			x=scan.nextInt();
-			System.out.println("Please insert the sink of Player "+ i + " : ");
-			y=scan.nextInt();
-			System.out.println("Please insert the demand of player " + i + " : ");
-			z=scan.nextInt();
-			players.add(i,new Player(i,this.getVertices().get(x),this.getVertices().get(y),z));
-		}
+	public ArrayList<Player> getPlayers() {
+		return this.players;
 	}
 
-	public ArrayList<Player> getPlayers() {
-		return players;
-	}
-	
-	
 }

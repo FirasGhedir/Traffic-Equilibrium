@@ -9,17 +9,45 @@ import ilog.concert.IloNumExpr;
 import ilog.concert.IloNumVar;
 import ilog.cplex.IloCplex;
 
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          This class contains everything for solving the system optimal flow
+ *          (social optimum)
+ */
 public class Socialoptimum {
-
-	public Socialoptimum() {
-
-	}
 
 	static ArrayList<IloNumExpr> s1 = new ArrayList<>();
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
 
+	/**
+	 * Constructor
+	 */
+	public Socialoptimum() {
+
+	}
+
+	/**
+	 * The main method
+	 * 
+	 * --------------------------------------------
+	 *
+	 * @param graph the command line argument
+	 * @throws IloException if a CPLEX error occures
+	 */
 	public static void step1(Graphs graph) throws IloException {
+		
 		IloCplex cplex = new IloCplex();
+		
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			for (int j = 0; j < graph.getPlayers().size(); j++) {
 				graph.getEdges().get(i).getPlayers()
@@ -65,10 +93,10 @@ public class Socialoptimum {
 				IloNumVar[] x1 = in.toArray(new IloNumVar[in.size()]);
 				IloNumVar[] y1 = out.toArray(new IloNumVar[out.size()]);
 
-                 System.out.println(in.size() + " " + out.size());
+				System.out.println(in.size() + " " + out.size());
 				in.clear();
 				out.clear();
-				
+
 				IloNumExpr samara = cplex.sum(cplex.sum(y1), cplex.prod(-1, cplex.sum(x1)));
 				IloAddable amg;
 				if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSource())) {
@@ -84,7 +112,6 @@ public class Socialoptimum {
 					amg = cplex.addEq(0, samara);
 
 				}
-				
 
 				s2.add(amg);
 
