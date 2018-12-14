@@ -2,12 +2,10 @@ package graphModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeSet;
 
 import player.Player;
 
@@ -33,6 +31,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	Scanner scan = new Scanner(System.in);
 	int n;
 	List<Integer>[] adj;
+	LinkedList<Integer>[] adjListArray;
 
 	/**
 	 * 
@@ -247,13 +246,37 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * @return the adjacency matrix of the graph
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Integer>[] getAdjacencyList() {
 
 		try {
 
-			/*
-			 * TODO
-			 */
+			int[][] adjacencyMatrix = this.getAdjacencyMatrix();
+			adjListArray = new LinkedList[vertices.size()];
+
+			// Create a new list for each vertex such that adjacent nodes can be stored
+			for (int i = 0; i < vertices.size(); i++) {
+				adjListArray[i] = new LinkedList<Integer>();
+			}
+			int i = 0;
+			for (List<Integer> list : adjListArray) {
+
+				// rows
+				for (int j = 0; j < adjacencyMatrix.length; j++) {
+					if (!(adjacencyMatrix[i][j] == 0)) {
+						list.add(j);
+					}
+				}
+
+				// columns
+				for (int k = 0; k < adjacencyMatrix.length; k++) {
+					if (!(adjacencyMatrix[k][i] == 0)) {
+						list.add(k);
+					}
+				}
+
+				++i;
+			}
 
 		} catch (Exception e) {
 			if (this.getEdges().size() > (long) this.getVertices().size() * (this.getVertices().size() - 1) / 2
@@ -265,7 +288,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 			}
 		}
 
-		return adj;
+		return adjListArray;
 	}
 
 	/**
@@ -303,6 +326,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 *         empty set if v is not in graph
 	 */
 	public Iterable<Integer> adjacentTo(int v) {
+		adj = getAdjacencyList();
 		return adj[v];
 	}
 

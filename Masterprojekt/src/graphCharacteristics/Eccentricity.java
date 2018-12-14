@@ -3,6 +3,7 @@ package graphCharacteristics;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -27,6 +28,7 @@ import sun.misc.Queue;
  */
 public class Eccentricity {
 
+	private double avgEccentricity;
 	private int[] eccentricities;
 	private int radius;
 	private int diameter;
@@ -43,6 +45,7 @@ public class Eccentricity {
 	public Eccentricity(Graphs graph) throws InterruptedException {
 
 		eccentricities = new int[graph.getVertices().size()];
+		avgEccentricity = Double.MAX_VALUE;
 		radius = Integer.MAX_VALUE;
 		diameter = Integer.MIN_VALUE;
 
@@ -65,10 +68,10 @@ public class Eccentricity {
 	 * 
 	 * [https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/]
 	 * 
-	 * What it does: Breadth first search queues the source vertex, then
-	 * iteratively dequeues the vertex and enqueues its adjacent vertices, until no
-	 * unvisited connected vertices remain. Each vertex is marked as visited the
-	 * first time it is encountered, and a distance to the source vertex recorded.
+	 * What it does: Breadth first search queues the source vertex, then iteratively
+	 * dequeues the vertex and enqueues its adjacent vertices, until no unvisited
+	 * connected vertices remain. Each vertex is marked as visited the first time it
+	 * is encountered, and a distance to the source vertex recorded.
 	 * 
 	 * --------------------------------------------
 	 * 
@@ -79,7 +82,7 @@ public class Eccentricity {
 	private int breadthFirstSearch(Graphs graph, int sourceVertex) throws InterruptedException {
 
 		Queue<Integer> queue = new Queue<>();
-		    
+
 		boolean[] isVisited = new boolean[graph.getVertices().size()];
 		int[] distanceToSource = new int[graph.getVertices().size()];
 
@@ -103,6 +106,8 @@ public class Eccentricity {
 			}
 		}
 
+		this.avgEccentricity = Arrays.stream(eccentricities).average().orElse(Double.NaN);
+
 		return eccentricity;
 	}
 
@@ -115,6 +120,17 @@ public class Eccentricity {
 	 */
 	public int[] getEccentricities() {
 		return this.eccentricities;
+	}
+
+	/**
+	 * Get the average eccentricities in the given graph.
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the average eccentricity
+	 */
+	public double getAvgEccentricity() {
+		return this.avgEccentricity;
 	}
 
 	/**

@@ -35,7 +35,7 @@ public class Vertex {
 	 * @return the id of the vertex
 	 */
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Vertex {
 	 *            the identifier number of the vertex
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.id = this.id;
 	}
 
 }

@@ -2,21 +2,16 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
 import graphCharacteristics.Eccentricity;
 import graphGenerator.GridGraphGenerator;
-import graphModel.ArrayStack;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.Socialoptimum;
-import ilog.cplex.IloCplex;
 import player.Player;
-import ilog.concert.IloNumVar;
 import ilog.concert.IloException;
 
 /**
@@ -115,22 +110,27 @@ public class Main {
 			System.out.println("----------------------------------------\n adjacency matrix:\n");
 			printMatrix(adjacency_matrix1, likeAList);
 
-//			// print adjacency list
-//			System.out.println("----------------------------------------\n adjacency list:\n");
-//			/*
-//			 *  TODO
-//			 */
-			
+			// print adjacency list
+			System.out.println("----------------------------------------\n adjacency list:\n");
+			for (int i = 0; i < graph.getAdjacencyMatrix().length; i++) {
+				System.out.println("Knoten " + graph.getVertices().get(i).getId() + ": " + graph.getAdjacencyList()[i]);
+				for (int j = 0; j < graph.getAdjacencyList()[i].size(); j++) {
+					System.out.println("-> " + graph.getAdjacencyList()[i].get(j));
+				}
+			}
+
 			// print node potential vector
 			System.out.println("\n----------------------------------------\n node potential vector:\n");
 			int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
 			printVector(nodePotentialVector);
+
+			// eccentricity
+			System.out.println("\n----------------------------------------\n calculation of eccentricity:\n");
+			Eccentricity ec = new Eccentricity(graph);
+			int[] ecc = ec.getEccentricities();
+			printVector(ecc);
+			System.out.println("average eccentricity: " + ec.getAvgEccentricity());
 			
-//			// eccentricity
-//			System.out.println("\n----------------------------------------\n calculation of eccentricity:\n");
-//			Eccentricity ec = new Eccentricity(graph);
-//			int[] ecc = ec.getEccentricities();
-//			printVector(ecc);
 
 			// social optimum
 			System.out.println("\n----------------------------------------\n calculation of social optimum:\n");
@@ -147,7 +147,7 @@ public class Main {
 			graph.getEdges().get(3).setB(0);
 			new Socialoptimum();
 			Socialoptimum.step1(graph);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

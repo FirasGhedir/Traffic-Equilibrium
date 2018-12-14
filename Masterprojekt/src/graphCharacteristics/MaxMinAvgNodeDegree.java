@@ -80,7 +80,7 @@ public class MaxMinAvgNodeDegree {
 	 */
 	public double getAvgNodeDegree() {
 
-		return Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).average().getAsDouble();
+		return Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).average().orElse(Double.NaN);
 	}
 
 }
