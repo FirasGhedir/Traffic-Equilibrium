@@ -29,7 +29,6 @@ public class Graphs implements Graph<Vertex, Edge> {
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 	ArrayList<Player> players = new ArrayList<>();
 	Scanner scan = new Scanner(System.in);
-	int n;
 	List<Integer>[] adj;
 	LinkedList<Integer>[] adjListArray;
 

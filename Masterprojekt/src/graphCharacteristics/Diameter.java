@@ -1,6 +1,5 @@
 package graphCharacteristics;
 
-import java.util.Arrays;
 import graphModel.Graphs;
 import sun.misc.Queue;
 
@@ -16,35 +15,52 @@ import sun.misc.Queue;
  * 
  *          _____________________________________________
  * 
- *          This contains an algorithm to calculate eccentricity, based on
- *          BreadthFirstPaths algorithm.
+ *          This contains an algorithm to calculate the diameter of a graph,
+ *          based on BreadthFirstPaths algorithm.
  * 
- *          The eccentricity of a graph vertex v in a connected graph G is the
- *          maximum graph distance between v and any other vertex u of G. For a
- *          disconnected graph, all vertices are defined to have infinite
- *          eccentricity.
+ *          The graph diameter of a graph is the length of the "longest shortest
+ *          path" (i.e., the longest graph geodesic) between any two graph
+ *          vertices (u,v), where d(u,v) is a graph distance. In other words, a
+ *          graph's diameter is the largest number of vertices which must be
+ *          traversed in order to travel from one vertex to another when paths
+ *          which backtrack, detour, or loop are excluded from consideration.
  */
-public class Eccentricity {
+public class Diameter {
 
-	private double avgEccentricity; // the average vertex eccentricity of the graph
+	Graphs G = new Graphs();
+	private int diameter; // the maximum eccentricity of any vertex in the graph
 	private int[] eccentricities; // vertex vector with its eccentricity values
 
 	/**
-	 * Computes the eccentricity of each vertex in the graph and calculates the
-	 * radius and diameter based on the eccentricity for each vertex.
+	 * Constructor
 	 * 
 	 * --------------------------------------------
 	 * 
 	 * @param graph the given graph
-	 * @throws InterruptedException
+	 * @throws InterruptedException if an error occures
 	 */
-	public Eccentricity(Graphs graph) throws InterruptedException {
+	public Diameter(Graphs graph) throws InterruptedException {
 
+		this.setG(graph);
+		diameter = Integer.MIN_VALUE;
 		eccentricities = new int[graph.getVertices().size()];
-		avgEccentricity = Double.MAX_VALUE;
+		calcDiameter();
+	}
 
-		for (int vertex = 0; vertex < graph.getVertices().size(); vertex++) {
-			eccentricities[vertex] = breadthFirstSearch(graph, vertex);
+	/**
+	 * calculates the diameter for the given graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @throws InterruptedException if an error occures
+	 */
+	public void calcDiameter() throws InterruptedException {
+		for (int vertex = 0; vertex < this.G.getVertices().size(); vertex++) {
+			this.eccentricities[vertex] = breadthFirstSearch(this.G, vertex);
+
+			if (this.eccentricities[vertex] > this.diameter) {
+				this.diameter = this.eccentricities[vertex];
+			}
 		}
 	}
 
@@ -93,30 +109,24 @@ public class Eccentricity {
 			}
 		}
 
-		this.avgEccentricity = Arrays.stream(eccentricities).average().orElse(Double.NaN);
-
 		return eccentricity;
 	}
 
 	/**
-	 * Get the eccentricities for each vertex in this graph.
+	 * Gets the diameter
 	 * 
-	 * --------------------------------------------
-	 * 
-	 * @return the eccentricities for each vertex
+	 * @return the diameter
 	 */
-	public int[] getEccentricities() {
-		return this.eccentricities;
+	public int getDiameter() {
+		return this.diameter;
 	}
 
 	/**
-	 * Get the average eccentricities in the given graph.
+	 * Sets the current graph
 	 * 
-	 * --------------------------------------------
-	 * 
-	 * @return the average eccentricity
+	 * @param g the given graph
 	 */
-	public double getAvgEccentricity() {
-		return this.avgEccentricity;
+	public void setG(Graphs g) {
+		this.G = g;
 	}
 }

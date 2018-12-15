@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
+import graphCharacteristics.Diameter;
 import graphCharacteristics.Eccentricity;
+import graphCharacteristics.Radius;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
@@ -64,6 +66,27 @@ public class Main {
 	}
 
 	/**
+	 * Prints the adjacency list of a given graph; Prints a LinkedLists in a 1D
+	 * array;
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param graph the given graph
+	 */
+	public static void printAdjacencyList(Graphs graph) {
+		for (int i = 0; i < graph.getAdjacencyMatrix().length; i++) {
+			System.out.println("Knoten " + graph.getVertices().get(i).getId() + ": " + graph.getAdjacencyList()[i]);
+			for (int j = 0; j < graph.getAdjacencyList()[i].size(); j++) {
+				System.out.println("-> " + graph.getAdjacencyList()[i].get(j));
+			}
+		}
+	}
+
+	private static void printTitle(String title) {
+		System.out.println("\n ------------------------------\n|     " + title + ":\n ------------------------------");
+	}
+
+	/**
 	 * The main method
 	 * 
 	 * --------------------------------------------
@@ -75,15 +98,11 @@ public class Main {
 
 		try {
 
-			// --- Test for GridGraph ---
+			// --- Graph parameter
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(2, 2);
+			GridGraphGenerator test = new GridGraphGenerator(4, 2);
 			test.generateGraph(graph, map);
-
-			// === console ===
-			System.out.println("Gridgraph:\n #edges:    " + graph.getEdges().size() + "\n #vertices: "
-					+ graph.getVertices().size() + "\n");
 
 			// --- create adjacency matrix for the graph
 			int[][] adjacency_matrix1 = graph.getAdjacencyMatrix();
@@ -94,46 +113,22 @@ public class Main {
 			// --- get number of outgoing edges of vertex with ID = 1 ---
 			ArrayList<Vertex> listOut = graph.getOutNeighbors(graph.getVertices().get(1), adjacency_matrix1);
 
-			// print ingoing edges of of vertex with ID = 1
-			System.out.println("----------------------------------------\n in:");
-			for (int i = 0; i < listIn.size(); i++) {
-				System.out.println(listIn.get(i).getId());
-			}
-
-			// print outgoing edges of vertex 2 with ID = 1
-			System.out.println("----------------------------------------\n out:");
-			for (int i = 0; i < listOut.size(); i++) {
-				System.out.println(listOut.get(i).getId());
-			}
-
-			// print adjacency matrix
-			System.out.println("----------------------------------------\n adjacency matrix:\n");
-			printMatrix(adjacency_matrix1, likeAList);
-
-			// print adjacency list
-			System.out.println("----------------------------------------\n adjacency list:\n");
-			for (int i = 0; i < graph.getAdjacencyMatrix().length; i++) {
-				System.out.println("Knoten " + graph.getVertices().get(i).getId() + ": " + graph.getAdjacencyList()[i]);
-				for (int j = 0; j < graph.getAdjacencyList()[i].size(); j++) {
-					System.out.println("-> " + graph.getAdjacencyList()[i].get(j));
-				}
-			}
-
-			// print node potential vector
-			System.out.println("\n----------------------------------------\n node potential vector:\n");
+			// --- create node potential vector
 			int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
-			printVector(nodePotentialVector);
 
-			// eccentricity
-			System.out.println("\n----------------------------------------\n calculation of eccentricity:\n");
+			// --- eccentricity
 			Eccentricity ec = new Eccentricity(graph);
 			int[] ecc = ec.getEccentricities();
-			printVector(ecc);
-			System.out.println("average eccentricity: " + ec.getAvgEccentricity());
 			
+			// --- Diameter
+			Diameter dia = new Diameter(graph);
+			int diameter = dia.getDiameter();
+			
+			// --- Radius
+			Radius rad = new Radius(graph);
+			int radius = rad.getRadius();
 
-			// social optimum
-			System.out.println("\n----------------------------------------\n calculation of social optimum:\n");
+			// --- social optimum ---
 			// graph.setPlayers(2);
 			graph.getPlayers().add(new Player(0, graph.getVertices().get(0), graph.getVertices().get(3), 5));
 			graph.getPlayers().add(new Player(1, graph.getVertices().get(1), graph.getVertices().get(3), 4));
@@ -145,6 +140,71 @@ public class Main {
 			graph.getEdges().get(2).setB(0);
 			graph.getEdges().get(3).setA(5);
 			graph.getEdges().get(3).setB(0);
+
+			/*
+			 * print GridGraph
+			 */
+			printTitle("Gridgraph");
+			System.out.println(
+					"#edges:    " + graph.getEdges().size() + "\n #vertices: " + graph.getVertices().size() + "\n");
+
+			/*
+			 * print ingoing edges of of vertex with ID = 1
+			 */
+			printTitle("Ingoing edges");
+			for (int i = 0; i < listIn.size(); i++) {
+				System.out.println(listIn.get(i).getId());
+			}
+
+			/*
+			 * print outgoing edges of vertex 2 with ID = 1
+			 */
+			printTitle("Outgoing edges");
+			for (int i = 0; i < listOut.size(); i++) {
+				System.out.println(listOut.get(i).getId());
+			}
+
+			/*
+			 * print adjacency matrix
+			 */
+			printTitle("Adjacency Matrix");
+			printMatrix(adjacency_matrix1, likeAList);
+
+			/*
+			 * print adjacency list
+			 */
+			printTitle("Adjacency List");
+			printAdjacencyList(graph);
+
+			/*
+			 * print node potential vector
+			 */
+			printTitle("Node potential vector");
+			printVector(nodePotentialVector);
+
+			/*
+			 * eccentricity
+			 */
+			printTitle("Eccentricity");
+			printVector(ecc);
+			System.out.println(" -> Average eccentricity:        " + ec.getAvgEccentricity());
+			
+			/*
+			 * diameter
+			 */
+			printTitle("Diameter");
+			System.out.println(" -> Diameter (Max eccentricity): " + diameter);
+
+			/*
+			 * radius
+			 */
+			printTitle("Radius");
+			System.out.println(" -> Radius   (Min eccentricity): " + radius);
+			
+			/*
+			 * social optimum
+			 */
+			printTitle("Social optimum");
 			new Socialoptimum();
 			Socialoptimum.step1(graph);
 

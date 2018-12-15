@@ -1,6 +1,5 @@
 package graphCharacteristics;
 
-import java.util.Arrays;
 import graphModel.Graphs;
 import sun.misc.Queue;
 
@@ -16,35 +15,49 @@ import sun.misc.Queue;
  * 
  *          _____________________________________________
  * 
- *          This contains an algorithm to calculate eccentricity, based on
+ *          This contains an algorithm to calculate radius of a graph, based on
  *          BreadthFirstPaths algorithm.
  * 
- *          The eccentricity of a graph vertex v in a connected graph G is the
- *          maximum graph distance between v and any other vertex u of G. For a
- *          disconnected graph, all vertices are defined to have infinite
- *          eccentricity.
+ *          The radius of a graph is the minimum graph eccentricity of any graph
+ *          vertex in a graph. A disconnected graph therefore has infinite
+ *          radius
  */
-public class Eccentricity {
+public class Radius {
 
-	private double avgEccentricity; // the average vertex eccentricity of the graph
+	Graphs G = new Graphs();
+	private int radius; // the minimum eccentricity of any vertex in the graph
 	private int[] eccentricities; // vertex vector with its eccentricity values
 
 	/**
-	 * Computes the eccentricity of each vertex in the graph and calculates the
-	 * radius and diameter based on the eccentricity for each vertex.
+	 * Constructor
 	 * 
 	 * --------------------------------------------
 	 * 
 	 * @param graph the given graph
-	 * @throws InterruptedException
+	 * @throws InterruptedException if an error occures
 	 */
-	public Eccentricity(Graphs graph) throws InterruptedException {
+	public Radius(Graphs graph) throws InterruptedException {
 
+		this.setG(graph);
+		radius = Integer.MAX_VALUE;
 		eccentricities = new int[graph.getVertices().size()];
-		avgEccentricity = Double.MAX_VALUE;
+		calcRadius();
+	}
 
-		for (int vertex = 0; vertex < graph.getVertices().size(); vertex++) {
-			eccentricities[vertex] = breadthFirstSearch(graph, vertex);
+	/**
+	 * calculates the radius for the given graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @throws InterruptedException if an error occures
+	 */
+	public void calcRadius() throws InterruptedException {
+		for (int vertex = 0; vertex < this.G.getVertices().size(); vertex++) {
+			this.eccentricities[vertex] = breadthFirstSearch(this.G, vertex);
+
+			if (eccentricities[vertex] < radius) {
+				radius = eccentricities[vertex];
+			}
 		}
 	}
 
@@ -93,30 +106,24 @@ public class Eccentricity {
 			}
 		}
 
-		this.avgEccentricity = Arrays.stream(eccentricities).average().orElse(Double.NaN);
-
 		return eccentricity;
 	}
 
 	/**
-	 * Get the eccentricities for each vertex in this graph.
+	 * Gets the diameter
 	 * 
-	 * --------------------------------------------
-	 * 
-	 * @return the eccentricities for each vertex
+	 * @return the diameter
 	 */
-	public int[] getEccentricities() {
-		return this.eccentricities;
+	public int getRadius() {
+		return this.radius;
 	}
 
 	/**
-	 * Get the average eccentricities in the given graph.
+	 * Sets the current graph
 	 * 
-	 * --------------------------------------------
-	 * 
-	 * @return the average eccentricity
+	 * @param g the given graph
 	 */
-	public double getAvgEccentricity() {
-		return this.avgEccentricity;
+	public void setG(Graphs g) {
+		this.G = g;
 	}
 }
