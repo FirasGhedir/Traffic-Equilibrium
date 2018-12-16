@@ -101,7 +101,7 @@ public class Main {
 			// --- Graph parameter
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(4, 2);
+			GridGraphGenerator test = new GridGraphGenerator(2, 2);
 			test.generateGraph(graph, map);
 
 			// --- create adjacency matrix for the graph
