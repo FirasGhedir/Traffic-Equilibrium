@@ -24,7 +24,7 @@ import ilog.cplex.IloCplex;
  *          This class contains everything for solving the system optimal flow
  *          (social optimum)
  */
-public class Socialoptimum {
+public class SocialOptimum {
 
 	static ArrayList<IloNumExpr> s1 = new ArrayList<>();
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
@@ -32,7 +32,7 @@ public class Socialoptimum {
 	/**
 	 * Constructor
 	 */
-	public Socialoptimum() {
+	public SocialOptimum() {
 
 	}
 
@@ -45,9 +45,9 @@ public class Socialoptimum {
 	 * @throws IloException if a CPLEX error occures
 	 */
 	public static void step1(Graphs graph) throws IloException {
-		
+
 		IloCplex cplex = new IloCplex();
-		
+
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			for (int j = 0; j < graph.getPlayers().size(); j++) {
 				graph.getEdges().get(i).getPlayers()
