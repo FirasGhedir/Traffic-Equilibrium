@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import player.Player;
 
@@ -28,9 +29,11 @@ public class Graphs implements Graph<Vertex, Edge> {
 	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 	ArrayList<Edge> edges = new ArrayList<Edge>();
 	ArrayList<Player> players = new ArrayList<>();
-	Scanner scan = new Scanner(System.in);
+
 	List<Integer>[] adj;
 	LinkedList<Integer>[] adjListArray;
+	private static String adjacencyMatrixAsString;
+	private static String gridGraphDataAsString;
 
 	/**
 	 * 
@@ -180,8 +183,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * @param vertex          the given vertex
 	 * @param adjacencymatrix the given adjacency matrix
 	 * 
-	 * @return this.return this.an Arraylist of verteces with all outgoing edges for each
-	 *         vertex
+	 * @return this.return this.an Arraylist of verteces with all outgoing edges for
+	 *         each vertex
 	 */
 	public ArrayList<Vertex> getInNeighbors(Vertex vertex, int[][] adjacencymatrix) {
 
@@ -196,6 +199,40 @@ public class Graphs implements Graph<Vertex, Edge> {
 		}
 
 		return list;
+	}
+
+	/**
+	 * Delimiter | for each row when printing matrix
+	 */
+	static Consumer<int[]> likeAList = row -> {
+		adjacencyMatrixAsString += ("|");
+		Arrays.stream(row).forEach((el) -> adjacencyMatrixAsString += (" " + el + " "));
+		adjacencyMatrixAsString += ("|\n");
+	};
+
+	/**
+	 * Prints a 2D array
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param matrix     the given matrix
+	 * @param rowPrinter prints each row of the matrix
+	 * @return
+	 */
+	public static String printMatrix(int[][] matrix, Consumer<int[]> rowPrinter) {
+		Arrays.stream(matrix).forEach((row) -> rowPrinter.accept(row));
+		return adjacencyMatrixAsString;
+	}
+
+	/**
+	 * Prints a 1D array
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param vector the given vector
+	 */
+	public static void printVector(int[] vector) {
+		System.out.println(Arrays.toString(vector));
 	}
 
 	/**
@@ -321,8 +358,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * --------------------------------------------
 	 *
 	 * @param v the int number of a Vertex
-	 * @return this.an Iterator over Vertices that are adjacent to the Vertex named v,
-	 *         empty set if v is not in graph
+	 * @return this.an Iterator over Vertices that are adjacent to the Vertex named
+	 *         v, empty set if v is not in graph
 	 */
 	public Iterable<Integer> adjacentTo(int v) {
 		adj = getAdjacencyList();
@@ -337,18 +374,28 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * @param n the number of players
 	 */
 	public void setPlayers(int n) {
+
 		int x, y, z;
 		x = 0;
 		y = 0;
 		z = 0;
+
 		for (int i = 0; i < n; i++) {
-			System.out.println("Please insert the Source of Player " + i + " : ");
-			x = scan.nextInt();
-			System.out.println("Please insert the sink of Player " + i + " : ");
-			y = scan.nextInt();
-			System.out.println("Please insert the demand of player " + i + " : ");
-			z = scan.nextInt();
-			players.add(i, new Player(i, this.getVertices().get(x), this.getVertices().get(y), z));
+			Scanner scan = new Scanner(System.in);
+			try {
+				System.out.println("Please insert the Source of Player " + i + " : ");
+				x = scan.nextInt();
+				System.out.println("Please insert the sink of Player " + i + " : ");
+				y = scan.nextInt();
+				System.out.println("Please insert the demand of player " + i + " : ");
+				z = scan.nextInt();
+				players.add(i, new Player(i, this.getVertices().get(x), this.getVertices().get(y), z));
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				scan.close();
+			}
+
 		}
 	}
 
@@ -362,7 +409,31 @@ public class Graphs implements Graph<Vertex, Edge> {
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
-	
-	
 
+	/**
+	 * Prints a title in a fancy frame on the console
+	 * 
+	 * @param title the title to print
+	 */
+	private static String printTitle(String title) {
+		return ("\n ------------------------------\n|     " + title + ":\n ------------------------------\n");
+	}
+
+	/**
+	 * The toString() method returns the string representation of the object
+	 * CharacteristicsCalculation.
+	 */
+	@Override
+	public String toString() {
+
+		gridGraphDataAsString = "";
+		adjacencyMatrixAsString = "";
+
+		gridGraphDataAsString += "#edges:    " + getEdges().size() + "\n#vertices: " + getVertices().size() + "\n";
+		adjacencyMatrixAsString += Graphs.printMatrix(getAdjacencyMatrix(), likeAList);
+
+		return (printTitle("Gridgraph") + gridGraphDataAsString + printTitle("Adjacency Matrix")
+				+ adjacencyMatrixAsString + printTitle("Node potential vector")
+				+ Arrays.toString(getNodePotentialVector(getAdjacencyMatrix())));
+	}
 }

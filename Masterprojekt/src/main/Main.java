@@ -1,19 +1,12 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.function.Consumer;
 
 import graphCharacteristics.CharacteristicsCalculator;
-import graphCharacteristics.Diameter;
-import graphCharacteristics.Eccentricity;
-import graphCharacteristics.Radius;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
-import heuristic.SocialOptimum;
 import player.Player;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
@@ -38,38 +31,6 @@ import ilog.cplex.IloCplex;
 public class Main {
 
 	/**
-	 * Delimiter | for each row when printing matrix
-	 */
-	static Consumer<int[]> likeAList = (row) -> {
-		System.out.print("|");
-		Arrays.stream(row).forEach((el) -> System.out.print(" " + el + " "));
-		System.out.println("|");
-	};
-
-	/**
-	 * Prints a 2D array
-	 * 
-	 * --------------------------------------------
-	 * 
-	 * @param matrix     the given matrix
-	 * @param rowPrinter prints each row of the matrix
-	 */
-	public static void printMatrix(int[][] matrix, Consumer<int[]> rowPrinter) {
-		Arrays.stream(matrix).forEach((row) -> rowPrinter.accept(row));
-	}
-
-	/**
-	 * Prints a 1D array
-	 * 
-	 * --------------------------------------------
-	 * 
-	 * @param vector the given vector
-	 */
-	public static void printVector(int[] vector) {
-		System.out.println(Arrays.toString(vector));
-	}
-
-	/**
 	 * Prints the adjacency list of a given graph; Prints a LinkedLists in a 1D
 	 * array;
 	 * 
@@ -86,6 +47,11 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Prints a title in a fancy frame on the console
+	 * 
+	 * @param title the title to print
+	 */
 	private static void printTitle(String title) {
 		System.out.println("\n ------------------------------\n|     " + title + ":\n ------------------------------");
 	}
@@ -108,34 +74,8 @@ public class Main {
 			GridGraphGenerator test = new GridGraphGenerator(2, 2);
 			test.generateGraph(graph, map);
 
-			// --- create adjacency matrix for the graph
-			int[][] adjacency_matrix1 = graph.getAdjacencyMatrix();
-
-			// --- get number of ingoing edges of vertex with ID = 1 ---
-			ArrayList<Vertex> listIn = graph.getInNeighbors(graph.getVertices().get(1), adjacency_matrix1);
-
-			// --- get number of outgoing edges of vertex with ID = 1 ---
-			ArrayList<Vertex> listOut = graph.getOutNeighbors(graph.getVertices().get(1), adjacency_matrix1);
-
-			// --- create node potential vector
-			int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
-
 			// --- Create CharacteristicsCalculator
 			CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
-
-			// --- max/min/avg vertex degree
-			int maxVertexDegree = characteristics.getMaxVertexDegree();
-			int minVertexDegree = characteristics.getMinVertexDegree();
-			double avgVertexDegree = characteristics.getAvgEccentricity();
-
-			// --- eccentricity
-			int[] ecc = characteristics.getEccentricities();
-
-			// --- Diameter
-			int diameter = characteristics.getDiameter();
-
-			// --- Radius
-			int radius = characteristics.getRadius();
 
 			// --- social optimum ---
 			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 5);
@@ -170,33 +110,9 @@ public class Main {
 			IloAddable[] beta = { x1, x2, x3, x4, x5, x6, x7, x8 };
 
 			/*
-			 * print GridGraph
+			 * print graph data
 			 */
-			printTitle("Gridgraph");
-			System.out.println(
-					"#edges:    " + graph.getEdges().size() + "\n #vertices: " + graph.getVertices().size() + "\n");
-
-			/*
-			 * print ingoing edges of of vertex with ID = 1
-			 */
-			printTitle("Ingoing edges");
-			for (int i = 0; i < listIn.size(); i++) {
-				System.out.println(listIn.get(i).getId());
-			}
-
-			/*
-			 * print outgoing edges of vertex 2 with ID = 1
-			 */
-			printTitle("Outgoing edges");
-			for (int i = 0; i < listOut.size(); i++) {
-				System.out.println(listOut.get(i).getId());
-			}
-
-			/*
-			 * print adjacency matrix
-			 */
-			printTitle("Adjacency Matrix");
-			printMatrix(adjacency_matrix1, likeAList);
+			System.out.println(graph);
 
 			/*
 			 * print adjacency list
@@ -205,42 +121,14 @@ public class Main {
 			printAdjacencyList(graph);
 
 			/*
-			 * print node potential vector
+			 * print graph characteristics
 			 */
-			printTitle("Node potential vector");
-			printVector(nodePotentialVector);
-
-			/*
-			 * max/min/avg vertex degree
-			 */
-			printTitle("max/min/avg vertex degree");
-			System.out.println(" -> Max vertex degree:      " + maxVertexDegree);
-			System.out.println(" -> Min vertex degree:      " + minVertexDegree);
-			System.out.println(" -> Average vertex degree:  " + avgVertexDegree);
-
-			/*
-			 * eccentricity
-			 */
-			printTitle("Eccentricity");
-			printVector(ecc);
-			System.out.println(" -> Average eccentricity:        " + characteristics.getAvgEccentricity());
-
-			/*
-			 * diameter
-			 */
-			printTitle("Diameter");
-			System.out.println(" -> Diameter (Max eccentricity): " + diameter);
-
-			/*
-			 * radius
-			 */
-			printTitle("Radius");
-			System.out.println(" -> Radius   (Min eccentricity): " + radius);
+			System.out.println(characteristics);
 
 			/*
 			 * social optimum
 			 */
-			printTitle("Social optimum");
+			printTitle("social optimum");
 			System.out.println(cplex.solve());
 
 			cplex.add(beta);
@@ -266,7 +154,5 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

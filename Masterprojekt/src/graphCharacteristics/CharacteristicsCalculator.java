@@ -1,5 +1,7 @@
 package graphCharacteristics;
 
+import java.util.Arrays;
+
 import graphModel.Graphs;
 
 /**
@@ -178,5 +180,27 @@ public class CharacteristicsCalculator {
 	 */
 	public int getRadius() {
 		return this.radius;
+	}
+
+	/**
+	 * Prints a title in a fancy frame on the console
+	 * 
+	 * @param title the title to print
+	 */
+	private static String printTitle(String title) {
+		return ("\n ------------------------------\n|     " + title + ":\n ------------------------------\n");
+	}
+
+	/**
+	 * The toString() method returns the string representation of the object
+	 * CharacteristicsCalculation.
+	 */
+	@Override
+	public String toString() {
+		return (printTitle("Max vertex degree") + this.getMaxVertexDegree() + "\n" + printTitle("Min vertex degree")
+				+ this.getMinVertexDegree() + "\n" + printTitle("Average vertex degree") + this.getAvgVertexDegree()
+				+ "\n" + printTitle("Eccentricity vector") + Arrays.toString(this.getEccentricities()) + "\n"
+				+ printTitle("Average eccentricity") + this.getAvgEccentricity() + "\n" + printTitle("Diameter")
+				+ this.getDiameter() + "\n" + printTitle("Radius") + this.getRadius());
 	}
 }
