@@ -27,10 +27,8 @@ public interface GraphGenerator<V, E, T> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param target
-	 *            receives the generated edges and vertices
-	 * @param resultMap
-	 *            receives implementation-specific mappings
+	 * @param target    receives the generated edges and vertices
+	 * @param resultMap receives implementation-specific mappings
 	 */
 	void generateGraph(Graph<V, E> target, Map<String, T> resultMap);
 
@@ -39,11 +37,9 @@ public interface GraphGenerator<V, E, T> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param target
-	 *            receives the generated edges and vertices
+	 * @param target receives the generated edges and vertices
 	 */
 	default void generateGraph(Graph<V, E> target) {
 		generateGraph(target, null);
 	}
-
 }

@@ -68,12 +68,12 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	@Override
 	public boolean containsEdge(Edge e) {
-		return edges.contains(e);
+		return this.edges.contains(e);
 	}
 
 	@Override
 	public boolean containsVertex(Vertex v) {
-		return vertices.contains(v);
+		return this.vertices.contains(v);
 	}
 
 	@Override
@@ -115,11 +115,11 @@ public class Graphs implements Graph<Vertex, Edge> {
 	@Override
 	public boolean containsEdge(Vertex sourceVertex, Vertex targetVertex) {
 		Edge e = new Edge(sourceVertex, targetVertex, 0);
-		return edges.contains(e);
+		return this.edges.contains(e);
 	}
 
 	public ArrayList<Vertex> getVertices() {
-		return vertices;
+		return this.vertices;
 	}
 
 	public void setVertices(ArrayList<Vertex> vertices) {
@@ -127,7 +127,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	public ArrayList<Edge> getEdges() {
-		return edges;
+		return this.edges;
 	}
 
 	public void setEdges(ArrayList<Edge> edges) {
@@ -150,14 +150,14 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	/**
-	 * Return the in going neighbors of the specified vertex
+	 * return this.the in going neighbors of the specified vertex
 	 * 
 	 * --------------------------------------------
 	 * 
 	 * @param vertex          the given vertex
 	 * @param adjacencymatrix the given adjacency matrix
 	 * 
-	 * @return an Arraylist of verteces with all ingoing edges for each vertex
+	 * @return this.an Arraylist of verteces with all ingoing edges for each vertex
 	 */
 	public ArrayList<Vertex> getOutNeighbors(Vertex vertex, int[][] adjacencymatrix) {
 		ArrayList<Vertex> tmp = new ArrayList<>();
@@ -173,14 +173,14 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	/**
-	 * Return the out going neighbors of the specified vertex
+	 * return this.the out going neighbors of the specified vertex
 	 * 
 	 * --------------------------------------------
 	 * 
 	 * @param vertex          the given vertex
 	 * @param adjacencymatrix the given adjacency matrix
 	 * 
-	 * @return return an Arraylist of verteces with all outgoing edges for each
+	 * @return this.return this.an Arraylist of verteces with all outgoing edges for each
 	 *         vertex
 	 */
 	public ArrayList<Vertex> getInNeighbors(Vertex vertex, int[][] adjacencymatrix) {
@@ -203,7 +203,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @return the adjacency matrix of the graph
+	 * @return this.the adjacency matrix of the graph
 	 */
 	public int[][] getAdjacencyMatrix() {
 
@@ -243,7 +243,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @return the adjacency matrix of the graph
+	 * @return this.the adjacency matrix of the graph
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Integer>[] getAdjacencyList() {
@@ -287,7 +287,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 			}
 		}
 
-		return adjListArray;
+		return this.adjListArray;
 	}
 
 	/**
@@ -296,7 +296,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * @param adjacencymatrix the given adjacency matrix
 	 * 
-	 * @return the node potential vector out of the adjacency matrix
+	 * @return this.the node potential vector out of the adjacency matrix
 	 */
 	public int[] getNodePotentialVector(int[][] adjacencymatrix) {
 
@@ -316,17 +316,17 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	/**
-	 * Return an iterator over the neighbors of Vertex named v
+	 * return this.an iterator over the neighbors of Vertex named v
 	 * 
 	 * --------------------------------------------
 	 *
 	 * @param v the int number of a Vertex
-	 * @return an Iterator over Vertices that are adjacent to the Vertex named v,
+	 * @return this.an Iterator over Vertices that are adjacent to the Vertex named v,
 	 *         empty set if v is not in graph
 	 */
 	public Iterable<Integer> adjacentTo(int v) {
 		adj = getAdjacencyList();
-		return adj[v];
+		return this.adj[v];
 	}
 
 	/**
@@ -353,14 +353,16 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	/**
-	 * Return the current players as ArrayList
+	 * return this.the current players as ArrayList
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @return the current players as ArrayList
+	 * @return this.the current players as ArrayList
 	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
+	
+	
 
 }

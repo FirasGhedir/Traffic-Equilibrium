@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
+import graphCharacteristics.CharacteristicsCalculator;
 import graphCharacteristics.Diameter;
 import graphCharacteristics.Eccentricity;
 import graphCharacteristics.Radius;
@@ -119,17 +120,22 @@ public class Main {
 			// --- create node potential vector
 			int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
 
+			// --- Create CharacteristicsCalculator
+			CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
+
+			// --- max/min/avg vertex degree
+			int maxVertexDegree = characteristics.getMaxVertexDegree();
+			int minVertexDegree = characteristics.getMinVertexDegree();
+			double avgVertexDegree = characteristics.getAvgEccentricity();
+
 			// --- eccentricity
-			Eccentricity ec = new Eccentricity(graph);
-			int[] ecc = ec.getEccentricities();
+			int[] ecc = characteristics.getEccentricities();
 
 			// --- Diameter
-			Diameter dia = new Diameter(graph);
-			int diameter = dia.getDiameter();
+			int diameter = characteristics.getDiameter();
 
 			// --- Radius
-			Radius rad = new Radius(graph);
-			int radius = rad.getRadius();
+			int radius = characteristics.getRadius();
 
 			// --- social optimum ---
 			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 5);
@@ -160,8 +166,8 @@ public class Main {
 			IloAddable x6 = cplex.addEq(player2.getDemand(), f4);
 			IloAddable x7 = cplex.addEq(player1.getDemand(), cplex.sum(f1, f5));
 			IloAddable x8 = cplex.addEq(player2.getDemand(), cplex.sum(f4, f8));
-			
-			IloAddable[] beta = {x1, x2, x3, x4, x5, x6, x7, x8};
+
+			IloAddable[] beta = { x1, x2, x3, x4, x5, x6, x7, x8 };
 
 			/*
 			 * print GridGraph
@@ -205,11 +211,19 @@ public class Main {
 			printVector(nodePotentialVector);
 
 			/*
+			 * max/min/avg vertex degree
+			 */
+			printTitle("max/min/avg vertex degree");
+			System.out.println(" -> Max vertex degree:      " + maxVertexDegree);
+			System.out.println(" -> Min vertex degree:      " + minVertexDegree);
+			System.out.println(" -> Average vertex degree:  " + avgVertexDegree);
+
+			/*
 			 * eccentricity
 			 */
 			printTitle("Eccentricity");
 			printVector(ecc);
-			System.out.println(" -> Average eccentricity:        " + ec.getAvgEccentricity());
+			System.out.println(" -> Average eccentricity:        " + characteristics.getAvgEccentricity());
 
 			/*
 			 * diameter

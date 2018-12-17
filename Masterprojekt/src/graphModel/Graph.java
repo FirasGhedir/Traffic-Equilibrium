@@ -27,10 +27,8 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param sourceVertex
-	 *            is the source vertex of the edge
-	 * @param targetVertex
-	 *            is the target vertex of the edge
+	 * @param sourceVertex is the source vertex of the edge
+	 * @param targetVertex is the target vertex of the edge
 	 * 
 	 * 
 	 * @return an edge connecting source vertex to target vertex
@@ -42,10 +40,8 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param sourceVertex
-	 *            the source vertex of the edge
-	 * @param targetVertex
-	 *            the target vertex of the edge
+	 * @param sourceVertex the source vertex of the edge
+	 * @param targetVertex the target vertex of the edge
 	 * 
 	 * @return the created edge if added to the graph
 	 */
@@ -57,12 +53,9 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param sourceVertex
-	 *            the source vertex of the edge
-	 * @param targetVertex
-	 *            the target vertex of the edge
-	 * @param e
-	 *            the edge to be added to this graph
+	 * @param sourceVertex the source vertex of the edge
+	 * @param targetVertex the target vertex of the edge
+	 * @param e            the edge to be added to this graph
 	 * 
 	 * @return true, if the given graph does not contain the specified edge
 	 */
@@ -83,8 +76,7 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param v
-	 *            the vertex to be added to this graph.
+	 * @param v the vertex to be added to this graph.
 	 * 
 	 * @return the created vertex if added to the graph
 	 */
@@ -96,10 +88,8 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param sourceVertex
-	 *            the source vertex of the edge
-	 * @param targetVertex
-	 *            the target vertex of the edge
+	 * @param sourceVertex the source vertex of the edge
+	 * @param targetVertex the target vertex of the edge
 	 * 
 	 * @return true, if the given graph contains the specified edge.
 	 */
@@ -110,8 +100,7 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param e
-	 *            the edge whose presence in this graph is to be tested
+	 * @param e the edge whose presence in this graph is to be tested
 	 * 
 	 * @return true, if the given graph contains the specified edge.
 	 */
@@ -122,8 +111,7 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param v
-	 *            the vertex in this graph
+	 * @param v the vertex in this graph
 	 * 
 	 * @return true, if the given graph contains the specified vertex
 	 */
@@ -134,8 +122,7 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param vertex
-	 *            the vertex whose degree has to get calculated
+	 * @param vertex the vertex whose degree has to get calculated
 	 * 
 	 * @return the degree of the specified vertex
 	 */
@@ -146,8 +133,7 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param e
-	 *            the edge to be removed from the given graph
+	 * @param e the edge to be removed from the given graph
 	 * 
 	 * @return true, if the given graph contains the specified edge
 	 */
@@ -158,8 +144,7 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param v
-	 *            the vertex to be removed from the given graph
+	 * @param v the vertex to be removed from the given graph
 	 * 
 	 * @return true, if the given graph contains the specified vertex
 	 */
@@ -170,8 +155,7 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param e
-	 *            the edge
+	 * @param e the edge
 	 * @return the egde weight
 	 */
 	double getEdgeWeight(E e);
@@ -181,10 +165,8 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param e
-	 *            the edge
-	 * @param weight
-	 *            the weight of the edge
+	 * @param e      the edge
+	 * @param weight the weight of the edge
 	 */
 	void setEdgeWeight(E e, double weight);
 
@@ -193,12 +175,9 @@ public interface Graph<V, E> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param sourceVertex
-	 *            the source vertex of the edge
-	 * @param targetVertex
-	 *            the target vertex of the edge
-	 * @param weight
-	 *            the weight of the edge
+	 * @param sourceVertex the source vertex of the edge
+	 * @param targetVertex the target vertex of the edge
+	 * @param weight       the weight of the edge
 	 */
 	default void setEdgeWeight(V sourceVertex, V targetVertex, double weight) {
 		this.setEdgeWeight(this.getEdge(sourceVertex, targetVertex), weight);
@@ -214,7 +193,7 @@ public interface Graph<V, E> {
 	GraphType getType();
 
 	/**
-	 * A collection that contains no duplicate elements. More formally, setscontain
+	 * A collection that contains no duplicate elements. More formally, sets contain
 	 * no pair of elements e1 and e2 such that e1.equals(e2), and at most one null
 	 * element.
 	 * 

@@ -29,54 +29,60 @@ import graphModel.Graphs;
 public class MaxMinAvgVertexDegree {
 
 	Graphs G = new Graphs();
-	int maxvertexDegree;
-	int minvertexDegree;
-	double avgvertexDegree;
+	int maxVertexDegree;
+	int minVertexDegree;
+	double avgVertexDegree;
 
 	/**
-	 * Constructor 1
-	 */
-	public MaxMinAvgVertexDegree() {
-
-	}
-
-	/**
-	 * Constructor 2
+	 * Constructor
 	 * 
 	 * @param g is a given graph
+	 * @throws InterruptedException
 	 */
-	public MaxMinAvgVertexDegree(Graphs g) {
+	public MaxMinAvgVertexDegree(Graphs g) throws InterruptedException {
 		this.G.setEdges(g.getEdges());
 		this.G.setVertices(g.getVertices());
-		this.maxvertexDegree = getMaxVertexDegree();
-		this.minvertexDegree = getMinVertexDegree();
-		this.avgvertexDegree = getAvgVertexDegree();
+		calcMaxMinAvgVertexDegree();
 	}
 
 	/**
-	 * Method, which returns the integer value of the maximum vertex degree of a given
-	 * graph
+	 * calculates the radius for the given graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @throws InterruptedException if an error occures
+	 */
+	public void calcMaxMinAvgVertexDegree() throws InterruptedException {
+		this.maxVertexDegree = Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).max()
+				.getAsInt();
+		this.minVertexDegree = Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).min()
+				.getAsInt();
+		this.avgVertexDegree = Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).average()
+				.orElse(Double.NaN);
+	}
+
+	/**
+	 * Method, which returns the integer value of the maximum vertex degree of a
+	 * given graph
 	 * 
 	 * --------------------------------------------
 	 * 
 	 * @return the maximum vertex degree
 	 */
 	public int getMaxVertexDegree() {
-
-		return Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).max().getAsInt();
+		return this.maxVertexDegree;
 	}
 
 	/**
-	 * Method, which returns the integer value of the minimum vertex degree of a given
-	 * graph
+	 * Method, which returns the integer value of the minimum vertex degree of a
+	 * given graph
 	 * 
 	 * --------------------------------------------
 	 * 
 	 * @return the minimum vertex degree
 	 */
 	public int getMinVertexDegree() {
-
-		return Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).min().getAsInt();
+		return this.minVertexDegree;
 	}
 
 	/**
@@ -87,8 +93,15 @@ public class MaxMinAvgVertexDegree {
 	 * @return the average vertex degree
 	 */
 	public double getAvgVertexDegree() {
-
-		return Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).average().orElse(Double.NaN);
+		return this.avgVertexDegree;
 	}
 
+	/**
+	 * Sets the current graph
+	 * 
+	 * @param g the given graph
+	 */
+	public void setG(Graphs g) {
+		this.G = g;
+	}
 }

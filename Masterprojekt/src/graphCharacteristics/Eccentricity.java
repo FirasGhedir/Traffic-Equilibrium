@@ -1,6 +1,7 @@
 package graphCharacteristics;
 
 import java.util.Arrays;
+
 import graphModel.Graphs;
 import sun.misc.Queue;
 
@@ -39,7 +40,7 @@ public class Eccentricity {
 	 * @throws InterruptedException
 	 */
 	public Eccentricity(Graphs graph) throws InterruptedException {
-
+		
 		eccentricities = new int[graph.getVertices().size()];
 		avgEccentricity = Double.MAX_VALUE;
 
