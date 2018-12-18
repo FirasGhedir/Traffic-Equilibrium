@@ -53,8 +53,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 		for(int i=0; i<this.edges.size() ; i++) {
 			
 			//ax+b is randomly generated
-			this.edges.get(i).setA(rand.nextInt(10) + 1);
-			this.edges.get(i).setB(rand.nextInt(10) + 1);
+			this.edges.get(i).setA(rand.nextInt(5) + 1);
+			this.edges.get(i).setB(rand.nextInt(5) + 1);
 
 		}
 	}

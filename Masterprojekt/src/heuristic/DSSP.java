@@ -41,7 +41,7 @@ public class DSSP {
 
 	}
 
-	public DSSP(Graphs g) throws IloException {
+	public void solving(Graphs g) throws IloException {
 
 		// initialising ro
 		for (int i = 0; i < g.getVertices().size(); i++) {
@@ -108,6 +108,13 @@ public class DSSP {
 		cplex.addMinimize(cplex.sum(planet));
 		cplex.add(planet3);
 		cplex.add(amg);
+		if (cplex.solve()) {
+			System.out.println("obj: " + cplex.getObjValue());}
+		else {
+
+			throw new IllegalStateException("Problem not solved.");
+
+		}
 	}
 
 }

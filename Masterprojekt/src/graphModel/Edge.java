@@ -142,10 +142,7 @@ public class Edge {
 
 	public double getC() {
 	 
-		if(this.sum>0) {
-			c=1/(this.getA()*sum);
-		}
-		else {c=0;}
+	
 		return c;
 	}
 
@@ -162,10 +159,7 @@ public class Edge {
 	}
 
 	public double getSum() {
-		sum=0;
-		for(int i=0; i<this.values.size() ; i++) {
-	    	sum+=this.values.get(i);
-	    }
+	
 		return sum;
 	}
 

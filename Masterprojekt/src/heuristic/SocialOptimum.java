@@ -97,7 +97,6 @@ public class SocialOptimum {
 				IloNumVar[] x1 = in.toArray(new IloNumVar[in.size()]);
 				IloNumVar[] y1 = out.toArray(new IloNumVar[out.size()]);
 
-
 				IloNumExpr samara = cplex.sum(cplex.sum(y1), cplex.prod(-1, cplex.sum(x1)));
 
 				IloAddable amg;
@@ -114,7 +113,6 @@ public class SocialOptimum {
 					amg = cplex.addEq(0, samara);
 
 				}
-
 
 				s2.add(count, amg);
 				count++;
@@ -136,35 +134,68 @@ public class SocialOptimum {
 
 				}
 			}
-			for (int i = 0; i < graph.getEdges().size(); i++) {
-				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
-			            System.out.println(graph.getEdges().get(i).getValues().get(j));
-					
-				}
-			}
 
 		} else {
 
 			throw new IllegalStateException("Problem not solved.");
 
 		}
+
+		for (int i = 0; i < graph.getEdges().size(); i++) {
+			double c = 0;
+			for (int j = 0; j < graph.getEdges().get(i).getValues().size(); j++) {
+				c += graph.getEdges().get(i).getValues().get(j);
+			}
+
+			graph.getEdges().get(i).setSum(c);
+
+		}
 		
-	 List<Double> minimum = new ArrayList<>();
-	 for(int c=0; c<graph.getEdges().size() ; c++) {
-		 if(!(graph.getEdges().get(c).getSum()>0)) continue;
-		 minimum.add(graph.getEdges().get(c).getA()*graph.getEdges().get(c).getSum());
-	 }
-	 
-	 double minimito = Collections.min(minimum);
-	 for(int c=0; c<graph.getEdges().size() ; c++) {
-		 if(graph.getEdges().get(c).getSum()>0) continue;
-		 graph.getEdges().get(c).setSum(1/2*minimito);
-	 }
-	 
-	
+		for(int i=0; i<graph.getEdges().size() ; i++) {
+			for(int j=0; j<graph.getEdges().get(i).getValues().size() ; j++) {
+              System.out.println(graph.getEdges().get(i).getValues().get(j));
+			}
+		}
+		
+		List<Double> minimum = new ArrayList<>();
+		for (int i = 0; i < graph.getEdges().size(); i++) {
+			if (graph.getEdges().get(i).getSum() > 0) {
+				graph.getEdges().get(i).setC(1 / (graph.getEdges().get(i).getA() * graph.getEdges().get(i).getSum()));
+				minimum.add(graph.getEdges().get(i).getA() * graph.getEdges().get(i).getSum());
+			}
+		}
+
+		double minimito = Collections.min(minimum);
+		
+		System.out.println("-----------------------------------");
+
+
+		System.out.println(minimito);
+		
+		System.out.println("-------------before C------------------");
+
+		
+		for (int i = 0; i < graph.getEdges().size(); i++) {
+			System.out.println(graph.getEdges().get(i).getC());
+
+		}
+		
+		System.out.println("-----------After C---------------");
+
+		for (int i = 0; i < graph.getEdges().size(); i++) {
+			if (graph.getEdges().get(i).getC() == 0) {
+				
+				graph.getEdges().get(i).setC(1 / (2 * minimito));
+			}
+		}
+
+		for (int i = 0; i < graph.getEdges().size(); i++) {
+			System.out.println(graph.getEdges().get(i).getC());
+
+		}
+		
+		System.out.println("-----------------------------------");
 
 	}
-	
-	
 
 }
