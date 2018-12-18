@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -30,6 +31,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 	public ArrayList<Edge> edges = new ArrayList<Edge>();
 	ArrayList<Player> players = new ArrayList<>();
 
+	Random rand = new Random();
+
 	List<Integer>[] adj;
 	LinkedList<Integer>[] adjListArray;
 	private static String adjacencyMatrixAsString;
@@ -44,6 +47,16 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	public Graphs(Graphs graph) {
 
+	}
+	
+	public void generateedgesfunctions() {
+		for(int i=0; i<this.edges.size() ; i++) {
+			
+			//ax+b is randomly generated
+			this.edges.get(i).setA(rand.nextInt(10) + 1);
+			this.edges.get(i).setB(rand.nextInt(10) + 1);
+
+		}
 	}
 
 	@Override
@@ -439,5 +452,10 @@ public class Graphs implements Graph<Vertex, Edge> {
 		return (printTitle("Gridgraph") + gridGraphDataAsString + printTitle("Adjacency Matrix")
 				+ adjacencyMatrixAsString + printTitle("Node potential vector")
 				+ Arrays.toString(getNodePotentialVector(getAdjacencyMatrix())));
+	}
+	
+	public void settplayers(ArrayList<Player> x) {
+		this.players=x;
+		
 	}
 }

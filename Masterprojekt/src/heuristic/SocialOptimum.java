@@ -41,8 +41,10 @@ public class SocialOptimum {
 	 * 
 	 * --------------------------------------------
 	 *
-	 * @param graph the command line argument
-	 * @throws IloException if a CPLEX error occures
+	 * @param graph
+	 *            the command line argument
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
 	public static void step1(Graphs graph) throws IloException {
 
@@ -51,7 +53,7 @@ public class SocialOptimum {
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			for (int j = 0; j < graph.getPlayers().size(); j++) {
 				graph.getEdges().get(i).getPlayers()
-						.add(cplex.numVar(0, Double.MAX_VALUE, "PlayerNr : " + j + "in Edge :" + i));
+						.add(cplex.numVar(0, Double.MAX_VALUE, "PlayerNr : " + j + " in Edge : " + i));
 			}
 		}
 
@@ -64,26 +66,24 @@ public class SocialOptimum {
 
 		}
 
-		for (int i = 0; i < graph.getEdges().size(); i++) {
-			System.out.println("Source : " + graph.getEdges().get(i).getFrom().getId() + " To : "
-					+ graph.getEdges().get(i).getTo().getId());
-
-		}
+		IloNumExpr[] planet = s1.toArray(new IloNumExpr[s1.size()]);
 
 		ArrayList<IloNumVar> out = new ArrayList<>();
 		ArrayList<IloNumVar> in = new ArrayList<>();
+		
+		int count=0;
 
 		for (int i = 0; i < graph.getPlayers().size(); i++) {
 			for (int j = 0; j < graph.getVertices().size(); j++) {
+				in.clear();
+				out.clear();
 				for (int k = 0; k < graph.getEdges().size(); k++) {
 					if (graph.getEdges().get(k).getFrom().equals(graph.getVertices().get(j))) {
-
 						out.add(graph.getEdges().get(k).getPlayers().get(i));
 
 					}
 
 					if (graph.getEdges().get(k).getTo().equals(graph.getVertices().get(j))) {
-
 						in.add(graph.getEdges().get(k).getPlayers().get(i));
 
 					}
@@ -93,43 +93,47 @@ public class SocialOptimum {
 				IloNumVar[] x1 = in.toArray(new IloNumVar[in.size()]);
 				IloNumVar[] y1 = out.toArray(new IloNumVar[out.size()]);
 
-				System.out.println(in.size() + " " + out.size());
-				in.clear();
-				out.clear();
+				System.out.println("----------------------------------------------------");
 
 				IloNumExpr samara = cplex.sum(cplex.sum(y1), cplex.prod(-1, cplex.sum(x1)));
+			
 				IloAddable amg;
 				if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSource())) {
 					amg = cplex.addEq(graph.getPlayers().get(i).getDemand(), samara);
+					System.err.println(amg.toString());
 				}
 
-				if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSink())) {
+				else if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSink())) {
 					amg = cplex.addEq(-graph.getPlayers().get(i).getDemand(), samara);
 
 				}
 
 				else {
 					amg = cplex.addEq(0, samara);
-
+   
 				}
-
-				s2.add(amg);
-
+				
+				System.out.println("equation numero "+ count +" : "+ amg.toString());
+            
+				s2.add(count,amg);
+                count++;
 			}
+
 
 		}
 
-		System.out.println(s1.size());
-		System.out.println(s2.size());
-
-		IloNumExpr[] alpha = s1.toArray(new IloNumExpr[s1.size()]);
 		IloAddable[] beta = s2.toArray(new IloAddable[s2.size()]);
 
-		cplex.addMinimize(cplex.sum(alpha));
+		cplex.addMinimize(cplex.sum(planet));
 		cplex.add(beta);
 
 		if (cplex.solve()) {
 			System.out.println("obj: " + cplex.getObjValue());
+			for(int i=0; i<graph.getEdges().size() ; i++) {
+                  for(int j=0 ; j<graph.getEdges().get(i).getPlayers().size() ; j++) {
+                	  System.out.println(graph.getEdges().get(i).getPlayers().get(j).getName()  + " :  " + cplex.getValue((graph.getEdges().get(i).getPlayers().get(j))));
+                  }
+			}
 
 		} else {
 
