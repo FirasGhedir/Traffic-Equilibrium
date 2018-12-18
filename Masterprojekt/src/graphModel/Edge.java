@@ -27,6 +27,7 @@ public class Edge {
 	double weight; // edge weight
 	int a,b; //cost
 	double c; //C
+	IloNumVar beta;
 	
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
     ArrayList<Double> values = new ArrayList<>();
@@ -169,6 +170,14 @@ public class Edge {
 
 	public void setSum(double sum) {
 		this.sum = sum;
+	}
+
+	public IloNumVar getBeta() {
+		return beta;
+	}
+
+	public void setBeta(IloNumVar beta) {
+		this.beta = beta;
 	}
 	
 	

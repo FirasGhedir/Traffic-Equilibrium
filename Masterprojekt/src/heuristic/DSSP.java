@@ -1,7 +1,12 @@
 package heuristic;
 
-import graphModel.Graph;
+import java.util.ArrayList;
+
 import graphModel.Graphs;
+import ilog.concert.IloAddable;
+import ilog.concert.IloException;
+import ilog.concert.IloNumExpr;
+import ilog.cplex.IloCplex;
 
 /**
  * Universität Ulm
@@ -19,42 +24,49 @@ import graphModel.Graphs;
  */
 public class DSSP {
 
-	Graphs graph = new Graphs();
-	int[] rho; // node potential vector
+	static ArrayList<IloNumExpr> s1 = new ArrayList<>();
+	static ArrayList<IloNumExpr> s11 = new ArrayList<>();
+	static ArrayList<IloAddable> s2 = new ArrayList<>();
+	static IloCplex cplex;
 
 	/**
 	 * Constructor
-	 */
-	public DSSP() {
-	}
-
-	/**
-	 * Constructor with parameter Graph
 	 * 
-	 * @param g
+	 * @throws IloException
 	 */
-	public DSSP(Graphs g) {
-		// set length of node potential vector
-		rho = new int[g.getAdjacencyMatrix().length];
-		// fill the vector out of the adjacency matrix
-		rho = g.getNodePotentialVector(g.getAdjacencyMatrix());
+	public DSSP() throws IloException {
+
+		cplex = new IloCplex();
+
 	}
 
-	/**
-	 * Linear problem of the DSSP
-	 */
-	public void dssLP() {
-		/*
-		 * ToDo
-		 */
+	public DSSP(Graphs g) throws IloException {
+
+		for (int i = 0; i < g.getEdges().size(); i++) {
+			g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the edge number : " + i));
+
+		}
+
+		for (int i = 0; i < g.getEdges().size(); i++) {
+			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getC(), g.getEdges().get(i).getBeta());
+			s1.add(tmp);
+		}
+
+		IloNumExpr[] planet = s1.toArray(new IloNumExpr[s1.size()]);
+
+		cplex.addMinimize(cplex.sum(planet));
+
+		for (int i = 0; i < g.getEdges().size(); i++) {
+
+			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getSum(), cplex.sum(cplex.constant(g.getEdges().get(i).getB()), cplex.prod(cplex.constant(g.getEdges().get(i).getA()), g.getEdges().get(i).getSum()),g.getEdges().get(i).getBeta()));
+            s11.add(tmp);
+		}
+		
+		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
+        IloNumExpr x = cplex.sum(planet1);
+        
+        
+
 	}
 
-	/**
-	 * Main algorithm of the DSSP
-	 */
-	public void dssp() {
-		/*
-		 * ToDo
-		 */
-	}
 }
