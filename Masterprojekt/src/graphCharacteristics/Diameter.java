@@ -27,7 +27,7 @@ import sun.misc.Queue;
  */
 public class Diameter {
 
-	Graphs G = new Graphs();
+	Graphs G;
 	private int diameter; // the maximum eccentricity of any vertex in the graph
 	private int[] eccentricities; // vertex vector with its eccentricity values
 
@@ -42,8 +42,8 @@ public class Diameter {
 	public Diameter(Graphs graph) throws InterruptedException {
 
 		this.setG(graph);
-		diameter = Integer.MIN_VALUE;
-		eccentricities = new int[graph.getVertices().size()];
+		this.setDiameter(Integer.MIN_VALUE);
+		this.setEccentricities(new int[graph.getVertices().size()]);
 		calcDiameter();
 	}
 
@@ -113,7 +113,31 @@ public class Diameter {
 	}
 
 	/**
+	 * Getter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given graph
+	 */
+	public Graphs getG() {
+		return this.G;
+	}
+
+	/**
+	 * Setter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param g the given graph
+	 */
+	public void setG(Graphs g) {
+		G = g;
+	}
+
+	/**
 	 * Gets the diameter
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @return the diameter
 	 */
@@ -122,11 +146,35 @@ public class Diameter {
 	}
 
 	/**
-	 * Sets the current graph
+	 * Sets the diameter
 	 * 
-	 * @param g the given graph
+	 * --------------------------------------------
+	 * 
+	 * @param diameter the given diameter
 	 */
-	public void setG(Graphs g) {
-		this.G = g;
+	public void setDiameter(int diameter) {
+		this.diameter = diameter;
+	}
+
+	/**
+	 * Gets the eccentricity vector
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given eccentricity vector
+	 */
+	public int[] getEccentricities() {
+		return this.eccentricities;
+	}
+
+	/**
+	 * Sets the eccentricity vector
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param eccentricities the given eccentricity vector
+	 */
+	public void setEccentricities(int[] eccentricities) {
+		this.eccentricities = eccentricities;
 	}
 }

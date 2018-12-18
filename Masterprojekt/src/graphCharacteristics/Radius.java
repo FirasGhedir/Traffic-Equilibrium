@@ -39,8 +39,8 @@ public class Radius {
 	public Radius(Graphs graph) throws InterruptedException {
 
 		this.setG(graph);
-		radius = Integer.MAX_VALUE;
-		eccentricities = new int[graph.getVertices().size()];
+		this.setRadius(Integer.MAX_VALUE);
+		this.setEccentricities(new int[graph.getVertices().size()]);
 		calcRadius();
 	}
 
@@ -110,20 +110,68 @@ public class Radius {
 	}
 
 	/**
-	 * Gets the diameter
+	 * Getter method for the graph
 	 * 
-	 * @return the diameter
+	 * --------------------------------------------
+	 * 
+	 * @return the given graph
+	 */
+	public Graphs getG() {
+		return this.G;
+	}
+
+	/**
+	 * Setter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param g the given graph
+	 */
+	public void setG(Graphs g) {
+		G = g;
+	}
+
+	/**
+	 * Gets the radius
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the radius
 	 */
 	public int getRadius() {
 		return this.radius;
 	}
 
 	/**
-	 * Sets the current graph
+	 * Sets the diameter
 	 * 
-	 * @param g the given graph
+	 * --------------------------------------------
+	 * 
+	 * @param diameter the given radius
 	 */
-	public void setG(Graphs g) {
-		this.G = g;
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+
+	/**
+	 * Gets the eccentricity vector
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given eccentricity vector
+	 */
+	public int[] getEccentricities() {
+		return this.eccentricities;
+	}
+
+	/**
+	 * Sets the eccentricity vector
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param eccentricities the given eccentricity vector
+	 */
+	public void setEccentricities(int[] eccentricities) {
+		this.eccentricities = eccentricities;
 	}
 }

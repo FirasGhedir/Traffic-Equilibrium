@@ -27,6 +27,7 @@ import sun.misc.Queue;
  */
 public class Eccentricity {
 
+	Graphs G;
 	private double avgEccentricity; // the average vertex eccentricity of the graph
 	private int[] eccentricities; // vertex vector with its eccentricity values
 
@@ -40,23 +41,24 @@ public class Eccentricity {
 	 * @throws InterruptedException
 	 */
 	public Eccentricity(Graphs graph) throws InterruptedException {
-		
-		eccentricities = new int[graph.getVertices().size()];
-		avgEccentricity = Double.MAX_VALUE;
+
+		this.setG(graph);
+		this.setEccentricities(new int[graph.getVertices().size()]);
+		this.setAvgEccentricity(Double.MAX_VALUE);
 
 		for (int vertex = 0; vertex < graph.getVertices().size(); vertex++) {
-			eccentricities[vertex] = breadthFirstSearch(graph, vertex);
+			this.eccentricities[vertex] = breadthFirstSearch(graph, vertex);
 		}
 	}
 
 	/**
-	 * Use breadth first search to compute the eccentricity for the graph
+	 * Use Breadth-first-search (BFS) to compute the min cuts for the graph
 	 * 
-	 * Note: for more information about Breadth first search:
+	 * Note: for more information about Breadth-first-search:
 	 * 
 	 * [https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/]
 	 * 
-	 * What it does: Breadth first search queues the source vertex, then iteratively
+	 * What it does: Breadth-first-search queues the source vertex, then iteratively
 	 * dequeues the vertex and enqueues its adjacent vertices, until no unvisited
 	 * connected vertices remain. Each vertex is marked as visited the first time it
 	 * is encountered, and a distance to the source vertex recorded.
@@ -100,14 +102,47 @@ public class Eccentricity {
 	}
 
 	/**
-	 * Get the eccentricities for each vertex in this graph.
+	 * Getter method for the graph
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @return the eccentricities for each vertex
+	 * @return the given graph
+	 */
+	public Graphs getG() {
+		return this.G;
+	}
+
+	/**
+	 * Setter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param g the given graph
+	 */
+	public void setG(Graphs g) {
+		G = g;
+	}
+
+	/**
+	 * Gets the eccentricity vector
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given eccentricity vector
 	 */
 	public int[] getEccentricities() {
 		return this.eccentricities;
+	}
+
+	/**
+	 * Sets the eccentricity vector
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param eccentricities the given eccentricity vector
+	 */
+	public void setEccentricities(int[] eccentricities) {
+		this.eccentricities = eccentricities;
 	}
 
 	/**
@@ -119,5 +154,16 @@ public class Eccentricity {
 	 */
 	public double getAvgEccentricity() {
 		return this.avgEccentricity;
+	}
+
+	/**
+	 * Get the average eccentricities in the given graph.
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param avgEccentricity the given average accentricity value
+	 */
+	public void setAvgEccentricity(double avgEccentricity) {
+		this.avgEccentricity = avgEccentricity;
 	}
 }

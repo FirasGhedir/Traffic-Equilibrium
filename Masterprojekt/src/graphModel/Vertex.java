@@ -1,5 +1,6 @@
 package graphModel;
 
+
 /**
  * Universität Ulm
  * 
@@ -22,8 +23,7 @@ public class Vertex {
 	/**
 	 * Constructor, creates a new vertex
 	 * 
-	 * @param id,
-	 *            the identifier number of the vertex
+	 * @param id, the identifier number of the vertex
 	 */
 	public Vertex(int id) {
 		this.id = id;
@@ -41,11 +41,9 @@ public class Vertex {
 	/**
 	 * Setter method for the id
 	 * 
-	 * @param id,
-	 *            the identifier number of the vertex
+	 * @param id, the identifier number of the vertex
 	 */
 	public void setId(int id) {
-		this.id = this.id;
+		this.id = id;
 	}
-
 }

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import graphCharacteristics.Diameter;
 import graphCharacteristics.Eccentricity;
+import graphCharacteristics.MinCut;
 import graphCharacteristics.Radius;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
@@ -195,4 +196,19 @@ class GraphCharacteristicsTestCases {
 		}
 	}
 
+	@Test
+	public void testMinCut() {
+
+		Map<String, Vertex> map = new TreeMap<>();
+		Graphs graph = new Graphs();
+		GridGraphGenerator test = new GridGraphGenerator(2, 2);
+		test.generateGraph(graph, map);
+
+		MinCut mincut = new MinCut(graph);
+		char[] expected = ("0 - 1" + "\n" + "0 - 2").toCharArray();
+		char[] actual = mincut.getMincut().toCharArray();
+		for (int i = 0; i < actual.length; i++) {
+			assertArrayEquals(expected, actual);
+		}
+	}
 }

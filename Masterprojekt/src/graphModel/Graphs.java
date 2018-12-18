@@ -26,8 +26,8 @@ import player.Player;
  */
 public class Graphs implements Graph<Vertex, Edge> {
 
-	ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-	ArrayList<Edge> edges = new ArrayList<Edge>();
+	public ArrayList<Vertex> vertices = new ArrayList<Vertex>();
+	public ArrayList<Edge> edges = new ArrayList<Edge>();
 	ArrayList<Player> players = new ArrayList<>();
 
 	List<Integer>[] adj;
@@ -39,6 +39,10 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 */
 	public Graphs() {
+
+	}
+
+	public Graphs(Graphs graph) {
 
 	}
 

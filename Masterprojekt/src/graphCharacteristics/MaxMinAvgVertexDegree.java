@@ -28,7 +28,7 @@ import graphModel.Graphs;
  */
 public class MaxMinAvgVertexDegree {
 
-	Graphs G = new Graphs();
+	Graphs G;
 	int maxVertexDegree;
 	int minVertexDegree;
 	double avgVertexDegree;
@@ -40,8 +40,8 @@ public class MaxMinAvgVertexDegree {
 	 * @throws InterruptedException
 	 */
 	public MaxMinAvgVertexDegree(Graphs g) throws InterruptedException {
-		this.G.setEdges(g.getEdges());
-		this.G.setVertices(g.getVertices());
+		
+		this.setG(g);
 		calcMaxMinAvgVertexDegree();
 	}
 
@@ -97,7 +97,20 @@ public class MaxMinAvgVertexDegree {
 	}
 
 	/**
-	 * Sets the current graph
+	 * Getter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given graph
+	 */
+	public Graphs getG() {
+		return this.G;
+	}
+
+	/**
+	 * Setter method for the graph
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param g the given graph
 	 */

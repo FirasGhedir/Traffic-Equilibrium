@@ -69,6 +69,9 @@ public class CharacteristicsCalculator {
 	// --- radius
 	Radius r;
 	private int radius; // the minimum eccentricity of any vertex in the graph
+	// --- radius
+	MinCut c;
+	private String minCut; // the minimum eccentricity of any vertex in the graph
 
 	/**
 	 * Constructor
@@ -96,6 +99,10 @@ public class CharacteristicsCalculator {
 		// --- Radius
 		this.r = new Radius(graph);
 		this.radius = r.getRadius();
+
+		// --- Min cut
+		this.c = new MinCut(graph);
+		this.minCut = c.getMincut();
 	}
 
 	/**
@@ -183,6 +190,15 @@ public class CharacteristicsCalculator {
 	}
 
 	/**
+	 * Gets the min cut
+	 * 
+	 * @return the mincut
+	 */
+	public String getMinCut() {
+		return this.minCut;
+	}
+
+	/**
 	 * Prints a title in a fancy frame on the console
 	 * 
 	 * @param title the title to print
@@ -201,6 +217,7 @@ public class CharacteristicsCalculator {
 				+ this.getMinVertexDegree() + "\n" + printTitle("Average vertex degree") + this.getAvgVertexDegree()
 				+ "\n" + printTitle("Eccentricity vector") + Arrays.toString(this.getEccentricities()) + "\n"
 				+ printTitle("Average eccentricity") + this.getAvgEccentricity() + "\n" + printTitle("Diameter")
-				+ this.getDiameter() + "\n" + printTitle("Radius") + this.getRadius());
+				+ this.getDiameter() + "\n" + printTitle("Radius") + this.getRadius() + printTitle("Min cut")
+				+ this.getMinCut());
 	}
 }

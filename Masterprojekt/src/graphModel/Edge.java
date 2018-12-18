@@ -22,8 +22,8 @@ import java.util.ArrayList;
  */
 public class Edge {
 
-	Vertex from; // Start vertex
-	Vertex to; // End vertex
+	public Vertex from; // Start vertex
+	public Vertex to; // End vertex
 	double weight; // edge weight
 	int a,b; //cost
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
