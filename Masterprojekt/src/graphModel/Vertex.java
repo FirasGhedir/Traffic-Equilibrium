@@ -1,5 +1,9 @@
 package graphModel;
 
+import java.util.ArrayList;
+
+import ilog.concert.IloNumVar;
+
 
 /**
  * Universität Ulm
@@ -19,6 +23,7 @@ package graphModel;
 public class Vertex {
 
 	int id; // vertex identification number
+	ArrayList<IloNumVar> ro = new ArrayList<>();
 
 	/**
 	 * Constructor, creates a new vertex
@@ -46,4 +51,14 @@ public class Vertex {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public ArrayList<IloNumVar> getRo() {
+		return ro;
+	}
+
+	public void setRo(ArrayList<IloNumVar> ro) {
+		this.ro = ro;
+	}
+	
+	
 }
