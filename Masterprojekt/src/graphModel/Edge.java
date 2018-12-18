@@ -182,6 +182,7 @@ public class Edge {
 	}
 
 	public double getResult() {
+		this.Result = this.sum*this.a + this.b;
 		return Result;
 	}
 
