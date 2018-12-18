@@ -96,13 +96,17 @@ public class DSSP {
 
 			for (int j = 0; j < g.getEdges().size() ; j++) {
 
-				
-				
+				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getFrom().getRo().get(i),cplex.prod(-1, g.getEdges().get(j).getTo().getRo().get(i)));
+				IloNumExpr tmp1 = cplex.sum(cplex.prod(-1, tmp),cplex.constant(g.getEdges().get(j).getResult()));
+				IloAddable tmp2 = cplex.addGe(0, tmp1);
+				s2.add(tmp2);
 			}
 
 		}
+		IloAddable[] planet3 = s2.toArray(new IloAddable[s2.size()]);
 
 		cplex.addMinimize(cplex.sum(planet));
+		cplex.add(planet3);
 		cplex.add(amg);
 	}
 
