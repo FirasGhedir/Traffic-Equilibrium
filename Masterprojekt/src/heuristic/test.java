@@ -32,10 +32,9 @@ public class test {
 		//edge functions are totally randomized 
 	    graph.generateedgesfunctions();
 		
+		SocialOptimum solver = new SocialOptimum();
 		
-		
-		SocialOptimum.step1(graph);
-		// TODO Auto-generated method stub
+		solver.step1(graph);
 
 	}
 

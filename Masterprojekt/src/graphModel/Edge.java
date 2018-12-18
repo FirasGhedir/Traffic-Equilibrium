@@ -26,7 +26,11 @@ public class Edge {
 	public Vertex to; // End vertex
 	double weight; // edge weight
 	int a,b; //cost
+	double c; //C
+	
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
+    ArrayList<Double> values = new ArrayList<>();
+    double sum;
     
 	/**
 	 * Constructor to create a new edge
@@ -133,6 +137,40 @@ public class Edge {
 	public IloNumVar[] convertarray(){
 		return players.toArray(new IloNumVar[players.size()]);
 	}
+
+	public double getC() {
+	 
+		if(this.sum>0) {
+			c=1/(this.getA()*sum);
+		}
+		else {c=0;}
+		return c;
+	}
+
+	public void setC(double c) {
+		this.c = c;
+	}
+
+	public ArrayList<Double> getValues() {
+		return values;
+	}
+
+	public void setValues(ArrayList<Double> values) {
+		this.values = values;
+	}
+
+	public double getSum() {
+		sum=0;
+		for(int i=0; i<this.values.size() ; i++) {
+	    	sum+=this.values.get(i);
+	    }
+		return sum;
+	}
+
+	public void setSum(double sum) {
+		this.sum = sum;
+	}
+	
 	
 
 }

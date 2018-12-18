@@ -1,6 +1,8 @@
 package heuristic;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import graphModel.Graphs;
 import ilog.concert.IloAddable;
@@ -28,12 +30,16 @@ public class SocialOptimum {
 
 	static ArrayList<IloNumExpr> s1 = new ArrayList<>();
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
+	static IloCplex cplex;
 
 	/**
 	 * Constructor
+	 * 
+	 * @throws IloException
 	 */
-	public SocialOptimum() {
+	public SocialOptimum() throws IloException {
 
+		cplex = new IloCplex();
 	}
 
 	/**
@@ -46,9 +52,7 @@ public class SocialOptimum {
 	 * @throws IloException
 	 *             if a CPLEX error occures
 	 */
-	public static void step1(Graphs graph) throws IloException {
-
-		IloCplex cplex = new IloCplex();
+	public void step1(Graphs graph) throws IloException {
 
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			for (int j = 0; j < graph.getPlayers().size(); j++) {
@@ -70,8 +74,8 @@ public class SocialOptimum {
 
 		ArrayList<IloNumVar> out = new ArrayList<>();
 		ArrayList<IloNumVar> in = new ArrayList<>();
-		
-		int count=0;
+
+		int count = 0;
 
 		for (int i = 0; i < graph.getPlayers().size(); i++) {
 			for (int j = 0; j < graph.getVertices().size(); j++) {
@@ -93,14 +97,12 @@ public class SocialOptimum {
 				IloNumVar[] x1 = in.toArray(new IloNumVar[in.size()]);
 				IloNumVar[] y1 = out.toArray(new IloNumVar[out.size()]);
 
-				System.out.println("----------------------------------------------------");
 
 				IloNumExpr samara = cplex.sum(cplex.sum(y1), cplex.prod(-1, cplex.sum(x1)));
-			
+
 				IloAddable amg;
 				if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSource())) {
 					amg = cplex.addEq(graph.getPlayers().get(i).getDemand(), samara);
-					System.err.println(amg.toString());
 				}
 
 				else if (graph.getVertices().get(j).equals(graph.getPlayers().get(i).getSink())) {
@@ -110,15 +112,13 @@ public class SocialOptimum {
 
 				else {
 					amg = cplex.addEq(0, samara);
-   
-				}
-				
-				System.out.println("equation numero "+ count +" : "+ amg.toString());
-            
-				s2.add(count,amg);
-                count++;
-			}
 
+				}
+
+
+				s2.add(count, amg);
+				count++;
+			}
 
 		}
 
@@ -129,10 +129,18 @@ public class SocialOptimum {
 
 		if (cplex.solve()) {
 			System.out.println("obj: " + cplex.getObjValue());
-			for(int i=0; i<graph.getEdges().size() ; i++) {
-                  for(int j=0 ; j<graph.getEdges().get(i).getPlayers().size() ; j++) {
-                	  System.out.println(graph.getEdges().get(i).getPlayers().get(j).getName()  + " :  " + cplex.getValue((graph.getEdges().get(i).getPlayers().get(j))));
-                  }
+			for (int i = 0; i < graph.getEdges().size(); i++) {
+				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
+					graph.getEdges().get(i).getValues()
+							.add(cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));
+
+				}
+			}
+			for (int i = 0; i < graph.getEdges().size(); i++) {
+				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
+			            System.out.println(graph.getEdges().get(i).getValues().get(j));
+					
+				}
 			}
 
 		} else {
@@ -140,7 +148,23 @@ public class SocialOptimum {
 			throw new IllegalStateException("Problem not solved.");
 
 		}
+		
+	 List<Double> minimum = new ArrayList<>();
+	 for(int c=0; c<graph.getEdges().size() ; c++) {
+		 if(!(graph.getEdges().get(c).getSum()>0)) continue;
+		 minimum.add(graph.getEdges().get(c).getA()*graph.getEdges().get(c).getSum());
+	 }
+	 
+	 double minimito = Collections.min(minimum);
+	 for(int c=0; c<graph.getEdges().size() ; c++) {
+		 if(graph.getEdges().get(c).getSum()>0) continue;
+		 graph.getEdges().get(c).setSum(1/2*minimito);
+	 }
+	 
+	
 
 	}
+	
+	
 
 }
