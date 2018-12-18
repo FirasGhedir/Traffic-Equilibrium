@@ -53,6 +53,9 @@ public class SocialOptimum {
 	 *             if a CPLEX error occures
 	 */
 	public void step1(Graphs graph) throws IloException {
+		
+		System.out.println("-----------Social Optimum-------------");
+
 
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			for (int j = 0; j < graph.getPlayers().size(); j++) {
@@ -150,12 +153,7 @@ public class SocialOptimum {
 			graph.getEdges().get(i).setSum(c);
 
 		}
-		
-		for(int i=0; i<graph.getEdges().size() ; i++) {
-			for(int j=0; j<graph.getEdges().get(i).getValues().size() ; j++) {
-              System.out.println(graph.getEdges().get(i).getValues().get(j));
-			}
-		}
+	
 		
 		List<Double> minimum = new ArrayList<>();
 		for (int i = 0; i < graph.getEdges().size(); i++) {
@@ -166,21 +164,7 @@ public class SocialOptimum {
 		}
 
 		double minimito = Collections.min(minimum);
-		
-		System.out.println("-----------------------------------");
-
-
-		System.out.println(minimito);
-		
-		System.out.println("-------------before C------------------");
-
-		
-		for (int i = 0; i < graph.getEdges().size(); i++) {
-			System.out.println(graph.getEdges().get(i).getC());
-
-		}
-		
-		System.out.println("-----------After C---------------");
+			
 
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			if (graph.getEdges().get(i).getC() == 0) {
@@ -189,12 +173,7 @@ public class SocialOptimum {
 			}
 		}
 
-		for (int i = 0; i < graph.getEdges().size(); i++) {
-			System.out.println(graph.getEdges().get(i).getC());
-
-		}
 		
-		System.out.println("-----------------------------------");
 
 	}
 

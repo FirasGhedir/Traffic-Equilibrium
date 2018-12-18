@@ -42,6 +42,8 @@ public class DSSP {
 	}
 
 	public void solving(Graphs g) throws IloException {
+		
+		System.out.println("-----------DSSP-LP-------------");
 
 		// initialising ro
 		for (int i = 0; i < g.getVertices().size(); i++) {

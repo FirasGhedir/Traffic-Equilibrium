@@ -19,10 +19,10 @@ public class test {
 		GridGraphGenerator test = new GridGraphGenerator(4, 4);
 		test.generateGraph(graph, map);
 		
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(6), 5);
+		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(6), 15);
 		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(10), 8);
 		Player player3 = new Player(3, graph.getVertices().get(4), graph.getVertices().get(14), 10);
-		Player player4 = new Player(4, graph.getVertices().get(3), graph.getVertices().get(15), 13);
+		Player player4 = new Player(4, graph.getVertices().get(3), graph.getVertices().get(15), 20);
 		Player player5 = new Player(5, graph.getVertices().get(2), graph.getVertices().get(11), 17);
 
 		
