@@ -20,10 +20,12 @@ public class test {
 		test.generateGraph(graph, map);
 		
 		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(6), 15);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(10), 8);
+		Player player2 = new Player(2, graph.getVertices().get(0), graph.getVertices().get(10), 8);
 		Player player3 = new Player(3, graph.getVertices().get(4), graph.getVertices().get(14), 10);
-		Player player4 = new Player(4, graph.getVertices().get(3), graph.getVertices().get(15), 20);
-		Player player5 = new Player(5, graph.getVertices().get(2), graph.getVertices().get(11), 17);
+		Player player4 = new Player(4, graph.getVertices().get(4), graph.getVertices().get(13), 25);
+		Player player5 = new Player(5, graph.getVertices().get(0), graph.getVertices().get(11), 15);
+		Player player6 = new Player(5, graph.getVertices().get(1), graph.getVertices().get(15), 19);
+		Player player7 = new Player(5, graph.getVertices().get(4), graph.getVertices().get(11), 20);
 
 		
 		/*graph.getEdges().get(0).setA(2);
@@ -42,6 +44,8 @@ public class test {
 		x.add(2,player3);
 		x.add(3,player4);
 		x.add(4,player5);
+		x.add(5,player6);
+		x.add(6,player7);
 
 		graph.settplayers(x);
 		
@@ -53,6 +57,9 @@ public class test {
 		solver.step1(graph);
 		DSSP solver1 = new DSSP();
 		solver1.solving(graph);
+		
+		
+		
 	}
 
 }

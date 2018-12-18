@@ -50,7 +50,7 @@ public class DSSP {
 			for (int j = 0; j < g.getPlayers().size(); j++) {
 
 				g.getVertices().get(i).getRo().add(j,
-						cplex.numVar(0, Double.MAX_VALUE, "Ro of Player " + j + " in Vertex " + i));
+						cplex.numVar(-Double.MAX_VALUE, Double.MAX_VALUE, "Ro of Player " + j + " in Vertex " + i));
 
 			}
 
@@ -77,6 +77,7 @@ public class DSSP {
 							cplex.prod(cplex.constant(g.getEdges().get(i).getA()), g.getEdges().get(i).getSum()),
 							g.getEdges().get(i).getBeta()));
 			s11.add(tmp);
+		//	System.out.println(tmp.toString());
 		}
 
 		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
@@ -88,6 +89,7 @@ public class DSSP {
 							cplex.prod(-1, g.getPlayers().get(i).getSink().getRo().get(i))));
 			s12.add(tmp);
 
+
 		}
 		IloNumExpr[] planet2 = s12.toArray(new IloNumExpr[s12.size()]);
 		IloNumExpr y = cplex.sum(planet2);
@@ -98,9 +100,9 @@ public class DSSP {
 
 			for (int j = 0; j < g.getEdges().size() ; j++) {
 
-				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getFrom().getRo().get(i),cplex.prod(-1, g.getEdges().get(j).getTo().getRo().get(i)));
-				IloNumExpr tmp1 = cplex.sum(cplex.prod(-1, tmp),cplex.constant(g.getEdges().get(j).getResult()));
-				IloAddable tmp2 = cplex.addGe(0, tmp1);
+				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
+				IloNumExpr tmp1 = cplex.sum(tmp,g.getEdges().get(j).getResult());
+				IloAddable tmp2 = cplex.addLe(tmp1,0);
 				s2.add(tmp2);
 			}
 
@@ -110,8 +112,13 @@ public class DSSP {
 		cplex.addMinimize(cplex.sum(planet));
 		cplex.add(planet3);
 		cplex.add(amg);
+		
+
 		if (cplex.solve()) {
-			System.out.println("obj: " + cplex.getObjValue());}
+			System.out.println("Object: " + cplex.getObjValue());
+			for(int i=0; i< g.getEdges().size() ; i++) {
+				System.out.println("in the  Edge " + i + " beta would be : " + cplex.getValue(g.getEdges().get(i).getBeta()));
+			}}
 		else {
 
 			throw new IllegalStateException("Problem not solved.");
