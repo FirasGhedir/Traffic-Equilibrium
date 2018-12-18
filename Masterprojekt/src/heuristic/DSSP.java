@@ -68,7 +68,6 @@ public class DSSP {
 
 		IloNumExpr[] planet = s1.toArray(new IloNumExpr[s1.size()]);
 
-
 		for (int i = 0; i < g.getEdges().size(); i++) {
 
 			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getSum(),
@@ -90,15 +89,19 @@ public class DSSP {
 		}
 		IloNumExpr[] planet2 = s12.toArray(new IloNumExpr[s12.size()]);
 		IloNumExpr y = cplex.sum(planet2);
-		
-		IloAddable amg = cplex.addEq(0,cplex.sum(x,cplex.prod(-1, y)));
-      
-        for(int i=0 ; i<g.getPlayers().size() ; i++) {
-        	
-        	
-        	
-        }
-		
+
+		IloAddable amg = cplex.addEq(0, cplex.sum(x, cplex.prod(-1, y)));
+
+		for (int i = 0; i < g.getPlayers().size(); i++) {
+
+			for (int j = 0; j < g.getEdges().size() ; j++) {
+
+				
+				
+			}
+
+		}
+
 		cplex.addMinimize(cplex.sum(planet));
 		cplex.add(amg);
 	}
