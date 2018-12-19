@@ -1,6 +1,5 @@
 package player;
 
-
 import graphModel.Vertex;
 
 /**
@@ -24,16 +23,16 @@ public class Player {
 	Vertex sink;
 	int demand;
 	int id;
-    
-	public Player(int id,Vertex source,Vertex sink,int demand) {
+
+	public Player(int id, Vertex source, Vertex sink, int demand) {
 		this.id = id;
-		this.source=source;
-		this.sink=sink;
-		this.demand=demand;
+		this.source = source;
+		this.sink = sink;
+		this.demand = demand;
 	}
 
 	public Vertex getSource() {
-		return source;
+		return this.source;
 	}
 
 	public void setSource(Vertex source) {
@@ -41,7 +40,7 @@ public class Player {
 	}
 
 	public Vertex getSink() {
-		return sink;
+		return this.sink;
 	}
 
 	public void setSink(Vertex sink) {
@@ -49,7 +48,7 @@ public class Player {
 	}
 
 	public int getDemand() {
-		return demand;
+		return this.demand;
 	}
 
 	public void setDemand(int demand) {
@@ -57,7 +56,7 @@ public class Player {
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {

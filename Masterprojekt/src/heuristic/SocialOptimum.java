@@ -72,8 +72,8 @@ public class SocialOptimum {
 
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			IloNumExpr tmp = cplex.sum(graph.getEdges().get(i).convertarray());
-			IloNumExpr tmp1 = cplex.sum(cplex.constant(graph.getEdges().get(i).getB()),
-					cplex.prod(cplex.constant(graph.getEdges().get(i).getA()), tmp));
+			IloNumExpr tmp1 = cplex.sum(cplex.constant(graph.getEdges().get(i).getCostB()),
+					cplex.prod(cplex.constant(graph.getEdges().get(i).getCostA()), tmp));
 			IloNumExpr tmp2 = cplex.prod(tmp, tmp1);
 			s1.add(tmp2);
 
@@ -167,8 +167,8 @@ public class SocialOptimum {
 		List<Double> minimum = new ArrayList<>();
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			if (graph.getEdges().get(i).getSum() > 0) {
-				graph.getEdges().get(i).setC(1 / (graph.getEdges().get(i).getA() * graph.getEdges().get(i).getSum()));
-				minimum.add(graph.getEdges().get(i).getA() * graph.getEdges().get(i).getSum());
+				graph.getEdges().get(i).setC(1 / (graph.getEdges().get(i).getCostA() * graph.getEdges().get(i).getSum()));
+				minimum.add(graph.getEdges().get(i).getCostA() * graph.getEdges().get(i).getSum());
 			}
 		}
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ilog.concert.IloNumVar;
 
-
 /**
  * Universität Ulm
  * 
@@ -53,12 +52,11 @@ public class Vertex {
 	}
 
 	public ArrayList<IloNumVar> getRo() {
-		return ro;
+		return this.ro;
 	}
 
 	public void setRo(ArrayList<IloNumVar> ro) {
 		this.ro = ro;
 	}
-	
-	
+
 }

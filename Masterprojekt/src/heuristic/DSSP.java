@@ -88,8 +88,8 @@ public class DSSP {
 		for (int i = 0; i < g.getEdges().size(); i++) {
 
 			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getSum(),
-					cplex.sum(cplex.constant(g.getEdges().get(i).getB()),
-							cplex.prod(cplex.constant(g.getEdges().get(i).getA()), g.getEdges().get(i).getSum()),
+					cplex.sum(cplex.constant(g.getEdges().get(i).getCostB()),
+							cplex.prod(cplex.constant(g.getEdges().get(i).getCostA()), g.getEdges().get(i).getSum()),
 							g.getEdges().get(i).getBeta()));
 			s11.add(tmp);
 		}

@@ -29,12 +29,10 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	public ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 	public ArrayList<Edge> edges = new ArrayList<Edge>();
-	ArrayList<Player> players = new ArrayList<>();
-
-	Random rand = new Random();
-
-	List<Integer>[] adj;
-	LinkedList<Integer>[] adjListArray;
+	private ArrayList<Player> players = new ArrayList<>();
+	private Random rand = new Random();
+	private List<Integer>[] adj;
+	private LinkedList<Integer>[] adjListArray;
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
 
@@ -48,13 +46,13 @@ public class Graphs implements Graph<Vertex, Edge> {
 	public Graphs(Graphs graph) {
 
 	}
-	
-	public void generateedgesfunctions() {
-		for(int i=0; i<this.edges.size() ; i++) {
-			
-			//ax+b is randomly generated
-			this.edges.get(i).setA(rand.nextInt(3) + 1);
-			this.edges.get(i).setB(rand.nextInt(2));
+
+	public void generateEdgesFunctions() {
+		for (int i = 0; i < this.edges.size(); i++) {
+
+			// ax+b is randomly generated
+			this.edges.get(i).setCostA(rand.nextInt(3) + 1);
+			this.edges.get(i).setCostB(rand.nextInt(2));
 
 		}
 	}
@@ -370,7 +368,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	/**
-	 * return this.an iterator over the neighbors of Vertex named v
+	 * Gets an iterator over the neighbors of Vertex named v
 	 * 
 	 * --------------------------------------------
 	 *
@@ -417,14 +415,25 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	/**
-	 * return this.the current players as ArrayList
+	 * Gets the current players as ArrayList
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @return this.the current players as ArrayList
+	 * @return the current players as ArrayList
 	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;
+	}
+
+	/**
+	 * Sets the current players as ArrayList
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param players the current players as ArrayList
+	 */
+	public void setPlayer(ArrayList<Player> players) {
+		this.players = players;
 	}
 
 	/**
@@ -452,10 +461,5 @@ public class Graphs implements Graph<Vertex, Edge> {
 		return (printTitle("Gridgraph") + gridGraphDataAsString + printTitle("Adjacency Matrix")
 				+ adjacencyMatrixAsString + printTitle("Node potential vector")
 				+ Arrays.toString(getNodePotentialVector(getAdjacencyMatrix())));
-	}
-	
-	public void setPlayer(ArrayList<Player> x) {
-		this.players=x;
-		
 	}
 }

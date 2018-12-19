@@ -1,8 +1,12 @@
 package main;
 
+// Java program to demonstrate redirection in System.out.println() 
+import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import graphCharacteristics.CharacteristicsCalculator;
 import graphGenerator.GridGraphGenerator;
@@ -11,10 +15,7 @@ import graphModel.Vertex;
 import heuristic.DSSP;
 import heuristic.SocialOptimum;
 import player.Player;
-import ilog.concert.IloAddable;
 import ilog.concert.IloException;
-import ilog.concert.IloNumVar;
-import ilog.cplex.IloCplex;
 
 /**
  * Universität Ulm
@@ -32,6 +33,8 @@ import ilog.cplex.IloCplex;
  *          them.
  */
 public class Main {
+
+	private static String path = "./Masterprojekt/files/graphData.txt";
 
 	/**
 	 * The main method
@@ -57,9 +60,6 @@ public class Main {
 			GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
 			test.generateGraph(graph, map);
 
-			// --- Create CharacteristicsCalculator ---
-			CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
-
 			// --- player ---
 			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(6), 15);
 			Player player2 = new Player(2, graph.getVertices().get(0), graph.getVertices().get(10), 8);
@@ -77,7 +77,10 @@ public class Main {
 			x.add(5, player6);
 			x.add(6, player7);
 			graph.setPlayer(x);
-			graph.generateedgesfunctions();// edge functions are totally randomized
+			graph.generateEdgesFunctions();// edge functions are totally randomized
+
+			// --- Create CharacteristicsCalculator ---
+			CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
 
 			// --- social optimum ---
 			SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
@@ -90,18 +93,43 @@ public class Main {
 			 * ================== PRINT EVERYTHING HERE ====================
 			 * =============================================================
 			 */
+//			// Uncomment this to get txt files for each program iteration for each graph
+//			String uniqueID = UUID.randomUUID().toString(); // create unique IDs
+//			path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
 
+			// Creating a File object that represents the disk file.
+			PrintStream outputToTxtFile = new PrintStream(new File(path));
+			// Store current System.out before assigning a new value
+			PrintStream console = System.out;
+
+			/*
+			 * Assign o to output stream
+			 */
+			System.setOut(outputToTxtFile);
 			// --- print graph data ---
 			System.out.println(graph);
-
 			// --- print graph characteristics ---
 			System.out.println(characteristics);
-
 			// --- print Social Optimum ---
 			System.out.println(systemOptimalFlow);
-
 			// --- print DSSP ---
 			System.out.println(dssp);
+
+			/*
+			 * Use stored value for output stream
+			 */
+			System.setOut(console);
+			// --- print graph data ---
+			System.out.println(graph);
+			// --- print graph characteristics ---
+			System.out.println(characteristics);
+			// --- print Social Optimum ---
+			System.out.println(systemOptimalFlow);
+			// --- print DSSP ---
+			System.out.println(dssp);
+
+			// close output stream
+			outputToTxtFile.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

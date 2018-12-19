@@ -183,6 +183,17 @@ public class CharacteristicsCalculator {
 	}
 
 	/**
+	 * Sets the diameter
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param diameter the given diameter
+	 */
+	public void setDiameter(int diameter) {
+		this.diameter = diameter;
+	}
+
+	/**
 	 * Gets the diameter
 	 * 
 	 * --------------------------------------------

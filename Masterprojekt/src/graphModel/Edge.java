@@ -4,7 +4,6 @@ import ilog.concert.IloNumVar;
 
 import java.util.ArrayList;
 
-
 /**
  * Universität Ulm
  * 
@@ -25,26 +24,23 @@ public class Edge {
 	public Vertex from; // Start vertex
 	public Vertex to; // End vertex
 	double weight; // edge weight
-	int a,b; //cost
-	double c; //C
+	int costA, costB; // cost
+	double c; // C
 	IloNumVar beta;
 	double Result;
-	
+
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
-    ArrayList<Double> values = new ArrayList<>();
-    double sum;
-    
+	ArrayList<Double> values = new ArrayList<>();
+	double sum;
+
 	/**
 	 * Constructor to create a new edge
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param from
-	 *            where the edge of the vertex starts
-	 * @param to
-	 *            where the edge of the vertex ends
-	 * @param weight
-	 *            the value of the edge weight
+	 * @param from   where the edge of the vertex starts
+	 * @param to     where the edge of the vertex ends
+	 * @param weight the value of the edge weight
 	 */
 	public Edge(Vertex from, Vertex to, int weight) {
 		super();
@@ -59,14 +55,13 @@ public class Edge {
 	 * @return the beginning node of the vertex
 	 */
 	public Vertex getFrom() {
-		return from;
+		return this.from;
 	}
 
 	/**
 	 * Setter method for the 'from' value
 	 * 
-	 * @param from,
-	 *            the beginning node of the vertex
+	 * @param from, the beginning node of the vertex
 	 */
 	public void setFrom(Vertex from) {
 		this.from = from;
@@ -78,14 +73,13 @@ public class Edge {
 	 * @return the node at the end of the vertex
 	 */
 	public Vertex getTo() {
-		return to;
+		return this.to;
 	}
 
 	/**
 	 * Setter method for the 'to' value
 	 * 
-	 * @param to,
-	 *            the node at the end of the vertex
+	 * @param to, the node at the end of the vertex
 	 */
 	public void setTo(Vertex to) {
 		this.to = to;
@@ -97,53 +91,48 @@ public class Edge {
 	 * @return the edge weight
 	 */
 	public double getWeight() {
-		return weight;
+		return this.weight;
 	}
 
 	/**
 	 * Setter method for the 'weight' value
 	 * 
-	 * @param weight,
-	 *            the edge weight
+	 * @param weight, the edge weight
 	 */
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
-
 
 	public ArrayList<IloNumVar> getPlayers() {
-		return players;
+		return this.players;
 	}
 
 	public void setPlayers(ArrayList<IloNumVar> players) {
 		this.players = players;
 	}
 
-	public int getA() {
-		return a;
+	public int getCostA() {
+		return this.costA;
 	}
 
-	public void setA(int a) {
-		this.a = a;
+	public void setCostA(int costA) {
+		this.costA = costA;
 	}
 
-	public int getB() {
-		return b;
+	public int getCostB() {
+		return this.costB;
 	}
 
-	public void setB(int b) {
-		this.b = b;
+	public void setCostB(int costB) {
+		this.costB = costB;
 	}
-	
-	public IloNumVar[] convertarray(){
+
+	public IloNumVar[] convertarray() {
 		return players.toArray(new IloNumVar[players.size()]);
 	}
 
 	public double getC() {
-	 
-	
-		return c;
+		return this.c;
 	}
 
 	public void setC(double c) {
@@ -151,7 +140,7 @@ public class Edge {
 	}
 
 	public ArrayList<Double> getValues() {
-		return values;
+		return this.values;
 	}
 
 	public void setValues(ArrayList<Double> values) {
@@ -159,8 +148,7 @@ public class Edge {
 	}
 
 	public double getSum() {
-	
-		return sum;
+		return this.sum;
 	}
 
 	public void setSum(double sum) {
@@ -168,7 +156,7 @@ public class Edge {
 	}
 
 	public IloNumVar getBeta() {
-		return beta;
+		return this.beta;
 	}
 
 	public void setBeta(IloNumVar beta) {
@@ -176,14 +164,12 @@ public class Edge {
 	}
 
 	public double getResult() {
-		this.Result = this.sum*this.a + this.b;
-		return Result;
+		this.Result = this.getSum() * this.getCostA() + this.getCostB();
+		return this.Result;
 	}
 
 	public void setResult(double result) {
-		Result = result;
+		this.Result = result;
 	}
-	
-	
 
 }

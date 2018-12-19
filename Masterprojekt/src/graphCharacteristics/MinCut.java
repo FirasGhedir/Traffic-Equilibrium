@@ -44,9 +44,12 @@ public class MinCut {
 	 */
 	public MinCut(Graphs graph) {
 
-		this.setSource(graph.getVertices().get(0).getId());
-		this.setTarget(graph.getVertices().get(graph.getAdjacencyMatrix().length - 1).getId());
-		this.setMincut(minCut(graph.getAdjacencyMatrix(), getSource(), getTarget()));
+		// --- calculate min cuts vor each player ---
+		for (int i = 0; i < graph.getPlayers().size(); i++) {
+			this.setSource(graph.getPlayers().get(i).getSource().getId());
+			this.setTarget(graph.getPlayers().get(i).getSink().getId());
+			this.setMincut(minCut(graph.getAdjacencyMatrix(), getSource(), getTarget()));
+		}
 	}
 
 	/**
