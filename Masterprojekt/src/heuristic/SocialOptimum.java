@@ -1,5 +1,6 @@
 package heuristic;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,34 +29,39 @@ import ilog.cplex.IloCplex;
  */
 public class SocialOptimum {
 
+	private Graphs G;
 	static ArrayList<IloNumExpr> s1 = new ArrayList<>();
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
 	static IloCplex cplex;
+	private String socialOptimumResultSet;
+	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	String cplexSolverOutputStream;
 
 	/**
 	 * Constructor
 	 * 
-	 * @throws IloException
+	 * --------------------------------------------
+	 * 
+	 * @throws IloException if a CPLEX error occures
 	 */
-	public SocialOptimum() throws IloException {
+	public SocialOptimum(Graphs graph) throws IloException {
 
+		this.setGraph(graph);
+		this.setSocialOptimumResultSet("");
 		cplex = new IloCplex();
+		cplex.setOut(stream); // store the cplex solver Outputstream in Bytestream
+		solveDSSP(this.getGraph());
 	}
 
 	/**
-	 * The main method
+	 * The main algorithm of solving the system optimal flow
 	 * 
 	 * --------------------------------------------
-	 *
-	 * @param graph
-	 *            the command line argument
-	 * @throws IloException
-	 *             if a CPLEX error occures
+	 * 
+	 * @param graph the given graph
+	 * @throws IloException if a CPLEX error occures
 	 */
-	public void step1(Graphs graph) throws IloException {
-		
-		System.out.println("-----------Social Optimum-------------");
-
+	public void solveDSSP(Graphs graph) throws IloException {
 
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			for (int j = 0; j < graph.getPlayers().size(); j++) {
@@ -79,7 +85,6 @@ public class SocialOptimum {
 		ArrayList<IloNumVar> in = new ArrayList<>();
 
 		int count = 0;
-
 		for (int i = 0; i < graph.getPlayers().size(); i++) {
 			for (int j = 0; j < graph.getVertices().size(); j++) {
 				in.clear();
@@ -128,8 +133,13 @@ public class SocialOptimum {
 		cplex.addMinimize(cplex.sum(planet));
 		cplex.add(beta);
 
-		if (cplex.solve()) {
-			System.out.println("obj: " + cplex.getObjValue());
+		switch (String.valueOf(cplex.solve())) {
+		case "true":
+
+			this.cplexSolverOutputStream = new String(stream.toByteArray());
+
+			this.setSocialOptimumResultSet(getSocialOptimumResultSet() + "obj: " + cplex.getObjValue() + "\n");
+
 			for (int i = 0; i < graph.getEdges().size(); i++) {
 				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
 					graph.getEdges().get(i).getValues()
@@ -137,11 +147,11 @@ public class SocialOptimum {
 
 				}
 			}
+			break;
 
-		} else {
+		default:
 
 			throw new IllegalStateException("Problem not solved.");
-
 		}
 
 		for (int i = 0; i < graph.getEdges().size(); i++) {
@@ -153,8 +163,7 @@ public class SocialOptimum {
 			graph.getEdges().get(i).setSum(c);
 
 		}
-	
-		
+
 		List<Double> minimum = new ArrayList<>();
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			if (graph.getEdges().get(i).getSum() > 0) {
@@ -164,17 +173,78 @@ public class SocialOptimum {
 		}
 
 		double minimito = Collections.min(minimum);
-			
 
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			if (graph.getEdges().get(i).getC() == 0) {
-				
+
 				graph.getEdges().get(i).setC(1 / (2 * minimito));
 			}
 		}
 
-		
+	}
 
+	/**
+	 * Getter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given graph
+	 */
+	public Graphs getGraph() {
+		return this.G;
+	}
+
+	/**
+	 * Setter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param g the given graph
+	 */
+	public void setGraph(Graphs g) {
+		this.G = g;
+	}
+
+	/**
+	 * Gets the social optimum result set
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the results of solving the system optimal flow as a String
+	 */
+	public String getSocialOptimumResultSet() {
+		return this.socialOptimumResultSet;
+	}
+
+	/**
+	 * Sets the social optimum result set
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param socialOptimumResultSet the results of solving the system optimal flow
+	 */
+	public void setSocialOptimumResultSet(String socialOptimumResultSet) {
+		this.socialOptimumResultSet = socialOptimumResultSet;
+	}
+
+	/**
+	 * Prints a title in a fancy frame on the console
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param title the title to print
+	 */
+	private static String printTitle(String title) {
+		return ("\n ==============================\n|     " + title + ":\n ==============================\n");
+	}
+
+	/**
+	 * The toString() method returns the string representation of the object
+	 * CharacteristicsCalculation.
+	 */
+	@Override
+	public String toString() {
+		return (printTitle("Social optimum") + cplexSolverOutputStream + "\n" + this.getSocialOptimumResultSet());
 	}
 
 }

@@ -37,7 +37,7 @@ class HeuristicTestCases {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(2, 2);
+		GridGraphGenerator test = new GridGraphGenerator(4, 4);
 		test.generateGraph(graph, map);
 
 		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 5);

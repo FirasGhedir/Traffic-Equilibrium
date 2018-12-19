@@ -120,7 +120,7 @@ public class Eccentricity {
 	 * @param g the given graph
 	 */
 	public void setG(Graphs g) {
-		G = g;
+		this.G = g;
 	}
 
 	/**

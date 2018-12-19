@@ -76,6 +76,8 @@ public class CharacteristicsCalculator {
 	/**
 	 * Constructor
 	 * 
+	 * --------------------------------------------
+	 * 
 	 * @param graph the given graph
 	 * @throws InterruptedException if an error occures
 	 */
@@ -183,6 +185,8 @@ public class CharacteristicsCalculator {
 	/**
 	 * Gets the diameter
 	 * 
+	 * --------------------------------------------
+	 * 
 	 * @return the diameter
 	 */
 	public int getRadius() {
@@ -192,6 +196,8 @@ public class CharacteristicsCalculator {
 	/**
 	 * Gets the min cut
 	 * 
+	 * --------------------------------------------
+	 * 
 	 * @return the mincut
 	 */
 	public String getMinCut() {
@@ -200,6 +206,8 @@ public class CharacteristicsCalculator {
 
 	/**
 	 * Prints a title in a fancy frame on the console
+	 * 
+	 * --------------------------------------------
 	 * 
 	 * @param title the title to print
 	 */

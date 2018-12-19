@@ -454,7 +454,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 				+ Arrays.toString(getNodePotentialVector(getAdjacencyMatrix())));
 	}
 	
-	public void settplayers(ArrayList<Player> x) {
+	public void setPlayer(ArrayList<Player> x) {
 		this.players=x;
 		
 	}

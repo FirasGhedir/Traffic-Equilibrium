@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -7,6 +8,8 @@ import graphCharacteristics.CharacteristicsCalculator;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
+import heuristic.DSSP;
+import heuristic.SocialOptimum;
 import player.Player;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
@@ -31,32 +34,6 @@ import ilog.cplex.IloCplex;
 public class Main {
 
 	/**
-	 * Prints the adjacency list of a given graph; Prints a LinkedLists in a 1D
-	 * array;
-	 * 
-	 * --------------------------------------------
-	 * 
-	 * @param graph the given graph
-	 */
-	public static void printAdjacencyList(Graphs graph) {
-		for (int i = 0; i < graph.getAdjacencyMatrix().length; i++) {
-			System.out.println("Knoten " + graph.getVertices().get(i).getId() + ": " + graph.getAdjacencyList()[i]);
-			for (int j = 0; j < graph.getAdjacencyList()[i].size(); j++) {
-				System.out.println("-> " + graph.getAdjacencyList()[i].get(j));
-			}
-		}
-	}
-
-	/**
-	 * Prints a title in a fancy frame on the console
-	 * 
-	 * @param title the title to print
-	 */
-	private static void printTitle(String title) {
-		System.out.println("\n ------------------------------\n|     " + title + ":\n ------------------------------");
-	}
-
-	/**
 	 * The main method
 	 * 
 	 * --------------------------------------------
@@ -68,88 +45,63 @@ public class Main {
 
 		try {
 
-			// --- Graph parameter
+			/*
+			 * =============================================================
+			 * ================== CREATE EVERYTHING HERE ===================
+			 * =============================================================
+			 */
+
+			// --- Graph parameter ---
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(2, 2);
+			GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
 			test.generateGraph(graph, map);
 
-			// --- Create CharacteristicsCalculator
+			// --- Create CharacteristicsCalculator ---
 			CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
 
+			// --- player ---
+			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(6), 15);
+			Player player2 = new Player(2, graph.getVertices().get(0), graph.getVertices().get(10), 8);
+			Player player3 = new Player(3, graph.getVertices().get(4), graph.getVertices().get(14), 10);
+			Player player4 = new Player(4, graph.getVertices().get(4), graph.getVertices().get(13), 25);
+			Player player5 = new Player(5, graph.getVertices().get(0), graph.getVertices().get(11), 15);
+			Player player6 = new Player(5, graph.getVertices().get(1), graph.getVertices().get(15), 19);
+			Player player7 = new Player(5, graph.getVertices().get(4), graph.getVertices().get(11), 20);
+			ArrayList<Player> x = new ArrayList<>();
+			x.add(0, player1);
+			x.add(1, player2);
+			x.add(2, player3);
+			x.add(3, player4);
+			x.add(4, player5);
+			x.add(5, player6);
+			x.add(6, player7);
+			graph.setPlayer(x);
+			graph.generateedgesfunctions();// edge functions are totally randomized
+
 			// --- social optimum ---
-			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 5);
-			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 4);
+			SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 
-			IloCplex cplex = new IloCplex();
-
-			// f>0 for every player in the graph
-			IloNumVar f1 = cplex.numVar(0, Double.MAX_VALUE, "f1");
-			IloNumVar f2 = cplex.numVar(0, Double.MAX_VALUE, "f2");
-			IloNumVar f3 = cplex.numVar(0, Double.MAX_VALUE, "f3");
-			IloNumVar f4 = cplex.numVar(0, Double.MAX_VALUE, "f4");
-			IloNumVar f5 = cplex.numVar(0, Double.MAX_VALUE, "f5");
-			IloNumVar f6 = cplex.numVar(0, Double.MAX_VALUE, "f6");
-			IloNumVar f7 = cplex.numVar(0, Double.MAX_VALUE, "f7");
-			IloNumVar f8 = cplex.numVar(0, Double.MAX_VALUE, "f8");
-
-			cplex.addMinimize(cplex.sum(cplex.prod(cplex.sum(f1, f2), cplex.sum(cplex.prod(2, f1), cplex.prod(2, f2))),
-					cplex.prod(cplex.sum(f3, f4), cplex.sum(cplex.prod(3, f3), cplex.prod(3, f4))),
-					cplex.prod(cplex.sum(f5, f6), cplex.sum(cplex.prod(4, f5), cplex.prod(4, f6))),
-					cplex.prod(cplex.sum(f7, f8), cplex.sum(cplex.prod(5, f7), cplex.prod(5, f8)))));
-
-			IloAddable x1 = cplex.addEq(0, cplex.sum(f7, cplex.prod(-1, f5)));
-			IloAddable x2 = cplex.addEq(0, cplex.sum(f6, cplex.prod(-1, f8)));
-			IloAddable x3 = cplex.addEq(0, cplex.sum(f1, cplex.prod(-1, f3)));
-			IloAddable x4 = cplex.addEq(0, cplex.sum(f2, f6));
-			IloAddable x5 = cplex.addEq(player1.getDemand(), cplex.sum(f1, f5));
-			IloAddable x6 = cplex.addEq(player2.getDemand(), f4);
-			IloAddable x7 = cplex.addEq(player1.getDemand(), cplex.sum(f1, f5));
-			IloAddable x8 = cplex.addEq(player2.getDemand(), cplex.sum(f4, f8));
-
-			IloAddable[] beta = { x1, x2, x3, x4, x5, x6, x7, x8 };
+			// --- DSSP ---
+			DSSP dssp = new DSSP(graph);
 
 			/*
-			 * print graph data
+			 * =============================================================
+			 * ================== PRINT EVERYTHING HERE ====================
+			 * =============================================================
 			 */
+
+			// --- print graph data ---
 			System.out.println(graph);
 
-			/*
-			 * print adjacency list
-			 */
-			printTitle("Adjacency List");
-			printAdjacencyList(graph);
-
-			/*
-			 * print graph characteristics
-			 */
+			// --- print graph characteristics ---
 			System.out.println(characteristics);
 
-			/*
-			 * social optimum
-			 */
-			printTitle("social optimum");
-			System.out.println(cplex.solve());
+			// --- print Social Optimum ---
+			System.out.println(systemOptimalFlow);
 
-			cplex.add(beta);
-
-			switch (String.valueOf(cplex.solve())) {
-			case "true":
-				System.out.println("obj: " + cplex.getObjValue());
-				System.out.println("f1: " + cplex.getValue(f1));
-				System.out.println("f2: " + cplex.getValue(f2));
-				System.out.println("f3: " + cplex.getValue(f3));
-				System.out.println("f4: " + cplex.getValue(f4));
-				System.out.println("f5: " + cplex.getValue(f5));
-				System.out.println("f6: " + cplex.getValue(f6));
-				System.out.println("f7: " + cplex.getValue(f7));
-				System.out.println("f8: " + cplex.getValue(f8));
-				break;
-
-			default:
-
-				throw new IllegalStateException("Problem not solved.");
-			}
+			// --- print DSSP ---
+			System.out.println(dssp);
 
 		} catch (Exception e) {
 			e.printStackTrace();

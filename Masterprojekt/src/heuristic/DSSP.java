@@ -1,5 +1,6 @@
 package heuristic;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import graphModel.Graphs;
@@ -24,28 +25,42 @@ import ilog.cplex.IloCplex;
  */
 public class DSSP {
 
+	private Graphs G;
 	static ArrayList<IloNumExpr> s1 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s11 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s12 = new ArrayList<>();
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
 	static IloCplex cplex;
+	private String DSSPResultSet;
+	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	String cplexSolverOutputStream;
 
 	/**
 	 * Constructor
 	 * 
-	 * @throws IloException
+	 * --------------------------------------------
+	 * 
+	 * @throws IloException if a CPLEX error occures
 	 */
-	public DSSP() throws IloException {
+	public DSSP(Graphs graph) throws IloException {
 
+		this.setGraph(graph);
 		cplex = new IloCplex();
-
+		cplex.setOut(stream);
+		solveDSSP(this.getGraph());
 	}
 
-	public void solving(Graphs g) throws IloException {
-		
-		System.out.println("-----------DSSP-LP-------------");
+	/**
+	 * The main algorithm of solving the DSSP-LP
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param graph the given graph
+	 * @throws IloException if a CPLEX error occures
+	 */
+	public void solveDSSP(Graphs g) throws IloException {
 
-		// initialising ro
+		// --- initialising ro ---
 		for (int i = 0; i < g.getVertices().size(); i++) {
 			for (int j = 0; j < g.getPlayers().size(); j++) {
 
@@ -56,13 +71,13 @@ public class DSSP {
 
 		}
 
-		// initialising beta
+		// --- initialising beta ---
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the edge number : " + i));
 
 		}
 
-		// C*beta
+		// --- C*beta ---
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getC(), g.getEdges().get(i).getBeta());
 			s1.add(tmp);
@@ -77,7 +92,6 @@ public class DSSP {
 							cplex.prod(cplex.constant(g.getEdges().get(i).getA()), g.getEdges().get(i).getSum()),
 							g.getEdges().get(i).getBeta()));
 			s11.add(tmp);
-		//	System.out.println(tmp.toString());
 		}
 
 		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
@@ -89,7 +103,6 @@ public class DSSP {
 							cplex.prod(-1, g.getPlayers().get(i).getSink().getRo().get(i))));
 			s12.add(tmp);
 
-
 		}
 		IloNumExpr[] planet2 = s12.toArray(new IloNumExpr[s12.size()]);
 		IloNumExpr y = cplex.sum(planet2);
@@ -98,11 +111,12 @@ public class DSSP {
 
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 
-			for (int j = 0; j < g.getEdges().size() ; j++) {
+			for (int j = 0; j < g.getEdges().size(); j++) {
 
-				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
-				IloNumExpr tmp1 = cplex.sum(tmp,g.getEdges().get(j).getResult());
-				IloAddable tmp2 = cplex.addLe(tmp1,0);
+				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),
+						cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
+				IloNumExpr tmp1 = cplex.sum(tmp, g.getEdges().get(j).getResult());
+				IloAddable tmp2 = cplex.addLe(tmp1, 0);
 				s2.add(tmp2);
 			}
 
@@ -112,18 +126,90 @@ public class DSSP {
 		cplex.addMinimize(cplex.sum(planet));
 		cplex.add(planet3);
 		cplex.add(amg);
-		
 
-		if (cplex.solve()) {
-			System.out.println("Object: " + cplex.getObjValue());
-			for(int i=0; i< g.getEdges().size() ; i++) {
-				System.out.println("in the  Edge " + i + " beta would be : " + cplex.getValue(g.getEdges().get(i).getBeta()));
-			}}
-		else {
+		switch (String.valueOf(cplex.solve())) {
+		case "true":
+
+			this.cplexSolverOutputStream = new String(stream.toByteArray());
+
+			this.setDSSPResultSet(getDSSPResultSet() + "obj: " + cplex.getObjValue() + "\n");
+
+			for (int i = 0; i < g.getEdges().size(); i++) {
+
+				this.setDSSPResultSet(getDSSPResultSet() + "   in the  Edge " + i + " beta would be : "
+						+ cplex.getValue(g.getEdges().get(i).getBeta()) + "\n");
+
+			}
+
+			break;
+
+		default:
 
 			throw new IllegalStateException("Problem not solved.");
-
 		}
 	}
 
+	/**
+	 * Getter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given graph
+	 */
+	public Graphs getGraph() {
+		return this.G;
+	}
+
+	/**
+	 * Setter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param g the given graph
+	 */
+	public void setGraph(Graphs g) {
+		this.G = g;
+	}
+
+	/**
+	 * Gets the results of solving the DSSP-LP as a String
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the results of solving the DSSP-LP as a String
+	 */
+	public String getDSSPResultSet() {
+		return this.DSSPResultSet;
+	}
+
+	/**
+	 * Sets the results of solving the DSSP-LP
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param dSSPResultSet the results of solving the DSSP-LP
+	 */
+	public void setDSSPResultSet(String dSSPResultSet) {
+		this.DSSPResultSet = dSSPResultSet;
+	}
+
+	/**
+	 * Prints a title in a fancy frame on the console
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param title the title to print
+	 */
+	private static String printTitle(String title) {
+		return ("\n ==============================\n|     " + title + ":\n ==============================\n");
+	}
+
+	/**
+	 * The toString() method returns the string representation of the object
+	 * CharacteristicsCalculation.
+	 */
+	@Override
+	public String toString() {
+		return (printTitle("DSSP-LP") + cplexSolverOutputStream + "\n" + this.getDSSPResultSet());
+	}
 }
