@@ -40,7 +40,8 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args             the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 * @param adjacency_matrix
 	 */
 	public static void main(String[] args) throws IloException {
@@ -56,25 +57,29 @@ public class Main {
 			// --- Graph parameter ---
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(3, 3); // do not change !!
+			GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
 			test.generateGraph(graph, map);
 
 			// --- player ---
-			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(8), 1);
-			Player player2 = new Player(2, graph.getVertices().get(3), graph.getVertices().get(7), 1);
-		/*	Player player3 = new Player(3, graph.getVertices().get(4), graph.getVertices().get(14), 10);
-			Player player4 = new Player(4, graph.getVertices().get(4), graph.getVertices().get(13), 25);
-			Player player5 = new Player(5, graph.getVertices().get(0), graph.getVertices().get(11), 15);
-			Player player6 = new Player(5, graph.getVertices().get(1), graph.getVertices().get(15), 19);
-			Player player7 = new Player(5, graph.getVertices().get(4), graph.getVertices().get(11), 20);*/
+			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(8), 5);
+			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(10), 4);
+
+			Player player3 = new Player(3, graph.getVertices().get(2), graph.getVertices().get(15), 10);
+			Player player4 = new Player(4, graph.getVertices().get(3), graph.getVertices().get(15), 25);
+			Player player5 = new Player(5, graph.getVertices().get(1), graph.getVertices().get(15), 15);
+			Player player6 = new Player(6, graph.getVertices().get(2), graph.getVertices().get(15), 19);
+			Player player7 = new Player(7, graph.getVertices().get(1), graph.getVertices().get(15), 20);
+
 			ArrayList<Player> x = new ArrayList<>();
 			x.add(0, player1);
 			x.add(1, player2);
-			/*x.add(2, player3);
+
+			x.add(2, player3);
 			x.add(3, player4);
 			x.add(4, player5);
 			x.add(5, player6);
-			x.add(6, player7);*/
+			x.add(6, player7);
+
 			graph.setPlayer(x);
 			graph.generateEdgesFunctions();// edge functions are totally randomized
 
@@ -86,9 +91,9 @@ public class Main {
 
 			// --- DSSP ---
 			DSSP dssp = new DSSP(graph);
-			
+
 			// --- RMINTB ---
-			
+
 			RMINTB rmintb = new RMINTB();
 
 			/*
@@ -96,9 +101,9 @@ public class Main {
 			 * ================== PRINT EVERYTHING HERE ====================
 			 * =============================================================
 			 */
-//			// Uncomment this to get txt files for each program iteration for each graph
-//			String uniqueID = UUID.randomUUID().toString(); // create unique IDs
-//			path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
+			// // Uncomment this to get txt files for each program iteration for each graph
+			// String uniqueID = UUID.randomUUID().toString(); // create unique IDs
+			// path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
 
 			// Creating a File object that represents the disk file.
 			PrintStream outputToTxtFile = new PrintStream(new File(path));
@@ -130,8 +135,10 @@ public class Main {
 			System.out.println(systemOptimalFlow);
 			// --- print DSSP ---
 			System.out.println(dssp);
-			
+
 			System.out.println("#####################################");
+
+			
 
 			rmintb.solve(graph);
 

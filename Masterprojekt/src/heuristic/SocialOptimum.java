@@ -139,12 +139,20 @@ public class SocialOptimum {
 			this.cplexSolverOutputStream = new String(stream.toByteArray());
 
 			this.setSocialOptimumResultSet(getSocialOptimumResultSet() + "obj: " + cplex.getObjValue() + "\n");
+			
+			for(int i=0; i<graph.getEdges().size() ; i++) {
+				for(int j=0 ; j<graph.getEdges().get(i).getPlayers().size() ; j++) {
+					System.out.println(graph.getEdges().get(i).getPlayers().get(j).toString() + " : " + cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));
+
+				}
+			}
+
 
 			for (int i = 0; i < graph.getEdges().size(); i++) {
 				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
 					graph.getEdges().get(i).getValues()
 							.add(cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));
-
+					
 				}
 			}
 			break;

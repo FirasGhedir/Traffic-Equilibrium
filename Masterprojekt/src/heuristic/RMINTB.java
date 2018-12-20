@@ -85,7 +85,7 @@ public class RMINTB {
 		
 		IloAddable amg = cplex.addEq(0, cplex.sum(x, cplex.prod(-1, y)));
 		
-		int m=2;
+		int m=1000;
         
 		for(int i=0; i<g.getEdges().size() ; i++) {
 			

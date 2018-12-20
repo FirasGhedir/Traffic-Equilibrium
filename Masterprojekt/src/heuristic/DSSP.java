@@ -116,7 +116,8 @@ public class DSSP {
 				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),
 						cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
 				IloNumExpr tmp1 = cplex.sum(tmp, g.getEdges().get(j).getResult());
-				IloAddable tmp2 = cplex.addLe(tmp1, 0);
+				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1,g.getEdges().get(j).getBeta()), 0);
+				System.out.println(tmp2.toString());
 				s2.add(tmp2);
 			}
 
