@@ -2,33 +2,26 @@
  ------------------------------
 |     Gridgraph:
  ------------------------------
-#edges:    24
-#vertices: 16
+#edges:    12
+#vertices: 9
 
  ------------------------------
 |     Adjacency Matrix:
  ------------------------------
-| 0  1  0  0  1  0  0  0  0  0  0  0  0  0  0  0 |
-| 0  0  1  0  0  1  0  0  0  0  0  0  0  0  0  0 |
-| 0  0  0  1  0  0  1  0  0  0  0  0  0  0  0  0 |
-| 0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0 |
-| 0  0  0  0  0  1  0  0  1  0  0  0  0  0  0  0 |
-| 0  0  0  0  0  0  1  0  0  1  0  0  0  0  0  0 |
-| 0  0  0  0  0  0  0  1  0  0  1  0  0  0  0  0 |
-| 0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0 |
-| 0  0  0  0  0  0  0  0  0  1  0  0  1  0  0  0 |
-| 0  0  0  0  0  0  0  0  0  0  1  0  0  1  0  0 |
-| 0  0  0  0  0  0  0  0  0  0  0  1  0  0  1  0 |
-| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1 |
-| 0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0 |
-| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0 |
-| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1 |
-| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |
+| 0  1  0  1  0  0  0  0  0 |
+| 0  0  1  0  1  0  0  0  0 |
+| 0  0  0  0  0  1  0  0  0 |
+| 0  0  0  0  1  0  1  0  0 |
+| 0  0  0  0  0  1  0  1  0 |
+| 0  0  0  0  0  0  0  0  1 |
+| 0  0  0  0  0  0  0  1  0 |
+| 0  0  0  0  0  0  0  0  1 |
+| 0  0  0  0  0  0  0  0  0 |
 
  ------------------------------
 |     Node potential vector:
  ------------------------------
-[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[2, 2, 2, 2, 2, 2, 2, 2, 2]
 
  ------------------------------
 |     Max vertex degree:
@@ -48,87 +41,89 @@
  ------------------------------
 |     Eccentricity vector:
  ------------------------------
-[6, 5, 5, 6, 5, 4, 4, 5, 5, 4, 4, 5, 6, 5, 5, 6]
+[4, 3, 4, 3, 2, 3, 4, 3, 4]
 
  ------------------------------
 |     Average eccentricity:
  ------------------------------
-4.625
+2.888888888888889
 
  ------------------------------
 |     Diameter:
  ------------------------------
-6
+4
 
  ------------------------------
 |     Radius:
  ------------------------------
-4
+2
  ------------------------------
 |     Min cut:
  ------------------------------
-4 - 5
-4 - 8
+3 - 4
+3 - 6
 
  ==============================
 |     Social optimum:
  ==============================
-Number of nonzeros in lower triangle of Q = 504
+Number of nonzeros in lower triangle of Q = 12
 Using Approximate Minimum Degree ordering
-Total time for automatic ordering = 0.00 sec. (0.02 ticks)
+Total time for automatic ordering = 0.00 sec. (0.00 ticks)
 Summary statistics for factor of Q:
-  Rows in Factor            = 168
-  Integer space required    = 168
-  Total non-zeros in factor = 672
-  Total FP ops to factor    = 3360
+  Rows in Factor            = 24
+  Integer space required    = 24
+  Total non-zeros in factor = 36
+  Total FP ops to factor    = 60
 Tried aggregator 1 time.
-QP Presolve eliminated 197 rows and 230 columns.
-QP Presolve added 0 rows and 168 columns.
-Aggregator did 34 substitutions.
-Reduced QP has 49 rows, 72 columns, and 198 nonzeros.
-Reduced QP objective Q matrix has 24 nonzeros.
-Presolve time = 0.00 sec. (0.21 ticks)
+QP Presolve eliminated 18 rows and 20 columns.
+QP Presolve added 0 rows and 24 columns.
+Aggregator did 7 substitutions.
+Reduced QP has 17 rows, 21 columns, and 44 nonzeros.
+Reduced QP objective Q matrix has 12 nonzeros.
+Presolve time = 0.00 sec. (0.03 ticks)
 Parallel mode: using up to 8 threads for barrier.
-Number of nonzeros in lower triangle of A*A' = 219
+Number of nonzeros in lower triangle of A*A' = 41
 Using Approximate Minimum Degree ordering
-Total time for automatic ordering = 0.00 sec. (0.02 ticks)
+Total time for automatic ordering = 0.00 sec. (0.00 ticks)
 Summary statistics for Cholesky factor:
   Threads                   = 8
-  Rows in Factor            = 49
-  Integer space required    = 90
-  Total non-zeros in factor = 619
-  Total FP ops to factor    = 9613
+  Rows in Factor            = 17
+  Integer space required    = 19
+  Total non-zeros in factor = 127
+  Total FP ops to factor    = 1265
  Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf          
-   0   2.0762640e+04  -2.4439728e+05  2.77e+02  9.37e-01  3.49e+04
-   1   2.1839221e+04  -4.8223191e+03  1.25e-13  2.22e-15  2.43e-12
-   2   2.0965278e+04   1.7883429e+04  1.19e-13  2.66e-15  9.86e-13
-   3   2.0732842e+04   2.0270071e+04  3.33e-13  3.11e-15  5.36e-13
-   4   2.0700956e+04   2.0675196e+04  3.45e-13  4.00e-15  5.08e-13
-   5   2.0698990e+04   2.0697702e+04  4.54e-12  1.33e-15  6.30e-13
-   6   2.0698975e+04   2.0698952e+04  7.17e-12  3.11e-15  4.73e-13
-   7   2.0698975e+04   2.0698975e+04  7.31e-13  3.55e-15  3.48e-13
-   8   2.0698975e+04   2.0698975e+04  4.38e-13  6.22e-15  6.30e-13
-Barrier time = 0.00 sec. (0.48 ticks)
+   0   1.5224116e+01  -3.0052241e+03  2.21e+01  3.00e+00  6.01e+03
+   1   1.0108664e+01  -1.6122879e+03  4.22e-15  0.00e+00  5.68e-13
+   2   1.0105409e+01  -4.7921428e-01  1.69e-15  1.11e-16  5.84e-13
+   3   9.9480699e+00   8.9777386e+00  1.89e-15  5.55e-17  2.89e-15
+   4   9.9236663e+00   9.8333281e+00  2.16e-15  5.55e-17  1.65e-15
+   5   9.9235297e+00   9.9160031e+00  1.80e-15  1.11e-16  2.79e-15
+   6   9.9235294e+00   9.9229023e+00  2.39e-15  0.00e+00  2.55e-15
+   7   9.9235294e+00   9.9234772e+00  1.58e-15  1.67e-16  3.32e-15
+   8   9.9235294e+00   9.9235251e+00  2.28e-15  1.67e-16  2.31e-15
+   9   9.9235294e+00   9.9235290e+00  1.55e-15  5.55e-17  1.71e-15
+  10   9.9235294e+00   9.9235294e+00  1.75e-15  1.11e-16  2.34e-15
+Barrier time = 0.00 sec. (0.11 ticks)
 
-Total time on 8 threads = 0.00 sec. (0.48 ticks)
+Total time on 8 threads = 0.00 sec. (0.11 ticks)
 
-obj: 20698.975004700602
+obj: 9.923529411764706
 
 
  ==============================
 |     DSSP-LP:
  ==============================
 Tried aggregator 1 time.
-LP Presolve eliminated 68 rows and 51 columns.
-Aggregator did 49 substitutions.
-Reduced LP has 52 rows, 36 columns, and 117 nonzeros.
-Presolve time = 0.00 sec. (0.10 ticks)
+LP Presolve eliminated 12 rows and 17 columns.
+Aggregator did 9 substitutions.
+Reduced LP has 4 rows, 4 columns, and 9 nonzeros.
+Presolve time = 0.00 sec. (0.02 ticks)
 Initializing dual steep norms . . .
 
 Iteration log . . .
-Iteration:     1   Dual objective     =             0.000000
+Iteration:     1   Dual objective     =             0.721290
 
-nullobj: 0.021953429216544862
+nullobj: 0.7212900009839354
    in the  Edge 0 beta would be : 0.0
    in the  Edge 1 beta would be : 0.0
    in the  Edge 2 beta would be : 0.0
@@ -137,20 +132,8 @@ nullobj: 0.021953429216544862
    in the  Edge 5 beta would be : 0.0
    in the  Edge 6 beta would be : 0.0
    in the  Edge 7 beta would be : 0.0
-   in the  Edge 8 beta would be : 2.211007374628636
+   in the  Edge 8 beta would be : 1.3365079424200705
    in the  Edge 9 beta would be : 0.0
    in the  Edge 10 beta would be : 0.0
    in the  Edge 11 beta would be : 0.0
-   in the  Edge 12 beta would be : 0.0
-   in the  Edge 13 beta would be : 0.0
-   in the  Edge 14 beta would be : 0.0
-   in the  Edge 15 beta would be : 0.0
-   in the  Edge 16 beta would be : 0.0
-   in the  Edge 17 beta would be : 0.0
-   in the  Edge 18 beta would be : 0.0
-   in the  Edge 19 beta would be : 0.0
-   in the  Edge 20 beta would be : 0.0
-   in the  Edge 21 beta would be : 0.0
-   in the  Edge 22 beta would be : 0.0
-   in the  Edge 23 beta would be : 0.0
 
