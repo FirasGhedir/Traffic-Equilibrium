@@ -6,8 +6,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.UUID;
-
 import graphCharacteristics.CharacteristicsCalculator;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;

@@ -6,7 +6,7 @@ import sun.misc.Queue;
 /**
  * Universität Ulm
  * 
- * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * Project Algorithm Engineering-Project --- WiSe 2018/19
  * 
  * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
  * @author Julian Bestler (julian.bestler@uni-ulm.de)

@@ -28,6 +28,7 @@ public class Edge {
 	double c; // C
 	IloNumVar beta;
 	double Result;
+	IloNumVar y;
 
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
 	ArrayList<Double> values = new ArrayList<>();
@@ -171,5 +172,15 @@ public class Edge {
 	public void setResult(double result) {
 		this.Result = result;
 	}
+
+	public IloNumVar getY() {
+		return y;
+	}
+
+	public void setY(IloNumVar y) {
+		this.y = y;
+	}
+	
+	
 
 }
