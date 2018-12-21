@@ -61,8 +61,8 @@ public class Main {
 			test.generateGraph(graph, map);
 
 			// --- player ---
-			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 1);
-			//Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 0);
+			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 4);
+			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 5);
 /*
 			Player player3 = new Player(3, graph.getVertices().get(2), graph.getVertices().get(15), 10);
 			Player player4 = new Player(4, graph.getVertices().get(3), graph.getVertices().get(15), 25);
@@ -72,7 +72,7 @@ public class Main {
 
 			ArrayList<Player> x = new ArrayList<>();
 			x.add(0, player1);
-		//	x.add(1, player2);
+			x.add(1, player2);
 /*
 			x.add(2, player3);
 			x.add(3, player4);
