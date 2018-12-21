@@ -55,28 +55,17 @@
  ------------------------------
 |     Min cut:
  ------------------------------
-1 - 3
+0 - 1
+0 - 2
 
  ==============================
 |     Social optimum:
  ==============================
-Number of nonzeros in lower triangle of Q = 4
-Using Approximate Minimum Degree ordering
-Total time for automatic ordering = 0.00 sec. (0.00 ticks)
-Summary statistics for factor of Q:
-  Rows in Factor            = 8
-  Integer space required    = 8
-  Total non-zeros in factor = 12
-  Total FP ops to factor    = 20
 Tried aggregator 1 time.
-QP Presolve eliminated 9 rows and 8 columns.
-QP Presolve added 0 rows and 8 columns.
-Aggregator did 3 substitutions.
-Reduced QP has 4 rows, 5 columns, and 8 nonzeros.
-Reduced QP objective Q matrix has 4 nonzeros.
-Presolve time = 0.00 sec. (0.01 ticks)
+No QP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.00 ticks)
 Parallel mode: using up to 8 threads for barrier.
-Number of nonzeros in lower triangle of A*A' = 6
+Number of nonzeros in lower triangle of A*A' = 4
 Using Approximate Minimum Degree ordering
 Total time for automatic ordering = 0.00 sec. (0.00 ticks)
 Summary statistics for Cholesky factor:
@@ -86,52 +75,29 @@ Summary statistics for Cholesky factor:
   Total non-zeros in factor = 10
   Total FP ops to factor    = 30
  Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf          
-   0   1.1133518e+02  -5.1073352e+03  1.29e+02  3.30e+01  2.82e+01
-   1   1.3836945e+02  -3.6408272e+03  1.69e-14  0.00e+00  1.14e-13
-   2   1.3705844e+02   7.1770259e+01  3.55e-15  0.00e+00  1.71e-13
-   3   1.2673827e+02   1.1964678e+02  0.00e+00  0.00e+00  3.55e-15
-   4   1.2630605e+02   1.2612600e+02  2.66e-15  2.22e-16  4.05e-15
-   5   1.2630557e+02   1.2621584e+02  0.00e+00  0.00e+00  3.52e-15
-   6   1.2630556e+02   1.2626072e+02  0.00e+00  0.00e+00  9.37e-17
-   7   1.2630556e+02   1.2628314e+02  0.00e+00  2.22e-16  3.05e-15
-   8   1.2630556e+02   1.2629435e+02  8.88e-16  0.00e+00  6.16e-16
-   9   1.2630556e+02   1.2629995e+02  0.00e+00  2.22e-16  3.16e-15
-  10   1.2630556e+02   1.2630275e+02  8.88e-16  0.00e+00  1.29e-15
-  11   1.2630556e+02   1.2630415e+02  1.78e-15  0.00e+00  5.29e-16
-  12   1.2630556e+02   1.2630486e+02  8.88e-16  0.00e+00  3.19e-15
-  13   1.2630556e+02   1.2630521e+02  0.00e+00  0.00e+00  3.88e-15
-  14   1.2630556e+02   1.2630538e+02  1.78e-15  2.22e-16  1.31e-15
-  15   1.2630556e+02   1.2630547e+02  1.78e-15  2.22e-16  2.52e-15
-  16   1.2630556e+02   1.2630551e+02  0.00e+00  0.00e+00  1.37e-15
-  17   1.2630556e+02   1.2630553e+02  8.88e-16  0.00e+00  1.55e-15
-  18   1.2630556e+02   1.2630554e+02  0.00e+00  2.22e-16  4.78e-15
-  19   1.2630556e+02   1.2630555e+02  2.66e-15  0.00e+00  5.50e-16
-  20   1.2630556e+02   1.2630555e+02  0.00e+00  0.00e+00  2.88e-15
-  21   1.2630556e+02   1.2630555e+02  0.00e+00  2.22e-16  2.33e-15
-  22   1.2630556e+02   1.2630555e+02  3.55e-15  0.00e+00  4.49e-16
-Barrier time = 0.00 sec. (0.04 ticks)
+   0   9.3000000e+02  -9.0000000e+02  3.80e+01  0.00e+00  1.79e+02
+   1   3.7500000e+00   1.9447857e+00  0.00e+00  0.00e+00  5.77e-15
+   2   3.7500000e+00   3.7409739e+00  0.00e+00  0.00e+00  2.22e-16
+   3   3.7500000e+00   3.7500000e+00  0.00e+00  0.00e+00  0.00e+00
+Barrier time = 0.00 sec. (0.01 ticks)
 
-Total time on 8 threads = 0.00 sec. (0.04 ticks)
+Total time on 8 threads = 0.00 sec. (0.01 ticks)
 
-obj: 126.30555555555557
+obj: 3.75
 
 
  ==============================
 |     DSSP-LP:
  ==============================
 Tried aggregator 1 time.
-LP Presolve eliminated 3 rows and 6 columns.
+LP Presolve eliminated 2 rows and 5 columns.
 Aggregator did 3 substitutions.
-Reduced LP has 3 rows, 3 columns, and 7 nonzeros.
-Presolve time = 0.00 sec. (0.01 ticks)
-Initializing dual steep norms . . .
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.00 ticks)
 
-Iteration log . . .
-Iteration:     1   Dual objective     =             0.044776
-
-nullobj: 0.04477612738953374
+nullobj: 0.3333333333333339
    in the  Edge 0 beta would be : 0.0
    in the  Edge 1 beta would be : 0.0
-   in the  Edge 2 beta would be : 0.0
-   in the  Edge 3 beta would be : 0.500000087871614
+   in the  Edge 2 beta would be : 0.5
+   in the  Edge 3 beta would be : 0.0
 
