@@ -11,6 +11,7 @@ import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.DSSP;
+import heuristic.GAMINTB;
 import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import player.Player;
@@ -40,8 +41,7 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args
-	 *            the command line arguments
+	 * @param args             the command line arguments
 	 * @param adjacency_matrix
 	 */
 	public static void main(String[] args) throws IloException {
@@ -63,22 +63,23 @@ public class Main {
 			// --- player ---
 			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 4);
 			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 5);
-/*
-			Player player3 = new Player(3, graph.getVertices().get(2), graph.getVertices().get(15), 10);
-			Player player4 = new Player(4, graph.getVertices().get(3), graph.getVertices().get(15), 25);
-			Player player5 = new Player(5, graph.getVertices().get(1), graph.getVertices().get(15), 15);
-			Player player6 = new Player(6, graph.getVertices().get(2), graph.getVertices().get(15), 19);
-			Player player7 = new Player(7, graph.getVertices().get(1), graph.getVertices().get(15), 20);*/
+			/*
+			 * Player player3 = new Player(3, graph.getVertices().get(2),
+			 * graph.getVertices().get(15), 10); Player player4 = new Player(4,
+			 * graph.getVertices().get(3), graph.getVertices().get(15), 25); Player player5
+			 * = new Player(5, graph.getVertices().get(1), graph.getVertices().get(15), 15);
+			 * Player player6 = new Player(6, graph.getVertices().get(2),
+			 * graph.getVertices().get(15), 19); Player player7 = new Player(7,
+			 * graph.getVertices().get(1), graph.getVertices().get(15), 20);
+			 */
 
 			ArrayList<Player> x = new ArrayList<>();
 			x.add(0, player1);
 			x.add(1, player2);
-/*
-			x.add(2, player3);
-			x.add(3, player4);
-			x.add(4, player5);
-			x.add(5, player6);
-			x.add(6, player7);*/
+			/*
+			 * x.add(2, player3); x.add(3, player4); x.add(4, player5); x.add(5, player6);
+			 * x.add(6, player7);
+			 */
 
 			graph.setPlayer(x);
 			graph.generateEdgesFunctions();// edge functions are totally randomized
@@ -93,8 +94,10 @@ public class Main {
 			DSSP dssp = new DSSP(graph);
 
 			// --- RMINTB ---
+//			RMINTB rmintb = new RMINTB(graph);
 
-			RMINTB rmintb = new RMINTB();
+			// --- RMINTB ---
+			GAMINTB gamintb = new GAMINTB(graph);
 
 			/*
 			 * =============================================================
@@ -122,6 +125,10 @@ public class Main {
 			System.out.println(systemOptimalFlow);
 			// --- print DSSP ---
 			System.out.println(dssp);
+			// --- print RMINTB ---
+//			System.out.println(rmintb);
+			// --- print GAMINTB ---
+			System.out.println(gamintb);
 
 			/*
 			 * Use stored value for output stream
@@ -135,15 +142,14 @@ public class Main {
 			System.out.println(systemOptimalFlow);
 			// --- print DSSP ---
 			System.out.println(dssp);
+			// --- print RMINTB ---
+//			System.out.println(rmintb);
+			// --- print GAMINTB ---
+			System.out.println(gamintb);
 
-			System.out.println("#####################################");
-
-			for(int i=0; i<graph.getEdges().size() ; i++) {
-				System.out.println("a : " + graph.getEdges().get(i).getCostA() + " b : " + graph.getEdges().get(i).getCostB() + " id : " + i);
-			}
-			
-
-			rmintb.solve(graph);
+//			for(int i=0; i<graph.getEdges().size() ; i++) {
+//				System.out.println("a : " + graph.getEdges().get(i).getCostA() + " b : " + graph.getEdges().get(i).getCostB() + " id : " + i);
+//			}
 
 			// close output stream
 			outputToTxtFile.close();

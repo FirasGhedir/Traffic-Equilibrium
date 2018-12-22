@@ -1,5 +1,6 @@
 package heuristic;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import graphModel.Graphs;
@@ -10,20 +11,55 @@ import ilog.concert.IloNumVar;
 import ilog.concert.IloNumVarType;
 import ilog.cplex.IloCplex;
 
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          Solver for the Restricted Minimnum Tollbooth Problem (RMINTB)
+ */
 public class RMINTB {
 
+	Graphs g;
 	static IloCplex cplex;
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s11 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s12 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s13 = new ArrayList<>();
+	private String rmintbResultSet;
+	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	String cplexSolverOutputStream;
 
-	public RMINTB() throws IloException {
+	/**
+	 * Constructor
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @throws IloException if a CPLEX error occures
+	 */
+	public RMINTB(Graphs g) throws IloException {
+		this.setGraph(g);
 		cplex = new IloCplex();
-
+		cplex.setOut(stream);
+		solveRMINTB();
 	}
 
-	public void solve(Graphs g) throws IloException {
+	/**
+	 * The main algorithm of solving the RMINTB
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param graph the given graph
+	 * @throws IloException if a CPLEX error occures
+	 */
+	public void solveRMINTB() throws IloException {
 
 		IloNumVar[] planet = new IloNumVar[g.getEdges().size()];
 
@@ -49,9 +85,9 @@ public class RMINTB {
 
 				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),
 						cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
-						
+
 				IloNumExpr tmp1 = cplex.sum(tmp, g.getEdges().get(j).getResult());
-				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1,g.getEdges().get(j).getBeta()), 0);
+				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1, g.getEdges().get(j).getBeta()), 0);
 				s2.add(tmp2);
 			}
 
@@ -102,7 +138,9 @@ public class RMINTB {
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
 
-			System.out.println(cplex.getObjValue());
+			this.cplexSolverOutputStream = new String(stream.toByteArray());
+
+			this.setRMINTBResultSet(getRMINTBResultSet() + "obj: " + cplex.getObjValue() + "\n");
 
 			break;
 
@@ -111,6 +149,69 @@ public class RMINTB {
 			throw new IllegalStateException("Problem not solved.");
 		}
 
+	}
+
+	/**
+	 * Getter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the given graph
+	 */
+	public Graphs getGraph() {
+		return this.g;
+	}
+
+	/**
+	 * Setter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param g the given graph
+	 */
+	public void setGraph(Graphs g) {
+		this.g = g;
+	}
+
+	/**
+	 * Gets the results of solving the DSSP-LP as a String
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the results of solving the DSSP-LP as a String
+	 */
+	public String getRMINTBResultSet() {
+		return this.rmintbResultSet;
+	}
+
+	/**
+	 * Sets the results of solving the DSSP-LP
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param dSSPResultSet the results of solving the DSSP-LP
+	 */
+	public void setRMINTBResultSet(String rmintbResultSet) {
+		this.rmintbResultSet = rmintbResultSet;
+	}
+
+	/**
+	 * Prints a title in a fancy frame on the console
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param title the title to print
+	 */
+	private static String printTitle(String title) {
+		return ("\n ==============================\n|     " + title + ":\n ==============================\n");
+	}
+
+	/**
+	 * The toString() method returns the string representation of the object RMINTB
+	 */
+	@Override
+	public String toString() {
+		return (printTitle("RMINTB") + cplexSolverOutputStream + "\n" + this.getRMINTBResultSet());
 	}
 
 }
