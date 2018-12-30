@@ -6,13 +6,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+
+import geneticheuristic.GaMINTB;
 import graphCharacteristics.CharacteristicsCalculator;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.DSSP;
 import heuristic.GAMINTB;
-import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import player.Player;
 import ilog.concert.IloException;
@@ -89,6 +90,10 @@ public class Main {
 
 			// --- social optimum ---
 			SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
+			
+			
+			GaMINTB genetic = new GaMINTB();
+			genetic.mains(graph);
 
 			// --- DSSP ---
 			DSSP dssp = new DSSP(graph);
@@ -98,6 +103,8 @@ public class Main {
 
 			// --- RMINTB ---
 			GAMINTB gamintb = new GAMINTB(graph);
+			
+			
 
 			/*
 			 * =============================================================
