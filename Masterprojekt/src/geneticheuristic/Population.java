@@ -36,7 +36,6 @@ public class Population {
 		children = new ArrayList<>();
 		migration = new ArrayList<>();
 
-
 	}
 
 	public int getSize() {
@@ -270,27 +269,26 @@ public class Population {
 		boolean[] tmp1 = new boolean[x.getVector().length];
 
 		for (int i = 0; i < x.getVector().length; i++) {
-             if(x.getVector()[i] == y.getVector()[i]) {
-            	 tmp[i] = x.getVector()[i];
-            	 tmp1[i] = x.getVector()[i];
+			if (x.getVector()[i] == y.getVector()[i]) {
+				tmp[i] = x.getVector()[i];
+				tmp1[i] = x.getVector()[i];
 
-             }
-             
-             else {
-            	 
-            	double randomValue = 0 + (1 - 0) * getR().nextDouble();
- 				int xx = (int) (randomValue + 0.5);
-            	 if( xx == 0) {
-            		 tmp[i] = false;
-            		 tmp1[i] = true;
-            	 }
-            	 else {
-            		 tmp[i] = true;
-            		 tmp1[i] = false;
-            		 
-            	 }
-            	 
-             }
+			}
+
+			else {
+
+				double randomValue = 0 + (1 - 0) * getR().nextDouble();
+				int xx = (int) (randomValue + 0.5);
+				if (xx == 0) {
+					tmp[i] = false;
+					tmp1[i] = true;
+				} else {
+					tmp[i] = true;
+					tmp1[i] = false;
+
+				}
+
+			}
 		}
 
 		Chromosom child1 = new Chromosom(tmp.length);
@@ -303,29 +301,34 @@ public class Population {
 		children.add(child2);
 	}
 
-	public static void main(String[] args) throws IloException {
+	public void generatemigranten(int rest, Graphs g) {
 
-		Population firas = new Population(10);
-		Map<String, Vertex> map = new TreeMap<>();
-		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
-		test.generateGraph(graph, map);
-		firas.generatechromosomes(graph);
+		for (int i = 0; i < rest; i++) {
+			migration.add(new Chromosom(g.getEdges().size()));
+			for (int j = 0; j < g.getEdges().size(); j++) {
 
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 10);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 5);
+				double randomValue = 0 + (1 - 0) * r.nextDouble();
+				int x = (int) (randomValue + 0.5);
+				if (x == 0) {
+					migration.get(i).vector[j] = false;
+				}
 
-		ArrayList<Player> x = new ArrayList<>();
-		x.add(0, player1);
-		x.add(1, player2);
+				else {
 
-		graph.setPlayer(x);
-		graph.generateEdgesFunctions();
+					migration.get(i).vector[j] = true;
 
-		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
-		// Store current System.out before assigning a new value
+				}
+			}
 
-		System.out.println(systemOptimalFlow);
+		}
+
+	}
+
+	public void run (List<Chromosom> t, Graphs graph, Population firas) throws IloException {
+
+
+
+	
 
 		for (int i = 0; i < firas.getY().size(); i++) {
 			firas.getY().get(i).setFeasible(firas.evaluation(graph, firas.getY().get(i)));
@@ -338,9 +341,10 @@ public class Population {
 		firas.saveprobability();
 
 		firas.setY(firas.getAfterranking());
-
+          
+		t.add(firas.getY().get(0));
+		
 		firas.saveminmax();
-
 
 		double upperbound = firas.getY().get(firas.getY().size() - 1).getMax();
 
@@ -357,21 +361,21 @@ public class Population {
 		}
 
 		firas.matchparents(finalrate, upperbound);
-		
-		for(int i = 0 ; i < firas.getParents().size() ; i+=2) {
-			
-			firas.newchromosomes(firas.getParents().get(i),firas.getParents().get(i+1));
-			
-		}
-		
-		for(int i = 0 ; i < firas.getParents().size() ; i+=2) {
-			System.out.println("Father " +  Arrays.toString(firas.getParents().get(i).getVector()));
-			System.out.println("Mother " +  Arrays.toString(firas.getParents().get(i+1).getVector()));
 
-			System.out.println("Children " +  Arrays.toString(firas.getChildren().get(i).getVector()));
-			System.out.println("Children " +  Arrays.toString(firas.getChildren().get(i+1).getVector()));
+		for (int i = 0; i < firas.getParents().size(); i += 2) {
+
+			firas.newchromosomes(firas.getParents().get(i), firas.getParents().get(i + 1));
 
 		}
+
+		int rest = firas.getSize() - finalrate;
+		firas.generatemigranten(rest, graph);
+
+		List<Chromosom> newgeneration = new ArrayList<>();
+		newgeneration.addAll(firas.getChildren());
+		newgeneration.addAll(firas.getMigration());
+		
+		firas.setY(newgeneration);
 
 	}
 

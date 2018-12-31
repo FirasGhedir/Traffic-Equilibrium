@@ -92,8 +92,6 @@ public class Main {
 			SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 			
 			
-			GaMINTB genetic = new GaMINTB();
-			genetic.mains(graph);
 
 			// --- DSSP ---
 			DSSP dssp = new DSSP(graph);
