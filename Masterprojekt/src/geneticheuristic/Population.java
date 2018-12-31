@@ -24,6 +24,8 @@ public class Population {
 	List<Chromosom> y;
 	List<Chromosom> afterranking;
 	List<Chromosom> parents;
+	List<Chromosom> children;
+	List<Chromosom> migration;
 	Random r = new Random();
 
 	public Population(int size) {
@@ -96,6 +98,24 @@ public class Population {
 
 	public void setParents(List<Chromosom> parents) {
 		this.parents = parents;
+	}
+	
+	
+
+	public List<Chromosom> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Chromosom> children) {
+		this.children = children;
+	}
+
+	public List<Chromosom> getMigration() {
+		return migration;
+	}
+
+	public void setMigration(List<Chromosom> migration) {
+		this.migration = migration;
 	}
 
 	public boolean evaluation(Graphs g, Chromosom xx) throws IloException {
