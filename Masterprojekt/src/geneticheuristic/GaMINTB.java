@@ -1,9 +1,10 @@
 package geneticheuristic;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import graphGenerator.GridGraphGenerator;
@@ -54,16 +55,15 @@ public class GaMINTB {
 		
 		firas.generatechromosomes(graph);
 
-		for(int i=0; i < 10 ; i++) {
+		for(int i=0; i < 30; i++) {
 		firas.run(start.bestsolutions,graph,firas);
 		
 		}
 		
-        for(int i=0; i<start.bestsolutions.size() ; i++) {
-        	
-        	System.out.println("Feasibility : " + start.bestsolutions.get(i).isFeasible() + " " + Arrays.toString(start.bestsolutions.get(i).vector));
-        }		
-	
+     	
+        Optional<Chromosom> alpha = start.bestsolutions.stream().min(Comparator.comparingInt(Chromosom::getEfficiency)) ;
+             
+        System.out.println(alpha.get().getEfficiency());
 
 }
 }
