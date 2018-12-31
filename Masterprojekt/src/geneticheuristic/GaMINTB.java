@@ -1,7 +1,8 @@
 package geneticheuristic;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 
 import graphModel.Graphs;
@@ -12,9 +13,7 @@ import ilog.cplex.IloCplex;
 
 public class GaMINTB {
 
-	Random r = new Random();
-	ArrayList<Chromosom> chromosomes = new ArrayList<>();
-
+	ArrayList<Chromosom> chromosomesranked = new ArrayList<>();
 	ArrayList<IloNumExpr> s11 = new ArrayList<>();
 	ArrayList<IloNumExpr> s12 = new ArrayList<>();
 	ArrayList<IloAddable> s2 = new ArrayList<>();
@@ -23,30 +22,7 @@ public class GaMINTB {
 
 	}
 
-	public void generatevectors(int p, Graphs g) {
 
-		Boolean[] tmp1 = new Boolean[g.getEdges().size()];
-		for (int i = 0; i < p; i++) {
-			for (int j = 0; j < g.getEdges().size(); j++) {
-				double randomValue = 0 + (1 - 0) * r.nextDouble();
-				int x = (int) (randomValue + 0.5);
-				if (x == 0) {
-					tmp1[j] = false;
-				} else {
-					tmp1[j] = true;
-				}
-
-			}
-			Chromosom chr = new Chromosom(tmp1);
-			this.chromosomes.add(i, chr);
-
-		}
-		Boolean[] tmp2 = new Boolean[g.getEdges().size()];
-		for (int i = 0; i < g.getEdges().size(); i++) {
-			tmp2[i] = false;
-		}
-		this.chromosomes.add(new Chromosom(tmp2));
-	}
 
 	public boolean evaluation(Graphs g, Chromosom xx) throws IloException {
 
@@ -124,45 +100,39 @@ public class GaMINTB {
 		}
 	}
 
-	public void saverank(int p) {
+	public void saverank(ArrayList<Chromosom> chromosomes, int p) {
 		// here is the sorting of the chromosoms list by their efficiency
-		ArrayList<Integer> solvable = new ArrayList<>();
-		ArrayList<Integer> notsolvable = new ArrayList<>();
+		ArrayList<Chromosom> solvable = new ArrayList<>();
+		ArrayList<Chromosom> notsolvable = new ArrayList<>();
 
-		for (int i = 0; i < this.chromosomes.size(); i++) {
-			this.chromosomes.get(i).efficientycalculate();
-			if (this.chromosomes.get(i).isFeasible()) {
-				solvable.add(this.chromosomes.get(i).getEfficiency());
-			}
-			else {
-				notsolvable.add(this.chromosomes.get(i).getEfficiency());
+		for (int i = 0; i < chromosomes.size(); i++) {
+			System.out.println(" Print Array =" + Arrays.toString(chromosomes.get(i).getVector()));
+			chromosomes.get(i).efficientycalculate();
+			if (chromosomes.get(i).isFeasible()) {
+				solvable.add(chromosomes.get(i));
+			} else {
+				notsolvable.add(chromosomes.get(i));
 			}
 
 		}
-		
-		Collections.sort(solvable);
-		Collections.sort(notsolvable);
-		
-		
+
+		solvable.sort(Comparator.comparing(Chromosom::getEfficiency));
+		notsolvable.sort(Comparator.comparing(Chromosom::getEfficiency));
+		chromosomesranked.addAll(solvable);
+		chromosomesranked.addAll(notsolvable);
+
+		for (int i = 0; i < chromosomesranked.size(); i++) {
+
+			System.out
+					.println(chromosomesranked.get(i).getEfficiency() + " : " + chromosomesranked.get(i).isFeasible());
+		}
+
 	}
 
 	public void mains(Graphs g) throws IloException {
 
-		int p = 50;
+	
+	
 
-		generatevectors(p, g);
-
-		for (int i = 0; i < p + 1; i++) {
-			this.chromosomes.get(i).setFeasible(evaluation(g, this.chromosomes.get(i)));
-
-		}
-
-		// check result
-
-		for (int i = 0; i < this.chromosomes.size(); i++) {
-			System.out.println(this.chromosomes.get(i).isFeasible());
-		}
-
-	}
-
+}
 }

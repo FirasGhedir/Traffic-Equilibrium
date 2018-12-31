@@ -2,15 +2,16 @@ package geneticheuristic;
 
 public class Chromosom {
 
-	boolean feasible;
-	Boolean[] vector;
-	int rank;
-	int efficiency;
-	double probability;
+	private boolean feasible;
+	public boolean[] vector;
+	private int rank;
+	private int efficiency;
+	private double probability;
+	private double max;
+	private double min;
 
-	public Chromosom(Boolean[] vector) {
-		this.vector = vector;
-
+	public Chromosom(int size) {
+		this.vector = new boolean[size];
 	}
 
 	public boolean isFeasible() {
@@ -21,11 +22,11 @@ public class Chromosom {
 		this.feasible = feasible;
 	}
 
-	public Boolean[] getVector() {
+	public boolean[] getVector() {
 		return vector;
 	}
 
-	public void setVector(Boolean[] vector) {
+	public void setVector(boolean[] vector) {
 		this.vector = vector;
 	}
 
@@ -40,11 +41,11 @@ public class Chromosom {
 	public void efficientycalculate() {
 
 		int tmp = 0;
-		for (int i = 0; i < this.vector.length; i++) {
+		for (int i = 0; i < getVector().length; i++) {
 
-			if (this.vector[i] == false)
-				continue;
-			tmp++;
+			if (getVector()[i] == true) {
+				tmp++;
+			}
 		}
 		this.setEfficiency(tmp);
 	}
@@ -57,10 +58,11 @@ public class Chromosom {
 		this.efficiency = efficiency;
 	}
 
-	public void probabilitycalculate(int p) {
+	public double probabilitycalculate(int p) {
+		double x = 2 * ((p + 1) - getRank());
+		double y = p * (p + 1);
+		return x/y;
 
-		double x = (2 * ((p + 1) - getRank())) / (p * (p + 1));
-		this.setProbability(x);
 	}
 
 	public double getProbability() {
@@ -70,5 +72,23 @@ public class Chromosom {
 	public void setProbability(double probability) {
 		this.probability = probability;
 	}
+
+	public double getMax() {
+		return max;
+	}
+
+	public void setMax(double max) {
+		this.max = max;
+	}
+
+	public double getMin() {
+		return min;
+	}
+
+	public void setMin(double min) {
+		this.min = min;
+	}
+	
+	
 
 }
