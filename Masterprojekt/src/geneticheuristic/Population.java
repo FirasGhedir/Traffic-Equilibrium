@@ -33,6 +33,10 @@ public class Population {
 		y = new ArrayList<>();
 		afterranking = new ArrayList<>();
 		parents = new ArrayList<>();
+		children = new ArrayList<>();
+		migration = new ArrayList<>();
+
+
 	}
 
 	public int getSize() {
@@ -89,8 +93,6 @@ public class Population {
 	public void setR(Random r) {
 		this.r = r;
 	}
-	
-	
 
 	public List<Chromosom> getParents() {
 		return parents;
@@ -99,8 +101,6 @@ public class Population {
 	public void setParents(List<Chromosom> parents) {
 		this.parents = parents;
 	}
-	
-	
 
 	public List<Chromosom> getChildren() {
 		return children;
@@ -257,16 +257,50 @@ public class Population {
 			double randomValue = upperbound * getR().nextDouble();
 			for (int j = 0; j < getY().size(); j++) {
 				if (randomValue > getY().get(j).getMin() && randomValue < getY().get(j).getMax()) {
-                     parents.add(getY().get(j));
+					parents.add(getY().get(j));
 				}
 			}
 		}
 
 	}
-	
-	public void newchromosomes(Chromosom x , Chromosom y) {
-		
-		
+
+	public void newchromosomes(Chromosom x, Chromosom y) {
+
+		boolean[] tmp = new boolean[x.getVector().length];
+		boolean[] tmp1 = new boolean[x.getVector().length];
+
+		for (int i = 0; i < x.getVector().length; i++) {
+             if(x.getVector()[i] == y.getVector()[i]) {
+            	 tmp[i] = x.getVector()[i];
+            	 tmp1[i] = x.getVector()[i];
+
+             }
+             
+             else {
+            	 
+            	double randomValue = 0 + (1 - 0) * getR().nextDouble();
+ 				int xx = (int) (randomValue + 0.5);
+            	 if( xx == 0) {
+            		 tmp[i] = false;
+            		 tmp1[i] = true;
+            	 }
+            	 else {
+            		 tmp[i] = true;
+            		 tmp1[i] = false;
+            		 
+            	 }
+            	 
+             }
+		}
+
+		Chromosom child1 = new Chromosom(tmp.length);
+		Chromosom child2 = new Chromosom(tmp.length);
+
+		child1.setVector(tmp);
+		child2.setVector(tmp1);
+
+		children.add(child1);
+		children.add(child2);
 	}
 
 	public static void main(String[] args) throws IloException {
@@ -274,12 +308,12 @@ public class Population {
 		Population firas = new Population(10);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
 		test.generateGraph(graph, map);
 		firas.generatechromosomes(graph);
 
-		Player player1 = new Player(1, graph.getVertices().get(4), graph.getVertices().get(15), 10);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 5);
+		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 10);
+		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 5);
 
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
@@ -307,11 +341,6 @@ public class Population {
 
 		firas.saveminmax();
 
-		for (int i = 0; i < firas.getY().size(); i++) {
-
-			System.out.println("[" + firas.getY().get(i).getMin() + " .. " + firas.getY().get(i).getMax() + " ]");
-
-		}
 
 		double upperbound = firas.getY().get(firas.getY().size() - 1).getMax();
 
@@ -328,9 +357,21 @@ public class Population {
 		}
 
 		firas.matchparents(finalrate, upperbound);
-       
-	
-	
+		
+		for(int i = 0 ; i < firas.getParents().size() ; i+=2) {
+			
+			firas.newchromosomes(firas.getParents().get(i),firas.getParents().get(i+1));
+			
+		}
+		
+		for(int i = 0 ; i < firas.getParents().size() ; i+=2) {
+			System.out.println("Father " +  Arrays.toString(firas.getParents().get(i).getVector()));
+			System.out.println("Mother " +  Arrays.toString(firas.getParents().get(i+1).getVector()));
+
+			System.out.println("Children " +  Arrays.toString(firas.getChildren().get(i).getVector()));
+			System.out.println("Children " +  Arrays.toString(firas.getChildren().get(i+1).getVector()));
+
+		}
 
 	}
 
