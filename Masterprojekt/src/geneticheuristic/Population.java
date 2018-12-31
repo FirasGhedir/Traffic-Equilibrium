@@ -87,6 +87,16 @@ public class Population {
 	public void setR(Random r) {
 		this.r = r;
 	}
+	
+	
+
+	public List<Chromosom> getParents() {
+		return parents;
+	}
+
+	public void setParents(List<Chromosom> parents) {
+		this.parents = parents;
+	}
 
 	public boolean evaluation(Graphs g, Chromosom xx) throws IloException {
 
@@ -206,13 +216,36 @@ public class Population {
 		}
 
 	}
-	
+
 	public void saveminmax() {
-		
-		for(int i=0; i<getY().size() ; i++) {
-			
-			
+
+		getY().get(0).setMin(0);
+		getY().get(0).setMax(getY().get(0).getProbability());
+
+		double tmp = getY().get(0).getProbability();
+
+		for (int i = 1; i < getY().size(); i++) {
+			getY().get(i).setMin(tmp);
+			tmp += getY().get(i).getProbability();
+			getY().get(i).setMax(tmp);
 		}
+
+	}
+
+	public void matchparents(int rate, double upperbound) {
+		for (int i = 0; i < rate; i++) {
+			double randomValue = upperbound * getR().nextDouble();
+			for (int j = 0; j < getY().size(); j++) {
+				if (randomValue > getY().get(j).getMin() && randomValue < getY().get(j).getMax()) {
+                     parents.add(getY().get(j));
+				}
+			}
+		}
+
+	}
+	
+	public void newchromosomes(Chromosom x , Chromosom y) {
+		
 		
 	}
 
@@ -243,17 +276,24 @@ public class Population {
 		for (int i = 0; i < firas.getY().size(); i++) {
 			firas.getY().get(i).setFeasible(firas.evaluation(graph, firas.getY().get(i)));
 		}
-		
-	
+
 		firas.savefetnicitiy();
 
 		firas.saverank();
 
 		firas.saveprobability();
-		
+
 		firas.setY(firas.getAfterranking());
-		
+
 		firas.saveminmax();
+
+		for (int i = 0; i < firas.getY().size(); i++) {
+
+			System.out.println("[" + firas.getY().get(i).getMin() + " .. " + firas.getY().get(i).getMax() + " ]");
+
+		}
+
+		double upperbound = firas.getY().get(firas.getY().size() - 1).getMax();
 
 		double rate = firas.getR().nextDouble();
 
@@ -266,11 +306,11 @@ public class Population {
 		if (odd) {
 			finalrate++;
 		}
-		
-     
-        
-        
-		
+
+		firas.matchparents(finalrate, upperbound);
+       
+	
+	
 
 	}
 
