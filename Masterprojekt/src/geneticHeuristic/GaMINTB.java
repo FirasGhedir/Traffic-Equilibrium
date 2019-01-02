@@ -24,7 +24,7 @@ import ilog.cplex.IloCplex;
  * 
  *          _____________________________________________
  * 
- *          Solver for the Genetic Algorithm Minimnum Tollbooth Problem
+ *          Solver for the Genetic Algorithm Minimum Tollbooth Problem
  *          (GAMINTB).
  * 
  *          Steps:
@@ -111,7 +111,7 @@ public class GaMINTB {
 
 			/*
 			 * =============================================================
-			 * =================== STEP 4 : selection =====================
+			 * ==================== STEP 4 : crossover =====================
 			 * =============================================================
 			 */
 			step4_crossover();
@@ -254,7 +254,7 @@ public class GaMINTB {
 	}
 
 	/**
-	 * Step 4: scrossover
+	 * Step 4: crossover
 	 */
 	public void step4_crossover() {
 

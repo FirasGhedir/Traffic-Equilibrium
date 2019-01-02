@@ -64,17 +64,23 @@
 |     Radius:
  ------------------------------
 4
+
  ------------------------------
 |     Min cut:
  ------------------------------
 1 - 2
 1 - 5
 
+ ------------------------------
+|     Degeneracy:
+ ------------------------------
+2
+
  ==============================
 |     Social optimum:
  ==============================
 
-obj: 870.4230820885863
+obj: 644.0057291041035
 
 
  ==============================
@@ -90,35 +96,35 @@ Initializing dual steep norms . . .
 Iteration log . . .
 Iteration:     1   Dual objective     =             0.000000
 
-nullobj: 0.3359722510338248
+nullobj: 0.5471285062278386
    in the  Edge 0 beta would be : 0.0
    in the  Edge 1 beta would be : 0.0
    in the  Edge 2 beta would be : 0.0
-   in the  Edge 3 beta would be : 0.0
+   in the  Edge 3 beta would be : 0.5000001863005821
    in the  Edge 4 beta would be : 0.0
    in the  Edge 5 beta would be : 0.0
    in the  Edge 6 beta would be : 0.0
    in the  Edge 7 beta would be : 0.0
    in the  Edge 8 beta would be : 0.0
-   in the  Edge 9 beta would be : 0.5000002859046759
+   in the  Edge 9 beta would be : 0.0
    in the  Edge 10 beta would be : 0.0
    in the  Edge 11 beta would be : 0.0
-   in the  Edge 12 beta would be : 0.0
-   in the  Edge 13 beta would be : 8.195904266372622E-8
+   in the  Edge 12 beta would be : 0.49999997537653584
+   in the  Edge 13 beta would be : 0.0
    in the  Edge 14 beta would be : 0.0
    in the  Edge 15 beta would be : 0.0
    in the  Edge 16 beta would be : 0.0
    in the  Edge 17 beta would be : 0.0
-   in the  Edge 18 beta would be : 0.0
+   in the  Edge 18 beta would be : -1.8672547952292007E-8
    in the  Edge 19 beta would be : 0.0
-   in the  Edge 20 beta would be : 0.0
+   in the  Edge 20 beta would be : 0.5000000374304996
    in the  Edge 21 beta would be : 0.0
-   in the  Edge 22 beta would be : 0.5000003549052501
-   in the  Edge 23 beta would be : 0.5000000551897692
+   in the  Edge 22 beta would be : 0.5000000551698776
+   in the  Edge 23 beta would be : 0.0
 
 
  ==============================
 |     GaMINTB:
  ==============================
-Best chromsom in generation 11
+Best chromsom in generation 7
 

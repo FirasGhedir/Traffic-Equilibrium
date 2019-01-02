@@ -54,24 +54,27 @@ import graphModel.Graphs;
 public class CharacteristicsCalculator {
 
 	// --- min/avg/max vertex degree
-	MaxMinAvgVertexDegree m;
+	MaxMinAvgVertexDegree maxMinAvgVertexDegreeObj;
 	int maxVertexDegree;
 	int minVertexDegree;
 	double avgVertexDegree;
 	// --- eccentricity
-	Eccentricity e;
+	Eccentricity eccentricityObj;
 	private double avgEccentricity; // the average vertex eccentricity of the graph
 	private int[] eccentricities; // vertex vector with its eccentricity values
-	int[] ecc;
+	int[] eccentricityVector;
 	// --- diameter
-	Diameter d;
+	Diameter diameterObj;
 	private int diameter; // the maximum eccentricity of any vertex in the graph
 	// --- radius
-	Radius r;
+	Radius radiusObj;
 	private int radius; // the minimum eccentricity of any vertex in the graph
 	// --- radius
-	MinCut c;
+	MinCut minCutObj;
 	private String minCut; // the minimum eccentricity of any vertex in the graph
+	// --- degeneracy
+	Degeneracy degeneracyObj;
+	private int degeneracy; // the minimum eccentricity of any vertex in the graph
 
 	/**
 	 * Constructor
@@ -84,27 +87,31 @@ public class CharacteristicsCalculator {
 	public CharacteristicsCalculator(Graphs graph) throws InterruptedException {
 
 		// --- max/avg/min vertex degree
-		this.m = new MaxMinAvgVertexDegree(graph);
-		this.maxVertexDegree = m.getMaxVertexDegree();
-		this.minVertexDegree = m.getMinVertexDegree();
-		this.avgVertexDegree = m.getAvgVertexDegree();
+		this.maxMinAvgVertexDegreeObj = new MaxMinAvgVertexDegree(graph);
+		this.maxVertexDegree = maxMinAvgVertexDegreeObj.getMaxVertexDegree();
+		this.minVertexDegree = maxMinAvgVertexDegreeObj.getMinVertexDegree();
+		this.avgVertexDegree = maxMinAvgVertexDegreeObj.getAvgVertexDegree();
 
 		// --- eccentricity
-		this.e = new Eccentricity(graph);
-		this.eccentricities = e.getEccentricities();
-		this.avgEccentricity = e.getAvgEccentricity();
+		this.eccentricityObj = new Eccentricity(graph);
+		this.eccentricities = eccentricityObj.getEccentricities();
+		this.avgEccentricity = eccentricityObj.getAvgEccentricity();
 
 		// --- Diameter
-		this.d = new Diameter(graph);
-		this.diameter = d.getDiameter();
+		this.diameterObj = new Diameter(graph);
+		this.diameter = diameterObj.getDiameter();
 
 		// --- Radius
-		this.r = new Radius(graph);
-		this.radius = r.getRadius();
+		this.radiusObj = new Radius(graph);
+		this.radius = radiusObj.getRadius();
 
 		// --- Min cut
-		this.c = new MinCut(graph);
-		this.minCut = c.getMincut();
+		this.minCutObj = new MinCut(graph);
+		this.minCut = minCutObj.getMincut();
+
+		// --- Degeneracy
+		this.degeneracyObj = new Degeneracy(graph);
+		this.degeneracy = degeneracyObj.getDegeneracy();
 	}
 
 	/**
@@ -216,6 +223,17 @@ public class CharacteristicsCalculator {
 	}
 
 	/**
+	 * Getter method for degeneracy
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the degeneracy
+	 */
+	public int getDegeneracy() {
+		return this.degeneracy;
+	}
+
+	/**
 	 * Prints a title in a fancy frame on the console
 	 * 
 	 * --------------------------------------------
@@ -236,7 +254,7 @@ public class CharacteristicsCalculator {
 				+ this.getMinVertexDegree() + "\n" + printTitle("Average vertex degree") + this.getAvgVertexDegree()
 				+ "\n" + printTitle("Eccentricity vector") + Arrays.toString(this.getEccentricities()) + "\n"
 				+ printTitle("Average eccentricity") + this.getAvgEccentricity() + "\n" + printTitle("Diameter")
-				+ this.getDiameter() + "\n" + printTitle("Radius") + this.getRadius() + printTitle("Min cut")
-				+ this.getMinCut());
+				+ this.getDiameter() + "\n" + printTitle("Radius") + this.getRadius() + "\n" + printTitle("Min cut")
+				+ this.getMinCut() + "\n" + printTitle("Degeneracy") + this.getDegeneracy());
 	}
 }
