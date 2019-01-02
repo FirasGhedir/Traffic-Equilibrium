@@ -25,18 +25,22 @@ public class Chromosom {
 	private double min;
 
 	/**
+	 * Constructor
 	 * 
-	 * @param size
+	 * --------------------------------------------
+	 * 
+	 * @param size the chromosom size
 	 */
 	public Chromosom(int size) {
-		
+
 		setVector(new boolean[size]);
 	}
 
 	/**
+	 * Calclulates the efficiency
 	 * 
 	 */
-	public void efficientycalculate() {
+	public void calculateEfficiency() {
 
 		int tmp = 0;
 		for (int i = 0; i < getVector().length; i++) {
@@ -49,11 +53,14 @@ public class Chromosom {
 	}
 
 	/**
+	 * Calclulates the probability according to roulette-wheel-selection
 	 * 
-	 * @param p
-	 * @return
+	 * --------------------------------------------
+	 * 
+	 * @param p the given probability
+	 * @return the probability according to roulette-wheel-selection
 	 */
-	public double probabilitycalculate(int p) {
+	public double calculateProbability(int p) {
 		double x = 2 * ((p + 1) - getRank());
 		double y = p * (p + 1);
 		return x / y;

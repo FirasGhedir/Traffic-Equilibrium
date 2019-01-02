@@ -2,22 +2,13 @@ package geneticHeuristic;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
-import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
-import graphModel.Vertex;
-import heuristic.SocialOptimum;
-import ilog.concert.IloAddable;
 import ilog.concert.IloException;
-import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
-import player.Player;
 
 /**
  * Universität Ulm
@@ -48,9 +39,12 @@ public class Population {
 	IloCplex cplex;
 
 	/**
+	 * Constructor
 	 * 
-	 * @param size
-	 * @throws IloException
+	 * --------------------------------------------
+	 * 
+	 * @param size the population size
+	 * @throws IloException if a CPLEX error occures
 	 */
 	public Population(int size) throws IloException {
 
@@ -67,8 +61,11 @@ public class Population {
 	}
 
 	/**
+	 * Generates new chromosomes out of the graph
 	 * 
-	 * @param g
+	 * --------------------------------------------
+	 * 
+	 * @param g the given graph
 	 */
 	public void generateChromosomes(Graphs g) {
 
@@ -88,105 +85,24 @@ public class Population {
 	}
 
 	/**
-	 * 
-	 * @param g
-	 * @param xx
-	 * @return
-	 * @throws IloException
+	 * Stores the efficiency
 	 */
-	public boolean evaluation(Graphs g, Chromosom xx) throws IloException {
-
-		ArrayList<IloNumExpr> s11 = new ArrayList<>();
-		ArrayList<IloNumExpr> s12 = new ArrayList<>();
-		ArrayList<IloAddable> s2 = new ArrayList<>();
-
-		// --- initialising ro ---
-		for (int i = 0; i < g.getVertices().size(); i++) {
-			for (int j = 0; j < g.getPlayers().size(); j++) {
-				g.getVertices().get(i).getRo().add(j,
-						cplex.numVar(-Double.MAX_VALUE, Double.MAX_VALUE, "Ro of Player " + j + " in Vertex " + i));
-			}
-		}
-
-		// --- initialising beta ---
-		for (int i = 0; i < g.getEdges().size(); i++) {
-			if (xx.getVector()[i] == true) {
-				g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the edge number : " + i));
-			} else {
-				g.getEdges().get(i).setBeta(cplex.numVar(0, 0, "beta in the edge number : " + i));
-			}
-		}
-
-		for (int i = 0; i < g.getEdges().size(); i++) {
-
-			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getSum(),
-					cplex.sum(cplex.constant(g.getEdges().get(i).getCostB()),
-							cplex.prod(cplex.constant(g.getEdges().get(i).getCostA()), g.getEdges().get(i).getSum()),
-							g.getEdges().get(i).getBeta()));
-			s11.add(tmp);
-		}
-
-		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
-		IloNumExpr x = cplex.sum(planet1);
-
-		for (int i = 0; i < g.getPlayers().size(); i++) {
-			IloNumExpr tmp = cplex.prod(cplex.constant(g.getPlayers().get(i).getDemand()),
-					cplex.sum(g.getPlayers().get(i).getSource().getRo().get(i),
-							cplex.prod(-1, g.getPlayers().get(i).getSink().getRo().get(i))));
-			s12.add(tmp);
-
-		}
-		IloNumExpr[] planet2 = s12.toArray(new IloNumExpr[s12.size()]);
-		IloNumExpr y = cplex.sum(planet2);
-
-		IloAddable amg = cplex.addEq(0, cplex.sum(x, cplex.prod(-1, y)));
-
-		for (int i = 0; i < g.getPlayers().size(); i++) {
-
-			for (int j = 0; j < g.getEdges().size(); j++) {
-
-				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),
-						cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
-				IloNumExpr tmp1 = cplex.sum(tmp, g.getEdges().get(j).getResult());
-				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1, g.getEdges().get(j).getBeta()), 0);
-				s2.add(tmp2);
-			}
-
-		}
-		IloAddable[] planet3 = s2.toArray(new IloAddable[s2.size()]);
-
-		cplex.add(planet3);
-		cplex.add(amg);
-		cplex.minimize();
-
-		if (cplex.solve()) {
-			cplex.clearModel();
-			return true;
-		} else {
-			cplex.clearModel();
-			return false;
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public void savefetnicitiy() {
+	public void saveEtnicitiy() {
 		for (int i = 0; i < getY().size(); i++) {
-			getY().get(i).efficientycalculate();
+			getY().get(i).calculateEfficiency();
 		}
 	}
 
 	/**
-	 * 
+	 * Stores the rank for each chromosome
 	 */
-	public void saverank() {
+	public void saveRank() {
 
 		List<Chromosom> solvable = new ArrayList<>();
 		List<Chromosom> notsolvable = new ArrayList<>();
 
 		for (int i = 0; i < getY().size(); i++) {
-			getY().get(i).efficientycalculate();
+			getY().get(i).calculateEfficiency();
 			if (getY().get(i).isFeasible()) {
 				solvable.add(getY().get(i));
 			} else {
@@ -206,20 +122,20 @@ public class Population {
 	}
 
 	/**
-	 * 
+	 * Stores the probability after ranking
 	 */
-	public void saveprobability() {
+	public void saveProbability() {
 
 		for (int i = 0; i < getAfterranking().size(); i++) {
-			getAfterranking().get(i).setProbability(getAfterranking().get(i).probabilitycalculate(getSize()));
+			getAfterranking().get(i).setProbability(getAfterranking().get(i).calculateProbability(getSize()));
 		}
 
 	}
 
 	/**
-	 * 
+	 * Saves extremal points (min, max)
 	 */
-	public void saveminmax() {
+	public void saveMinMax() {
 
 		getY().get(0).setMin(0);
 		getY().get(0).setMax(getY().get(0).getProbability());
@@ -235,11 +151,14 @@ public class Population {
 	}
 
 	/**
+	 * Matches the parents
 	 * 
-	 * @param rate
-	 * @param upperbound
+	 * --------------------------------------------
+	 * 
+	 * @param rate       the given rate
+	 * @param upperbound the given upper bound
 	 */
-	public void matchparents(int rate, double upperbound) {
+	public void matchParents(int rate, double upperbound) {
 		for (int i = 0; i < rate; i++) {
 			double randomValue = upperbound * getR().nextDouble();
 			for (int j = 0; j < getY().size(); j++) {
@@ -252,11 +171,14 @@ public class Population {
 	}
 
 	/**
+	 * Creates new chromosome vectors
 	 * 
-	 * @param x
-	 * @param y
+	 * --------------------------------------------
+	 * 
+	 * @param x first chromosom
+	 * @param y second chromosom
 	 */
-	public void newchromosomes(Chromosom x, Chromosom y) {
+	public void newChromosomes(Chromosom x, Chromosom y) {
 
 		boolean[] tmp = new boolean[x.getVector().length];
 		boolean[] tmp1 = new boolean[x.getVector().length];
@@ -265,11 +187,9 @@ public class Population {
 			if (x.getVector()[i] == y.getVector()[i]) {
 				tmp[i] = x.getVector()[i];
 				tmp1[i] = x.getVector()[i];
-
 			}
 
 			else {
-
 				double randomValue = 0 + (1 - 0) * getR().nextDouble();
 				int xx = (int) (randomValue + 0.5);
 				if (xx == 0) {
@@ -278,9 +198,7 @@ public class Population {
 				} else {
 					tmp[i] = true;
 					tmp1[i] = false;
-
 				}
-
 			}
 		}
 
@@ -295,11 +213,14 @@ public class Population {
 	}
 
 	/**
+	 * Generates the migrants to refill the population
 	 * 
-	 * @param rest
-	 * @param g
+	 * --------------------------------------------
+	 * 
+	 * @param rest the rest of the population
+	 * @param g    the given graph
 	 */
-	public void generatemigranten(int rest, Graphs g) {
+	public void generateMigrants(int rest, Graphs g) {
 
 		for (int i = 0; i < rest; i++) {
 			migration.add(new Chromosom(g.getEdges().size()));
@@ -312,72 +233,10 @@ public class Population {
 				}
 
 				else {
-
 					migration.get(i).vector[j] = true;
-
 				}
 			}
-
 		}
-
-	}
-
-	/**
-	 * 
-	 * @param t
-	 * @param graph
-	 * @param population
-	 * @throws IloException
-	 */
-	public void run(List<Chromosom> t, Graphs graph, Population population) throws IloException {
-
-		for (int i = 0; i < population.getY().size(); i++) {
-			population.getY().get(i).setFeasible(population.evaluation(graph, population.getY().get(i)));
-		}
-
-		population.savefetnicitiy();
-
-		population.saverank();
-
-		population.saveprobability();
-
-		population.setY(population.getAfterranking());
-
-		t.add(population.getY().get(0));
-
-		population.saveminmax();
-
-		double upperbound = population.getY().get(population.getY().size() - 1).getMax();
-
-		double rate = population.getR().nextDouble();
-
-		double nb = (rate * population.getSize()) / 2;
-
-		int finalrate = (int) nb;
-
-		boolean odd = (finalrate & 1) != 0;
-
-		if (odd) {
-			finalrate++;
-		}
-
-		population.matchparents(finalrate, upperbound);
-
-		for (int i = 0; i < population.getParents().size(); i += 2) {
-
-			population.newchromosomes(population.getParents().get(i), population.getParents().get(i + 1));
-
-		}
-
-		int rest = population.getSize() - finalrate;
-		population.generatemigranten(rest, graph);
-
-		List<Chromosom> newgeneration = new ArrayList<>();
-		newgeneration.addAll(population.getChildren());
-		newgeneration.addAll(population.getMigration());
-
-		population.setY(newgeneration);
-
 	}
 
 	public int getSize() {
@@ -443,7 +302,7 @@ public class Population {
 	public void setPopulationResultSet(String populationResultSet) {
 		this.populationResultSet = populationResultSet;
 	}
-	
+
 	/**
 	 * The toString() method returns the string representation of the object
 	 * CharacteristicsCalculation.
@@ -452,5 +311,4 @@ public class Population {
 	public String toString() {
 		return (cplexSolverOutputStream + "\n" + this.getPopulationResultSet());
 	}
-
 }

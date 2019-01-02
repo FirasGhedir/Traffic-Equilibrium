@@ -74,7 +74,7 @@
 |     Social optimum:
  ==============================
 
-obj: 956.4484167962349
+obj: 870.4230820885863
 
 
  ==============================
@@ -90,7 +90,7 @@ Initializing dual steep norms . . .
 Iteration log . . .
 Iteration:     1   Dual objective     =             0.000000
 
-nullobj: 0.4308360605739221
+nullobj: 0.3359722510338248
    in the  Edge 0 beta would be : 0.0
    in the  Edge 1 beta would be : 0.0
    in the  Edge 2 beta would be : 0.0
@@ -100,25 +100,25 @@ nullobj: 0.4308360605739221
    in the  Edge 6 beta would be : 0.0
    in the  Edge 7 beta would be : 0.0
    in the  Edge 8 beta would be : 0.0
-   in the  Edge 9 beta would be : 0.0
-   in the  Edge 10 beta would be : 0.5000005781193266
-   in the  Edge 11 beta would be : 0.5000006731915789
+   in the  Edge 9 beta would be : 0.5000002859046759
+   in the  Edge 10 beta would be : 0.0
+   in the  Edge 11 beta would be : 0.0
    in the  Edge 12 beta would be : 0.0
-   in the  Edge 13 beta would be : 0.0
+   in the  Edge 13 beta would be : 8.195904266372622E-8
    in the  Edge 14 beta would be : 0.0
    in the  Edge 15 beta would be : 0.0
    in the  Edge 16 beta would be : 0.0
-   in the  Edge 17 beta would be : 2.2079721029300003E-7
+   in the  Edge 17 beta would be : 0.0
    in the  Edge 18 beta would be : 0.0
    in the  Edge 19 beta would be : 0.0
    in the  Edge 20 beta would be : 0.0
    in the  Edge 21 beta would be : 0.0
-   in the  Edge 22 beta would be : 0.0
-   in the  Edge 23 beta would be : 0.49999986594114887
+   in the  Edge 22 beta would be : 0.5000003549052501
+   in the  Edge 23 beta would be : 0.5000000551897692
 
 
  ==============================
 |     GaMINTB:
  ==============================
-Best chromsom in generation 9
+Best chromsom in generation 11
 

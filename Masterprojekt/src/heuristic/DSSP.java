@@ -45,6 +45,7 @@ public class DSSP {
 	public DSSP(Graphs graph) throws IloException {
 
 		this.setGraph(graph);
+		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
 		cplex.setOut(stream);
 		solveDSSP(this.getGraph());
