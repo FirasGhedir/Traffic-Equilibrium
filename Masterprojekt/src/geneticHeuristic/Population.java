@@ -1,5 +1,6 @@
-package geneticheuristic;
+package geneticHeuristic;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -18,6 +19,20 @@ import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
 import player.Player;
 
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          Class for Population
+ */
 public class Population {
 
 	int size;
@@ -27,34 +42,35 @@ public class Population {
 	List<Chromosom> children;
 	List<Chromosom> migration;
 	Random r = new Random();
+	private String populationResultSet;
+	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	String cplexSolverOutputStream;
+	IloCplex cplex;
 
-	public Population(int size) {
-		this.size = size;
-		y = new ArrayList<>();
-		afterranking = new ArrayList<>();
-		parents = new ArrayList<>();
-		children = new ArrayList<>();
-		migration = new ArrayList<>();
+	/**
+	 * 
+	 * @param size
+	 * @throws IloException
+	 */
+	public Population(int size) throws IloException {
+
+		setSize(size);
+		setY(new ArrayList<>());
+		setAfterranking(new ArrayList<>());
+		setParents(new ArrayList<>());
+		setChildren(new ArrayList<>());
+		setMigration(new ArrayList<>());
+
+		cplex = new IloCplex();
+		cplex.setOut(stream);
 
 	}
 
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public List<Chromosom> getY() {
-		return y;
-	}
-
-	public void setY(List<Chromosom> y) {
-		this.y = y;
-	}
-
-	public void generatechromosomes(Graphs g) {
+	/**
+	 * 
+	 * @param g
+	 */
+	public void generateChromosomes(Graphs g) {
 
 		for (int i = 0; i < getSize(); i++) {
 			y.add(new Chromosom(g.getEdges().size()));
@@ -64,76 +80,32 @@ public class Population {
 				int x = (int) (randomValue + 0.5);
 				if (x == 0) {
 					y.get(i).vector[j] = false;
-				}
-
-				else {
-
+				} else {
 					y.get(i).vector[j] = true;
-
 				}
 			}
-
 		}
-
 	}
 
-	public List<Chromosom> getAfterranking() {
-		return afterranking;
-	}
-
-	public void setAfterranking(List<Chromosom> afterranking) {
-		this.afterranking = afterranking;
-	}
-
-	public Random getR() {
-		return r;
-	}
-
-	public void setR(Random r) {
-		this.r = r;
-	}
-
-	public List<Chromosom> getParents() {
-		return parents;
-	}
-
-	public void setParents(List<Chromosom> parents) {
-		this.parents = parents;
-	}
-
-	public List<Chromosom> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<Chromosom> children) {
-		this.children = children;
-	}
-
-	public List<Chromosom> getMigration() {
-		return migration;
-	}
-
-	public void setMigration(List<Chromosom> migration) {
-		this.migration = migration;
-	}
-
+	/**
+	 * 
+	 * @param g
+	 * @param xx
+	 * @return
+	 * @throws IloException
+	 */
 	public boolean evaluation(Graphs g, Chromosom xx) throws IloException {
 
 		ArrayList<IloNumExpr> s11 = new ArrayList<>();
 		ArrayList<IloNumExpr> s12 = new ArrayList<>();
 		ArrayList<IloAddable> s2 = new ArrayList<>();
 
-		IloCplex cplex = new IloCplex();
-
 		// --- initialising ro ---
 		for (int i = 0; i < g.getVertices().size(); i++) {
 			for (int j = 0; j < g.getPlayers().size(); j++) {
-
 				g.getVertices().get(i).getRo().add(j,
 						cplex.numVar(-Double.MAX_VALUE, Double.MAX_VALUE, "Ro of Player " + j + " in Vertex " + i));
-
 			}
-
 		}
 
 		// --- initialising beta ---
@@ -143,7 +115,6 @@ public class Population {
 			} else {
 				g.getEdges().get(i).setBeta(cplex.numVar(0, 0, "beta in the edge number : " + i));
 			}
-
 		}
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
@@ -197,12 +168,18 @@ public class Population {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void savefetnicitiy() {
 		for (int i = 0; i < getY().size(); i++) {
 			getY().get(i).efficientycalculate();
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void saverank() {
 
 		List<Chromosom> solvable = new ArrayList<>();
@@ -228,6 +205,9 @@ public class Population {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void saveprobability() {
 
 		for (int i = 0; i < getAfterranking().size(); i++) {
@@ -236,6 +216,9 @@ public class Population {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void saveminmax() {
 
 		getY().get(0).setMin(0);
@@ -251,6 +234,11 @@ public class Population {
 
 	}
 
+	/**
+	 * 
+	 * @param rate
+	 * @param upperbound
+	 */
 	public void matchparents(int rate, double upperbound) {
 		for (int i = 0; i < rate; i++) {
 			double randomValue = upperbound * getR().nextDouble();
@@ -263,6 +251,11 @@ public class Population {
 
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void newchromosomes(Chromosom x, Chromosom y) {
 
 		boolean[] tmp = new boolean[x.getVector().length];
@@ -301,6 +294,11 @@ public class Population {
 		children.add(child2);
 	}
 
+	/**
+	 * 
+	 * @param rest
+	 * @param g
+	 */
 	public void generatemigranten(int rest, Graphs g) {
 
 		for (int i = 0; i < rest; i++) {
@@ -324,33 +322,36 @@ public class Population {
 
 	}
 
-	public void run (List<Chromosom> t, Graphs graph, Population firas) throws IloException {
+	/**
+	 * 
+	 * @param t
+	 * @param graph
+	 * @param population
+	 * @throws IloException
+	 */
+	public void run(List<Chromosom> t, Graphs graph, Population population) throws IloException {
 
-
-
-	
-
-		for (int i = 0; i < firas.getY().size(); i++) {
-			firas.getY().get(i).setFeasible(firas.evaluation(graph, firas.getY().get(i)));
+		for (int i = 0; i < population.getY().size(); i++) {
+			population.getY().get(i).setFeasible(population.evaluation(graph, population.getY().get(i)));
 		}
 
-		firas.savefetnicitiy();
+		population.savefetnicitiy();
 
-		firas.saverank();
+		population.saverank();
 
-		firas.saveprobability();
+		population.saveprobability();
 
-		firas.setY(firas.getAfterranking());
-          
-		t.add(firas.getY().get(0));
-		
-		firas.saveminmax();
+		population.setY(population.getAfterranking());
 
-		double upperbound = firas.getY().get(firas.getY().size() - 1).getMax();
+		t.add(population.getY().get(0));
 
-		double rate = firas.getR().nextDouble();
+		population.saveminmax();
 
-		double nb = (rate * firas.getSize()) / 2;
+		double upperbound = population.getY().get(population.getY().size() - 1).getMax();
+
+		double rate = population.getR().nextDouble();
+
+		double nb = (rate * population.getSize()) / 2;
 
 		int finalrate = (int) nb;
 
@@ -360,23 +361,96 @@ public class Population {
 			finalrate++;
 		}
 
-		firas.matchparents(finalrate, upperbound);
+		population.matchparents(finalrate, upperbound);
 
-		for (int i = 0; i < firas.getParents().size(); i += 2) {
+		for (int i = 0; i < population.getParents().size(); i += 2) {
 
-			firas.newchromosomes(firas.getParents().get(i), firas.getParents().get(i + 1));
+			population.newchromosomes(population.getParents().get(i), population.getParents().get(i + 1));
 
 		}
 
-		int rest = firas.getSize() - finalrate;
-		firas.generatemigranten(rest, graph);
+		int rest = population.getSize() - finalrate;
+		population.generatemigranten(rest, graph);
 
 		List<Chromosom> newgeneration = new ArrayList<>();
-		newgeneration.addAll(firas.getChildren());
-		newgeneration.addAll(firas.getMigration());
-		
-		firas.setY(newgeneration);
+		newgeneration.addAll(population.getChildren());
+		newgeneration.addAll(population.getMigration());
 
+		population.setY(newgeneration);
+
+	}
+
+	public int getSize() {
+		return this.size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public List<Chromosom> getY() {
+		return this.y;
+	}
+
+	public void setY(List<Chromosom> y) {
+		this.y = y;
+	}
+
+	public List<Chromosom> getAfterranking() {
+		return this.afterranking;
+	}
+
+	public void setAfterranking(List<Chromosom> afterranking) {
+		this.afterranking = afterranking;
+	}
+
+	public Random getR() {
+		return this.r;
+	}
+
+	public void setR(Random r) {
+		this.r = r;
+	}
+
+	public List<Chromosom> getParents() {
+		return this.parents;
+	}
+
+	public void setParents(List<Chromosom> parents) {
+		this.parents = parents;
+	}
+
+	public List<Chromosom> getChildren() {
+		return this.children;
+	}
+
+	public void setChildren(List<Chromosom> children) {
+		this.children = children;
+	}
+
+	public List<Chromosom> getMigration() {
+		return this.migration;
+	}
+
+	public void setMigration(List<Chromosom> migration) {
+		this.migration = migration;
+	}
+
+	public String getPopulationResultSet() {
+		return populationResultSet;
+	}
+
+	public void setPopulationResultSet(String populationResultSet) {
+		this.populationResultSet = populationResultSet;
+	}
+	
+	/**
+	 * The toString() method returns the string representation of the object
+	 * CharacteristicsCalculation.
+	 */
+	@Override
+	public String toString() {
+		return (cplexSolverOutputStream + "\n" + this.getPopulationResultSet());
 	}
 
 }

@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import geneticheuristic.GaMINTB;
+import geneticHeuristic.GaMINTB;
 import graphCharacteristics.CharacteristicsCalculator;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.DSSP;
-import heuristic.GAMINTB;
 import heuristic.SocialOptimum;
 import player.Player;
 import ilog.concert.IloException;
@@ -58,29 +57,16 @@ public class Main {
 			// --- Graph parameter ---
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
+			GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
 			test.generateGraph(graph, map);
 
 			// --- player ---
-			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 4);
-			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 5);
-			/*
-			 * Player player3 = new Player(3, graph.getVertices().get(2),
-			 * graph.getVertices().get(15), 10); Player player4 = new Player(4,
-			 * graph.getVertices().get(3), graph.getVertices().get(15), 25); Player player5
-			 * = new Player(5, graph.getVertices().get(1), graph.getVertices().get(15), 15);
-			 * Player player6 = new Player(6, graph.getVertices().get(2),
-			 * graph.getVertices().get(15), 19); Player player7 = new Player(7,
-			 * graph.getVertices().get(1), graph.getVertices().get(15), 20);
-			 */
+			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 10);
+			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 5);
 
 			ArrayList<Player> x = new ArrayList<>();
 			x.add(0, player1);
 			x.add(1, player2);
-			/*
-			 * x.add(2, player3); x.add(3, player4); x.add(4, player5); x.add(5, player6);
-			 * x.add(6, player7);
-			 */
 
 			graph.setPlayer(x);
 			graph.generateEdgesFunctions();// edge functions are totally randomized
@@ -90,8 +76,6 @@ public class Main {
 
 			// --- social optimum ---
 			SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
-			
-			
 
 			// --- DSSP ---
 			DSSP dssp = new DSSP(graph);
@@ -99,10 +83,8 @@ public class Main {
 			// --- RMINTB ---
 //			RMINTB rmintb = new RMINTB(graph);
 
-			// --- RMINTB ---
-			GAMINTB gamintb = new GAMINTB(graph);
-			
-			
+			// --- GAMINTB ---
+			GaMINTB gamintb = new GaMINTB(graph, 10, 30);
 
 			/*
 			 * =============================================================
@@ -151,10 +133,6 @@ public class Main {
 //			System.out.println(rmintb);
 			// --- print GAMINTB ---
 			System.out.println(gamintb);
-
-//			for(int i=0; i<graph.getEdges().size() ; i++) {
-//				System.out.println("a : " + graph.getEdges().get(i).getCostA() + " b : " + graph.getEdges().get(i).getCostB() + " id : " + i);
-//			}
 
 			// close output stream
 			outputToTxtFile.close();

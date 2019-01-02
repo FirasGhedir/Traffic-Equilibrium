@@ -1,5 +1,19 @@
-package geneticheuristic;
+package geneticHeuristic;
 
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          Class for Chromosomes
+ */
 public class Chromosom {
 
 	private boolean feasible;
@@ -10,34 +24,18 @@ public class Chromosom {
 	private double max;
 	private double min;
 
+	/**
+	 * 
+	 * @param size
+	 */
 	public Chromosom(int size) {
-		this.vector = new boolean[size];
+		
+		setVector(new boolean[size]);
 	}
 
-	public boolean isFeasible() {
-		return feasible;
-	}
-
-	public void setFeasible(boolean feasible) {
-		this.feasible = feasible;
-	}
-
-	public boolean[] getVector() {
-		return vector;
-	}
-
-	public void setVector(boolean[] vector) {
-		this.vector = vector;
-	}
-
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
-
+	/**
+	 * 
+	 */
 	public void efficientycalculate() {
 
 		int tmp = 0;
@@ -50,23 +48,52 @@ public class Chromosom {
 		this.setEfficiency(tmp);
 	}
 
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public double probabilitycalculate(int p) {
+		double x = 2 * ((p + 1) - getRank());
+		double y = p * (p + 1);
+		return x / y;
+
+	}
+
+	public boolean isFeasible() {
+		return this.feasible;
+	}
+
+	public void setFeasible(boolean feasible) {
+		this.feasible = feasible;
+	}
+
+	public boolean[] getVector() {
+		return this.vector;
+	}
+
+	public void setVector(boolean[] vector) {
+		this.vector = vector;
+	}
+
+	public int getRank() {
+		return this.rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
 	public int getEfficiency() {
-		return efficiency;
+		return this.efficiency;
 	}
 
 	public void setEfficiency(int efficiency) {
 		this.efficiency = efficiency;
 	}
 
-	public double probabilitycalculate(int p) {
-		double x = 2 * ((p + 1) - getRank());
-		double y = p * (p + 1);
-		return x/y;
-
-	}
-
 	public double getProbability() {
-		return probability;
+		return this.probability;
 	}
 
 	public void setProbability(double probability) {
@@ -74,7 +101,7 @@ public class Chromosom {
 	}
 
 	public double getMax() {
-		return max;
+		return this.max;
 	}
 
 	public void setMax(double max) {
@@ -82,13 +109,11 @@ public class Chromosom {
 	}
 
 	public double getMin() {
-		return min;
+		return this.min;
 	}
 
 	public void setMin(double min) {
 		this.min = min;
 	}
-	
-	
 
 }
