@@ -52,6 +52,8 @@ public class GaMINTB {
 	double nb;
 	int finalrate;
 	boolean odd;
+	int rest;
+
 	ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	String cplexSolverOutputStream;
 	IloCplex cplex;
@@ -233,7 +235,8 @@ public class GaMINTB {
 		population.saveEtnicitiy();
 		population.saveRank();
 		population.saveProbability();
-		population.setY(population.getAfterranking());
+		population.setY(new ArrayList<>(population.getAfterranking()));
+		population.getAfterranking().clear();
 
 		t.add(population.getY().get(0));
 		setBestsolutions(t);
@@ -258,29 +261,24 @@ public class GaMINTB {
 	 */
 	public void step4_crossover() {
 
-		List<Chromosom> t = getBestsolutions();
 
-		population.saveEtnicitiy();
-		population.saveRank();
-		population.saveProbability();
-		population.setY(population.getAfterranking());
+		population.matchParents(getFinalrate(), getUpperbound());
 
-		t.add(population.getY().get(0));
-		setBestsolutions(t);
-
-		population.saveMinMax();
-
-		setUpperbound(population.getY().get(population.getY().size() - 1).getMax());
-		setRate(population.getR().nextDouble());
-		setNb((rate * population.getSize()) / 2);
-		setFinalrate((int) nb);
-		setOdd((finalrate & 1) != 0);
-
-		switch (String.valueOf(odd)) {
-		case "true":
-			setFinalrate(getFinalrate() + 1);
-		default:
+		for (int i1 = 0; i1 < population.getParents().size(); i1 += 2) {
+			population.newChromosomes(population.getParents().get(i1),  
+population.getParents().get(i1 + 1));
 		}
+
+		setRest(population.getSize() - getFinalrate());
+
+		population.generateMigrants(rest, getGraph());
+
+		List<Chromosom> newgeneration = new ArrayList<>();
+		newgeneration.addAll(population.getChildren());
+		newgeneration.addAll(population.getMigration());
+
+		population.setY(newgeneration);
+	
 	}
 
 	/**
@@ -288,6 +286,7 @@ public class GaMINTB {
 	 */
 	public void step5_termination() {
 
+		System.err.println(getBestsolutions().size());
 		Optional<Chromosom> alpha = getBestsolutions().stream().min(Comparator.comparingInt(Chromosom::getEfficiency));
 		setGamintbResultSet(alpha.get().getEfficiency() + "\n");
 	}
@@ -344,6 +343,14 @@ public class GaMINTB {
 		this.rate = rate;
 	}
 
+	public int getRest() {
+		return this.rest;
+	}
+
+	public void setRest(int rest) {
+		this.rest = rest;
+	}
+	
 	public double getNb() {
 		return this.nb;
 	}

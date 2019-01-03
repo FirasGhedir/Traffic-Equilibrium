@@ -57,12 +57,12 @@ public class Main {
 			// --- Graph parameter ---
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
+			GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
 			test.generateGraph(graph, map);
 
 			// --- player ---
-			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 10);
-			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 5);
+			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 10);
+			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 5);
 
 			ArrayList<Player> x = new ArrayList<>();
 			x.add(0, player1);
@@ -84,7 +84,7 @@ public class Main {
 //			RMINTB rmintb = new RMINTB(graph);
 
 			// --- GAMINTB ---
-			GaMINTB gamintb = new GaMINTB(graph, 10, 30);
+			GaMINTB gamintb = new GaMINTB(graph, 100, 30);
 
 			/*
 			 * =============================================================
