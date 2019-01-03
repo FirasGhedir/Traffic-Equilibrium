@@ -84,7 +84,7 @@ public class Main {
 //			RMINTB rmintb = new RMINTB(graph);
 
 			// --- GAMINTB ---
-			GaMINTB gamintb = new GaMINTB(graph, 100, 30);
+			GaMINTB gamintb = new GaMINTB(graph, 10, 30);
 
 			/*
 			 * =============================================================

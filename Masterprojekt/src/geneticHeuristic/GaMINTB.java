@@ -2,6 +2,7 @@ package geneticHeuristic;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,8 @@ public class GaMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @throws IloException if a CPLEX error occures
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
 	public GaMINTB(Graphs graph, int populationSize, int generation) throws IloException {
 
@@ -83,8 +85,10 @@ public class GaMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param graph the given graph
-	 * @throws IloException if a CPLEX error occures
+	 * @param graph
+	 *            the given graph
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
 	public void solveGAMINTB() throws IloException {
 
@@ -139,9 +143,11 @@ public class GaMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param xx the given chromosome
+	 * @param xx
+	 *            the given chromosome
 	 * @return true if evaluation succesful
-	 * @throws IloException if a CPLEX error occures
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
 	public void step2_evaluation() throws IloException {
 
@@ -261,24 +267,26 @@ public class GaMINTB {
 	 */
 	public void step4_crossover() {
 
-
 		population.matchParents(getFinalrate(), getUpperbound());
 
 		for (int i1 = 0; i1 < population.getParents().size(); i1 += 2) {
-			population.newChromosomes(population.getParents().get(i1),  
-population.getParents().get(i1 + 1));
+			population.newChromosomes(population.getParents().get(i1), population.getParents().get(i1 + 1));
 		}
+		
+		population.getParents().clear();
 
 		setRest(population.getSize() - getFinalrate());
-
-		population.generateMigrants(rest, getGraph());
+		population.generateMigrants(getRest(), getGraph());
 
 		List<Chromosom> newgeneration = new ArrayList<>();
-		newgeneration.addAll(population.getChildren());
-		newgeneration.addAll(population.getMigration());
+		newgeneration.addAll(new ArrayList<>(population.getChildren()));
+		newgeneration.addAll(new ArrayList<>(population.getMigration()));
+		population.getChildren().clear();
+		population.getMigration().clear();
+		population.setY(new ArrayList<>(newgeneration));
+		population.mutation(population.getY());
+		newgeneration.clear();
 
-		population.setY(newgeneration);
-	
 	}
 
 	/**
@@ -288,7 +296,7 @@ population.getParents().get(i1 + 1));
 
 		System.err.println(getBestsolutions().size());
 		Optional<Chromosom> alpha = getBestsolutions().stream().min(Comparator.comparingInt(Chromosom::getEfficiency));
-		setGamintbResultSet(alpha.get().getEfficiency() + "\n");
+		setGamintbResultSet(alpha.get().getEfficiency() + " " + Arrays.toString(alpha.get().getVector()) +  "\n");
 	}
 
 	public Graphs getGraph() {
@@ -350,7 +358,7 @@ population.getParents().get(i1 + 1));
 	public void setRest(int rest) {
 		this.rest = rest;
 	}
-	
+
 	public double getNb() {
 		return this.nb;
 	}
@@ -392,7 +400,8 @@ population.getParents().get(i1 + 1));
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param title the title to print
+	 * @param title
+	 *            the title to print
 	 */
 	private static String printTitle(String title) {
 		return ("\n ==============================\n|     " + title + ":\n ==============================\n");

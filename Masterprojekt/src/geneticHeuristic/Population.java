@@ -239,6 +239,33 @@ public class Population {
 		}
 	}
 
+	
+	public void mutation(List<Chromosom> list) {
+		double m = 0.1 + (0.9)*r.nextDouble();
+		System.out.println("M : " + m + " this : " + this.getSize());
+		int bound  = (int) (m * this.getSize());
+		System.out.println("the number of flipped bits is : " + bound);
+		for (int i = 0; i < bound; i++) {
+			int chosenvector = r.nextInt(this.getSize());
+			int chosenbit = r.nextInt(list.get(chosenvector).getVector().length);
+			
+			System.err.println("ID : " + chosenvector + " bit number : " + chosenbit);
+			
+			if (list.get(chosenvector).getVector()[chosenbit] == false) {
+				list.get(chosenvector).getVector()[chosenbit] = true;
+
+			}
+
+			else {
+
+				list.get(chosenvector).getVector()[chosenbit] = false;
+
+			}
+
+		}
+
+	}
+	
 	public int getSize() {
 		return this.size;
 	}
