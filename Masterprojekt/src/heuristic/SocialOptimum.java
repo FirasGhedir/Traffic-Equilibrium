@@ -48,9 +48,11 @@ public class SocialOptimum {
 
 		this.setGraph(graph);
 		this.setSocialOptimumResultSet("");
+
+		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
 		cplex.setOut(stream); // store the cplex solver Outputstream in Bytestream
-		this.cplexSolverOutputStream = new String(stream.toByteArray());
+
 		solveDSSP(this.getGraph());
 	}
 
@@ -137,18 +139,15 @@ public class SocialOptimum {
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
 
-			this.setSocialOptimumResultSet(getSocialOptimumResultSet() + "obj: " + cplex.getObjValue() + "\n");
+			this.setSocialOptimumResultSet(getSocialOptimumResultSet() + "obj: " + cplex.getObjValue() + "\n--\n");
 
 			for (int i = 0; i < graph.getEdges().size(); i++) {
 				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
-					System.out.println(graph.getEdges().get(i).getPlayers().get(j).toString() + " : "
-							+ cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));
 
-				}
-			}
+					setSocialOptimumResultSet(
+							getSocialOptimumResultSet() + graph.getEdges().get(i).getPlayers().get(j).toString() + " : "
+									+ cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)) + "\n");
 
-			for (int i = 0; i < graph.getEdges().size(); i++) {
-				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
 					graph.getEdges().get(i).getValues()
 							.add(cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));
 
@@ -252,7 +251,8 @@ public class SocialOptimum {
 	 */
 	@Override
 	public String toString() {
-		return (printTitle("Social optimum") + cplexSolverOutputStream + "\n" + this.getSocialOptimumResultSet());
+		this.cplexSolverOutputStream = new String(stream.toByteArray());
+		return (printTitle("Social optimum") + cplexSolverOutputStream + "------------------------------------------------\n\n" + this.getSocialOptimumResultSet());
 	}
 
 }

@@ -293,10 +293,8 @@ public class GaMINTB {
 	 * Step 5: termination
 	 */
 	public void step5_termination() {
-
-		System.err.println(getBestsolutions().size());
 		Optional<Chromosom> alpha = getBestsolutions().stream().min(Comparator.comparingInt(Chromosom::getEfficiency));
-		setGamintbResultSet(alpha.get().getEfficiency() + " " + Arrays.toString(alpha.get().getVector()) +  "\n");
+		setGamintbResultSet(alpha.get().getEfficiency() + "\n--\nalpha: " + Arrays.toString(alpha.get().getVector()) +  "\n");
 	}
 
 	public Graphs getGraph() {
@@ -404,6 +402,7 @@ public class GaMINTB {
 	 *            the title to print
 	 */
 	private static String printTitle(String title) {
+	
 		return ("\n ==============================\n|     " + title + ":\n ==============================\n");
 	}
 
@@ -413,6 +412,6 @@ public class GaMINTB {
 	 */
 	@Override
 	public String toString() {
-		return (printTitle("GaMINTB") + "Best chromsom in generation " + this.getGamintbResultSet());
+		return (printTitle("GaMINTB") + "Best chromsom in generation " + this.getGamintbResultSet() + population.getPopulationResultSet());
 	}
 }

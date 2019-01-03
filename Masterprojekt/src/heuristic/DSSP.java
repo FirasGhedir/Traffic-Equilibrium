@@ -45,9 +45,11 @@ public class DSSP {
 	public DSSP(Graphs graph) throws IloException {
 
 		this.setGraph(graph);
+
 		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
 		cplex.setOut(stream);
+
 		solveDSSP(this.getGraph());
 	}
 
@@ -117,7 +119,7 @@ public class DSSP {
 				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),
 						cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
 				IloNumExpr tmp1 = cplex.sum(tmp, g.getEdges().get(j).getResult());
-				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1,g.getEdges().get(j).getBeta()), 0);
+				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1, g.getEdges().get(j).getBeta()), 0);
 				s2.add(tmp2);
 			}
 

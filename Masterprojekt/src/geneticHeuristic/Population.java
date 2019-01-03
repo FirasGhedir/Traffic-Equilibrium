@@ -50,6 +50,7 @@ public class Population {
 
 		setSize(size);
 		setY(new ArrayList<>());
+		setPopulationResultSet("");
 		setAfterranking(new ArrayList<>());
 		setParents(new ArrayList<>());
 		setChildren(new ArrayList<>());
@@ -239,18 +240,31 @@ public class Population {
 		}
 	}
 
-	
 	public void mutation(List<Chromosom> list) {
-		double m = 0.1 + (0.9)*r.nextDouble();
-		System.out.println("M : " + m + " this : " + this.getSize());
-		int bound  = (int) (m * this.getSize());
-		System.out.println("the number of flipped bits is : " + bound);
+		double m = 0.1 + (0.9) * r.nextDouble();
+		/*
+		 * TODO
+		 */
+		setPopulationResultSet(getPopulationResultSet() + "\n\n ---\n| M : " + m + " this : " + this.getSize());
+		//System.out.println("M : " + m + " this : " + this.getSize());
+
+		int bound = (int) (m * this.getSize());
+		/*
+		 * TODO
+		 */
+		setPopulationResultSet(getPopulationResultSet() + "\n|     # flipped bits : " + bound + "\n ---");
+		//System.out.println("the number of flipped bits is : " + bound);
+
 		for (int i = 0; i < bound; i++) {
 			int chosenvector = r.nextInt(this.getSize());
 			int chosenbit = r.nextInt(list.get(chosenvector).getVector().length);
-			
-			System.err.println("ID : " + chosenvector + " bit number : " + chosenbit);
-			
+
+			/*
+			 * TODO
+			 */
+			setPopulationResultSet(getPopulationResultSet() + "\n   -> ID : " + chosenvector + " bit number : " + chosenbit);
+			//System.err.println("ID : " + chosenvector + " bit number : " + chosenbit);
+
 			if (list.get(chosenvector).getVector()[chosenbit] == false) {
 				list.get(chosenvector).getVector()[chosenbit] = true;
 
@@ -265,7 +279,7 @@ public class Population {
 		}
 
 	}
-	
+
 	public int getSize() {
 		return this.size;
 	}

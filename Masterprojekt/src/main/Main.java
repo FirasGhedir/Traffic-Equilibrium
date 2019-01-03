@@ -1,11 +1,12 @@
 package main;
 
-// Java program to demonstrate redirection in System.out.println() 
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import geneticHeuristic.GaMINTB;
 import graphCharacteristics.CharacteristicsCalculator;
@@ -13,6 +14,7 @@ import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.DSSP;
+import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import player.Player;
 import ilog.concert.IloException;
@@ -35,6 +37,47 @@ import ilog.concert.IloException;
 public class Main {
 
 	private static String path = "./Masterprojekt/files/graphData.txt";
+	static List<Object> printList = new ArrayList<Object>();
+
+	/**
+	 * Help method to print list content to console and txt file
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param list a given list
+	 * @throws IOException
+	 */
+	private static void printObjects(List<Object> list) throws IOException {
+
+//		// Uncomment this to get txt files for each program iteration for each graph
+//		String uniqueID = UUID.randomUUID().toString(); // create unique IDs
+//		path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
+
+		// Creating a File object that represents the disk file.
+		PrintStream outputToTxtFile = new PrintStream(new File(path));
+		// Store current System.out before assigning a new value
+		PrintStream console = System.out;
+
+		for (Object object : list) {
+
+			/*
+			 * Assign o to output stream
+			 */
+			System.setOut(outputToTxtFile);
+			// print object to txt file
+			System.out.println(object);
+
+			/*
+			 * Use stored value for output stream
+			 */
+			System.setOut(console);
+			// print object to console
+			System.out.println(object);
+		}
+
+		// close output stream
+		outputToTxtFile.close();
+	}
 
 	/**
 	 * The main method
@@ -88,54 +131,17 @@ public class Main {
 
 			/*
 			 * =============================================================
-			 * ================== PRINT EVERYTHING HERE ====================
+			 * ================== SET EVERYTHING TO PRINT HERE =============
 			 * =============================================================
 			 */
-			// // Uncomment this to get txt files for each program iteration for each graph
-			// String uniqueID = UUID.randomUUID().toString(); // create unique IDs
-			// path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
+			printList.add(graph);
+//			list.add(characteristics);
+			printList.add(systemOptimalFlow);
+			printList.add(dssp);
+//			list.add(rmintb);
+			printList.add(gamintb);
 
-			// Creating a File object that represents the disk file.
-			//PrintStream outputToTxtFile = new PrintStream(new File(path));
-			// Store current System.out before assigning a new value
-			PrintStream console = System.out;
-
-			/*
-			 * Assign o to output stream
-			 */
-			//System.setOut(outputToTxtFile);
-			// --- print graph data ---
-	//		System.out.println(graph);
-			// --- print graph characteristics ---
-	//		System.out.println(characteristics);
-			// --- print Social Optimum ---
-			System.out.println(systemOptimalFlow);
-			// --- print DSSP ---
-			System.out.println(dssp);
-			// --- print RMINTB ---
-//			System.out.println(rmintb);
-			// --- print GAMINTB ---
-			System.out.println(gamintb);
-
-			/*
-			 * Use stored value for output stream
-			 */
-			System.setOut(console);
-			// --- print graph data ---
-		//	System.out.println(graph);
-			// --- print graph characteristics ---
-		//	System.out.println(characteristics);
-			// --- print Social Optimum ---
-			System.out.println(systemOptimalFlow);
-			// --- print DSSP ---
-			System.out.println(dssp);
-			// --- print RMINTB ---
-//			System.out.println(rmintb);
-			// --- print GAMINTB ---
-			System.out.println(gamintb);
-
-			// close output stream
-			//outputToTxtFile.close();
+			printObjects(printList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
