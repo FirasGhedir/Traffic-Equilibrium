@@ -57,12 +57,12 @@ public class Main {
 			// --- Graph parameter ---
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+			GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
 			test.generateGraph(graph, map);
 
 			// --- player ---
 			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 10);
-			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 5);
+			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 5);
 
 			ArrayList<Player> x = new ArrayList<>();
 			x.add(0, player1);
@@ -96,18 +96,18 @@ public class Main {
 			// path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
 
 			// Creating a File object that represents the disk file.
-			PrintStream outputToTxtFile = new PrintStream(new File(path));
+			//PrintStream outputToTxtFile = new PrintStream(new File(path));
 			// Store current System.out before assigning a new value
 			PrintStream console = System.out;
 
 			/*
 			 * Assign o to output stream
 			 */
-			System.setOut(outputToTxtFile);
+			//System.setOut(outputToTxtFile);
 			// --- print graph data ---
-			System.out.println(graph);
+	//		System.out.println(graph);
 			// --- print graph characteristics ---
-			System.out.println(characteristics);
+	//		System.out.println(characteristics);
 			// --- print Social Optimum ---
 			System.out.println(systemOptimalFlow);
 			// --- print DSSP ---
@@ -122,9 +122,9 @@ public class Main {
 			 */
 			System.setOut(console);
 			// --- print graph data ---
-			System.out.println(graph);
+		//	System.out.println(graph);
 			// --- print graph characteristics ---
-			System.out.println(characteristics);
+		//	System.out.println(characteristics);
 			// --- print Social Optimum ---
 			System.out.println(systemOptimalFlow);
 			// --- print DSSP ---
@@ -135,7 +135,7 @@ public class Main {
 			System.out.println(gamintb);
 
 			// close output stream
-			outputToTxtFile.close();
+			//outputToTxtFile.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
