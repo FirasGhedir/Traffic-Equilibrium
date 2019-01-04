@@ -64,12 +64,13 @@ public class GaMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @throws IloException
-	 *             if a CPLEX error occures
+	 * @throws IloException if a CPLEX error occures
 	 */
 	public GaMINTB(Graphs graph, int populationSize, int generation) throws IloException {
 
 		setGraph(graph);
+		setGamintbResultSet("");
+
 		setBestsolutions(new ArrayList<>());
 		setPopulation(new Population(populationSize));
 		setGeneration(generation);
@@ -85,10 +86,8 @@ public class GaMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param graph
-	 *            the given graph
-	 * @throws IloException
-	 *             if a CPLEX error occures
+	 * @param graph the given graph
+	 * @throws IloException if a CPLEX error occures
 	 */
 	public void solveGAMINTB() throws IloException {
 
@@ -143,11 +142,9 @@ public class GaMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param xx
-	 *            the given chromosome
+	 * @param xx the given chromosome
 	 * @return true if evaluation succesful
-	 * @throws IloException
-	 *             if a CPLEX error occures
+	 * @throws IloException if a CPLEX error occures
 	 */
 	public void step2_evaluation() throws IloException {
 
@@ -272,7 +269,7 @@ public class GaMINTB {
 		for (int i1 = 0; i1 < population.getParents().size(); i1 += 2) {
 			population.newChromosomes(population.getParents().get(i1), population.getParents().get(i1 + 1));
 		}
-		
+
 		population.getParents().clear();
 
 		setRest(population.getSize() - getFinalrate());
@@ -294,7 +291,9 @@ public class GaMINTB {
 	 */
 	public void step5_termination() {
 		Optional<Chromosom> alpha = getBestsolutions().stream().min(Comparator.comparingInt(Chromosom::getEfficiency));
-		setGamintbResultSet(alpha.get().getEfficiency() + "\n--\nalpha: " + Arrays.toString(alpha.get().getVector()) +  "\n");
+
+		setGamintbResultSet(getGamintbResultSet() + alpha.get().getEfficiency() + "\n\n\nalpha: "
+				+ Arrays.toString(alpha.get().getVector()) + "\n");
 	}
 
 	public Graphs getGraph() {
@@ -394,24 +393,34 @@ public class GaMINTB {
 	}
 
 	/**
-	 * Prints a title in a fancy frame on the console
-	 * 
-	 * --------------------------------------------
-	 * 
-	 * @param title
-	 *            the title to print
-	 */
-	private static String printTitle(String title) {
-	
-		return ("\n ==============================\n|     " + title + ":\n ==============================\n");
-	}
-
-	/**
 	 * The toString() method returns the string representation of the object
 	 * CharacteristicsCalculation.
 	 */
 	@Override
 	public String toString() {
-		return (printTitle("GaMINTB") + "Best chromsom in generation " + this.getGamintbResultSet() + population.getPopulationResultSet());
+
+		this.cplexSolverOutputStream = new String(stream.toByteArray());
+
+		/*
+		 * print title
+		 */
+		String leftAlignFormat = "|| %-10s %-70s  ||%n";
+		String limiter = "++========================================================================================++";
+		String dashedLimiter = "++----------------------------------------------------------------------------------------++";
+		System.out.format("%n");
+		System.out.format(limiter + "%n");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(leftAlignFormat, "\t",
+				this.getClass().getSimpleName() + " (" + this.getClass().getName() + ")");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(limiter + "%n%n");
+
+		/*
+		 * return the string representation of the object
+		 */
+		return (
+		// cplexSolverOutputStream + "\n" + dashedLimiter + "\n\n" +
+		"Best chromsom in generation " + this.getGamintbResultSet() + "\n" + dashedLimiter + "\n\n"
+				+ population.getPopulationResultSet());
 	}
 }

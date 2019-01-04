@@ -1,7 +1,7 @@
 package main;
 
 import java.io.*;
-
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +17,7 @@ import heuristic.DSSP;
 import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import player.Player;
+import sun.misc.IOUtils;
 import ilog.concert.IloException;
 
 /**
@@ -38,6 +39,8 @@ public class Main {
 
 	private static String path = "./Masterprojekt/files/graphData.txt";
 	static List<Object> printList = new ArrayList<Object>();
+	static String impressum = "\n| Universität Ulm\n| \n| Projekt Algorithm Engineering-Projekt --- WiSe 2018/19\n| \n| @author Firas Ghedir (firas.ghedir@uni-ulm.de)\n| @author Julian Bestler (julian.bestler@uni-ulm.de)\n| \n| @version 1.0\n\n";
+
 
 	/**
 	 * Help method to print list content to console and txt file
@@ -47,7 +50,7 @@ public class Main {
 	 * @param list a given list
 	 * @throws IOException
 	 */
-	private static void printObjects(List<Object> list) throws IOException {
+	private static void printObjects(List<?> list) throws IOException {
 
 //		// Uncomment this to get txt files for each program iteration for each graph
 //		String uniqueID = UUID.randomUUID().toString(); // create unique IDs
@@ -72,6 +75,7 @@ public class Main {
 			 */
 			System.setOut(console);
 			// print object to console
+
 			System.out.println(object);
 		}
 
@@ -134,6 +138,7 @@ public class Main {
 			 * ================== SET EVERYTHING TO PRINT HERE =============
 			 * =============================================================
 			 */
+			printList.add(impressum);
 			printList.add(graph);
 //			list.add(characteristics);
 			printList.add(systemOptimalFlow);

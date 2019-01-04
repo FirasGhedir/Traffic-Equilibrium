@@ -45,9 +45,13 @@ public class RMINTB {
 	 * @throws IloException if a CPLEX error occures
 	 */
 	public RMINTB(Graphs g) throws IloException {
+
 		this.setGraph(g);
+		this.setRMINTBResultSet("");
+
 		cplex = new IloCplex();
 		cplex.setOut(stream);
+
 		solveRMINTB();
 	}
 
@@ -138,8 +142,6 @@ public class RMINTB {
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
 
-			this.cplexSolverOutputStream = new String(stream.toByteArray());
-
 			this.setRMINTBResultSet(getRMINTBResultSet() + "obj: " + cplex.getObjValue() + "\n");
 
 			break;
@@ -196,22 +198,31 @@ public class RMINTB {
 	}
 
 	/**
-	 * Prints a title in a fancy frame on the console
-	 * 
-	 * --------------------------------------------
-	 * 
-	 * @param title the title to print
-	 */
-	private static String printTitle(String title) {
-		return ("\n ==============================\n|     " + title + ":\n ==============================\n");
-	}
-
-	/**
 	 * The toString() method returns the string representation of the object RMINTB
 	 */
 	@Override
 	public String toString() {
-		return (printTitle("RMINTB") + cplexSolverOutputStream + "\n" + this.getRMINTBResultSet());
+
+		this.cplexSolverOutputStream = new String(stream.toByteArray());
+
+		/*
+		 * print title
+		 */
+		String leftAlignFormat = "|| %-10s %-70s  ||%n";
+		String limiter = "++========================================================================================++";
+		String dashedLimiter = "++----------------------------------------------------------------------------------------++";
+		System.out.format("%n");
+		System.out.format(limiter + "%n");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(leftAlignFormat, "\t",
+				this.getClass().getSimpleName() + " (" + this.getClass().getName() + ")");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(limiter + "%n%n");
+
+		/*
+		 * return the string representation of the object
+		 */
+		return (cplexSolverOutputStream + "\n" + dashedLimiter + "\n\n" + this.getRMINTBResultSet());
 	}
 
 }

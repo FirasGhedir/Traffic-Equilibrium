@@ -241,7 +241,7 @@ public class CharacteristicsCalculator {
 	 * @param title the title to print
 	 */
 	private static String printTitle(String title) {
-		return ("\n ------------------------------\n|     " + title + ":\n ------------------------------\n");
+		return ("\n+------------------------------\n|     " + title + ":\n+------------------------------\n");
 	}
 
 	/**
@@ -250,6 +250,23 @@ public class CharacteristicsCalculator {
 	 */
 	@Override
 	public String toString() {
+		/*
+		 * print title
+		 */
+		String leftAlignFormat = "|| %-10s %-70s  ||%n";
+		String limiter = "++========================================================================================++";
+		//String dashedLimiter = "++----------------------------------------------------------------------------------------++";
+		System.out.format("%n");
+		System.out.format(limiter + "%n");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(leftAlignFormat, "\t",
+				this.getClass().getSimpleName() + " (" + this.getClass().getName() + ")");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(limiter + "%n%n");
+
+		/*
+		 * return the string representation of the object
+		 */
 		return (printTitle("Max vertex degree") + this.getMaxVertexDegree() + "\n" + printTitle("Min vertex degree")
 				+ this.getMinVertexDegree() + "\n" + printTitle("Average vertex degree") + this.getAvgVertexDegree()
 				+ "\n" + printTitle("Eccentricity vector") + Arrays.toString(this.getEccentricities()) + "\n"

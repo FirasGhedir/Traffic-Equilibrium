@@ -1,13 +1,33 @@
 
- ------------------------------
+| Universität Ulm
+| 
+| Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+| 
+| @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+| @author Julian Bestler (julian.bestler@uni-ulm.de)
+| 
+| @version 1.0
+
+
+
+++========================================================================================++
+|| 	                                                                                  ||
+|| 	          Graphs (graphModel.Graphs)                                              ||
+|| 	                                                                                  ||
+++========================================================================================++
+
+
++------------------------------
 |     Gridgraph:
- ------------------------------
++------------------------------
+
 #edges:    24
 #vertices: 16
 
- ------------------------------
++------------------------------
 |     Adjacency Matrix:
- ------------------------------
++------------------------------
+
 | 0  1  0  0  1  0  0  0  0  0  0  0  0  0  0  0 |
 | 0  0  1  0  0  1  0  0  0  0  0  0  0  0  0  0 |
 | 0  0  0  1  0  0  1  0  0  0  0  0  0  0  0  0 |
@@ -25,14 +45,13 @@
 | 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1 |
 | 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |
 
- ------------------------------
-|     Node potential vector:
- ------------------------------
-[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
 
- ==============================
-|     Social optimum:
- ==============================
+++========================================================================================++
+|| 	                                                                                  ||
+|| 	          SocialOptimum (heuristic.SocialOptimum)                                 ||
+|| 	                                                                                  ||
+++========================================================================================++
+
 Number of nonzeros in lower triangle of Q = 24
 Using Approximate Minimum Degree ordering
 Total time for automatic ordering = 0.00 sec. (0.00 ticks)
@@ -47,7 +66,7 @@ QP Presolve added 0 rows and 48 columns.
 Aggregator did 14 substitutions.
 Reduced QP has 38 rows, 51 columns, and 125 nonzeros.
 Reduced QP objective Q matrix has 24 nonzeros.
-Presolve time = 0.00 sec. (0.05 ticks)
+Presolve time = 0.02 sec. (0.05 ticks)
 Parallel mode: using up to 2 threads for barrier.
 Number of nonzeros in lower triangle of A*A' = 137
 Using Approximate Minimum Degree ordering
@@ -59,77 +78,81 @@ Summary statistics for Cholesky factor:
   Total non-zeros in factor = 383
   Total FP ops to factor    = 4927
  Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf          
-   0   1.3751076e+03  -3.0670745e+04  3.81e+03  2.72e+02  2.31e+04
-   1   3.3716962e+03  -5.2768966e+04  4.45e+02  3.17e+01  2.70e+03
-   2   8.5733380e+02  -2.3717278e+04  6.53e-14  4.44e-16  3.10e-12
-   3   8.3206629e+02  -1.8021170e+02  5.02e-14  0.00e+00  3.16e-12
-   4   7.1986459e+02   2.1928668e+02  3.46e-14  4.44e-16  5.42e-14
-   5   7.1016945e+02   6.5264617e+02  3.14e-14  0.00e+00  5.84e-14
-   6   7.0857937e+02   7.0704904e+02  9.85e-14  6.66e-16  7.31e-14
-   7   7.0857593e+02   7.0852615e+02  1.05e-13  0.00e+00  6.60e-14
-   8   7.0857592e+02   7.0857432e+02  4.40e-14  0.00e+00  5.72e-14
-   9   7.0857592e+02   7.0857587e+02  4.10e-14  4.44e-16  6.04e-14
-  10   7.0857592e+02   7.0857592e+02  7.86e-14  0.00e+00  5.78e-14
+   0   1.0745041e+03  -3.0593027e+04  2.15e+03  1.48e+02  2.31e+04
+   1   1.8693260e+03  -4.7010609e+04  2.29e+02  1.57e+01  2.46e+03
+   2   8.1170430e+02  -1.3489698e+04  6.68e-14  0.00e+00  2.29e-12
+   3   7.7689650e+02  -3.0920965e+02  4.76e-14  0.00e+00  1.05e-12
+   4   6.4234905e+02   4.1437753e+02  3.61e-14  0.00e+00  7.35e-14
+   5   6.3371462e+02   6.2125338e+02  6.25e-14  0.00e+00  5.28e-14
+   6   6.3346022e+02   6.3300821e+02  1.21e-13  0.00e+00  4.72e-14
+   7   6.3346014e+02   6.3344556e+02  5.11e-14  0.00e+00  6.02e-14
+   8   6.3346014e+02   6.3345967e+02  4.10e-14  0.00e+00  6.03e-14
+   9   6.3346014e+02   6.3346012e+02  4.67e-14  0.00e+00  4.95e-14
+  10   6.3346014e+02   6.3346014e+02  4.60e-14  0.00e+00  5.34e-14
 Barrier time = 0.02 sec. (0.32 ticks)
 
 Total time on 2 threads = 0.02 sec. (0.32 ticks)
-------------------------------------------------
 
-obj: 708.5759245609942
+++----------------------------------------------------------------------------------------++
+
+obj: 633.4601362688807
 --
-PlayerNr : 0 in Edge : 0 : 6.255714955265915
+PlayerNr : 0 in Edge : 0 : 5.186747578648709
 PlayerNr : 1 in Edge : 0 : 0.0
-PlayerNr : 0 in Edge : 1 : 3.7442850447340854
+PlayerNr : 0 in Edge : 1 : 4.813252421351291
 PlayerNr : 1 in Edge : 1 : 0.0
-PlayerNr : 0 in Edge : 2 : 2.854377189549855
-PlayerNr : 1 in Edge : 2 : 2.4318619357196907
-PlayerNr : 0 in Edge : 3 : 3.40133776571606
-PlayerNr : 1 in Edge : 3 : 2.5681380642803093
-PlayerNr : 0 in Edge : 4 : 1.6611913557405138
-PlayerNr : 1 in Edge : 4 : 0.9966185780429394
-PlayerNr : 0 in Edge : 5 : 1.193185833809341
-PlayerNr : 1 in Edge : 5 : 1.4352433576767536
-PlayerNr : 0 in Edge : 6 : 1.6611913557405138
-PlayerNr : 1 in Edge : 6 : 0.9966185780429394
-PlayerNr : 0 in Edge : 7 : 1.992335659373395
+PlayerNr : 0 in Edge : 2 : 2.6597451856022545
+PlayerNr : 1 in Edge : 2 : 2.5372663026613584
+PlayerNr : 0 in Edge : 3 : 2.5270023930464482
+PlayerNr : 1 in Edge : 3 : 2.4627336973386416
+PlayerNr : 0 in Edge : 4 : 1.008847292663658
+PlayerNr : 1 in Edge : 4 : 0.324033922578817
+PlayerNr : 0 in Edge : 5 : 1.6508978929385967
+PlayerNr : 1 in Edge : 5 : 2.2132323800825424
+PlayerNr : 0 in Edge : 6 : 1.008847292663658
+PlayerNr : 1 in Edge : 6 : 0.324033922578817
+PlayerNr : 0 in Edge : 7 : 2.358099292982503
 PlayerNr : 1 in Edge : 7 : 0.0
-PlayerNr : 0 in Edge : 8 : 1.7519493853606858
+PlayerNr : 0 in Edge : 8 : 2.4551531283687895
 PlayerNr : 1 in Edge : 8 : 0.0
-PlayerNr : 0 in Edge : 9 : 1.2499659006404849
-PlayerNr : 1 in Edge : 9 : 0.7868449435315311
-PlayerNr : 0 in Edge : 10 : 4.143707524448955
-PlayerNr : 1 in Edge : 10 : 1.7812931207487783
-PlayerNr : 0 in Edge : 11 : 0.882322628066797
-PlayerNr : 1 in Edge : 11 : 0.834248821642208
-PlayerNr : 0 in Edge : 12 : 1.560829106383031
-PlayerNr : 1 in Edge : 12 : 1.387839479566078
-PlayerNr : 0 in Edge : 13 : 2.5435139838073106
-PlayerNr : 1 in Edge : 13 : 1.8308673996851474
-PlayerNr : 0 in Edge : 14 : 0.5538293923670544
+PlayerNr : 0 in Edge : 9 : 1.4228446185729182
+PlayerNr : 1 in Edge : 9 : 0.8201336172410093
+PlayerNr : 0 in Edge : 10 : 3.4622570674560325
+PlayerNr : 1 in Edge : 10 : 1.642600080097631
+PlayerNr : 0 in Edge : 11 : 2.2260560587821923
+PlayerNr : 1 in Edge : 11 : 1.9071009558295104
+PlayerNr : 0 in Edge : 12 : 0.8476864527293223
+PlayerNr : 1 in Edge : 12 : 1.1262650414940383
+PlayerNr : 0 in Edge : 13 : 3.2349033514458503
+PlayerNr : 1 in Edge : 13 : 2.2311348784083274
+PlayerNr : 0 in Edge : 14 : 1.2277981745793494
 PlayerNr : 1 in Edge : 14 : 0.0
-PlayerNr : 0 in Edge : 15 : 1.1981199929936313
+PlayerNr : 0 in Edge : 15 : 1.2273549537894404
 PlayerNr : 1 in Edge : 15 : 0.0
-PlayerNr : 0 in Edge : 16 : 3.4854482328235155
-PlayerNr : 1 in Edge : 16 : 1.0605099557641657
-PlayerNr : 0 in Edge : 17 : 1.212088683992494
-PlayerNr : 1 in Edge : 17 : 0.7207831649846126
-PlayerNr : 0 in Edge : 18 : 3.652215956771603
-PlayerNr : 1 in Edge : 18 : 1.4157810866947402
-PlayerNr : 0 in Edge : 19 : 1.3940613824349417
-PlayerNr : 1 in Edge : 19 : 1.0325683486355044
-PlayerNr : 0 in Edge : 20 : 6.195729940578914
-PlayerNr : 1 in Edge : 20 : 3.2466484863798875
-PlayerNr : 0 in Edge : 21 : 1.1981199929936313
+PlayerNr : 0 in Edge : 16 : 1.9056839326365056
+PlayerNr : 1 in Edge : 16 : 0.7457929669141617
+PlayerNr : 0 in Edge : 17 : 2.784371309398877
+PlayerNr : 1 in Edge : 17 : 0.8968071131834692
+PlayerNr : 0 in Edge : 18 : 1.1355566372585477
+PlayerNr : 1 in Edge : 18 : 0.703113750098332
+PlayerNr : 0 in Edge : 19 : 1.6178137481072805
+PlayerNr : 1 in Edge : 19 : 1.1689442583098681
+PlayerNr : 0 in Edge : 20 : 4.370459988704399
+PlayerNr : 1 in Edge : 20 : 2.93424862850666
+PlayerNr : 0 in Edge : 21 : 1.2273549537894404
 PlayerNr : 1 in Edge : 21 : 0.0
-PlayerNr : 0 in Edge : 22 : 2.4102086769861253
-PlayerNr : 1 in Edge : 22 : 0.7207831649846126
-PlayerNr : 0 in Edge : 23 : 3.8042700594210856
-PlayerNr : 1 in Edge : 23 : 1.7533515136201125
+PlayerNr : 0 in Edge : 22 : 4.011726263188317
+PlayerNr : 1 in Edge : 22 : 0.8968071131834692
+PlayerNr : 0 in Edge : 23 : 5.629540011295601
+PlayerNr : 1 in Edge : 23 : 2.06575137149334
 
 
- ==============================
-|     DSSP-LP:
- ==============================
+++========================================================================================++
+|| 	                                                                                  ||
+|| 	          DSSP (heuristic.DSSP)                                                   ||
+|| 	                                                                                  ||
+++========================================================================================++
+
 Tried aggregator 1 time.
 LP Presolve eliminated 7 rows and 6 columns.
 Aggregator did 14 substitutions.
@@ -140,335 +163,350 @@ Initializing dual steep norms . . .
 Iteration log . . .
 Iteration:     1   Dual objective     =             0.000000
 
-nullobj: 0.7204537065249843
+++----------------------------------------------------------------------------------------++
+
+nullobj: 0.30125564985061937
    in the  Edge 0 beta would be : 0.0
-   in the  Edge 1 beta would be : 0.9999999916866305
-   in the  Edge 2 beta would be : 0.5000000100986632
-   in the  Edge 3 beta would be : 0.0
+   in the  Edge 1 beta would be : 0.0
+   in the  Edge 2 beta would be : 1.0000000104610685
+   in the  Edge 3 beta would be : 1.0000000002149
    in the  Edge 4 beta would be : 0.0
    in the  Edge 5 beta would be : 0.0
-   in the  Edge 6 beta would be : 1.0000000154792725
+   in the  Edge 6 beta would be : -3.822009375653579E-9
    in the  Edge 7 beta would be : 0.0
-   in the  Edge 8 beta would be : 0.0
+   in the  Edge 8 beta would be : -7.464002749202336E-10
    in the  Edge 9 beta would be : 0.0
-   in the  Edge 10 beta would be : 1.000000011934631
+   in the  Edge 10 beta would be : 0.0
    in the  Edge 11 beta would be : 0.0
-   in the  Edge 12 beta would be : 0.49999998547779967
+   in the  Edge 12 beta would be : 0.0
    in the  Edge 13 beta would be : 0.0
    in the  Edge 14 beta would be : 0.0
    in the  Edge 15 beta would be : 0.0
    in the  Edge 16 beta would be : 0.0
    in the  Edge 17 beta would be : 0.0
    in the  Edge 18 beta would be : 0.0
-   in the  Edge 19 beta would be : 0.49999999309029874
-   in the  Edge 20 beta would be : 0.5000000080412903
-   in the  Edge 21 beta would be : 0.0
-   in the  Edge 22 beta would be : 0.0
+   in the  Edge 19 beta would be : 0.0
+   in the  Edge 20 beta would be : 0.5000000021857147
+   in the  Edge 21 beta would be : 2.7938433788676775E-9
+   in the  Edge 22 beta would be : 0.5000000114687992
    in the  Edge 23 beta would be : 0.0
 
 
- ==============================
-|     GaMINTB:
- ==============================
-Best chromsom in generation 4
---
-alpha: [false, false, false, true, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false, true]
+++========================================================================================++
+|| 	                                                                                  ||
+|| 	          GaMINTB (geneticHeuristic.GaMINTB)                                      ||
+|| 	                                                                                  ||
+++========================================================================================++
+
+Best chromsom in generation 5
 
 
- ---
-| M : 0.8453227688319285 this : 10
-|     # flipped bits : 8
- ---
-   -> ID : 7 bit number : 10
-   -> ID : 4 bit number : 2
-   -> ID : 0 bit number : 6
-   -> ID : 6 bit number : 13
-   -> ID : 2 bit number : 12
-   -> ID : 1 bit number : 20
-   -> ID : 5 bit number : 2
-   -> ID : 7 bit number : 13
+alpha: [false, true, false, false, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, false, false]
 
- ---
-| M : 0.3852865845630604 this : 10
-|     # flipped bits : 3
- ---
+++----------------------------------------------------------------------------------------++
+
+
+
++------------------------------
+| M : 0.7741748246758637 this : 10
+|     # flipped bits : 7
++------------------------------
    -> ID : 3 bit number : 18
-   -> ID : 4 bit number : 5
-   -> ID : 2 bit number : 7
+   -> ID : 3 bit number : 20
+   -> ID : 0 bit number : 15
+   -> ID : 2 bit number : 14
+   -> ID : 7 bit number : 10
+   -> ID : 8 bit number : 13
+   -> ID : 3 bit number : 20
 
- ---
-| M : 0.2593137184638159 this : 10
-|     # flipped bits : 2
- ---
-   -> ID : 2 bit number : 16
-   -> ID : 6 bit number : 5
-
- ---
-| M : 0.39558992331304554 this : 10
-|     # flipped bits : 3
- ---
-   -> ID : 8 bit number : 6
-   -> ID : 4 bit number : 20
-   -> ID : 4 bit number : 15
-
- ---
-| M : 0.57163688275306 this : 10
-|     # flipped bits : 5
- ---
-   -> ID : 3 bit number : 16
-   -> ID : 9 bit number : 12
-   -> ID : 6 bit number : 15
-   -> ID : 0 bit number : 14
-   -> ID : 0 bit number : 14
-
- ---
-| M : 0.9827460901028252 this : 10
-|     # flipped bits : 9
- ---
-   -> ID : 5 bit number : 17
-   -> ID : 3 bit number : 12
-   -> ID : 6 bit number : 12
-   -> ID : 3 bit number : 19
-   -> ID : 1 bit number : 1
-   -> ID : 5 bit number : 22
-   -> ID : 6 bit number : 16
-   -> ID : 8 bit number : 12
-   -> ID : 3 bit number : 2
-
- ---
-| M : 0.4532858887296909 this : 10
++------------------------------
+| M : 0.4639621848865848 this : 10
 |     # flipped bits : 4
- ---
-   -> ID : 0 bit number : 22
-   -> ID : 5 bit number : 0
-   -> ID : 8 bit number : 11
-   -> ID : 6 bit number : 14
-
- ---
-| M : 0.6731110355712071 this : 10
-|     # flipped bits : 6
- ---
++------------------------------
+   -> ID : 0 bit number : 19
+   -> ID : 6 bit number : 21
    -> ID : 4 bit number : 19
-   -> ID : 1 bit number : 17
-   -> ID : 0 bit number : 4
-   -> ID : 5 bit number : 10
-   -> ID : 2 bit number : 18
-   -> ID : 3 bit number : 19
+   -> ID : 7 bit number : 11
 
- ---
-| M : 0.7378070622269313 this : 10
-|     # flipped bits : 7
- ---
-   -> ID : 2 bit number : 1
-   -> ID : 8 bit number : 0
-   -> ID : 1 bit number : 19
-   -> ID : 1 bit number : 12
-   -> ID : 5 bit number : 16
-   -> ID : 4 bit number : 21
-   -> ID : 0 bit number : 10
-
- ---
-| M : 0.44804377594194433 this : 10
-|     # flipped bits : 4
- ---
-   -> ID : 2 bit number : 13
++------------------------------
+| M : 0.6456570404368563 this : 10
+|     # flipped bits : 6
++------------------------------
+   -> ID : 7 bit number : 16
+   -> ID : 3 bit number : 13
+   -> ID : 8 bit number : 22
    -> ID : 4 bit number : 8
-   -> ID : 3 bit number : 0
-   -> ID : 5 bit number : 16
-
- ---
-| M : 0.3730350298581361 this : 10
-|     # flipped bits : 3
- ---
-   -> ID : 2 bit number : 3
-   -> ID : 3 bit number : 6
-   -> ID : 7 bit number : 2
-
- ---
-| M : 0.7936247495984198 this : 10
-|     # flipped bits : 7
- ---
-   -> ID : 8 bit number : 5
-   -> ID : 7 bit number : 3
-   -> ID : 1 bit number : 5
-   -> ID : 8 bit number : 13
-   -> ID : 5 bit number : 17
-   -> ID : 8 bit number : 2
-   -> ID : 4 bit number : 0
-
- ---
-| M : 0.31368818652117614 this : 10
-|     # flipped bits : 3
- ---
-   -> ID : 3 bit number : 16
-   -> ID : 0 bit number : 21
-   -> ID : 6 bit number : 3
-
- ---
-| M : 0.5535757904329118 this : 10
-|     # flipped bits : 5
- ---
-   -> ID : 8 bit number : 21
-   -> ID : 2 bit number : 2
-   -> ID : 7 bit number : 2
-   -> ID : 1 bit number : 0
-   -> ID : 0 bit number : 10
-
- ---
-| M : 0.29161504772090385 this : 10
-|     # flipped bits : 2
- ---
-   -> ID : 8 bit number : 1
-   -> ID : 9 bit number : 20
-
- ---
-| M : 0.23761476594883074 this : 10
-|     # flipped bits : 2
- ---
-   -> ID : 2 bit number : 3
-   -> ID : 5 bit number : 8
-
- ---
-| M : 0.7328422063917526 this : 10
-|     # flipped bits : 7
- ---
-   -> ID : 3 bit number : 17
-   -> ID : 6 bit number : 10
-   -> ID : 9 bit number : 4
-   -> ID : 2 bit number : 13
-   -> ID : 2 bit number : 0
+   -> ID : 1 bit number : 7
    -> ID : 9 bit number : 16
-   -> ID : 9 bit number : 14
 
- ---
-| M : 0.5769384249881684 this : 10
-|     # flipped bits : 5
- ---
-   -> ID : 9 bit number : 21
-   -> ID : 6 bit number : 1
-   -> ID : 9 bit number : 8
-   -> ID : 0 bit number : 15
-   -> ID : 0 bit number : 6
-
- ---
-| M : 0.6234237154691189 this : 10
-|     # flipped bits : 6
- ---
-   -> ID : 6 bit number : 6
-   -> ID : 1 bit number : 4
-   -> ID : 4 bit number : 8
-   -> ID : 4 bit number : 14
-   -> ID : 2 bit number : 16
-   -> ID : 5 bit number : 16
-
- ---
-| M : 0.6978646836725562 this : 10
-|     # flipped bits : 6
- ---
-   -> ID : 4 bit number : 18
-   -> ID : 3 bit number : 8
-   -> ID : 4 bit number : 4
-   -> ID : 1 bit number : 12
-   -> ID : 9 bit number : 22
-   -> ID : 5 bit number : 20
-
- ---
-| M : 0.46728719404785035 this : 10
-|     # flipped bits : 4
- ---
-   -> ID : 7 bit number : 7
-   -> ID : 1 bit number : 19
-   -> ID : 3 bit number : 4
-   -> ID : 8 bit number : 20
-
- ---
-| M : 0.25442000660665837 this : 10
-|     # flipped bits : 2
- ---
-   -> ID : 7 bit number : 9
-   -> ID : 3 bit number : 6
-
- ---
-| M : 0.7137695911489731 this : 10
++------------------------------
+| M : 0.7875704121912354 this : 10
 |     # flipped bits : 7
- ---
-   -> ID : 5 bit number : 21
++------------------------------
+   -> ID : 2 bit number : 16
+   -> ID : 2 bit number : 8
+   -> ID : 2 bit number : 15
+   -> ID : 1 bit number : 15
+   -> ID : 1 bit number : 1
+   -> ID : 4 bit number : 11
    -> ID : 3 bit number : 21
-   -> ID : 8 bit number : 3
-   -> ID : 0 bit number : 15
-   -> ID : 9 bit number : 8
-   -> ID : 2 bit number : 7
+
++------------------------------
+| M : 0.9830156632824493 this : 10
+|     # flipped bits : 9
++------------------------------
+   -> ID : 5 bit number : 6
+   -> ID : 5 bit number : 10
+   -> ID : 9 bit number : 20
+   -> ID : 8 bit number : 5
+   -> ID : 0 bit number : 0
+   -> ID : 0 bit number : 17
+   -> ID : 2 bit number : 5
+   -> ID : 6 bit number : 13
+   -> ID : 5 bit number : 23
+
++------------------------------
+| M : 0.6436079700801959 this : 10
+|     # flipped bits : 6
++------------------------------
+   -> ID : 8 bit number : 8
+   -> ID : 1 bit number : 23
+   -> ID : 1 bit number : 18
+   -> ID : 7 bit number : 13
+   -> ID : 0 bit number : 22
+   -> ID : 2 bit number : 17
+
++------------------------------
+| M : 0.18681053210274995 this : 10
+|     # flipped bits : 1
++------------------------------
+   -> ID : 6 bit number : 17
+
++------------------------------
+| M : 0.9012687663105482 this : 10
+|     # flipped bits : 9
++------------------------------
+   -> ID : 8 bit number : 2
+   -> ID : 0 bit number : 12
+   -> ID : 8 bit number : 14
+   -> ID : 0 bit number : 12
+   -> ID : 4 bit number : 19
+   -> ID : 5 bit number : 5
+   -> ID : 3 bit number : 14
+   -> ID : 1 bit number : 16
+   -> ID : 7 bit number : 7
+
++------------------------------
+| M : 0.25069014905208675 this : 10
+|     # flipped bits : 2
++------------------------------
+   -> ID : 0 bit number : 5
+   -> ID : 8 bit number : 10
+
++------------------------------
+| M : 0.1995810628730233 this : 10
+|     # flipped bits : 1
++------------------------------
    -> ID : 2 bit number : 3
 
- ---
-| M : 0.9306457994161588 this : 10
++------------------------------
+| M : 0.9582682407974552 this : 10
 |     # flipped bits : 9
- ---
-   -> ID : 6 bit number : 3
-   -> ID : 6 bit number : 5
-   -> ID : 0 bit number : 5
-   -> ID : 5 bit number : 4
-   -> ID : 7 bit number : 22
-   -> ID : 8 bit number : 11
-   -> ID : 3 bit number : 19
-   -> ID : 1 bit number : 22
-   -> ID : 7 bit number : 5
++------------------------------
+   -> ID : 7 bit number : 0
+   -> ID : 1 bit number : 6
+   -> ID : 8 bit number : 17
+   -> ID : 3 bit number : 8
+   -> ID : 7 bit number : 4
+   -> ID : 0 bit number : 12
+   -> ID : 1 bit number : 13
+   -> ID : 8 bit number : 10
+   -> ID : 0 bit number : 0
 
- ---
-| M : 0.24140807742489884 this : 10
-|     # flipped bits : 2
- ---
-   -> ID : 5 bit number : 17
-   -> ID : 6 bit number : 6
++------------------------------
+| M : 0.12761832541308135 this : 10
+|     # flipped bits : 1
++------------------------------
+   -> ID : 9 bit number : 19
 
- ---
-| M : 0.44959015811778014 this : 10
-|     # flipped bits : 4
- ---
-   -> ID : 0 bit number : 15
-   -> ID : 9 bit number : 11
-   -> ID : 9 bit number : 22
-   -> ID : 7 bit number : 10
-
- ---
-| M : 0.48272909292366517 this : 10
-|     # flipped bits : 4
- ---
-   -> ID : 6 bit number : 3
-   -> ID : 8 bit number : 13
-   -> ID : 8 bit number : 15
-   -> ID : 5 bit number : 5
-
- ---
-| M : 0.9741464648697098 this : 10
-|     # flipped bits : 9
- ---
-   -> ID : 3 bit number : 22
-   -> ID : 0 bit number : 8
-   -> ID : 7 bit number : 1
-   -> ID : 2 bit number : 20
-   -> ID : 7 bit number : 10
++------------------------------
+| M : 0.314629541776327 this : 10
+|     # flipped bits : 3
++------------------------------
    -> ID : 1 bit number : 0
-   -> ID : 7 bit number : 7
+   -> ID : 4 bit number : 1
+   -> ID : 4 bit number : 11
+
++------------------------------
+| M : 0.5340350405723178 this : 10
+|     # flipped bits : 5
++------------------------------
+   -> ID : 4 bit number : 15
+   -> ID : 6 bit number : 12
+   -> ID : 5 bit number : 10
+   -> ID : 1 bit number : 9
+   -> ID : 2 bit number : 4
+
++------------------------------
+| M : 0.9882485220067122 this : 10
+|     # flipped bits : 9
++------------------------------
+   -> ID : 8 bit number : 19
+   -> ID : 4 bit number : 16
+   -> ID : 7 bit number : 16
+   -> ID : 2 bit number : 11
+   -> ID : 0 bit number : 3
+   -> ID : 2 bit number : 12
+   -> ID : 3 bit number : 16
+   -> ID : 3 bit number : 4
+   -> ID : 2 bit number : 14
+
++------------------------------
+| M : 0.3727647182507744 this : 10
+|     # flipped bits : 3
++------------------------------
+   -> ID : 8 bit number : 16
+   -> ID : 4 bit number : 23
+   -> ID : 6 bit number : 5
+
++------------------------------
+| M : 0.9896028748340057 this : 10
+|     # flipped bits : 9
++------------------------------
+   -> ID : 0 bit number : 19
+   -> ID : 4 bit number : 7
+   -> ID : 9 bit number : 12
+   -> ID : 4 bit number : 18
+   -> ID : 5 bit number : 8
+   -> ID : 6 bit number : 19
+   -> ID : 7 bit number : 1
+   -> ID : 0 bit number : 5
+   -> ID : 0 bit number : 5
+
++------------------------------
+| M : 0.14592444788542297 this : 10
+|     # flipped bits : 1
++------------------------------
+   -> ID : 3 bit number : 1
+
++------------------------------
+| M : 0.41366305614926 this : 10
+|     # flipped bits : 4
++------------------------------
+   -> ID : 9 bit number : 2
+   -> ID : 6 bit number : 23
+   -> ID : 1 bit number : 5
+   -> ID : 1 bit number : 6
+
++------------------------------
+| M : 0.7934542238556975 this : 10
+|     # flipped bits : 7
++------------------------------
+   -> ID : 9 bit number : 23
+   -> ID : 7 bit number : 13
+   -> ID : 9 bit number : 11
+   -> ID : 9 bit number : 1
+   -> ID : 8 bit number : 21
+   -> ID : 3 bit number : 2
+   -> ID : 6 bit number : 17
+
++------------------------------
+| M : 0.2949723662521375 this : 10
+|     # flipped bits : 2
++------------------------------
+   -> ID : 4 bit number : 13
+   -> ID : 0 bit number : 5
+
++------------------------------
+| M : 0.8754544705211454 this : 10
+|     # flipped bits : 8
++------------------------------
+   -> ID : 0 bit number : 16
+   -> ID : 7 bit number : 13
+   -> ID : 4 bit number : 3
+   -> ID : 9 bit number : 6
+   -> ID : 7 bit number : 9
+   -> ID : 7 bit number : 17
+   -> ID : 6 bit number : 23
+   -> ID : 5 bit number : 11
+
++------------------------------
+| M : 0.6872907172113504 this : 10
+|     # flipped bits : 6
++------------------------------
+   -> ID : 7 bit number : 10
+   -> ID : 7 bit number : 9
+   -> ID : 7 bit number : 21
+   -> ID : 3 bit number : 0
+   -> ID : 0 bit number : 3
+   -> ID : 2 bit number : 4
+
++------------------------------
+| M : 0.690623297062834 this : 10
+|     # flipped bits : 6
++------------------------------
+   -> ID : 4 bit number : 20
+   -> ID : 9 bit number : 9
    -> ID : 8 bit number : 18
+   -> ID : 4 bit number : 7
+   -> ID : 0 bit number : 3
    -> ID : 8 bit number : 3
 
- ---
-| M : 0.20292885916595432 this : 10
-|     # flipped bits : 2
- ---
-   -> ID : 2 bit number : 4
-   -> ID : 5 bit number : 22
++------------------------------
+| M : 0.37441283131554004 this : 10
+|     # flipped bits : 3
++------------------------------
+   -> ID : 3 bit number : 9
+   -> ID : 3 bit number : 21
+   -> ID : 4 bit number : 16
 
- ---
-| M : 0.8622597260350865 this : 10
-|     # flipped bits : 8
- ---
-   -> ID : 7 bit number : 8
++------------------------------
+| M : 0.9032380182990855 this : 10
+|     # flipped bits : 9
++------------------------------
+   -> ID : 1 bit number : 17
+   -> ID : 8 bit number : 23
+   -> ID : 4 bit number : 16
+   -> ID : 4 bit number : 19
+   -> ID : 1 bit number : 15
+   -> ID : 5 bit number : 4
+   -> ID : 6 bit number : 11
+   -> ID : 5 bit number : 13
+   -> ID : 2 bit number : 4
+
++------------------------------
+| M : 0.5645071718507202 this : 10
+|     # flipped bits : 5
++------------------------------
+   -> ID : 4 bit number : 18
+   -> ID : 3 bit number : 14
+   -> ID : 4 bit number : 20
+   -> ID : 5 bit number : 14
+   -> ID : 1 bit number : 18
+
++------------------------------
+| M : 0.528661462203206 this : 10
+|     # flipped bits : 5
++------------------------------
+   -> ID : 9 bit number : 16
+   -> ID : 2 bit number : 14
+   -> ID : 7 bit number : 16
+   -> ID : 5 bit number : 5
+   -> ID : 8 bit number : 11
+
++------------------------------
+| M : 0.15244501265698474 this : 10
+|     # flipped bits : 1
++------------------------------
+   -> ID : 7 bit number : 23
+
++------------------------------
+| M : 0.6577490841514964 this : 10
+|     # flipped bits : 6
++------------------------------
    -> ID : 3 bit number : 15
-   -> ID : 0 bit number : 0
-   -> ID : 0 bit number : 7
-   -> ID : 4 bit number : 23
-   -> ID : 5 bit number : 9
-   -> ID : 8 bit number : 9
-   -> ID : 9 bit number : 13
+   -> ID : 9 bit number : 15
+   -> ID : 5 bit number : 19
+   -> ID : 7 bit number : 11
+   -> ID : 9 bit number : 1
+   -> ID : 1 bit number : 20

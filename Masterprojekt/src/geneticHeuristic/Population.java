@@ -48,6 +48,7 @@ public class Population {
 	 */
 	public Population(int size) throws IloException {
 
+		setPopulationResultSet("");
 		setSize(size);
 		setY(new ArrayList<>());
 		setPopulationResultSet("");
@@ -245,14 +246,14 @@ public class Population {
 		/*
 		 * TODO
 		 */
-		setPopulationResultSet(getPopulationResultSet() + "\n\n ---\n| M : " + m + " this : " + this.getSize());
+		setPopulationResultSet(getPopulationResultSet() + "\n\n+------------------------------\n| M : " + m + " this : " + this.getSize());
 		//System.out.println("M : " + m + " this : " + this.getSize());
 
 		int bound = (int) (m * this.getSize());
 		/*
 		 * TODO
 		 */
-		setPopulationResultSet(getPopulationResultSet() + "\n|     # flipped bits : " + bound + "\n ---");
+		setPopulationResultSet(getPopulationResultSet() + "\n|     # flipped bits : " + bound + "\n+------------------------------");
 		//System.out.println("the number of flipped bits is : " + bound);
 
 		for (int i = 0; i < bound; i++) {

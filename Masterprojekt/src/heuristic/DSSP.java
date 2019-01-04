@@ -133,8 +133,6 @@ public class DSSP {
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
 
-			this.cplexSolverOutputStream = new String(stream.toByteArray());
-
 			this.setDSSPResultSet(getDSSPResultSet() + "obj: " + cplex.getObjValue() + "\n");
 
 			for (int i = 0; i < g.getEdges().size(); i++) {
@@ -197,22 +195,31 @@ public class DSSP {
 	}
 
 	/**
-	 * Prints a title in a fancy frame on the console
-	 * 
-	 * --------------------------------------------
-	 * 
-	 * @param title the title to print
-	 */
-	private static String printTitle(String title) {
-		return ("\n ==============================\n|     " + title + ":\n ==============================\n");
-	}
-
-	/**
 	 * The toString() method returns the string representation of the object
 	 * CharacteristicsCalculation.
 	 */
 	@Override
 	public String toString() {
-		return (printTitle("DSSP-LP") + cplexSolverOutputStream + "\n" + this.getDSSPResultSet());
+
+		this.cplexSolverOutputStream = new String(stream.toByteArray());
+
+		/*
+		 * print title
+		 */
+		String leftAlignFormat = "|| %-10s %-70s  ||%n";
+		String limiter = "++========================================================================================++";
+		String dashedLimiter = "++----------------------------------------------------------------------------------------++";
+		System.out.format("%n");
+		System.out.format(limiter + "%n");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(leftAlignFormat, "\t",
+				this.getClass().getSimpleName() + " (" + this.getClass().getName() + ")");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(limiter + "%n%n");
+
+		/*
+		 * return the string representation of the object
+		 */
+		return (cplexSolverOutputStream + "\n" + dashedLimiter + "\n\n" + this.getDSSPResultSet());
 	}
 }

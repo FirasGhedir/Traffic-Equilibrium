@@ -166,7 +166,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	public Set<Vertex> vertexSet() {
 		return null;
 	}
-	
+
 	@Override
 	public Vertex getEdgeSource(Edge e) {
 		return null;
@@ -475,7 +475,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * @param title the title to print
 	 */
 	private static String printTitle(String title) {
-		return ("\n ------------------------------\n|     " + title + ":\n ------------------------------\n");
+		return ("\n+------------------------------\n|     " + title + ":\n+------------------------------\n");
 	}
 
 	/**
@@ -485,14 +485,34 @@ public class Graphs implements Graph<Vertex, Edge> {
 	@Override
 	public String toString() {
 
+		/*
+		 * print title
+		 */
+		String leftAlignFormat = "|| %-10s %-70s  ||%n";
+		String limiter = "++========================================================================================++";
+		// String dashedLimiter =
+		// "++----------------------------------------------------------------------------------------++";
+		System.out.format("%n");
+		System.out.format(limiter + "%n");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(leftAlignFormat, "\t",
+				this.getClass().getSimpleName() + " (" + this.getClass().getName() + ")");
+		System.out.format(leftAlignFormat, "\t", "");
+		System.out.format(limiter + "%n%n");
+
+		/*
+		 * return the string representation of the object
+		 */
+
 		gridGraphDataAsString = "";
 		adjacencyMatrixAsString = "";
 
 		gridGraphDataAsString += "#edges:    " + getEdges().size() + "\n#vertices: " + getVertices().size() + "\n";
 		adjacencyMatrixAsString += Graphs.printMatrix(getAdjacencyMatrix(), likeAList);
 
-		return (printTitle("Gridgraph") + gridGraphDataAsString + printTitle("Adjacency Matrix")
-				+ adjacencyMatrixAsString + printTitle("Node potential vector")
-				+ Arrays.toString(getNodePotentialVector(getAdjacencyMatrix())));
+		return (printTitle("Gridgraph") + "\n" + gridGraphDataAsString + printTitle("Adjacency Matrix") + "\n"
+				+ adjacencyMatrixAsString
+//				+ printTitle("Node potential vector") + "\n" + Arrays.toString(getNodePotentialVector(getAdjacencyMatrix()))
+		);
 	}
 }
