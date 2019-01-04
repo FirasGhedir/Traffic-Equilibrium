@@ -1,12 +1,10 @@
 package main;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.UUID;
 
 import geneticHeuristic.GaMINTB;
 import graphCharacteristics.CharacteristicsCalculator;
@@ -14,10 +12,8 @@ import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.DSSP;
-import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import player.Player;
-import sun.misc.IOUtils;
 import ilog.concert.IloException;
 
 /**
@@ -57,7 +53,7 @@ public class Main {
 //		path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
 
 		// Creating a File object that represents the disk file.
-		PrintStream outputToTxtFile = new PrintStream(new File(path));
+		//PrintStream outputToTxtFile = new PrintStream(new File(path));
 		// Store current System.out before assigning a new value
 		PrintStream console = System.out;
 
@@ -66,7 +62,7 @@ public class Main {
 			/*
 			 * Assign o to output stream
 			 */
-			System.setOut(outputToTxtFile);
+		//	System.setOut(outputToTxtFile);
 			// print object to txt file
 			System.out.println(object);
 
@@ -80,7 +76,7 @@ public class Main {
 		}
 
 		// close output stream
-		outputToTxtFile.close();
+	//	outputToTxtFile.close();
 	}
 
 	/**
@@ -119,7 +115,7 @@ public class Main {
 			graph.generateEdgesFunctions();// edge functions are totally randomized
 
 			// --- Create CharacteristicsCalculator ---
-			CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
+		//	CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
 
 			// --- social optimum ---
 			SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
