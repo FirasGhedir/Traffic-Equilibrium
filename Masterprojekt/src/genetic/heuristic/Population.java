@@ -1,25 +1,19 @@
-package cplex;
+package genetic.heuristic;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
-import graphGenerator.GridGraphGenerator;
+import genetic.heuristic.Chromosom;
 import graphModel.Graphs;
-import graphModel.Vertex;
-import heuristic.SocialOptimum;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
-import player.Player;
 
 public class Population {
-
+	
 	int size;
 	List<Chromosom> y;
 	List<Chromosom> afterranking;
@@ -27,7 +21,7 @@ public class Population {
 	List<Chromosom> children;
 	List<Chromosom> migration;
 	Random r = new Random();
-
+    int checkrefused =0;
 	public Population(int size) {
 		this.size = size;
 		y = new ArrayList<>();
@@ -55,7 +49,6 @@ public class Population {
 	}
 
 	public void generatechromosomes(Graphs g) {
-
 		for (int i = 0; i < getSize(); i++) {
 			y.add(new Chromosom(g.getEdges().size()));
 			for (int j = 0; j < g.getEdges().size(); j++) {
@@ -193,13 +186,14 @@ public class Population {
 			return true;
 		} else {
 			cplex.clearModel();
+			this.checkrefused++;
 			return false;
 		}
 	}
 
 	public void savefetnicitiy() {
 		for (int i = 0; i < getY().size(); i++) {
-			getY().get(i).efficientycalculate();
+			getY().get(i).calculateEfficiency();
 		}
 	}
 
@@ -209,7 +203,7 @@ public class Population {
 		List<Chromosom> notsolvable = new ArrayList<>();
 
 		for (int i = 0; i < getY().size(); i++) {
-			getY().get(i).efficientycalculate();
+			getY().get(i).calculateEfficiency();
 			if (getY().get(i).isFeasible()) {
 				solvable.add(getY().get(i));
 			} else {
@@ -219,19 +213,23 @@ public class Population {
 		solvable.sort(Comparator.comparing(Chromosom::getEfficiency));
 		notsolvable.sort(Comparator.comparing(Chromosom::getEfficiency));
 
-		setAfterranking(solvable);
-		getAfterranking().addAll(notsolvable);
+		
+		setAfterranking(new ArrayList<>(solvable));
+		getAfterranking().addAll(new ArrayList<>(notsolvable));
 
 		for (int i = 0; i < getAfterranking().size(); i++) {
 			getAfterranking().get(i).setRank(i);
 		}
+		
+		solvable.clear();
+		notsolvable.clear();
 
 	}
 
 	public void saveprobability() {
 
 		for (int i = 0; i < getAfterranking().size(); i++) {
-			getAfterranking().get(i).setProbability(getAfterranking().get(i).probabilitycalculate(getSize()));
+			getAfterranking().get(i).setProbability(getAfterranking().get(i).calculateProbability(getSize()));
 		}
 
 	}
@@ -324,11 +322,31 @@ public class Population {
 
 	}
 
-	public void run (List<Chromosom> t, Graphs graph, Population firas) throws IloException {
+	public void mutation(List<Chromosom> list) {
+		double m = 0.1 + (0.9) * r.nextDouble();
 
+		int bound = (int) (m * this.getSize());
 
+		for (int i = 0; i < bound; i++) {
+			int chosenvector = r.nextInt(this.getSize());
+			int chosenbit = r.nextInt(list.get(chosenvector).getVector().length);
+			
+			if (list.get(chosenvector).getVector()[chosenbit] == false) {
+				list.get(chosenvector).getVector()[chosenbit] = true;
 
-	
+			}
+
+			else {
+
+				list.get(chosenvector).getVector()[chosenbit] = false;
+
+			}
+
+		}
+
+	}
+
+	public void run(List<Chromosom> list, Graphs graph, Population firas) throws IloException {
 
 		for (int i = 0; i < firas.getY().size(); i++) {
 			firas.getY().get(i).setFeasible(firas.evaluation(graph, firas.getY().get(i)));
@@ -340,10 +358,11 @@ public class Population {
 
 		firas.saveprobability();
 
-		firas.setY(firas.getAfterranking());
-          
-		t.add(firas.getY().get(0));
-		
+		firas.setY(new ArrayList<>(firas.getAfterranking()));
+		firas.getAfterranking().clear();
+        if(firas.getY().get(0).isFeasible()) {
+		list.add(firas.getY().get(0));
+        }
 		firas.saveminmax();
 
 		double upperbound = firas.getY().get(firas.getY().size() - 1).getMax();
@@ -367,6 +386,8 @@ public class Population {
 			firas.newchromosomes(firas.getParents().get(i), firas.getParents().get(i + 1));
 
 		}
+		
+		firas.getParents().clear();
 
 		int rest = firas.getSize() - finalrate;
 		firas.generatemigranten(rest, graph);
@@ -374,9 +395,16 @@ public class Population {
 		List<Chromosom> newgeneration = new ArrayList<>();
 		newgeneration.addAll(firas.getChildren());
 		newgeneration.addAll(firas.getMigration());
-		
-		firas.setY(newgeneration);
 
+		firas.mutation(newgeneration);
+				
+		firas.setY(new ArrayList<>(newgeneration));
+		
+		newgeneration.clear();
+		firas.getChildren().clear();
+		firas.getMigration().clear();
+		
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package geneticHeuristic;
+package genetic.heuristic;
 
 /**
  * Universität Ulm

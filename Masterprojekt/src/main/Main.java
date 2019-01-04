@@ -6,15 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import geneticHeuristic.GaMINTB;
-import graphCharacteristics.CharacteristicsCalculator;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.DSSP;
 import heuristic.SocialOptimum;
-import player.Player;
 import ilog.concert.IloException;
+import player.Player;
 
 /**
  * Universität Ulm
@@ -127,7 +125,7 @@ public class Main {
 //			RMINTB rmintb = new RMINTB(graph);
 
 			// --- GAMINTB ---
-			GaMINTB gamintb = new GaMINTB(graph, 10, 30);
+//			GaMINTB gamintb = new GaMINTB(graph, 10, 30);
 
 			/*
 			 * =============================================================
@@ -140,7 +138,7 @@ public class Main {
 			printList.add(systemOptimalFlow);
 			printList.add(dssp);
 //			list.add(rmintb);
-			printList.add(gamintb);
+		//	printList.add(gamintb);
 
 			printObjects(printList);
 
