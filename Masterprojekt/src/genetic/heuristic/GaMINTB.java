@@ -40,11 +40,11 @@ public class GaMINTB {
 		Population firas = new Population(100);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(9, 9); // do not change !!
 		test.generateGraph(graph, map);
 
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 18);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(14), 17);
+		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(60), 18);
+		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(60), 17);
 
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
@@ -59,7 +59,7 @@ public class GaMINTB {
 		System.out.println(systemOptimalFlow);
 
 		firas.generatechromosomes(graph);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 50; i++) {
 			firas.run(start.getBestsolutions(), graph, firas);
 	
 
