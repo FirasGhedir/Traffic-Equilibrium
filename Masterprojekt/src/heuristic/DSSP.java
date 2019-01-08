@@ -8,6 +8,7 @@ import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
+import ilog.cplex.IloCplex.UnknownObjectException;
 
 /**
  * Universität Ulm
@@ -40,7 +41,8 @@ public class DSSP {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @throws IloException if a CPLEX error occures
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
 	public DSSP(Graphs graph) throws IloException {
 
@@ -58,8 +60,10 @@ public class DSSP {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param graph the given graph
-	 * @throws IloException if a CPLEX error occures
+	 * @param graph
+	 *            the given graph
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
 	public void solveDSSP(Graphs g) throws IloException {
 
@@ -142,12 +146,27 @@ public class DSSP {
 
 			}
 
+			savevalues(cplex, g);
+
 			break;
 
 		default:
 
 			throw new IllegalStateException("Problem not solved.");
 		}
+	}
+
+	private void savevalues(IloCplex cplex2, Graphs g) throws IloException {
+
+		for (int i = 0; i < g.getEdges().size(); i++) {
+			if (cplex2.getValue(g.getEdges().get(i).getBeta()) > 0) {
+				g.getEdges().get(i).setC(1 / cplex.getValue(g.getEdges().get(i).getBeta()));
+			}
+			else if(cplex2.getValue(g.getEdges().get(i).getBeta()) == 0) {
+				
+			}
+		}
+
 	}
 
 	/**
@@ -166,7 +185,8 @@ public class DSSP {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param g the given graph
+	 * @param g
+	 *            the given graph
 	 */
 	public void setGraph(Graphs g) {
 		this.G = g;
@@ -188,7 +208,8 @@ public class DSSP {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param dSSPResultSet the results of solving the DSSP-LP
+	 * @param dSSPResultSet
+	 *            the results of solving the DSSP-LP
 	 */
 	public void setDSSPResultSet(String dSSPResultSet) {
 		this.DSSPResultSet = dSSPResultSet;
