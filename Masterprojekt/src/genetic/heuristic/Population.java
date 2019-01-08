@@ -53,7 +53,7 @@ public class Population {
 			y.add(new Chromosom(g.getEdges().size()));
 			for (int j = 0; j < g.getEdges().size(); j++) {
 
-				double randomValue = 0 + (1 - 0) * r.nextDouble();
+				double randomValue =  r.nextDouble();
 				int x = (int) (randomValue + 0.5);
 				if (x == 0) {
 					y.get(i).vector[j] = false;
