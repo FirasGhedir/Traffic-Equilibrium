@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
+import heuristic.BellmanFordShortestPath;
 import heuristic.SocialOptimum;
 import ilog.concert.IloException;
 import player.Player;
@@ -37,14 +38,14 @@ public class GaMINTB {
 
 		GaMINTB start = new GaMINTB();
 
-		Population firas = new Population(100);
+		Population firas = new Population(10);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(9, 9); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
 		test.generateGraph(graph, map);
 
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(60), 18);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(60), 17);
+		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 7);
+		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 8);
 
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
@@ -53,13 +54,16 @@ public class GaMINTB {
 		graph.setPlayer(x);
 		graph.generateEdgesFunctions();
 
+		BellmanFordShortestPath algo = new BellmanFordShortestPath(graph,0.1);
+		System.out.println(algo.getPath(graph.getVertices().get(0), graph.getVertices().get(3)).toString());
+		
 		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 		// Store current System.out before assigning a new value
 
 		System.out.println(systemOptimalFlow);
 
 		firas.generatechromosomes(graph);
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 10; i++) {
 			firas.run(start.getBestsolutions(), graph, firas);
 	
 

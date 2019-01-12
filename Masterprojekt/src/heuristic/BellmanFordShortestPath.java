@@ -11,12 +11,12 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.*;
 
 import graphModel.Edge;
 import graphModel.Graph;
 import graphModel.Graphs;
 
+@SuppressWarnings("hiding")
 public class BellmanFordShortestPath<Vertex, Edge>
 extends
 BaseShortestPathAlgorithm<Vertex, Edge>

@@ -122,7 +122,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	@Override
 	public double getEdgeWeight(Edge e) {
-		return e.getWeight();
+		return e.getL();
 	}
 
 	@Override
