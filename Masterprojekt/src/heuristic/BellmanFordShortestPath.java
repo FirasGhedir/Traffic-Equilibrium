@@ -16,7 +16,6 @@ import java.util.*;
 import graphModel.Edge;
 import graphModel.Graph;
 import graphModel.Graphs;
-import javafx.util.Pair;
 
 public class BellmanFordShortestPath<Vertex, Edge>
 extends
@@ -166,9 +165,9 @@ public SingleSourcePaths<Vertex, Edge> getPaths(Vertex source)
      */
     Map<Vertex, Pair<Double, Edge>> distanceAndPredecessorMap = new HashMap<>();
     for (Vertex v : graph.vertexSet()) {
-        distanceAndPredecessorMap.put(v, Pair.of(distance.get(v), pred.get(v)));
+        distanceAndPredecessorMap.put(v, new Pair(distance.get(v), pred.get(v)));
     }
-    return new TreeSingleSourcePathsImpl<>(graph, source, distanceAndPredecessorMap);
+    return new TreeSingleSourcePathsImpl<Vertex,Edge>(graph, source, distanceAndPredecessorMap);
 }
 
 /**

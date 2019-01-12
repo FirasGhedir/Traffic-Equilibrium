@@ -5,9 +5,9 @@ package heuristic;
 import graphModel.Graph;
 import graphModel.Graphs;
 import heuristic.ShortestPathAlgorithm.SingleSourcePaths;
+
 import java.io.*;
 import java.util.*;
-
 
 public class TreeSingleSourcePathsImpl<Vertex,Edge> implements
 SingleSourcePaths<Vertex, Edge>,
@@ -116,7 +116,7 @@ Serializable {
 
 	        double weight = 0d;
 	        while (p != null && !cur.equals(source)) {
-	            Edge e = p.getSecond();
+	            Edge e =  p.getSecond();
 	            if (e == null) {
 	                break;
 	            }
