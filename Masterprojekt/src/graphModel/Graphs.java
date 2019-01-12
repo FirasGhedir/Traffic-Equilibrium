@@ -2,6 +2,7 @@ package graphModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -180,11 +181,16 @@ public class Graphs implements Graph<Vertex, Edge> {
 	/**
 	 * Gets the vertex opposite another vertex across an edge.
 	 *
-	 * @param g graph containing e and v
-	 * @param e edge in g
-	 * @param v vertex in g
-	 * @param   <V> the graph vertex type
-	 * @param   <E> the graph edge type
+	 * @param g
+	 *            graph containing e and v
+	 * @param e
+	 *            edge in g
+	 * @param v
+	 *            vertex in g
+	 * @param <V>
+	 *            the graph vertex type
+	 * @param <E>
+	 *            the graph edge type
 	 *
 	 * @return vertex opposite to v across e
 	 */
@@ -205,8 +211,10 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param vertex          the given vertex
-	 * @param adjacencymatrix the given adjacency matrix
+	 * @param vertex
+	 *            the given vertex
+	 * @param adjacencymatrix
+	 *            the given adjacency matrix
 	 * 
 	 * @return this.an Arraylist of verteces with all ingoing edges for each vertex
 	 */
@@ -228,8 +236,10 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param vertex          the given vertex
-	 * @param adjacencymatrix the given adjacency matrix
+	 * @param vertex
+	 *            the given vertex
+	 * @param adjacencymatrix
+	 *            the given adjacency matrix
 	 * 
 	 * @return this.return this.an Arraylist of verteces with all outgoing edges for
 	 *         each vertex
@@ -263,8 +273,10 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param matrix     the given matrix
-	 * @param rowPrinter prints each row of the matrix
+	 * @param matrix
+	 *            the given matrix
+	 * @param rowPrinter
+	 *            prints each row of the matrix
 	 * @return
 	 */
 	public static String printMatrix(int[][] matrix, Consumer<int[]> rowPrinter) {
@@ -277,7 +289,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param vector the given vector
+	 * @param vector
+	 *            the given vector
 	 */
 	public static void printVector(int[] vector) {
 		System.out.println(Arrays.toString(vector));
@@ -379,7 +392,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * Creates the node potential vector for a given graph
 	 * --------------------------------------------
 	 * 
-	 * @param adjacencymatrix the given adjacency matrix
+	 * @param adjacencymatrix
+	 *            the given adjacency matrix
 	 * 
 	 * @return this.the node potential vector out of the adjacency matrix
 	 */
@@ -405,7 +419,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 *
-	 * @param v the int number of a Vertex
+	 * @param v
+	 *            the int number of a Vertex
 	 * @return this.an Iterator over Vertices that are adjacent to the Vertex named
 	 *         v, empty set if v is not in graph
 	 */
@@ -419,7 +434,8 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param n the number of players
+	 * @param n
+	 *            the number of players
 	 */
 	public void setPlayers(int n) {
 
@@ -463,16 +479,22 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param players the current players as ArrayList
+	 * @param players
+	 *            the current players as ArrayList
 	 */
 	public void setPlayer(ArrayList<Player> players) {
 		this.players = players;
 	}
 
+	public static <Vertex, Edge> boolean testIncidence(Graph<Vertex, Edge> g, Edge e, Vertex v) {
+		return (g.getEdgeSource(e).equals(v)) || (g.getEdgeTarget(e).equals(v));
+	}
+
 	/**
 	 * Prints a title in a fancy frame on the console
 	 * 
-	 * @param title the title to print
+	 * @param title
+	 *            the title to print
 	 */
 	private static String printTitle(String title) {
 		return ("\n+------------------------------\n|     " + title + ":\n+------------------------------\n");
@@ -512,7 +534,14 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 		return (printTitle("Gridgraph") + "\n" + gridGraphDataAsString + printTitle("Adjacency Matrix") + "\n"
 				+ adjacencyMatrixAsString
-//				+ printTitle("Node potential vector") + "\n" + Arrays.toString(getNodePotentialVector(getAdjacencyMatrix()))
+		// + printTitle("Node potential vector") + "\n" +
+		// Arrays.toString(getNodePotentialVector(getAdjacencyMatrix()))
 		);
+	}
+
+	@Override
+	public Set<Edge> edgeSet() {
+		Set<Edge> tmp =  new HashSet<Edge>(edges);
+		return tmp;
 	}
 }

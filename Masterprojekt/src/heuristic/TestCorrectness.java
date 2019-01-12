@@ -2,9 +2,6 @@ package heuristic;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import graphModel.Edge;
 import graphModel.Graphs;
@@ -51,9 +48,8 @@ public class TestCorrectness {
 	
     public boolean test(Graphs g) {
     	boolean f = false;
-    	DijkstraAlgorithm shortespath = new DijkstraAlgorithm(g);
-    	shortespath.execute(g.getVertices().get(0));
-    	shortespath.getPath(g.getVertices().get(7));
+    	
+    	
     	
     
     	

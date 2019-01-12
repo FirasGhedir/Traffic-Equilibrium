@@ -228,5 +228,8 @@ public interface Graph<V, E> {
 	 * @return target vertex
 	 */
 	V getEdgeTarget(E e);
+	
+    Set<E> edgeSet();
+
 
 }
