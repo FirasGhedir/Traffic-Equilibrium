@@ -1,6 +1,8 @@
 package graphModel;
 
+import ilog.concert.IloException;
 import ilog.concert.IloNumVar;
+import ilog.cplex.IloCplex;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ public class Edge {
 	IloNumVar beta;
 	double Result;
 	IloNumVar y;
+	double l;
 
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
 	ArrayList<Double> values = new ArrayList<>();
@@ -179,6 +182,20 @@ public class Edge {
 
 	public void setY(IloNumVar y) {
 		this.y = y;
+	}
+
+	public double getL() {
+		return l;
+	}
+
+	public void setL(double l) {
+		this.l = l;
+	}
+	
+	public void calculateL(IloCplex cplex) throws  IloException {
+		
+		double x = getCostA()*getSum() + getCostB() + cplex.getValue(getBeta()) ;
+		setL(x);
 	}
 	
 	
