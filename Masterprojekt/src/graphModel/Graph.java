@@ -1,5 +1,6 @@
 package graphModel;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -230,6 +231,8 @@ public interface Graph<V, E> {
 	V getEdgeTarget(E e);
 	
     Set<E> edgeSet();
+
+	ArrayList<E> outgoingEdgesOf(V v);
 
 
 }

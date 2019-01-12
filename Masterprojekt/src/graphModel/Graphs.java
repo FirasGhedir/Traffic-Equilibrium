@@ -544,4 +544,15 @@ public class Graphs implements Graph<Vertex, Edge> {
 		Set<Edge> tmp =  new HashSet<Edge>(edges);
 		return tmp;
 	}
+
+	@Override
+	public ArrayList<Edge> outgoingEdgesOf(Vertex v) {
+		
+		ArrayList<Edge> tmp = new ArrayList<>();
+		for(int i = 0 ; i < getEdges().size() ; i++) {
+	        if(getEdges().get(i).getFrom().equals(v))
+              tmp.add(getEdges().get(i));
+		}
+		return tmp;
+	}
 }
