@@ -165,17 +165,18 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	@Override
 	public Set<Vertex> vertexSet() {
-		return null;
+		Set<Vertex> tmp = new HashSet<>(getVertices());
+		return tmp;
 	}
 
 	@Override
 	public Vertex getEdgeSource(Edge e) {
-		return null;
+		return e.getFrom();
 	}
 
 	@Override
 	public Vertex getEdgeTarget(Edge e) {
-		return null;
+		return e.getTo();
 	}
 
 	/**
@@ -194,9 +195,9 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 *
 	 * @return vertex opposite to v across e
 	 */
-	public static <V, E> V getOppositeVertex(Graph<V, E> g, E e, V v) {
-		V source = g.getEdgeSource(e);
-		V target = g.getEdgeTarget(e);
+	public static  <Vertex, Edge> Vertex getOppositeVertex(Graph<Vertex, Edge> g, Edge e, Vertex v) {
+		Vertex source = g.getEdgeSource(e);
+		Vertex target = g.getEdgeTarget(e);
 		if (v.equals(source)) {
 			return target;
 		} else if (v.equals(target)) {

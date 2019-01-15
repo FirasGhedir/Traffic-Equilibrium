@@ -31,12 +31,12 @@ public class Edge {
 	IloNumVar beta;
 	double Result;
 	IloNumVar y;
-	double l;
+	double l; // the real weight after finishing the algorithm
 
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
 	ArrayList<Double> values = new ArrayList<>();
 	double sum;
-
+    double betta;
 	/**
 	 * Constructor to create a new edge
 	 * 
@@ -196,6 +196,14 @@ public class Edge {
 		
 		double x = getCostA()*getSum() + getCostB() + cplex.getValue(getBeta()) ;
 		setL(x);
+	}
+
+	public double getBetta() {
+		return betta;
+	}
+
+	public void setBetta(double betta) {
+		this.betta = betta;
 	}
 	
 	

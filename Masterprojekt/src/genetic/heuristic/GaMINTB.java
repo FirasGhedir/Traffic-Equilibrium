@@ -54,26 +54,30 @@ public class GaMINTB {
 		graph.setPlayer(x);
 		graph.generateEdgesFunctions();
 
-		BellmanFordShortestPath algo = new BellmanFordShortestPath(graph,0.1);
-		System.out.println(algo.getPath(graph.getVertices().get(0), graph.getVertices().get(3)).toString());
+		BellmanFordShortestPath algo = new BellmanFordShortestPath(graph);
 		
+		List<Vertex> tmp = algo.findPathBetween(graph,graph.getVertices().get(0),graph.getVertices().get(3)).getVertexList();		
+
+		
+		for(int i = 0 ; i < tmp.size() ; i++) {
+			System.out.println(tmp.get(i).getId());
+		}
 		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 		// Store current System.out before assigning a new value
 
 		System.out.println(systemOptimalFlow);
 
 		firas.generatechromosomes(graph);
-		for (int i = 0; i < 10; i++) {
+	/*	for (int i = 0; i < 100; i++) {
 			firas.run(start.getBestsolutions(), graph, firas);
 	
 
 		}
-        System.out.println(firas.checkrefused);
 		Optional<Chromosom> alpha = start.getBestsolutions().stream().min(Comparator.comparingInt(Chromosom::getEfficiency));
 
 		System.err.println("##################################################### termination ########################################");
 		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : " +alpha.get().getEfficiency() + " || Feasibility  : " + alpha.get().isFeasible());
-		
+		*/
 	}
 
 }
