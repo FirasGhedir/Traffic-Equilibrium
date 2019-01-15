@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
@@ -35,7 +40,6 @@ public class Main {
 	static List<Object> printList = new ArrayList<Object>();
 	static String impressum = "\n| Universität Ulm\n| \n| Projekt Algorithm Engineering-Projekt --- WiSe 2018/19\n| \n| @author Firas Ghedir (firas.ghedir@uni-ulm.de)\n| @author Julian Bestler (julian.bestler@uni-ulm.de)\n| \n| @version 1.0\n\n";
 
-
 	/**
 	 * Help method to print list content to console and txt file
 	 * 
@@ -51,7 +55,7 @@ public class Main {
 //		path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
 
 		// Creating a File object that represents the disk file.
-		//PrintStream outputToTxtFile = new PrintStream(new File(path));
+		// PrintStream outputToTxtFile = new PrintStream(new File(path));
 		// Store current System.out before assigning a new value
 		PrintStream console = System.out;
 
@@ -60,7 +64,7 @@ public class Main {
 			/*
 			 * Assign o to output stream
 			 */
-		//	System.setOut(outputToTxtFile);
+			// System.setOut(outputToTxtFile);
 			// print object to txt file
 			System.out.println(object);
 
@@ -74,7 +78,69 @@ public class Main {
 		}
 
 		// close output stream
-	//	outputToTxtFile.close();
+		// outputToTxtFile.close();
+	}
+
+	/**
+	 * Help method to configure a JSON file of a given object instance
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param obj the object to store into JSON file
+	 */
+	private static void buildJSON(Object obj) {
+
+		final ObjectMapper mapper = new ObjectMapper(); // can use static singleton, inject: just make sure to reuse!
+
+		// configure JSON
+		File file = new File("./Masterprojekt/files/graphData.json");
+		try {
+			mapper.writeValue(file, obj); // writes JSON serialization of object instance
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Help method to create an object instance out of a given JSON file
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param obj the object to store into JSON file
+	 */
+	private static Object createObjectInstanceFromJSON(File file) {
+
+		Graphs graph = new Graphs(); // new instance for JSON data
+
+		// check, if file is valide
+		String fileName = file.getName().toUpperCase();
+		boolean extension = fileName.endsWith(".JSON");
+
+		switch (String.valueOf(extension)) {
+		case "true":
+			final ObjectMapper mapper = new ObjectMapper(); // can use static singleton, inject: just make sure to
+			// reuse!
+
+			try {
+				graph = mapper.readValue(new File("my-older-stuff.json"), Graphs.class); // reads object instance of
+				// JSON serialization
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return graph;
+		default:
+			System.err.println("The given file is not valid to create an object instance out of it...");
+			break;
+		}
+		return graph;
 	}
 
 	/**
@@ -112,8 +178,11 @@ public class Main {
 			graph.setPlayer(x);
 			graph.generateEdgesFunctions();// edge functions are totally randomized
 
+			buildJSON(graph);
+
 			// --- Create CharacteristicsCalculator ---
-		//	CharacteristicsCalculator characteristics = new CharacteristicsCalculator(graph);
+			// CharacteristicsCalculator characteristics = new
+			// CharacteristicsCalculator(graph);
 
 			// --- social optimum ---
 			SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
@@ -138,7 +207,7 @@ public class Main {
 			printList.add(systemOptimalFlow);
 			printList.add(dssp);
 //			list.add(rmintb);
-		//	printList.add(gamintb);
+			// printList.add(gamintb);
 
 			printObjects(printList);
 
