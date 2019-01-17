@@ -36,6 +36,7 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	private LinkedList<Integer>[] adjListArray;
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
+	ArrayList<Double> beta;
 
 	/**
 	 * 
@@ -43,6 +44,7 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	public Graphs() {
          vertices = new ArrayList<Vertex>();
          edges = new ArrayList<Edge>();
+         beta = new ArrayList<>();
 	}
 
 	public Graphs(Graphs graph) {
@@ -559,6 +561,22 @@ public class Graphs implements Graph<Vertex, Edge>  {
 		}
 		return tmp;
 	}
+	
+	public void fillbeta() {
+		for(int i = 0 ; i < getEdges().size() ; i++	 ) {
+			getBeta().add(getEdges().get(i).getBetta());
+		}
+	}
+
+	public ArrayList<Double> getBeta() {
+		return beta;
+	}
+
+	public void setBeta(ArrayList<Double> beta) {
+		this.beta = beta;
+	}
+	
+	
 	
 	
 }

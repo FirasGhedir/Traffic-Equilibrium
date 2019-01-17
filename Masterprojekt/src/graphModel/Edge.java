@@ -35,6 +35,7 @@ public class Edge {
 
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
 	ArrayList<Double> values = new ArrayList<>();
+	ArrayList<Double> ilist = new ArrayList<>();
 	double sum;
     double betta;
 	/**
@@ -206,6 +207,18 @@ public class Edge {
 
 	public void setBetta(double betta) {
 		this.betta = betta;
+	}
+
+
+
+	public ArrayList<Double> getIlist() {
+		return ilist;
+	}
+
+
+
+	public void setIlist(ArrayList<Double> ilist) {
+		this.ilist = ilist;
 	}
 	
 	

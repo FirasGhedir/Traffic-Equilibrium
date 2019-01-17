@@ -162,14 +162,12 @@ public class DSSP {
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			g.getEdges().get(i).setBetta(cplex2.getValue(g.getEdges().get(i).getBeta()));
+			if(g.getEdges().get(i).getBetta()>0) {g.getEdges().get(i).getIlist().add(g.getEdges().get(i).getBetta());}
 			g.getEdges().get(i).calculateL();
-			if (cplex2.getValue(g.getEdges().get(i).getBeta()) > 0) {
-				g.getEdges().get(i).setC(1 / cplex.getValue(g.getEdges().get(i).getBeta()));
-			}
-			else if(cplex2.getValue(g.getEdges().get(i).getBeta()) == 0) {
-				
-			}
+			
 		}
+		
+		 g.fillbeta();
 
 	}
 
