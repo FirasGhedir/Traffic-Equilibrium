@@ -182,6 +182,9 @@ public class Population {
 		cplex.minimize();
 
 		if (cplex.solve()) {
+			for(int i = 0 ;i< g.getEdges().size() ;  i++) {
+				xx.getBeta().add(cplex.getValue(g.getEdges().get(i).getBeta()));
+			}
 			cplex.clearModel();
 			return true;
 		} else {

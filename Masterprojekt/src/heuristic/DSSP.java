@@ -157,8 +157,12 @@ public class DSSP {
 	}
 
 	private void savevalues(IloCplex cplex2, Graphs g) throws IloException {
+		
+		
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
+			g.getEdges().get(i).setBetta(cplex2.getValue(g.getEdges().get(i).getBeta()));
+			g.getEdges().get(i).calculateL();
 			if (cplex2.getValue(g.getEdges().get(i).getBeta()) > 0) {
 				g.getEdges().get(i).setC(1 / cplex.getValue(g.getEdges().get(i).getBeta()));
 			}

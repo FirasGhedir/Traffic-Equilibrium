@@ -1,5 +1,7 @@
 package genetic.heuristic;
 
+import java.util.ArrayList;
+
 /**
  * Universität Ulm
  * 
@@ -23,6 +25,7 @@ public class Chromosom {
 	private double probability;
 	private double max;
 	private double min;
+	ArrayList<Double> beta;
 
 	/**
 	 * Constructor
@@ -34,10 +37,11 @@ public class Chromosom {
 	public Chromosom(int size) {
 
 		setVector(new boolean[size]);
+		beta = new ArrayList<>();
 	}
 
 	/**
-	 * Calclulates the efficiency
+	 * Calculates the efficiency
 	 * 
 	 */
 	public void calculateEfficiency() {
@@ -122,5 +126,15 @@ public class Chromosom {
 	public void setMin(double min) {
 		this.min = min;
 	}
+
+	public ArrayList<Double> getBeta() {
+		return beta;
+	}
+
+	public void setBeta(ArrayList<Double> beta) {
+		this.beta = beta;
+	}
+	
+	
 
 }

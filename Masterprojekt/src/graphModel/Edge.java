@@ -50,8 +50,10 @@ public class Edge {
 		super();
 		this.from = from;
 		this.to = to;
-		this.weight = weight;
+		this.l = weight;
 	}
+	
+	
 
 	/**
 	 * Getter method for the 'from' value
@@ -192,9 +194,9 @@ public class Edge {
 		this.l = l;
 	}
 	
-	public void calculateL(IloCplex cplex) throws  IloException {
+	public void calculateL() {
 		
-		double x = getCostA()*getSum() + getCostB() + cplex.getValue(getBeta()) ;
+		double x = getCostA()*getSum() + getCostB() + getBetta() ;
 		setL(x);
 	}
 
@@ -205,6 +207,7 @@ public class Edge {
 	public void setBetta(double betta) {
 		this.betta = betta;
 	}
+	
 	
 	
 

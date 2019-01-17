@@ -26,10 +26,10 @@ import player.Player;
  * 
  *          A collection of utilities to assist with graph manipulation.
  */
-public class Graphs implements Graph<Vertex, Edge> {
+public class Graphs implements Graph<Vertex, Edge>  {
 
-	public ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-	public ArrayList<Edge> edges = new ArrayList<Edge>();
+	public ArrayList<Vertex> vertices;
+	public ArrayList<Edge> edges;
 	private ArrayList<Player> players = new ArrayList<>();
 	private Random rand = new Random();
 	private List<Integer>[] adj;
@@ -41,11 +41,13 @@ public class Graphs implements Graph<Vertex, Edge> {
 	 * 
 	 */
 	public Graphs() {
-
+         vertices = new ArrayList<Vertex>();
+         edges = new ArrayList<Edge>();
 	}
 
 	public Graphs(Graphs graph) {
-
+       this.vertices = new ArrayList<>(graph.getVertices());
+       this.edges = new ArrayList<>(graph.getEdges());
 	}
 
 	public void generateEdgesFunctions() {
@@ -155,6 +157,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	@Override
 	public Vertex addVertex() {
+		this.getVertices().add(new Vertex(50));
 		return null;
 	}
 
@@ -556,4 +559,6 @@ public class Graphs implements Graph<Vertex, Edge> {
 		}
 		return tmp;
 	}
+	
+	
 }

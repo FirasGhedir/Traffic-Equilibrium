@@ -16,6 +16,7 @@ import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.DSSP;
 import heuristic.SocialOptimum;
+import heuristic.TestCorrectness;
 import ilog.concert.IloException;
 import player.Player;
 
@@ -189,6 +190,10 @@ public class Main {
 
 			// --- DSSP ---
 			DSSP dssp = new DSSP(graph);
+			TestCorrectness correct = new TestCorrectness();
+
+			System.out.println(correct.test(graph, player1.getSource(), player1.getSink()));
+
 
 			// --- RMINTB ---
 //			RMINTB rmintb = new RMINTB(graph);
