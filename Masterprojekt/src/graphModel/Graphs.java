@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -26,7 +25,7 @@ import player.Player;
  * 
  *          A collection of utilities to assist with graph manipulation.
  */
-public class Graphs implements Graph<Vertex, Edge>  {
+public class Graphs implements Graph<Vertex, Edge> {
 
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
@@ -37,27 +36,33 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
 	ArrayList<Double> beta;
+	final static int d_max = 10;
+	final static int d_min = 1;
+	final static int b_max = 3;
+	final static int b_min = 0;
+	final static double Pi = 1.57079632679;
+	final static int max_players = 10;
 
 	/**
 	 * 
 	 */
 	public Graphs() {
-         vertices = new ArrayList<Vertex>();
-         edges = new ArrayList<Edge>();
-         beta = new ArrayList<>();
+		vertices = new ArrayList<Vertex>();
+		edges = new ArrayList<Edge>();
+		beta = new ArrayList<>();
 	}
 
 	public Graphs(Graphs graph) {
-       this.vertices = new ArrayList<>(graph.getVertices());
-       this.edges = new ArrayList<>(graph.getEdges());
+		this.vertices = new ArrayList<>(graph.getVertices());
+		this.edges = new ArrayList<>(graph.getEdges());
 	}
 
 	public void generateEdgesFunctions() {
 		for (int i = 0; i < this.edges.size(); i++) {
 
 			// ax+b is randomly generated
-			this.edges.get(i).setCostA(rand.nextInt(3) + 1);
-			this.edges.get(i).setCostB(rand.nextInt(2));
+			this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
+			this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
 
 		}
 	}
@@ -200,7 +205,8 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	 *
 	 * @return vertex opposite to v across e
 	 */
-	public static  <Vertex, Edge> Vertex getOppositeVertex(Graph<Vertex, Edge> g, Edge e, Vertex v) {
+	@SuppressWarnings("hiding")
+	public static <Vertex, Edge> Vertex getOppositeVertex(Graph<Vertex, Edge> g, Edge e, Vertex v) {
 		Vertex source = g.getEdgeSource(e);
 		Vertex target = g.getEdgeTarget(e);
 		if (v.equals(source)) {
@@ -443,29 +449,12 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	 * @param n
 	 *            the number of players
 	 */
-	public void setPlayers(int n) {
+	public void generatePlayers() {
 
-		int x, y, z;
-		x = 0;
-		y = 0;
-		z = 0;
-
-		for (int i = 0; i < n; i++) {
-			Scanner scan = new Scanner(System.in);
-			try {
-				System.out.println("Please insert the Source of Player " + i + " : ");
-				x = scan.nextInt();
-				System.out.println("Please insert the sink of Player " + i + " : ");
-				y = scan.nextInt();
-				System.out.println("Please insert the demand of player " + i + " : ");
-				z = scan.nextInt();
-				players.add(i, new Player(i, this.getVertices().get(x), this.getVertices().get(y), z));
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				scan.close();
-			}
-
+		int x = rand.nextInt(max_players);
+		for (int i = 0; i < x; i++) {
+			this.getPlayers().add(new Player(i, getVertices().get(rand.nextInt(getVertices().size())),
+					getVertices().get(rand.nextInt(getVertices().size())), d_min + (d_max-d_min)*rand.nextInt()));
 		}
 	}
 
@@ -492,6 +481,7 @@ public class Graphs implements Graph<Vertex, Edge>  {
 		this.players = players;
 	}
 
+	@SuppressWarnings("hiding")
 	public static <Vertex, Edge> boolean testIncidence(Graph<Vertex, Edge> g, Edge e, Vertex v) {
 		return (g.getEdgeSource(e).equals(v)) || (g.getEdgeTarget(e).equals(v));
 	}
@@ -547,23 +537,23 @@ public class Graphs implements Graph<Vertex, Edge>  {
 
 	@Override
 	public Set<Edge> edgeSet() {
-		Set<Edge> tmp =  new HashSet<Edge>(edges);
+		Set<Edge> tmp = new HashSet<Edge>(edges);
 		return tmp;
 	}
 
 	@Override
 	public ArrayList<Edge> outgoingEdgesOf(Vertex v) {
-		
+
 		ArrayList<Edge> tmp = new ArrayList<>();
-		for(int i = 0 ; i < getEdges().size() ; i++) {
-	        if(getEdges().get(i).getFrom().equals(v))
-              tmp.add(getEdges().get(i));
+		for (int i = 0; i < getEdges().size(); i++) {
+			if (getEdges().get(i).getFrom().equals(v))
+				tmp.add(getEdges().get(i));
 		}
 		return tmp;
 	}
-	
+
 	public void fillbeta() {
-		for(int i = 0 ; i < getEdges().size() ; i++	 ) {
+		for (int i = 0; i < getEdges().size(); i++) {
 			getBeta().add(getEdges().get(i).getBetta());
 		}
 	}
@@ -575,8 +565,5 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	public void setBeta(ArrayList<Double> beta) {
 		this.beta = beta;
 	}
-	
-	
-	
-	
+
 }

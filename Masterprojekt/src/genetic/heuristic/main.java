@@ -50,12 +50,12 @@ public class main {
 		
         Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(10, 5); // do not change !!
 		test.generateGraph(graph, map);
 
 		// --- player ---
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 5);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 4);
+		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(49), 10);
+		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(49), 12);
 
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);

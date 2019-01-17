@@ -1,8 +1,6 @@
 package graphModel;
 
-import ilog.concert.IloException;
 import ilog.concert.IloNumVar;
-import ilog.cplex.IloCplex;
 
 import java.util.ArrayList;
 
@@ -26,7 +24,8 @@ public class Edge {
 	public Vertex from; // Start vertex
 	public Vertex to; // End vertex
 	double weight; // edge weight
-	int costA, costB; // cost
+	double costA;
+	double costB; // cost
 	double c; // C
 	IloNumVar beta;
 	double Result;
@@ -118,20 +117,20 @@ public class Edge {
 		this.players = players;
 	}
 
-	public int getCostA() {
+	public double getCostA() {
 		return this.costA;
 	}
 
-	public void setCostA(int costA) {
-		this.costA = costA;
+	public void setCostA(double d) {
+		this.costA = d;
 	}
 
-	public int getCostB() {
+	public double getCostB() {
 		return this.costB;
 	}
 
-	public void setCostB(int costB) {
-		this.costB = costB;
+	public void setCostB(double d) {
+		this.costB = d;
 	}
 
 	public IloNumVar[] convertarray() {

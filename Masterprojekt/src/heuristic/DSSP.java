@@ -10,9 +10,9 @@ import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
 
 /**
- * Universität Ulm
+ * University of Ulm
  * 
- * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * Project Algorithm Engineering-Project --- WiSe 2018/19
  * 
  * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
  * @author Julian Bestler (julian.bestler@uni-ulm.de)
@@ -49,6 +49,7 @@ public class DSSP {
 
 		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
+		
 		cplex.setOut(stream);
 
 		solveDSSP(this.getGraph());
@@ -62,11 +63,11 @@ public class DSSP {
 	 * @param graph
 	 *            the given graph
 	 * @throws IloException
-	 *             if a CPLEX error occures
+	 *             if a CPLEX error occurs
 	 */
 	public void solveDSSP(Graphs g) throws IloException {
 
-		// --- initialising ro ---
+		// --- Initializing ro ---
 		for (int i = 0; i < g.getVertices().size(); i++) {
 			for (int j = 0; j < g.getPlayers().size(); j++) {
 
