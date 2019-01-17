@@ -11,7 +11,11 @@ public class Mintb_FC {
 	DSSP x;
 	final static double default_epsilon = 0.1;
 
-	public void run(Graphs g) throws IloException {
+	public Mintb_FC() {
+		
+	}
+	
+	public  void run(Graphs g) throws IloException {
         ArrayList<Double> xx = new ArrayList<>();
         ArrayList<Double> yy = new ArrayList<>();
 		x = new DSSP(g);
@@ -35,7 +39,6 @@ public class Mintb_FC {
 		}
 		
 		sum = Math.sqrt(sum);
-		System.out.println(sum + "  7okka");
 		if(sum < default_epsilon) return true;
 		
 		return false;

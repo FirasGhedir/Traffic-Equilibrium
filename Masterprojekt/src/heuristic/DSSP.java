@@ -8,7 +8,6 @@ import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
-import ilog.cplex.IloCplex.UnknownObjectException;
 
 /**
  * Universität Ulm
@@ -147,7 +146,7 @@ public class DSSP {
 			}
 
 			savevalues(cplex, g);
-
+               cplex.clearModel();
 			break;
 
 		default:

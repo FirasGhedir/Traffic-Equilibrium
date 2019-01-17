@@ -1,20 +1,16 @@
 package genetic.heuristic;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import bai_A.Mintb_FC;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
-import heuristic.BellmanFordShortestPath;
-import heuristic.DSSP;
+
 import heuristic.SocialOptimum;
 import heuristic.TestCorrectness;
 import ilog.concert.IloException;
@@ -22,18 +18,8 @@ import player.Player;
 
 public class main {
 
-
-public static Graphs copy(Graphs original) {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.obj"));
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.obj"))) {
-        out.writeObject(original);
-        return (Graphs) in.readObject();
-    } catch (Exception e) {
-        throw new RuntimeException(e); 
-    }
-}
 	
-	public static void main(String[] args) throws IloException, CloneNotSupportedException {
+	public static void main(String[] args) throws IloException {
 
 		Vertex a = new Vertex(1);
 		Vertex b = new Vertex(2);
@@ -62,19 +48,14 @@ public static Graphs copy(Graphs original) {
 		g.setEdges(edges);
 		g.setVertices(vertices);
 		
-		List<Edge> KP = BellmanFordShortestPath.findPathBetween(g,a,d).getEdgeList();
-		for(int i = 0 ; i < KP.size() ; i++) {
-			System.out.println("from : " + KP.get(i).getFrom().getId() + " to : " + KP.get(i).getTo().getId() + " Weight : " +  KP.get(i).getL());
-		}
-        System.out.println(KP.size());
         Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
 		test.generateGraph(graph, map);
 
 		// --- player ---
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 10);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 5);
+		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 5);
+		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 4);
 
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
@@ -84,8 +65,10 @@ public static Graphs copy(Graphs original) {
 		graph.generateEdgesFunctions();// edge functions are totally randomized
 		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 
-    	DSSP dssp = new DSSP(graph);
-      //  Graphs xx = copy(graph);
+        Mintb_FC pp = new Mintb_FC();
+		System.out.println("number of edges : " + graph.getEdges().size());
+        pp.run(graph);
+		//  Graphs xx = copy(graph);
 		TestCorrectness correct = new TestCorrectness();
 		System.out.println(correct.test(graph, player1.getSource(), player1.getSink()));
 		//System.out.println(correct.test(graph, player2.getSource(), player2.getSink()));

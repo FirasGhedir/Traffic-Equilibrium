@@ -12,7 +12,7 @@ public class TestCorrectness {
 
 	private Graphs graph;
 	private Graphs graph1;
-
+    final static double default_epsilon = 0.00001;
 	
 	public TestCorrectness() {
 		
@@ -24,7 +24,8 @@ public class TestCorrectness {
 		ArrayList<Vertex> vertices = new ArrayList<>();
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
-			if (g.getEdges().get(i).getL() > 0)
+			
+			if (g.getEdges().get(i).getSum() > 0.5)
 				edges.add(g.getEdges().get(i));
 		}
 
@@ -76,16 +77,16 @@ public class TestCorrectness {
 
 		List<Edge> KP = BellmanFordShortestPath.findPathBetween(g, s,t).getEdgeList();
 
-		int countLP = 0;
-		int countKP = 0;
+		double countLP = 0;
+		double countKP = 0;
 	
 		for (int i = 0; i < KP.size(); i++) {
             countKP += KP.get(i).getL();
 		}
 		Graphs y = negativgraph(newgraph(g));
-
+	     System.err.println(y.getEdges().size() + " " +  y.getVertices().size());
 		for(int i = 0 ; i < y.getEdges().size() ; i++) {
-			System.out.println(y.getEdges().get(i).getFrom().getId() + " to " + y.getEdges().get(i).getTo().getId() + " " + g.getEdges().get(i).getL());
+			System.out.println(y.getEdges().get(i).getFrom().getId() + " to " + y.getEdges().get(i).getTo().getId() + " " + g.getEdges().get(i).getSum());
 		}
 		
 		List<Edge> LP = BellmanFordShortestPath.findPathBetween(y, s,t).getEdgeList();
@@ -95,9 +96,9 @@ public class TestCorrectness {
 		
 		
 		System.out.println("KP : " + KP.size() + " LP : " + LP.size() );
-        System.out.println(countLP + " " + countKP);
+        System.out.println(countKP + " " + countLP);
         y = negativgraph(newgraph(g));
-		if(countKP < countLP) return false;
+		if(countKP + default_epsilon < countLP) return false;
         return true;
 	}
 

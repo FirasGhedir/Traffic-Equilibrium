@@ -49,7 +49,7 @@ public class GaMINTB {
 
 		
 
-		Population firas = new Population(100);
+		Population firas = new Population(10);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
 		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
@@ -73,7 +73,7 @@ public class GaMINTB {
 		System.out.println(systemOptimalFlow);
 
 		firas.generatechromosomes(graph);
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			firas.run(start.getBestsolutions(), graph, firas);
 	
 
