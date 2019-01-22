@@ -52,17 +52,18 @@ public class GaMINTB {
 		Population firas = new Population(10);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(6, 6); // do not change !!
 		test.generateGraph(graph, map);
-
+/*
 		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 4);
 		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 4);
 
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
 		x.add(1, player2);
+		*/
 
-		graph.setPlayer(x);
+		graph.generatePlayers();
 		graph.generateEdgesFunctions();
         System.out.println("the number of edges " + graph.getEdges().size() );
 			
@@ -85,7 +86,7 @@ public class GaMINTB {
 		
 		start.savebestsolution(graph,alpha.get());
 		TestCorrectness correct = new TestCorrectness();
-		System.out.println(correct.test(graph, player1.getSource(), player1.getSink()));
+		System.out.println(correct.test(graph, graph.getPlayers().get(0).getSource(), graph.getPlayers().get(0).getSink()));
 	//	System.out.println(correct.test(graph, player2.getSource(), player2.getSink()));
 
 		

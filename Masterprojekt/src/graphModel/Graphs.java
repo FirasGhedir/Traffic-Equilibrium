@@ -41,7 +41,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	final static int b_max = 3;
 	final static int b_min = 0;
 	final static double Pi = 1.57079632679;
-	final static int max_players = 10;
+	final static int max_players = 4;
 
 	/**
 	 * 
