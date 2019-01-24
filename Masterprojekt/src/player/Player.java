@@ -1,5 +1,9 @@
 package player;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import graphModel.Edge;
 import graphModel.Vertex;
 
 /**
@@ -21,14 +25,16 @@ public class Player {
 
 	Vertex source;
 	Vertex sink;
-	int demand;
+	double demand;
 	int id;
-
-	public Player(int id, Vertex source, Vertex sink, int demand) {
+    List<Edge> P;
+    
+	public Player(int id, Vertex source, Vertex sink, double demand) {
 		this.id = id;
 		this.source = source;
 		this.sink = sink;
 		this.demand = demand;
+		this.P = new ArrayList<>();
 	}
 
 	public Vertex getSource() {
@@ -47,11 +53,11 @@ public class Player {
 		this.sink = sink;
 	}
 
-	public int getDemand() {
+	public double getDemand() {
 		return this.demand;
 	}
 
-	public void setDemand(int demand) {
+	public void setDemand(double demand) {
 		this.demand = demand;
 	}
 
@@ -62,5 +68,15 @@ public class Player {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public List<Edge> getP() {
+		return P;
+	}
+
+	public void setP(List<Edge> p) {
+		P = p;
+	}
+	
+	
 
 }
