@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,14 +47,15 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param list a given list
+	 * @param list
+	 *            a given list
 	 * @throws IOException
 	 */
 	private static void printObjects(List<?> list) throws IOException {
 
-//		// Uncomment this to get txt files for each program iteration for each graph
-//		String uniqueID = UUID.randomUUID().toString(); // create unique IDs
-//		path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
+		// // Uncomment this to get txt files for each program iteration for each graph
+		// String uniqueID = UUID.randomUUID().toString(); // create unique IDs
+		// path = "./Masterprojekt/files/graphData(" + uniqueID + ").txt";
 
 		// Creating a File object that represents the disk file.
 		// PrintStream outputToTxtFile = new PrintStream(new File(path));
@@ -87,7 +89,8 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param obj the object to store into JSON file
+	 * @param obj
+	 *            the object to store into JSON file
 	 */
 	private static void buildJSON(Object obj) {
 
@@ -111,9 +114,10 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param obj the object to store into JSON file
+	 * @param obj
+	 *            the object to store into JSON file
 	 */
-	private static Object createObjectInstanceFromJSON(File file) {
+	private static Graphs createObjectInstanceFromJSON(File file) {
 
 		Graphs graph = new Graphs(); // new instance for JSON data
 
@@ -124,10 +128,13 @@ public class Main {
 		switch (String.valueOf(extension)) {
 		case "true":
 			final ObjectMapper mapper = new ObjectMapper(); // can use static singleton, inject: just make sure to
-			// reuse!
+			mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
 			try {
-				graph = mapper.readValue(new File("my-older-stuff.json"), Graphs.class); // reads object instance of
+				graph = mapper.readValue(new File("./Masterprojekt/files/graphData.json"), Graphs.class); // reads
+																											// object
+																											// instance
+																											// of
 				// JSON serialization
 			} catch (JsonParseException e) {
 				e.printStackTrace();
@@ -149,7 +156,8 @@ public class Main {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param args             the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 * @param adjacency_matrix
 	 */
 	public static void main(String[] args) throws IloException {
@@ -179,8 +187,11 @@ public class Main {
 			graph.setPlayer(x);
 			graph.generateEdgesFunctions();// edge functions are totally randomized
 
-			buildJSON(graph);
-
+			// buildJSON(graph);
+			graph.getPlayers().get(0).setDemand(4);
+			Graphs graphClone = createObjectInstanceFromJSON(new File("./graphData.json"));
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + graphClone.getVertices().size());
+			System.out.println(graphClone.getPlayers().get(0).getDemand());
 			// --- Create CharacteristicsCalculator ---
 			// CharacteristicsCalculator characteristics = new
 			// CharacteristicsCalculator(graph);
@@ -194,12 +205,11 @@ public class Main {
 
 			System.out.println(correct.test(graph, player1.getSource(), player1.getSink()));
 
-
 			// --- RMINTB ---
-//			RMINTB rmintb = new RMINTB(graph);
+			// RMINTB rmintb = new RMINTB(graph);
 
 			// --- GAMINTB ---
-//			GaMINTB gamintb = new GaMINTB(graph, 10, 30);
+			// GaMINTB gamintb = new GaMINTB(graph, 10, 30);
 
 			/*
 			 * =============================================================
@@ -208,10 +218,10 @@ public class Main {
 			 */
 			printList.add(impressum);
 			printList.add(graph);
-//			list.add(characteristics);
+			// list.add(characteristics);
 			printList.add(systemOptimalFlow);
 			printList.add(dssp);
-//			list.add(rmintb);
+			// list.add(rmintb);
 			// printList.add(gamintb);
 
 			printObjects(printList);

@@ -2,6 +2,8 @@ package graphModel;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import ilog.concert.IloNumVar;
 
 /**
@@ -27,10 +29,15 @@ public class Vertex {
 	/**
 	 * Constructor, creates a new vertex
 	 * 
-	 * @param id, the identifier number of the vertex
+	 * @param id,
+	 *            the identifier number of the vertex
 	 */
+	@JsonCreator
 	public Vertex(int id) {
 		this.id = id;
+	}
+
+	public Vertex() {
 	}
 
 	/**
@@ -45,7 +52,8 @@ public class Vertex {
 	/**
 	 * Setter method for the id
 	 * 
-	 * @param id, the identifier number of the vertex
+	 * @param id,
+	 *            the identifier number of the vertex
 	 */
 	public void setId(int id) {
 		this.id = id;

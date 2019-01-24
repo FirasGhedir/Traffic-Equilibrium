@@ -28,6 +28,7 @@ public class Player {
 	double demand;
 	int id;
     List<Edge> P;
+    List<Double> values;
     
 	public Player(int id, Vertex source, Vertex sink, double demand) {
 		this.id = id;
@@ -35,8 +36,12 @@ public class Player {
 		this.sink = sink;
 		this.demand = demand;
 		this.P = new ArrayList<>();
+        this.values = new ArrayList<>();
 	}
 
+	public Player() {
+		
+	}
 	public Vertex getSource() {
 		return this.source;
 	}
@@ -76,6 +81,15 @@ public class Player {
 	public void setP(List<Edge> p) {
 		P = p;
 	}
+
+	public List<Double> getValues() {
+		return values;
+	}
+
+	public void setValues(List<Double> values) {
+		this.values = values;
+	}
+	
 	
 	
 

@@ -25,7 +25,7 @@ import player.Player;
  * 
  *          A collection of utilities to assist with graph manipulation.
  */
-public class Graphs implements Graph<Vertex, Edge> {
+public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
@@ -42,6 +42,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	final static int b_min = 0;
 	final static double Pi = 1.57079632679;
 	final static int max_players = 4;
+	List<Player> P;
 
 	/**
 	 * 
@@ -50,6 +51,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 		vertices = new ArrayList<Vertex>();
 		edges = new ArrayList<Edge>();
 		beta = new ArrayList<>();
+		P = new ArrayList<>();
 	}
 
 	public Graphs(Graphs graph) {
@@ -566,4 +568,18 @@ public class Graphs implements Graph<Vertex, Edge> {
 		this.beta = beta;
 	}
 
+    @Override
+	public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+	public List<Player> getP() {
+		return P;
+	}
+
+	public void setP(List<Player> p) {
+		P = p;
+	}
+    
+    
 }

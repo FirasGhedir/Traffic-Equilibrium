@@ -70,9 +70,7 @@ public class main {
 		graph.generateEdgesFunctions();// edge functions are totally randomized
 		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 
-		DC pp = new DC();
 		System.out.println("number of edges : " + graph.getEdges().size());
-		pp.run(graph);
 		// Graphs xx = copy(graph);
 		TestCorrectness correct = new TestCorrectness();
 		System.out.println(

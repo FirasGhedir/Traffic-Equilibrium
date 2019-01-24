@@ -4,6 +4,8 @@ import ilog.concert.IloNumVar;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Universität Ulm
  * 
@@ -46,11 +48,16 @@ public class Edge {
 	 * @param to     where the edge of the vertex ends
 	 * @param weight the value of the edge weight
 	 */
+	
 	public Edge(Vertex from, Vertex to, int weight) {
 		super();
 		this.from = from;
 		this.to = to;
 		this.l = weight;
+	}
+	
+	public Edge() {
+		
 	}
 	
 	
