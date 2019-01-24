@@ -52,17 +52,14 @@ public class main {
 		test.generateGraph(graph, map);
 
 		// --- player ---
-		// Player player1 = new Player(1, graph.getVertices().get(0),
-		// graph.getVertices().get(49), 10);
-		// Player player2 = new Player(2, graph.getVertices().get(1),
-		// graph.getVertices().get(49), 12);
-
-		ArrayList<Player> x = new ArrayList<>();
-		// x.add(0, player1);
-		// x.add(1, player2);
-
-		//
-		// graph.setPlayer(x);
+//		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(49), 10);
+//		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(49), 12);
+//
+//		ArrayList<Player> x = new ArrayList<>();
+//		x.add(0, player1);
+//		x.add(1, player2);
+//
+//		graph.setPlayer(x);
 		graph.generatePlayers();
 		for (int i = 0; i < graph.getPlayers().size(); i++) {
 			System.out.println("Player  ID : " + graph.getPlayers().get(i).getId() + " FROM : "
