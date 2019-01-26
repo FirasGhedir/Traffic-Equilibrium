@@ -192,10 +192,12 @@ public class DC {
 		}
 		buildJSON(graph);
 
+		Graphs g1 = new Graphs();
+		Graphs g2 = new Graphs();
+		
 		if (graph.getVertices().size() > 2) {
 			double randomValue = graph.getVertices().size() * r.nextDouble();
-			Graphs g1 = new Graphs();
-			Graphs g2 = new Graphs();
+		
 			for (int j = 0; j < randomValue; j++) {
 
 				g1.getVertices().add(graph.getVertices().get(j));
@@ -223,10 +225,51 @@ public class DC {
 
 		} else
 			return;
-		
+		List<Edge> epsilon = new ArrayList<>();
 		while(graph.getP().size() !=0) {
-			
-			
+			Player tmp =  graph.getP().get(0);
+			graph.getP().remove(0);
+			int idx;
+			if(g1.containsVertex(tmp.getSource())) {
+				idx = 1;
+			}
+			else {
+				idx = 2 ; 
+			}
+			Vertex v = tmp.getSource();
+			while(!v.equals(tmp.getSink())) {
+				for(int j = 0 ; j < graph.getEdges().size() ; j++ ) {
+					 if(graph.getEdges().get(j).getFrom().equals(tmp.getSource())){
+						 if(g1.containsVertex(graph.getEdges().get(j).getTo()) && idx == 1) {
+							 v=graph.getEdges().get(j).getTo();
+							 epsilon.add(graph.getEdges().get(j));
+						 }
+						 else if (g2.containsVertex(graph.getEdges().get(j).getTo()) && idx == 2) {
+							 v=graph.getEdges().get(j).getTo();
+							 epsilon.add(graph.getEdges().get(j));
+						 }
+						 else {
+							 if(!v.equals(tmp.getSource())) {
+								 Player pl = new Player(graph.getPlayers().get(graph.getPlayers().size()-1).getId()+1,tmp.getSource(),v,tmp.getDemand());
+								 
+								 if(idx == 1) {
+									 g1.getP().add(pl);
+								 }
+								 else {
+									 g2.getP().add(pl);
+								 }
+							 }
+							 
+							 
+							 epsilon.clear();
+							 idx = (idx %2) + 1 ; 
+							 v=graph.getEdges().get(j).getTo();
+							 tmp.setSource(graph.getEdges().get(j).getTo());
+
+						 }
+					 }
+				} 
+			}
 		}
 		
 	}
