@@ -23,7 +23,7 @@ import ilog.cplex.IloCplex;
  * 
  *          _____________________________________________
  * 
- *          Solver for the Restricted Minimnum Tollbooth Problem (RMINTB)
+ *          Solver for the Restricted Minimum Tollbooth Problem (RMINTB)
  */
 public class RMINTB {
 

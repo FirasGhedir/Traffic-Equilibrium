@@ -65,6 +65,12 @@ public class Edge {
 	
 	
 
+	public Edge(Edge e1, Edge e2, double d) {
+	}
+
+	public Edge(Vertex v1, Vertex v2, double d) {
+	}
+
 	/**
 	 * Getter method for the 'from' value
 	 * 
