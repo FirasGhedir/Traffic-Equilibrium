@@ -75,7 +75,7 @@ public class GridGraphGenerator implements GraphGenerator<Vertex, Edge, Vertex> 
 				if ((((i % cols) > 0) && ((i + 1) == j)) || ((i + cols) == j)) {
 					target.addEdge(map.get(i), map.get(j));
 					// --- uncomment the following statement to get a directed graph ---
-				target.addEdge(map.get(j), map.get(i));
+			     	target.addEdge(map.get(j), map.get(i));
 				}
 			}
 		}

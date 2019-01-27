@@ -25,7 +25,7 @@ public class TestCorrectness {
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			
-			if (g.getEdges().get(i).getSum() > 0.5)
+			if (g.getEdges().get(i).getSum() > 0.1)
 				edges.add(g.getEdges().get(i));
 		}
 

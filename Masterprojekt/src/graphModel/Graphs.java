@@ -41,7 +41,7 @@ public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 	final static int b_max = 3;
 	final static int b_min = 0;
 	final static double Pi = 1.57079632679;
-	final static int max_players = 4;
+	final static int max_players = 10;
 	List<Player> P;
 
 	/**
@@ -61,10 +61,11 @@ public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 
 	public void generateEdgesFunctions() {
 		for (int i = 0; i < this.edges.size(); i++) {
-
+			this.edges.get(i).setCostA(1);
+			this.edges.get(i).setCostB(1);
 			// ax+b is randomly generated
-			this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
-			this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
+		//	this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
+		//	this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
 
 		}
 	}
@@ -453,7 +454,7 @@ public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 	 */
 	public void generatePlayers() {
 
-		int x = rand.nextInt(max_players);
+		int x = 1 + rand.nextInt(max_players);
 		for (int i = 0; i < x; i++) {
 			this.getPlayers().add(new Player(i, getVertices().get(rand.nextInt(getVertices().size())),
 					getVertices().get(rand.nextInt(getVertices().size())), d_min + (d_max-d_min)*rand.nextInt()));

@@ -14,9 +14,9 @@ import heuristic.SocialOptimum;
 import heuristic.TestCorrectness;
 import ilog.concert.IloException;
 import player.Player;
-
+import bai_A.*;
 public class main {
-
+	static SocialOptimum systemOptimalFlow;
 	public static void main(String[] args) throws IloException {
 
 		Vertex a = new Vertex(1);
@@ -48,36 +48,27 @@ public class main {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(6, 6); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
 		test.generateGraph(graph, map);
 
-		// --- player ---
-//		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(49), 10);
-//		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(49), 12);
-//
-//		ArrayList<Player> x = new ArrayList<>();
-//		x.add(0, player1);
-//		x.add(1, player2);
-//
-//		graph.setPlayer(x);
-		graph.generatePlayers();
-		for (int i = 0; i < graph.getPlayers().size(); i++) {
-			System.out.println("Player  ID : " + graph.getPlayers().get(i).getId() + " FROM : "
-					+ graph.getPlayers().get(i).getSource().getId() + " TO : "
-					+ graph.getPlayers().get(i).getSink().getId());
-		}
+		
+		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 10);
+		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 10);
+
+		ArrayList<Player> x = new ArrayList<>();
+		x.add(0, player1);
+		x.add(1, player2);
+        graph.setPlayer(x);
+		
+		
+//		graph.generatePlayers();
+
 		graph.generateEdgesFunctions();// edge functions are totally randomized
-		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
+		 systemOptimalFlow = new SocialOptimum(graph);
 
 		Mintb_FC pp = new Mintb_FC();
-		System.out.println("number of edges : " + graph.getEdges().size());
 		pp.run(graph);
-		// Graphs xx = copy(graph);
-		TestCorrectness correct = new TestCorrectness();
-		System.out.println(
-				correct.test(graph, graph.getPlayers().get(0).getSource(), graph.getPlayers().get(0).getSink()));
-		// System.out.println(correct.test(graph, player2.getSource(),
-		// player2.getSink()));
+		
 
 	}
 
