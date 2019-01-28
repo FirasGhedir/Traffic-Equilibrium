@@ -62,8 +62,8 @@ public class GaMINTB {
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
 		x.add(1, player2);
-        graph.setPlayer(x);
-	//	graph.generatePlayers();
+    //    graph.setPlayer(x);
+		graph.generatePlayers();
 		graph.generateEdgesFunctions();
         System.out.println("the number of edges " + graph.getEdges().size() );
 			

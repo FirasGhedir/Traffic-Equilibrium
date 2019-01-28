@@ -25,7 +25,7 @@ import player.Player;
  * 
  *          A collection of utilities to assist with graph manipulation.
  */
-public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
+public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
@@ -61,11 +61,11 @@ public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 
 	public void generateEdgesFunctions() {
 		for (int i = 0; i < this.edges.size(); i++) {
-			this.edges.get(i).setCostA(1);
-			this.edges.get(i).setCostB(1);
+			//this.edges.get(i).setCostA(1);
+			//this.edges.get(i).setCostB(1);
 			// ax+b is randomly generated
-		//	this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
-		//	this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
+		 this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
+		 this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
 
 		}
 	}
@@ -455,9 +455,14 @@ public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 	public void generatePlayers() {
 
 		int x = 1 + rand.nextInt(max_players);
+		int tmp = rand.nextInt(getVertices().size()) ;
+		int tmp1;
+
+		do {
+			tmp1 = rand.nextInt(getVertices().size()) ;
+		}while(tmp == tmp1);
 		for (int i = 0; i < x; i++) {
-			this.getPlayers().add(new Player(i, getVertices().get(rand.nextInt(getVertices().size())),
-					getVertices().get(rand.nextInt(getVertices().size())), d_min + (d_max-d_min)*rand.nextInt()));
+			this.getPlayers().add(new Player(i,this.getVertices().get(tmp),this.getVertices().get(tmp1), d_min + rand.nextInt((d_max-d_min)+1)));
 		}
 	}
 
@@ -569,10 +574,10 @@ public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 		this.beta = beta;
 	}
 
-    @Override
+	@Override
 	public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+		return super.clone();
+	}
 
 	public List<Player> getP() {
 		return P;
@@ -581,6 +586,5 @@ public class Graphs implements Graph<Vertex, Edge>,  Cloneable{
 	public void setP(List<Player> p) {
 		P = p;
 	}
-    
-    
+
 }
