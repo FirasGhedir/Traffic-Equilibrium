@@ -41,7 +41,15 @@ public class Edge {
 	ArrayList<Double> values = new ArrayList<>();
 	ArrayList<Double> ilist = new ArrayList<>();
 	double sum;
-    double betta;
+	double betta;
+
+	/**
+	 * 
+	 */
+	public Edge() {
+
+	}
+
 	/**
 	 * Constructor to create a new edge
 	 * 
@@ -51,24 +59,25 @@ public class Edge {
 	 * @param to     where the edge of the vertex ends
 	 * @param weight the value of the edge weight
 	 */
-	
+
 	public Edge(Vertex from, Vertex to, int weight) {
 		super();
 		this.from = from;
 		this.to = to;
 		this.l = weight;
 	}
-	
-	public Edge() {
-		
-	}
-	
-	
 
-	public Edge(Edge e1, Edge e2, double d) {
-	}
-
-	public Edge(Vertex v1, Vertex v2, double d) {
+	/**
+	 * 
+	 * @param from
+	 * @param to
+	 * @param weight
+	 */
+	public Edge(Vertex from, Vertex to, double weight) {
+		super();
+		this.from = from;
+		this.to = to;
+		this.weight = weight;
 	}
 
 	/**
@@ -209,10 +218,10 @@ public class Edge {
 	public void setL(double l) {
 		this.l = l;
 	}
-	
+
 	public void calculateL() {
-		
-		double x = getCostA()*getSum() + getCostB() + getBetta() ;
+
+		double x = getCostA() * getSum() + getCostB() + getBetta();
 		setL(x);
 	}
 
@@ -224,19 +233,12 @@ public class Edge {
 		this.betta = betta;
 	}
 
-
-
 	public ArrayList<Double> getIlist() {
 		return ilist;
 	}
 
-
-
 	public void setIlist(ArrayList<Double> ilist) {
 		this.ilist = ilist;
 	}
-	
-	
-	
 
 }

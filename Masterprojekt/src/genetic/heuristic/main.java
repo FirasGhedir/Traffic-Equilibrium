@@ -16,7 +16,14 @@ import ilog.concert.IloException;
 import player.Player;
 import bai_A.*;
 public class main {
+	
 	static SocialOptimum systemOptimalFlow;
+	
+	/**
+	 * 
+	 * @param args
+	 * @throws IloException
+	 */
 	public static void main(String[] args) throws IloException {
 
 		Vertex a = new Vertex(1);
