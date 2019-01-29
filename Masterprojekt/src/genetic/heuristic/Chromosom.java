@@ -55,6 +55,14 @@ public class Chromosom {
 		}
 		this.setEfficiency(tmp);
 	}
+	
+	public void calculateE() {
+		int tmp = 0;
+		for(int i = 0 ; i < getBeta().size() ; i++) {
+			if(getBeta().get(i)>0) tmp++;
+		}
+		this.setEfficiency(tmp);
+	}
 
 	/**
 	 * Calclulates the probability according to roulette-wheel-selection

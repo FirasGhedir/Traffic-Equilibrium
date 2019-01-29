@@ -65,16 +65,20 @@ public class main {
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
 		x.add(1, player2);
-        graph.setPlayer(x);
+//        graph.setPlayer(x);
 		
 		
-//		graph.generatePlayers();
+	    graph.generatePlayers();
 
 		graph.generateEdgesFunctions();// edge functions are totally randomized
 		 systemOptimalFlow = new SocialOptimum(graph);
 
 		Mintb_FC pp = new Mintb_FC();
 		pp.run(graph);
+		for(int i = 0 ; i < graph.getEdges().size() ; i++) {
+			System.out.println("In edge number :" + i + " beta would be " + graph.getEdges().get(i).getBetta() );
+		}
+	
 		
 
 	}

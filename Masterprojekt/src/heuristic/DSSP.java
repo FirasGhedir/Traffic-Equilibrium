@@ -50,7 +50,7 @@ public class DSSP {
 		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
 		
-		cplex.setOut(stream);
+	//	cplex.setOut(stream);
 
 		solveDSSP(this.getGraph());
 	}
@@ -136,6 +136,8 @@ public class DSSP {
 
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
+			
+			System.out.println(true);
 
 			this.setDSSPResultSet(getDSSPResultSet() + "obj: " + cplex.getObjValue() + "\n");
 

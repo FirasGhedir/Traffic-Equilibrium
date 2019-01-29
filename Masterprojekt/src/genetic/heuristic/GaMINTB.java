@@ -1,5 +1,7 @@
 package genetic.heuristic;
 
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -8,16 +10,22 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
-import bai_A.SocialNewModel;
-import graphGenerator.GnpRandomGraphGenerator;
+import bai_A.Mintb_FC;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.SocialOptimum;
 import heuristic.TestCorrectness;
 import ilog.concert.IloException;
-import player.Player;
 
+final class DiscardOutputStream extends java.io.OutputStream {
+
+	@Override
+	public void write(int b) throws IOException {
+		// noop
+	}
+
+}
 
 public class GaMINTB {
 
@@ -35,63 +43,84 @@ public class GaMINTB {
 	public void setBestsolutions(List<Chromosom> bestsolutions) {
 		this.bestsolutions = bestsolutions;
 	}
-	
-	public  void savebestsolution(Graphs g,Chromosom xx) {
-		
-		for(int i = 0 ; i < xx.getBeta().size() ; i++) {
-			 g.getEdges().get(i).setBetta(xx.getBeta().get(i));
-			 g.getEdges().get(i).calculateL();
+
+	public void savebestsolution(Graphs g, Chromosom xx) {
+
+		for (int i = 0; i < xx.getBeta().size(); i++) {
+			g.getEdges().get(i).setBetta(xx.getBeta().get(i));
+			g.getEdges().get(i).calculateL();
 		}
 	}
 
 	public static void main(String[] args) throws IloException {
+		
+		System.setOut(new PrintStream(new DiscardOutputStream()));
 
 		GaMINTB start = new GaMINTB();
-
-		
 
 		Population firas = new Population(40);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4,4); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(3, 2); // do not change !!
 		test.generateGraph(graph, map);
-		
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 14);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 40);
 
-		ArrayList<Player> x = new ArrayList<>();
-		x.add(0, player1);
-		x.add(1, player2);
-    //    graph.setPlayer(x);
+		// Player player1 = new Player(1, graph.getVertices().get(0),
+		// graph.getVertices().get(15), 14);
+		// Player player2 = new Player(2, graph.getVertices().get(1),
+		// graph.getVertices().get(15), 40);
+		//
+		// ArrayList<Player> x = new ArrayList<>();
+		// x.add(0, player1);
+		// x.add(1, player2);
+		// // graph.setPlayer(x);
 		graph.generatePlayers();
 		graph.generateEdgesFunctions();
-        System.out.println("the number of edges " + graph.getEdges().size() );
-			
-        SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
+		System.out.println("the number of edges " + graph.getEdges().size());
 
-	//	SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
+		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
+
+		// SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 		// Store current System.out before assigning a new value
 
 		System.out.println(systemOptimalFlow);
 
 		firas.generatechromosomes(graph);
-		for (int i = 0; i < 40; i++) {
+		for (int i = 0; i < 20; i++) {
 			firas.run(start.getBestsolutions(), graph, firas);
-	
 
 		}
 
-		Optional<Chromosom> alpha = start.getBestsolutions().stream().min(Comparator.comparingInt(Chromosom::getEfficiency));
-		start.savebestsolution(graph,alpha.get());
-          
-		System.err.println("##################################################### termination ########################################");
-		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : " +alpha.get().getEfficiency() + " || Feasibility  : " + alpha.get().isFeasible());
-		
-		
-		
-        TestCorrectness correct = new TestCorrectness();
-     	System.out.println(correct.test(graph, graph.getPlayers().get(0).getSource(), graph.getPlayers().get(0).getSink()));
-	//	System.out.println(correct.test(graph, player2.getSource(), player2.getSink()));
+		Optional<Chromosom> alpha = start.getBestsolutions().stream()
+				.min(Comparator.comparingInt(Chromosom::getEfficiency));
+		start.savebestsolution(graph, alpha.get());
+		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+			if (alpha.get().getBeta().get(i) < 0.00001) {
+				alpha.get().getBeta().set(i, 0.0);
+			}
+		}
+		alpha.get().calculateE();
+		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+			if (alpha.get().getBeta().get(i) == 0) {
+				alpha.get().vector[i] = false;
+			}
+		}
+		alpha.get().setFeasible(firas.evaluation(graph, alpha.get()));
+		System.err.println(
+				"##################################################### termination ########################################");
+		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
+				+ alpha.get().getEfficiency() + " || Feasibility  : " + alpha.get().isFeasible());
+
+		Mintb_FC pp = new Mintb_FC();
+		pp.run(graph);
+		for (int i = 0; i < graph.getEdges().size(); i++) {
+			System.out.println("In edge number :" + i + " beta would be " + graph.getEdges().get(i).getBetta());
+		}
+
+		TestCorrectness correct = new TestCorrectness();
+		System.out.println(
+				correct.test(graph, graph.getPlayers().get(0).getSource(), graph.getPlayers().get(0).getSink()));
+		// System.out.println(correct.test(graph, player2.getSource(),
+		// player2.getSink()));
 
 	}
 

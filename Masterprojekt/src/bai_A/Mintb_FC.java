@@ -19,14 +19,16 @@ public class Mintb_FC {
         ArrayList<Double> xx = new ArrayList<>();
         ArrayList<Double> yy = new ArrayList<>();
 		x = new DSSP(g);
-
+        
 		while (true) {
+			System.out.println(l);
 			update(g);
 			xx = g.getBeta();
 			x = new DSSP(g);
 			yy = g.getBeta();
 			if(check(xx,yy) == true) break;
 			l++;
+
 		}
 	}
 
@@ -45,7 +47,7 @@ public class Mintb_FC {
 	}
 
 	private void update(Graphs g) {
-
+	
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			if (g.getEdges().get(i).getBetta() > 0) {
 				g.getEdges().get(i).setC(1 / g.getEdges().get(i).getBetta());
@@ -61,6 +63,7 @@ public class Mintb_FC {
 			}
 
 		}
+		
 	}
 
 }
