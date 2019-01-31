@@ -52,7 +52,7 @@ public class DSSP {
 		
 	//	cplex.setOut(stream);
 
-		solveDSSP(this.getGraph());
+	//	solveDSSP(this.getGraph());
 	}
 
 	/**

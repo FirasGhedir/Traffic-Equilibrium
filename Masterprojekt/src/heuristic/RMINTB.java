@@ -152,6 +152,17 @@ public class RMINTB {
 		}
 
 	}
+	
+	
+	public void run() throws IloException {
+		
+		DSSP step1 = new DSSP(this.g);
+		step1.solveDSSP(g);
+		
+		
+		
+	}
+	
 
 	/**
 	 * Getter method for the graph

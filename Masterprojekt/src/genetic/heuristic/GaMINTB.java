@@ -1,7 +1,6 @@
 package genetic.heuristic;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -17,6 +16,7 @@ import graphModel.Vertex;
 import heuristic.SocialOptimum;
 import heuristic.TestCorrectness;
 import ilog.concert.IloException;
+import player.Player;
 
 final class DiscardOutputStream extends java.io.OutputStream {
 
@@ -53,26 +53,24 @@ public class GaMINTB {
 	}
 
 	public static void main(String[] args) throws IloException {
-		
-		System.setOut(new PrintStream(new DiscardOutputStream()));
+
+		// System.setOut(new PrintStream(new DiscardOutputStream()));
 
 		GaMINTB start = new GaMINTB();
 
 		Population firas = new Population(40);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(3, 2); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(7, 7); // do not change !!
 		test.generateGraph(graph, map);
 
-		// Player player1 = new Player(1, graph.getVertices().get(0),
-		// graph.getVertices().get(15), 14);
-		// Player player2 = new Player(2, graph.getVertices().get(1),
-		// graph.getVertices().get(15), 40);
-		//
-		// ArrayList<Player> x = new ArrayList<>();
-		// x.add(0, player1);
-		// x.add(1, player2);
-		// // graph.setPlayer(x);
+		Player player1 = new Player(0, graph.getVertices().get(0), graph.getVertices().get(8), 7);
+		Player player2 = new Player(1, graph.getVertices().get(1), graph.getVertices().get(8), 4);
+
+		ArrayList<Player> x = new ArrayList<>();
+		x.add(0, player1);
+		x.add(1, player2);
+		// graph.setPlayer(x);
 		graph.generatePlayers();
 		graph.generateEdgesFunctions();
 		System.out.println("the number of edges " + graph.getEdges().size());
@@ -108,19 +106,25 @@ public class GaMINTB {
 		System.err.println(
 				"##################################################### termination ########################################");
 		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
-				+ alpha.get().getEfficiency() + " || Feasibility  : " + alpha.get().isFeasible());
+				+ alpha.get().getEfficiency() + " || Feasibility : " + alpha.get().isFeasible());
 
 		Mintb_FC pp = new Mintb_FC();
 		pp.run(graph);
+
 		for (int i = 0; i < graph.getEdges().size(); i++) {
 			System.out.println("In edge number :" + i + " beta would be " + graph.getEdges().get(i).getBetta());
 		}
 
 		TestCorrectness correct = new TestCorrectness();
-		System.out.println(
-				correct.test(graph, graph.getPlayers().get(0).getSource(), graph.getPlayers().get(0).getSink()));
-		// System.out.println(correct.test(graph, player2.getSource(),
-		// player2.getSink()));
+		TestCorrectness correct1 = new TestCorrectness();
+
+		Graphs g1 = new Graphs(graph);
+		Graphs g2 = new Graphs(graph);
+
+		System.out.println("getPlayers(0): "
+				+ correct1.test(g1, g1.getPlayers().get(0).getSource(), g1.getPlayers().get(0).getSink()));
+		System.out.println("getPlayers(1): "
+				+ correct.test(g2, g2.getPlayers().get(1).getSource(), g2.getPlayers().get(1).getSink()));
 
 	}
 

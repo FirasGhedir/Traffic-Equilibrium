@@ -26,6 +26,14 @@ import player.Player;
  *          A collection of utilities to assist with graph manipulation.
  */
 public class Graphs implements Graph<Vertex, Edge>, Cloneable {
+	private static String adjacencyMatrixAsString;
+	private static String gridGraphDataAsString;
+	final static int d_max = 10;
+	final static int d_min = 1;
+	final static int b_max = 3;
+	final static int b_min = 0;
+	final static double Pi = 1.57079632679;
+	final static int max_players = 20;
 
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
@@ -33,15 +41,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	private Random rand = new Random();
 	private List<Integer>[] adj;
 	private LinkedList<Integer>[] adjListArray;
-	private static String adjacencyMatrixAsString;
-	private static String gridGraphDataAsString;
 	ArrayList<Double> beta;
-	final static int d_max = 10;
-	final static int d_min = 1;
-	final static int b_max = 3;
-	final static int b_min = 0;
-	final static double Pi = 1.57079632679;
-	final static int max_players = 20;
 	List<Player> P;
 
 	/**
@@ -54,18 +54,34 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 		P = new ArrayList<>();
 	}
 
-	public Graphs(Graphs graph) {
-		this.vertices = new ArrayList<>(graph.getVertices());
-		this.edges = new ArrayList<>(graph.getEdges());
+	@SuppressWarnings("unchecked")
+	public Graphs(Graphs that) {
+		this.vertices = (ArrayList<graphModel.Vertex>) that.vertices.clone();
+		this.edges = (ArrayList<graphModel.Edge>) that.edges.clone();
+		this.players = (ArrayList<Player>) that.players.clone();
+		this.rand = that.rand;
+		if (this.adj != null && that.adj != null)
+			this.adj = that.adj.clone();
+		if (this.adjListArray != null && that.adjListArray != null)
+			this.adjListArray = that.adjListArray.clone();
+		if (this.beta != null && that.beta != null)
+			this.beta = (ArrayList<Double>) that.beta.clone();
+		if (this.P != null && that.P != null)
+			this.P = that.P;
 	}
+
+	// public Graphs(Graphs graph) {
+	// this.vertices = new ArrayList<>(graph.getVertices());
+	// this.edges = new ArrayList<>(graph.getEdges());
+	// }
 
 	public void generateEdgesFunctions() {
 		for (int i = 0; i < this.edges.size(); i++) {
-			//this.edges.get(i).setCostA(1);
-			//this.edges.get(i).setCostB(1);
+			// this.edges.get(i).setCostA(1);
+			// this.edges.get(i).setCostB(1);
 			// ax+b is randomly generated
-		 this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
-		 this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
+			this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
+			this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
 
 		}
 	}
@@ -455,14 +471,15 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	public void generatePlayers() {
 
 		int x = 1 + rand.nextInt(max_players);
-		int tmp = rand.nextInt(getVertices().size()) ;
+		int tmp = rand.nextInt(getVertices().size());
 		int tmp1;
 
 		do {
-			tmp1 = rand.nextInt(getVertices().size()) ;
-		}while(tmp == tmp1);
+			tmp1 = rand.nextInt(getVertices().size());
+		} while (tmp == tmp1);
 		for (int i = 0; i < x; i++) {
-			this.getPlayers().add(new Player(i,this.getVertices().get(tmp),this.getVertices().get(tmp1), d_min + rand.nextInt((d_max-d_min)+1)));
+			this.getPlayers().add(new Player(i, this.getVertices().get(tmp), this.getVertices().get(tmp1),
+					d_min + rand.nextInt((d_max - d_min) + 1)));
 		}
 	}
 
