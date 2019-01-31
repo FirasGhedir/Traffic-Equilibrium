@@ -3,6 +3,7 @@ package heuristic;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import graphModel.Edge;
 import graphModel.Graphs;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
@@ -28,21 +29,25 @@ import ilog.cplex.IloCplex;
 public class RMINTB {
 
 	Graphs g;
+	int i = 0, l = 0;
 	static IloCplex cplex;
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s11 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s12 = new ArrayList<>();
 	static ArrayList<IloNumExpr> s13 = new ArrayList<>();
+	static ArrayList<Edge> omega = new ArrayList<>();
 	private String rmintbResultSet;
 	ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	String cplexSolverOutputStream;
+	ArrayList<Double> tempo = new ArrayList<>();
 
 	/**
 	 * Constructor
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @throws IloException if a CPLEX error occures
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
 	public RMINTB(Graphs g) throws IloException {
 
@@ -52,7 +57,6 @@ public class RMINTB {
 		cplex = new IloCplex();
 		cplex.setOut(stream);
 
-		solveRMINTB();
 	}
 
 	/**
@@ -60,28 +64,32 @@ public class RMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param graph the given graph
-	 * @throws IloException if a CPLEX error occures
+	 * @param graph
+	 *            the given graph
+	 * @throws IloException
+	 *             if a CPLEX error occures
 	 */
-	public void solveRMINTB() throws IloException {
+	public boolean solveRMINTB(Graphs g) throws IloException {
 
-		IloNumVar[] planet = new IloNumVar[g.getEdges().size()];
+		// IloNumVar[] planet = new IloNumVar[g.getEdges().size()];
 
-		// --- initialising beta ---
-		for (int i = 0; i < g.getEdges().size(); i++) {
-			g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the edge number : " + i));
-
-		}
-
-		// initialise boolean
-		for (int i = 0; i < g.getEdges().size(); i++) {
-
-			g.getEdges().get(i)
-					.setY(cplex.numVar(0, 1, IloNumVarType.Bool, "is There a Toll station in the edge number  : " + i));
-
-			planet[i] = g.getEdges().get(i).getY();
-
-		}
+		// // --- initialising beta ---
+		// for (int i = 0; i < g.getEdges().size(); i++) {
+		// g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the
+		// edge number : " + i));
+		//
+		// }
+		//
+		// // initialise boolean
+		// for (int i = 0; i < g.getEdges().size(); i++) {
+		//
+		// g.getEdges().get(i)
+		// .setY(cplex.numVar(0, 1, IloNumVarType.Bool, "is There a Toll station in the
+		// edge number : " + i));
+		//
+		// planet[i] = g.getEdges().get(i).getY();
+		//
+		// }
 
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 
@@ -91,7 +99,7 @@ public class RMINTB {
 						cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
 
 				IloNumExpr tmp1 = cplex.sum(tmp, g.getEdges().get(j).getResult());
-				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1, g.getEdges().get(j).getBeta()), 0);
+				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1, g.getEdges().get(j).getBetta()), 0);
 				s2.add(tmp2);
 			}
 
@@ -104,7 +112,7 @@ public class RMINTB {
 			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getSum(),
 					cplex.sum(cplex.constant(g.getEdges().get(i).getCostB()),
 							cplex.prod(cplex.constant(g.getEdges().get(i).getCostA()), g.getEdges().get(i).getSum()),
-							g.getEdges().get(i).getBeta()));
+							cplex.constant(g.getEdges().get(i).getBetta())));
 			s11.add(tmp);
 		}
 
@@ -126,43 +134,107 @@ public class RMINTB {
 		int m = 100;
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
-
-			IloNumExpr tmp = cplex.addGe(
-					cplex.sum(cplex.prod(m, g.getEdges().get(i).getY()), cplex.prod(-1, g.getEdges().get(i).getBeta())),
-					0);
+			IloNumExpr tmp = null;
+			if(g.getEdges().get(i).getBetta()>0) {
+			 tmp = cplex.addGe(
+					cplex.sum(cplex.constant(m), -1 * g.getEdges().get(i).getBetta()), 0);}
+			else {
+				cplex.sum(cplex.constant(0),g.getEdges().get(i).getBetta());
+			}
 			s13.add(tmp);
 		}
 		IloAddable[] planet4 = s13.toArray(new IloAddable[s13.size()]);
 
-		cplex.addMinimize(cplex.sum(planet));
 		cplex.add(planet1);
 		cplex.add(planet4);
 		cplex.add(amg);
+		cplex.minimize();
 
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
 
 			this.setRMINTBResultSet(getRMINTBResultSet() + "obj: " + cplex.getObjValue() + "\n");
-
-			break;
+			return true;
 
 		default:
-
-			throw new IllegalStateException("Problem not solved.");
+			return false;
+		// throw new IllegalStateException("Problem not solved.");
 		}
 
 	}
-	
-	
+
 	public void run() throws IloException {
+       
+		step1();
 		
+
+	}
+
+	public void step1() throws IloException {
 		DSSP step1 = new DSSP(this.g);
 		step1.solveDSSP(g);
+		l = 1;
+        step2(i,true);
+	}
+
+	public void step2(int s,boolean xx) throws IloException {
+       if(xx) {
+		for (int i = 0; i < g.getEdges().size(); i++) {
+			if (g.getEdges().get(i).getBetta() > 0) {
+				omega.add(g.getEdges().get(i));
+			}
+
+		}
+       }
+
+		for (int i = 0; i < g.getEdges().size(); i++) {
+			tempo.add(new Double(g.getEdges().get(i).getBetta()));
+		}
+		omega.get(s).setBetta(0);
+		omega.remove(s);
+		step3(g);
 		
+
+	}
+
+	private void step3(Graphs g2) throws IloException {
+
+		if (solveRMINTB(g2) == true) {
+			System.out.println("Danielooooo");
+			int countnew = 0;
+			int countold = 0;
+			for (int i = 0; i < g2.getEdges().size(); i++) {
+				if (omega.contains(g2.getEdges().get(i)))
+					countnew++;
+				if (g2.getEdges().get(i).getBetta() > 0)
+					countold++;
+			}
+
+			if (countnew < countold)
+				step2(i,false);
+		} else
+			step4();
+	}
+
+	private void step4() throws IloException {
+		if (omega.size() == 0)
+			end();
+		else {
+			i++;
+			step3(g);
+		}
+
+	}
+
+	private void end() {
+ 
+		for (int i = 0; i < g.getEdges().size(); i++) {
+			System.out.println("In edge number :" + i + " beta would be " + g.getEdges().get(i).getBetta());
+		}
+
 		
 		
 	}
-	
 
 	/**
 	 * Getter method for the graph
@@ -180,7 +252,8 @@ public class RMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param g the given graph
+	 * @param g
+	 *            the given graph
 	 */
 	public void setGraph(Graphs g) {
 		this.g = g;
@@ -202,7 +275,8 @@ public class RMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param dSSPResultSet the results of solving the DSSP-LP
+	 * @param dSSPResultSet
+	 *            the results of solving the DSSP-LP
 	 */
 	public void setRMINTBResultSet(String rmintbResultSet) {
 		this.rmintbResultSet = rmintbResultSet;

@@ -144,9 +144,9 @@ public class SocialOptimum {
 			for (int i = 0; i < graph.getEdges().size(); i++) {
 				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
 
-					setSocialOptimumResultSet(
-							getSocialOptimumResultSet() + graph.getEdges().get(i).getPlayers().get(j).toString() + " : "
-									+ cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)) + "\n");
+//					setSocialOptimumResultSet(
+//							getSocialOptimumResultSet() + graph.getEdges().get(i).getPlayers().get(j).toString() + " : "
+//									+ cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)) + "\n");
 
 					graph.getEdges().get(i).getValues()
 							.add(cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));

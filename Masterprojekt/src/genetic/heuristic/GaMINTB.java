@@ -13,6 +13,7 @@ import bai_A.Mintb_FC;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
 import graphModel.Vertex;
+import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import heuristic.TestCorrectness;
 import ilog.concert.IloException;
@@ -61,7 +62,7 @@ public class GaMINTB {
 		Population firas = new Population(40);
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(7, 7); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(3, 3); // do not change !!
 		test.generateGraph(graph, map);
 
 		Player player1 = new Player(0, graph.getVertices().get(0), graph.getVertices().get(8), 7);
@@ -82,39 +83,39 @@ public class GaMINTB {
 
 		System.out.println(systemOptimalFlow);
 
-		firas.generatechromosomes(graph);
-		for (int i = 0; i < 20; i++) {
-			firas.run(start.getBestsolutions(), graph, firas);
+//		firas.generatechromosomes(graph);
+//		for (int i = 0; i < 20; i++) {
+//			firas.run(start.getBestsolutions(), graph, firas);
+//
+//		}
+//
+//		Optional<Chromosom> alpha = start.getBestsolutions().stream()
+//				.min(Comparator.comparingInt(Chromosom::getEfficiency));
+//		start.savebestsolution(graph, alpha.get());
+//		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+//			if (alpha.get().getBeta().get(i) < 0.00001) {
+//				alpha.get().getBeta().set(i, 0.0);
+//			}
+//		}
+//		alpha.get().calculateE();
+//		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+//			if (alpha.get().getBeta().get(i) == 0) {
+//				alpha.get().vector[i] = false;
+//			}
+//		}
+//		alpha.get().setFeasible(firas.evaluation(graph, alpha.get()));
+//		System.err.println(
+//				"##################################################### termination ########################################");
+//		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
+//				+ alpha.get().getEfficiency() + " || Feasibility : " + alpha.get().isFeasible());
 
-		}
+//		Mintb_FC pp = new Mintb_FC();
+//		pp.run(graph);
+		
+		RMINTB aa = new RMINTB(graph);
+		aa.run();
 
-		Optional<Chromosom> alpha = start.getBestsolutions().stream()
-				.min(Comparator.comparingInt(Chromosom::getEfficiency));
-		start.savebestsolution(graph, alpha.get());
-		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
-			if (alpha.get().getBeta().get(i) < 0.00001) {
-				alpha.get().getBeta().set(i, 0.0);
-			}
-		}
-		alpha.get().calculateE();
-		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
-			if (alpha.get().getBeta().get(i) == 0) {
-				alpha.get().vector[i] = false;
-			}
-		}
-		alpha.get().setFeasible(firas.evaluation(graph, alpha.get()));
-		System.err.println(
-				"##################################################### termination ########################################");
-		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
-				+ alpha.get().getEfficiency() + " || Feasibility : " + alpha.get().isFeasible());
-
-		Mintb_FC pp = new Mintb_FC();
-		pp.run(graph);
-
-		for (int i = 0; i < graph.getEdges().size(); i++) {
-			System.out.println("In edge number :" + i + " beta would be " + graph.getEdges().get(i).getBetta());
-		}
-
+		
 		TestCorrectness correct = new TestCorrectness();
 		TestCorrectness correct1 = new TestCorrectness();
 
