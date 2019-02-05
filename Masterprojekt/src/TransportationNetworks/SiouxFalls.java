@@ -288,27 +288,25 @@ public class SiouxFalls {
 				 * =============================================================
 				 */
 
-				Graphs g = new Graphs();
-				g.setEdges(edges);
-				g.setVertices(vertices);
-
 				Map<String, Vertex> map = new TreeMap<>();
 				Graphs graph = new Graphs();
-				GridGraphGenerator test = new GridGraphGenerator(5, 5);
+
+				GridGraphGenerator test = new GridGraphGenerator(5, 5); // do not change !!
 				test.generateGraph(graph, map);
 
-				Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 14);
-				Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 40);
+				graph.setVertices(vertices);
+				graph.setEdges(edges);
 
-				ArrayList<Player> players = new ArrayList<>();
-				players.add(0, player1);
-				players.add(1, player2);
-				graph.setPlayer(players);
+				Player player1 = new Player(0, graph.getVertices().get(0), graph.getVertices().get(8), 7);
+				Player player2 = new Player(1, graph.getVertices().get(1), graph.getVertices().get(8), 4);
 
-//				graph.generatePlayers();
-
-				systemOptimalFlow = new SocialOptimum(graph);
-				System.out.println(systemOptimalFlow);
+				ArrayList<Player> x = new ArrayList<>();
+				x.add(0, player1);
+				x.add(1, player2);
+				// graph.setPlayer(x);
+				graph.generatePlayers();
+				graph.generateEdgesFunctions();
+				System.out.println("the number of edges " + graph.getEdges().size());
 
 				/*
 				 * =============================================================
@@ -329,24 +327,61 @@ public class SiouxFalls {
 
 				Population population = new Population(40);
 
-				population.generatechromosomes(graph);
+				graph.generatePlayers();
 
-				for (int i = 0; i < 40; i++) {
+				graph.generateEdgesFunctions();
+				System.out.println("the number of edges " + graph.getEdges().size());
+
+				SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
+				System.out.println(systemOptimalFlow);
+
+				final long time = System.currentTimeMillis();
+
+				population.generatechromosomes(graph);
+				for (int i = 0; i < 20; i++) {
 					population.run(start.getBestsolutions(), graph, population);
+
 				}
 
 				Optional<Chromosom> alpha = start.getBestsolutions().stream()
 						.min(Comparator.comparingInt(Chromosom::getEfficiency));
 				start.savebestsolution(graph, alpha.get());
 
-				System.err.println("\n========== termination ==========\n");
+				for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+					if (alpha.get().getBeta().get(i) < 0.00001) {
+						alpha.get().getBeta().set(i, 0.0);
+					}
+				}
+
+				alpha.get().calculateE();
+
+				for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+					if (alpha.get().getBeta().get(i) == 0) {
+						alpha.get().vector[i] = false;
+					}
+				}
+
+				alpha.get().setFeasible(population.evaluation(graph, alpha.get()));
+
+				System.err.println(
+						"##################################################### termination ########################################");
 				System.out.println(
 						"Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
-								+ alpha.get().getEfficiency() + " || Feasibility  : " + alpha.get().isFeasible());
+								+ alpha.get().getEfficiency() + " || Feasibility : " + alpha.get().isFeasible());
+
+				System.out.printf("\n==========\nThe GAMINTB heuristic took %dms for calculation.\n",
+						System.currentTimeMillis() - time);
 
 				TestCorrectness correct = new TestCorrectness();
-				System.out.println(correct.test(graph, graph.getPlayers().get(0).getSource(),
-						graph.getPlayers().get(0).getSink()));
+				TestCorrectness correct1 = new TestCorrectness();
+
+				Graphs g1 = new Graphs(graph);
+				Graphs g2 = new Graphs(graph);
+
+				System.out.println("getPlayers(0): "
+						+ correct1.test(g1, g1.getPlayers().get(0).getSource(), g1.getPlayers().get(0).getSink()));
+				System.out.println("getPlayers(1): "
+						+ correct.test(g2, g2.getPlayers().get(1).getSource(), g2.getPlayers().get(1).getSink()));
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
