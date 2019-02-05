@@ -54,7 +54,7 @@ public class GaMINTB {
 	}
 
 	public static void main(String[] args) throws IloException {
-
+	    
 		// System.setOut(new PrintStream(new DiscardOutputStream()));
 
 		GaMINTB start = new GaMINTB();
@@ -82,40 +82,37 @@ public class GaMINTB {
 		// Store current System.out before assigning a new value
 
 		System.out.println(systemOptimalFlow);
-
-//		firas.generatechromosomes(graph);
-//		for (int i = 0; i < 20; i++) {
-//			firas.run(start.getBestsolutions(), graph, firas);
-//
-//		}
-//
-//		Optional<Chromosom> alpha = start.getBestsolutions().stream()
-//				.min(Comparator.comparingInt(Chromosom::getEfficiency));
-//		start.savebestsolution(graph, alpha.get());
-//		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
-//			if (alpha.get().getBeta().get(i) < 0.00001) {
-//				alpha.get().getBeta().set(i, 0.0);
-//			}
-//		}
-//		alpha.get().calculateE();
-//		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
-//			if (alpha.get().getBeta().get(i) == 0) {
-//				alpha.get().vector[i] = false;
-//			}
-//		}
-//		alpha.get().setFeasible(firas.evaluation(graph, alpha.get()));
-//		System.err.println(
-//				"##################################################### termination ########################################");
-//		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
-//				+ alpha.get().getEfficiency() + " || Feasibility : " + alpha.get().isFeasible());
-
-//		Mintb_FC pp = new Mintb_FC();
-//		pp.run(graph);
 		
-		RMINTB aa = new RMINTB(graph);
-		aa.run();
+	    final long time = System.currentTimeMillis();
 
+		firas.generatechromosomes(graph);
+		for (int i = 0; i < 20; i++) {
+			firas.run(start.getBestsolutions(), graph, firas);
+
+		}
+
+		Optional<Chromosom> alpha = start.getBestsolutions().stream()
+				.min(Comparator.comparingInt(Chromosom::getEfficiency));
+		start.savebestsolution(graph, alpha.get());
+		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+			if (alpha.get().getBeta().get(i) < 0.00001) {
+				alpha.get().getBeta().set(i, 0.0);
+			}
+		}
+		alpha.get().calculateE();
+		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+			if (alpha.get().getBeta().get(i) == 0) {
+				alpha.get().vector[i] = false;
+			}
+		}
+		alpha.get().setFeasible(firas.evaluation(graph, alpha.get()));
+		System.err.println(
+				"##################################################### termination ########################################");
+		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
+				+ alpha.get().getEfficiency() + " || Feasibility : " + alpha.get().isFeasible());
 		
+	    System.out.printf("\n==========\nThe GAMINTB heuristic took %dms for calculation.\n", System.currentTimeMillis() - time);
+
 		TestCorrectness correct = new TestCorrectness();
 		TestCorrectness correct1 = new TestCorrectness();
 
@@ -126,7 +123,6 @@ public class GaMINTB {
 				+ correct1.test(g1, g1.getPlayers().get(0).getSource(), g1.getPlayers().get(0).getSink()));
 		System.out.println("getPlayers(1): "
 				+ correct.test(g2, g2.getPlayers().get(1).getSource(), g2.getPlayers().get(1).getSink()));
-
 	}
 
 }

@@ -46,8 +46,7 @@ public class RMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @throws IloException
-	 *             if a CPLEX error occures
+	 * @throws IloException if a CPLEX error occures
 	 */
 	public RMINTB(Graphs g) throws IloException {
 
@@ -64,32 +63,30 @@ public class RMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param graph
-	 *            the given graph
-	 * @throws IloException
-	 *             if a CPLEX error occures
+	 * @param graph the given graph
+	 * @throws IloException if a CPLEX error occures
 	 */
 	public boolean solveRMINTB(Graphs g) throws IloException {
 
-		// IloNumVar[] planet = new IloNumVar[g.getEdges().size()];
-
-		// // --- initialising beta ---
-		// for (int i = 0; i < g.getEdges().size(); i++) {
-		// g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the
-		// edge number : " + i));
-		//
-		// }
-		//
-		// // initialise boolean
-		// for (int i = 0; i < g.getEdges().size(); i++) {
-		//
-		// g.getEdges().get(i)
-		// .setY(cplex.numVar(0, 1, IloNumVarType.Bool, "is There a Toll station in the
-		// edge number : " + i));
-		//
-		// planet[i] = g.getEdges().get(i).getY();
-		//
-		// }
+//		 IloNumVar[] planet = new IloNumVar[g.getEdges().size()];
+//
+//		 // --- initialising beta ---
+//		 for (int i = 0; i < g.getEdges().size(); i++) {
+//		 g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the
+//		 edge number : " + i));
+//		
+//		 }
+//		
+//		 // initialise boolean
+//		 for (int i = 0; i < g.getEdges().size(); i++) {
+//		
+//		 g.getEdges().get(i)
+//		 .setY(cplex.numVar(0, 1, IloNumVarType.Bool, "is There a Toll station in the
+//		 edge number : " + i));
+//		
+//		 planet[i] = g.getEdges().get(i).getY();
+//		
+//		 }
 
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 
@@ -135,11 +132,10 @@ public class RMINTB {
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			IloNumExpr tmp = null;
-			if(g.getEdges().get(i).getBetta()>0) {
-			 tmp = cplex.addGe(
-					cplex.sum(cplex.constant(m), -1 * g.getEdges().get(i).getBetta()), 0);}
-			else {
-				cplex.sum(cplex.constant(0),g.getEdges().get(i).getBetta());
+			if (g.getEdges().get(i).getBetta() > 0) {
+				tmp = cplex.addGe(cplex.sum(cplex.constant(m), -1 * g.getEdges().get(i).getBetta()), 0);
+			} else {
+				cplex.sum(cplex.constant(0), g.getEdges().get(i).getBetta());
 			}
 			s13.add(tmp);
 		}
@@ -164,9 +160,8 @@ public class RMINTB {
 	}
 
 	public void run() throws IloException {
-       
+
 		step1();
-		
 
 	}
 
@@ -174,18 +169,18 @@ public class RMINTB {
 		DSSP step1 = new DSSP(this.g);
 		step1.solveDSSP(g);
 		l = 1;
-        step2(i,true);
+		step2(i, true);
 	}
 
-	public void step2(int s,boolean xx) throws IloException {
-       if(xx) {
-		for (int i = 0; i < g.getEdges().size(); i++) {
-			if (g.getEdges().get(i).getBetta() > 0) {
-				omega.add(g.getEdges().get(i));
-			}
+	public void step2(int s, boolean xx) throws IloException {
+		if (xx) {
+			for (int i = 0; i < g.getEdges().size(); i++) {
+				if (g.getEdges().get(i).getBetta() > 0) {
+					omega.add(g.getEdges().get(i));
+				}
 
+			}
 		}
-       }
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			tempo.add(new Double(g.getEdges().get(i).getBetta()));
@@ -193,7 +188,6 @@ public class RMINTB {
 		omega.get(s).setBetta(0);
 		omega.remove(s);
 		step3(g);
-		
 
 	}
 
@@ -211,7 +205,7 @@ public class RMINTB {
 			}
 
 			if (countnew < countold)
-				step2(i,false);
+				step2(i, false);
 		} else
 			step4();
 	}
@@ -227,13 +221,11 @@ public class RMINTB {
 	}
 
 	private void end() {
- 
+
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			System.out.println("In edge number :" + i + " beta would be " + g.getEdges().get(i).getBetta());
 		}
 
-		
-		
 	}
 
 	/**
@@ -252,8 +244,7 @@ public class RMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param g
-	 *            the given graph
+	 * @param g the given graph
 	 */
 	public void setGraph(Graphs g) {
 		this.g = g;
@@ -275,8 +266,7 @@ public class RMINTB {
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @param dSSPResultSet
-	 *            the results of solving the DSSP-LP
+	 * @param dSSPResultSet the results of solving the DSSP-LP
 	 */
 	public void setRMINTBResultSet(String rmintbResultSet) {
 		this.rmintbResultSet = rmintbResultSet;
