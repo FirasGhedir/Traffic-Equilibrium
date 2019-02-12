@@ -1,8 +1,21 @@
 package tntpUtil;
 
-
-public enum network
-{
+/**
+ * Universität Ulm
+ * 
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          Enumerations for transportation networks
+ */
+public enum network{
+	
 	Anaheim("Anaheim"), 
 	Austin("Austin"),
 	Barcelona("Barcelona"),
@@ -22,7 +35,8 @@ public enum network
 	TerrassaAsymmetric("Terrassa-Asymmetric"),
 	Winnipeg("Winnipeg"),
 	WinnipegAsymmetric("Winnipeg-Asymmetric"),
-	chicagoregional("chicago-regional");
+	chicagoregional("chicago-regional"),
+	other("other");
 
 	public final String name;
 

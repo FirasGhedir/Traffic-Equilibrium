@@ -9,12 +9,21 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import graphModel.Edge;
 import graphModel.Vertex;
-import heuristic.SocialOptimum;
 
 /**
+ * University Ulm
  * 
- * @author julian
- *
+ * Projekt Algorithm Engineering-Projekt --- WiSe 2018/19
+ * 
+ * @author Firas Ghedir (firas.ghedir@uni-ulm.de)
+ * @author Julian Bestler (julian.bestler@uni-ulm.de)
+ * 
+ * @version 1.0
+ * 
+ *          _____________________________________________
+ * 
+ *          This class accesses tools to parse '.tntp' files, whereas tntp
+ *          stands for 'Transportation Network Test Problems'
  */
 public class tntpParser {
 
@@ -42,30 +51,12 @@ public class tntpParser {
 	static int[] to;
 	static double[] weight;
 
-	static SocialOptimum systemOptimalFlow;
-
 	/**
 	 * 
 	 */
-	public tntpParser(String data) {
+	public tntpParser(network transportationNetwork) {
 
-		for (network name : network.values()) {
-			// System.out.printf("%s \n", name.getName());
-			if (data == name.getName()) {
-				setTestCase(data);
-			}
-		}
-		if (testCase == "") {
-			setTestCase("other");
-		}
-
-		System.out.println(getTestCase());
-
-		// --- paths to files ---
-		path_flow = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_flow.tntp";
-		path_net = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_net.tntp";
-		path_node = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_node.tntp";
-		path_trips = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_trips.tntp";
+		setTestCaseParameters(transportationNetwork);
 
 		switch (String.valueOf(isValid())) {
 
@@ -100,7 +91,7 @@ public class tntpParser {
 
 					if (strLine.startsWith("<NUMBER OF LINKS>")) {
 						String[] splited = strLine.split("\\s+");
-						System.out.println("\n The " + testCase + " transportation network has "
+						System.out.println("The " + testCase + " transportation network has "
 								+ Integer.parseInt(splited[splited.length - 1]) + " links.\n");
 						/*
 						 * --- create edges ----
@@ -132,8 +123,17 @@ public class tntpParser {
 
 	/**
 	 * 
+	 * @param transportationNetwork
 	 */
-	public static void printTitle() {
+	public static void setTestCaseParameters(network transportationNetwork) {
+
+		for (network name : network.values()) {
+			// System.out.printf("%s \n", name.getName());
+			if (transportationNetwork.getName() == name.getName()) {
+				setTestCase(transportationNetwork.getName());
+			}
+		}
+
 		String leftAlignFormat = "|| %-10s %-70s  ||%n";
 		String limiter = "++========================================================================================++";
 		// String dashedLimiter =
@@ -141,9 +141,15 @@ public class tntpParser {
 		System.out.format("%n");
 		System.out.format(limiter + "%n");
 		System.out.format(leftAlignFormat, "\t", "");
-		System.out.format(leftAlignFormat, "\t", testCase + " (" + "test" + ")");
+		System.out.format(leftAlignFormat, "\t", getTestCase() + " (" + "test" + ")");
 		System.out.format(leftAlignFormat, "\t", "");
 		System.out.format(limiter + "%n%n");
+
+		// --- paths to files ---
+		path_flow = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_flow.tntp";
+		path_net = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_net.tntp";
+		path_node = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_node.tntp";
+		path_trips = "./Masterprojekt/files/TransportationNetworks/" + testCase + "/" + testCase + "_trips.tntp";
 	}
 
 	/**
@@ -158,26 +164,21 @@ public class tntpParser {
 		File node = new File(path_node);
 		File trips = new File(path_trips);
 
-		switch (String.valueOf(testCase)) {
-		case "other":
-
-			if (!flow.exists()) {
-				System.err.println(testCase + "_flow does not exist...");
-				return false;
-			}
-			if (!net.exists()) {
-				System.err.println(testCase + "_net does not exist...");
-				return false;
-			}
-			if (!node.exists()) {
-				System.err.println(testCase + "_node does not exist...");
-				return false;
-			}
-			if (!trips.exists()) {
-				System.err.println(testCase + "_trips does not exist...");
-				return false;
-			}
-			break;
+		if (!flow.exists()) {
+			System.err.println(testCase + "_flow does not exist...");
+			return false;
+		}
+		if (!net.exists()) {
+			System.err.println(testCase + "_net does not exist...");
+			return false;
+		}
+		if (!node.exists()) {
+			System.err.println(testCase + "_node does not exist...");
+			return false;
+		}
+		if (!trips.exists()) {
+			System.err.println(testCase + "_trips does not exist...");
+			return false;
 		}
 
 		return true;

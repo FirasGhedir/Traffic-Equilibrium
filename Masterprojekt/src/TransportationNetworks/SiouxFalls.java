@@ -19,6 +19,7 @@ import heuristic.SocialOptimum;
 import heuristic.TestCorrectness;
 import ilog.concert.IloException;
 import player.Player;
+import tntpUtil.network;
 import tntpUtil.tntpParser;
 
 /**
@@ -38,17 +39,14 @@ import tntpUtil.tntpParser;
  */
 public class SiouxFalls {
 
-	// --- test case ---
-	static String testCase = "SiouxFall";
-
 	/*
 	 * --- other ---
 	 */
 	static ArrayList<Vertex> vertices = new ArrayList<>();
 	static ArrayList<Edge> edges = new ArrayList<>();
 
-	static // --- tntp parser ---
-	tntpParser parser;
+	// --- tntp parser ---
+	static tntpParser parser;
 
 	static SocialOptimum systemOptimalFlow;
 
@@ -69,11 +67,18 @@ public class SiouxFalls {
 
 		GridGraphGenerator test = new GridGraphGenerator(5, 5); // do not change !!
 		test.generateGraph(graph, map);
-		
-		parser = new tntpParser(testCase);
+
+		/*
+		 * ==========
+		 */
+		network transportationNetwork = network.SiouxFalls;
+		parser = new tntpParser(transportationNetwork);
 		vertices = parser.getVertices();
 		edges = parser.getEdges();
-		
+		/*
+		 * ==========
+		 */
+
 		graph.setVertices(vertices);
 		graph.setEdges(edges);
 
@@ -86,7 +91,6 @@ public class SiouxFalls {
 		// graph.setPlayer(x);
 		graph.generatePlayers();
 		graph.generateEdgesFunctions();
-		System.out.println("the number of edges " + graph.getEdges().size());
 
 		/*
 		 * =============================================================
