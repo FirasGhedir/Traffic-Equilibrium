@@ -8,6 +8,7 @@ import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
+import ilog.cplex.IloCplexModeler; 
 
 /**
  * University of Ulm
@@ -31,6 +32,8 @@ public class DSSP {
 	static ArrayList<IloNumExpr> s12 = new ArrayList<>();
 	static ArrayList<IloAddable> s2 = new ArrayList<>();
 	static IloCplex cplex;
+	IloCplexModeler m1;
+
 	private String DSSPResultSet;
 	ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	String cplexSolverOutputStream;
@@ -50,9 +53,11 @@ public class DSSP {
 		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
 		
-	//	cplex.setOut(stream);
+		m1 = new IloCplexModeler();
 
-	//	solveDSSP(this.getGraph());
+		// cplex.setOut(stream);
+
+		solveDSSP(this.getGraph());
 	}
 
 	/**
@@ -72,7 +77,7 @@ public class DSSP {
 			for (int j = 0; j < g.getPlayers().size(); j++) {
 
 				g.getVertices().get(i).getRo().add(j,
-						cplex.numVar(-Double.MAX_VALUE, Double.MAX_VALUE, "Ro of Player " + j + " in Vertex " + i));
+						m1.numVar(-Double.MAX_VALUE, Double.MAX_VALUE, "Ro of Player " + j + " in Vertex " + i));
 
 			}
 
@@ -80,13 +85,13 @@ public class DSSP {
 
 		// --- initialising beta ---
 		for (int i = 0; i < g.getEdges().size(); i++) {
-			g.getEdges().get(i).setBeta(cplex.numVar(0, Double.MAX_VALUE, "beta in the edge number : " + i));
+			g.getEdges().get(i).setBeta(m1.numVar(0, Double.MAX_VALUE, "beta in the edge number : " + i));
 
 		}
 
 		// --- C*beta ---
 		for (int i = 0; i < g.getEdges().size(); i++) {
-			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getC(), g.getEdges().get(i).getBeta());
+			IloNumExpr tmp = m1.prod(g.getEdges().get(i).getC(), g.getEdges().get(i).getBeta());
 			s1.add(tmp);
 		}
 
@@ -94,49 +99,49 @@ public class DSSP {
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
 
-			IloNumExpr tmp = cplex.prod(g.getEdges().get(i).getSum(),
-					cplex.sum(cplex.constant(g.getEdges().get(i).getCostB()),
-							cplex.prod(cplex.constant(g.getEdges().get(i).getCostA()), g.getEdges().get(i).getSum()),
+			IloNumExpr tmp = m1.prod(g.getEdges().get(i).getSum(),
+					m1.sum(m1.constant(g.getEdges().get(i).getCostB()),
+							m1.prod(cplex.constant(g.getEdges().get(i).getCostA()), g.getEdges().get(i).getSum()),
 							g.getEdges().get(i).getBeta()));
 			s11.add(tmp);
 		}
 
 		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
-		IloNumExpr x = cplex.sum(planet1);
+		IloNumExpr x = m1.sum(planet1);
 
 		for (int i = 0; i < g.getPlayers().size(); i++) {
-			IloNumExpr tmp = cplex.prod(cplex.constant(g.getPlayers().get(i).getDemand()),
-					cplex.sum(g.getPlayers().get(i).getSource().getRo().get(i),
-							cplex.prod(-1, g.getPlayers().get(i).getSink().getRo().get(i))));
+			IloNumExpr tmp = m1.prod(m1.constant(g.getPlayers().get(i).getDemand()),
+					m1.sum(g.getPlayers().get(i).getSource().getRo().get(i),
+							m1.prod(-1, g.getPlayers().get(i).getSink().getRo().get(i))));
 			s12.add(tmp);
 
 		}
 		IloNumExpr[] planet2 = s12.toArray(new IloNumExpr[s12.size()]);
-		IloNumExpr y = cplex.sum(planet2);
+		IloNumExpr y = m1.sum(planet2);
 
-		IloAddable amg = cplex.addEq(0, cplex.sum(x, cplex.prod(-1, y)));
+		IloAddable amg = m1.addEq(0, cplex.sum(x, cplex.prod(-1, y)));
 
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 
 			for (int j = 0; j < g.getEdges().size(); j++) {
 
-				IloNumExpr tmp = cplex.sum(g.getEdges().get(j).getTo().getRo().get(i),
-						cplex.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
-				IloNumExpr tmp1 = cplex.sum(tmp, g.getEdges().get(j).getResult());
-				IloAddable tmp2 = cplex.addGe(cplex.sum(tmp1, g.getEdges().get(j).getBeta()), 0);
+				IloNumExpr tmp = m1.sum(g.getEdges().get(j).getTo().getRo().get(i),
+						m1.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
+				IloNumExpr tmp1 = m1.sum(tmp, g.getEdges().get(j).getResult());
+				IloAddable tmp2 = m1.addGe(cplex.sum(tmp1, g.getEdges().get(j).getBeta()), 0);
 				s2.add(tmp2);
 			}
 
 		}
 		IloAddable[] planet3 = s2.toArray(new IloAddable[s2.size()]);
 
-		cplex.addMinimize(cplex.sum(planet));
+		cplex.addMinimize(m1.sum(planet));
 		cplex.add(planet3);
 		cplex.add(amg);
 
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
-			
+
 			System.out.println(true);
 
 			this.setDSSPResultSet(getDSSPResultSet() + "obj: " + cplex.getObjValue() + "\n");
@@ -149,27 +154,28 @@ public class DSSP {
 			}
 
 			savevalues(cplex, g);
-               cplex.clearModel();
+			cplex.clearModel();
 			break;
 
 		default:
+			System.out.println(cplex.toString());
 
 			throw new IllegalStateException("Problem not solved.");
 		}
 	}
 
 	private void savevalues(IloCplex cplex2, Graphs g) throws IloException {
-		
-		
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			g.getEdges().get(i).setBetta(cplex2.getValue(g.getEdges().get(i).getBeta()));
-			if(g.getEdges().get(i).getBetta()>0) {g.getEdges().get(i).getIlist().add(g.getEdges().get(i).getBetta());}
+			if (g.getEdges().get(i).getBetta() > 0) {
+				g.getEdges().get(i).getIlist().add(g.getEdges().get(i).getBetta());
+			}
 			g.getEdges().get(i).calculateL();
-			
+
 		}
-		
-		 g.fillbeta();
+
+		g.fillbeta();
 
 	}
 

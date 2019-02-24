@@ -55,23 +55,15 @@ public class main {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(3, 8); // do not change !!
 		test.generateGraph(graph, map);
 
-		
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 10);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 10);
-
-		ArrayList<Player> x = new ArrayList<>();
-		x.add(0, player1);
-		x.add(1, player2);
-//        graph.setPlayer(x);
 		
 		
 	    graph.generatePlayers();
 
 		graph.generateEdgesFunctions();// edge functions are totally randomized
-		 systemOptimalFlow = new SocialOptimum(graph);
+		systemOptimalFlow = new SocialOptimum(graph);
 
 		Mintb_FC pp = new Mintb_FC();
 		pp.run(graph);

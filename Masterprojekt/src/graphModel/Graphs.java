@@ -33,7 +33,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	final static int b_max = 3;
 	final static int b_min = 0;
 	final static double Pi = 1.57079632679;
-	final static int max_players = 20;
+	final static int max_players = 4;
 
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
@@ -78,7 +78,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	public void generateEdgesFunctions() {
 		for (int i = 0; i < this.edges.size(); i++) {
 			// this.edges.get(i).setCostA(1);
-			// this.edges.get(i).setCostB(1);
+			 //this.edges.get(i).setCostB(1);
 			// ax+b is randomly generated
 			this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
 			this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
@@ -476,7 +476,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 
 		do {
 			tmp1 = rand.nextInt(getVertices().size());
-		} while (tmp == tmp1);
+		} while (!(tmp + 2 > tmp1 || tmp +2 < tmp1));
 		for (int i = 0; i < x; i++) {
 			this.getPlayers().add(new Player(i, this.getVertices().get(tmp), this.getVertices().get(tmp1),
 					d_min + rand.nextInt((d_max - d_min) + 1)));
