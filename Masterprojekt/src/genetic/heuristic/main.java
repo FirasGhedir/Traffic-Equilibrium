@@ -55,18 +55,20 @@ public class main {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(3, 8); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
 		test.generateGraph(graph, map);
 
 		
 		
 	    graph.generatePlayers();
-
+        for(int i = 0 ; i < graph.getPlayers().size() ; i++) {
+        	System.out.println(graph.getPlayers().get(i).getSource().getId() + " " + graph.getPlayers().get(i).getSink().getId());
+        }
 		graph.generateEdgesFunctions();// edge functions are totally randomized
 		systemOptimalFlow = new SocialOptimum(graph);
 
 		Mintb_FC pp = new Mintb_FC();
-		pp.run(graph);
+		pp.run(graph);   
 		for(int i = 0 ; i < graph.getEdges().size() ; i++) {
 			System.out.println("In edge number :" + i + " beta would be " + graph.getEdges().get(i).getBetta() );
 		}

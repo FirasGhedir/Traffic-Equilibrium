@@ -34,6 +34,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	final static int b_min = 0;
 	final static double Pi = 1.57079632679;
 	final static int max_players = 4;
+	final static int accuracy = 1000;
 
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
@@ -77,11 +78,11 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 
 	public void generateEdgesFunctions() {
 		for (int i = 0; i < this.edges.size(); i++) {
-			// this.edges.get(i).setCostA(1);
-			 //this.edges.get(i).setCostB(1);
+			 this.edges.get(i).setCostA(1);
+			 this.edges.get(i).setCostB(1);
 			// ax+b is randomly generated
-			this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
-			this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
+		//	this.edges.get(i).setCostA(Math.round(Math.tan(Pi * rand.nextDouble())*accuracy )/accuracy);
+			//this.edges.get(i).setCostB(Math.round(b_min + (b_max - b_min) * rand.nextDouble()*accuracy)/accuracy);
 
 		}
 	}
@@ -471,13 +472,14 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	public void generatePlayers() {
 
 		int x = 1 + rand.nextInt(max_players);
-		int tmp = rand.nextInt(getVertices().size());
-		int tmp1;
 
-		do {
-			tmp1 = rand.nextInt(getVertices().size());
-		} while (!(tmp + 2 > tmp1 || tmp +2 < tmp1));
 		for (int i = 0; i < x; i++) {
+			int tmp = rand.nextInt(getVertices().size());
+			int tmp1;
+
+			do {
+				tmp1 = rand.nextInt(getVertices().size());
+			} while (tmp == tmp1);
 			this.getPlayers().add(new Player(i, this.getVertices().get(tmp), this.getVertices().get(tmp1),
 					d_min + rand.nextInt((d_max - d_min) + 1)));
 		}
