@@ -69,8 +69,8 @@ public class GaMINTB {
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
 		x.add(1, player2);
-		// graph.setPlayer(x);
-		graph.generatePlayers();
+		graph.setPlayer(x);
+	//	graph.generatePlayers();
 		graph.generateEdgesFunctions();
 		System.out.println("the number of edges " + graph.getEdges().size());
 
@@ -91,19 +91,19 @@ public class GaMINTB {
 
 		Optional<Chromosom> alpha = start.getBestsolutions().stream()
 				.min(Comparator.comparingInt(Chromosom::getEfficiency));
-		start.savebestsolution(graph, alpha.get());
-		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
-			if (alpha.get().getBeta().get(i) < 0.00001) {
-				alpha.get().getBeta().set(i, 0.0);
-			}
-		}
-		alpha.get().calculateE();
-		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
-			if (alpha.get().getBeta().get(i) == 0) {
-				alpha.get().vector[i] = false;
-			}
-		}
-		alpha.get().setFeasible(firas.evaluation(graph, alpha.get()));
+    	start.savebestsolution(graph, alpha.get());
+//		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+//			if (alpha.get().getBeta().get(i) < 0.00001) {
+//				alpha.get().getBeta().set(i, 0.0);
+//			}
+//		}
+	alpha.get().calculateE();
+//		for (int i = 0; i < alpha.get().getBeta().size(); i++) {
+//			if (alpha.get().getBeta().get(i) == 0) {
+//				alpha.get().vector[i] = false;
+//			}
+//		}
+//		alpha.get().setFeasible(firas.evaluation(graph, alpha.get()));
 		System.err.println(
 				"##################################################### termination ########################################");
 		System.out.println("Best final solution : " + Arrays.toString(alpha.get().getVector()) + " || Efficiency : "
@@ -112,12 +112,14 @@ public class GaMINTB {
 	    System.out.printf("\n==========\nThe GAMINTB heuristic took %dms for calculation.\n", System.currentTimeMillis() - time);
 
 		TestCorrectness correct1 = new TestCorrectness();
-
-		Graphs g1 = new Graphs(graph);
-
+		
 		System.out.println("getPlayers(0): "
-				+ correct1.test(g1, g1.getPlayers().get(0).getSource(), g1.getPlayers().get(0).getSink()));
+				+ correct1.test(graph, graph.getPlayers().get(0).getSource(), graph.getPlayers().get(0).getSink()));
+
+		System.out.println("getPlayers(1): "
+				+ correct1.test(graph, graph.getPlayers().get(1).getSource(), graph.getPlayers().get(1).getSink()));
 	
 	}
+	
 
 }
