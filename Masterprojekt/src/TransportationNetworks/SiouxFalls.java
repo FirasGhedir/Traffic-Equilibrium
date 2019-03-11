@@ -155,15 +155,12 @@ public class SiouxFalls {
 		System.out.printf("\n==========\nThe GAMINTB heuristic took %dms for calculation.\n",
 				System.currentTimeMillis() - time);
 
-		TestCorrectness correct = new TestCorrectness();
 		TestCorrectness correct1 = new TestCorrectness();
 
 		Graphs g1 = new Graphs(graph);
-		Graphs g2 = new Graphs(graph);
 
 		System.out.println("getPlayers(0): "
 				+ correct1.test(g1, g1.getPlayers().get(0).getSource(), g1.getPlayers().get(0).getSink()));
-		System.out.println("getPlayers(1): "
-				+ correct.test(g2, g2.getPlayers().get(1).getSource(), g2.getPlayers().get(1).getSink()));
+	
 	}
 }

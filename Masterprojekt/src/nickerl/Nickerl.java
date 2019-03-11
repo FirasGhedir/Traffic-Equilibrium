@@ -65,10 +65,11 @@ public class Nickerl {
 				Player sigma = new Player(players.size(), g.getPlayers().get(i).getSource(),
 						g.getPlayers().get(i).getSink(), fmax);
 				players.add(sigma);
-				
+
 				for (int k = 0; k < g.getEdges().size(); k++) {
 					if (KP.contains(g.getEdges().get(k))) {
-						g.getEdges().get(k).getValues().set(i, g.getEdges().get(k).getValues().get(i) - fmax);
+						g.getEdges().get(k).getValues().set(g.getPlayers().get(i).getId(),
+								g.getEdges().get(k).getValues().get(g.getPlayers().get(i).getId()) - fmax);
 						g.getEdges().get(k).getValues().add(sigma.getId(), fmax);
 
 					} else {
@@ -83,9 +84,9 @@ public class Nickerl {
 			}
 
 		}
-        for(int i = 0 ; i < g.getPlayers().size() ; i++) {
-        	
-        }
+		for (int i = 0; i < g.getPlayers().size(); i++) {
+
+		}
 		step2(0);
 	}
 
@@ -104,7 +105,7 @@ public class Nickerl {
 
 	public boolean step3() throws IloException {
 		ArrayList<Player> p0 = new ArrayList<>(players);
-     	ArrayList<ArrayList<Player>> list = new ArrayList<>();
+		ArrayList<ArrayList<Player>> list = new ArrayList<>();
 		list.add(p0);
 		for (int i = 1; i < g.getEdges().size(); i++) {
 			list.add(i, new ArrayList<Player>());
@@ -121,7 +122,7 @@ public class Nickerl {
 				flag = false;
 
 				for (int j = 0; j < list.get(i).size(); j++) {
-					System.out.println(list.get(i).get(j).getId()+ " " + list.get(i).get(j).getDemand() );
+					System.out.println(list.get(i).get(j).getId() + " " + list.get(i).get(j).getDemand());
 					if (g.getEdges().get(i).getValues().get(list.get(i).get(j).getId()) > 0) {
 						System.out.println(g.getEdges().get(i).getValues().get(g.getPlayers().size() + j - 1));
 						tmp = j;
@@ -169,7 +170,7 @@ public class Nickerl {
 		g.getEdges().get(id).getValues().set(alpha.get(tmp).getId(), 0.0);
 		Graphs x = newgraph(g, alpha.get(tmp).getId());
 		Graphs y = newgraph(g, alpha.get(tmp).getId());
-        System.err.println(y.getEdges().size());
+		System.err.println(y.getEdges().size());
 		List<Edge> K1 = BellmanFordShortestPath.findPathBetween(x, k1.getSource(), k1.getSink()).getEdgeList();
 		List<Edge> K2 = BellmanFordShortestPath.findPathBetween(y, k2.getSource(), k2.getSink()).getEdgeList();
 		for (int i = 0; i < K1.size(); i++) {
@@ -300,8 +301,8 @@ public class Nickerl {
 		graph.generateEdgesFunctions();
 		Nickerl n = new Nickerl(graph);
 		SocialOptimum social = new SocialOptimum(graph);
-	    social.solveDSSP(graph);
-	        n.run();
+		social.solveDSSP(graph);
+		n.run();
 	}
 
 }
