@@ -53,7 +53,7 @@ public class SocialOptimum {
 		cplex = new IloCplex();
 		cplex.setOut(stream); // store the cplex solver Outputstream in Bytestream
 
-		solveDSSP(this.getGraph());
+		//solveDSSP(this.getGraph());
 	}
 
 	/**

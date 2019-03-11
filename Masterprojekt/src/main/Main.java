@@ -1,9 +1,12 @@
 package main;
 
 import bai_A.Mintb_FC;
+import genetic.heuristic.GaMINTB;
 import graphModel.Graphs;
 import heuristic.RMINTB;
+import heuristic.SocialOptimum;
 import ilog.concert.IloException;
+import nickerl.Nickerl;
 
 public class Main{
 	
@@ -30,9 +33,23 @@ public class Main{
 	
 	public static void Genetic(Graphs graph) {
 		
+		GaMINTB solver = new GaMINTB(graph);
+		try {
+			solver.run();
+		} catch (IloException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void Nickerl(Graphs graph) {
+		
+		try {
+			Nickerl solver = new Nickerl(graph);
+			solver.run();
+		} catch (IloException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -41,17 +58,21 @@ public class Main{
 		return null;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IloException {
 	   Graphs graph = null;
 	  
-	   switch(args[1]) {
+	   switch(args[0]) {
 	   case "1" : graph = getGraph(1);
 	   case "2" : graph = getGraph(2);
 	   case "3" : graph = getGraph(3);
 	   
 	   }
 	   
-	   switch(args[0]) {
+		SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
+		systemOptimalFlow.solveDSSP(graph);
+
+	   
+	   switch(args[1]) {
 	   case "1" : Mintb(graph);
 	   case "2" : Rmintb(graph);
 	   case "3" : Genetic(graph);
