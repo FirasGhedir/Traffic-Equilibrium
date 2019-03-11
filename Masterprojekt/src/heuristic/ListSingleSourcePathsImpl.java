@@ -9,6 +9,7 @@ import graphModel.Graph;
 import graphModel.Vertex;
 import heuristic.ShortestPathAlgorithm.SingleSourcePaths;
 
+@SuppressWarnings("hiding")
 public class ListSingleSourcePathsImpl<Vertex, Edge> implements SingleSourcePaths<Vertex, Edge>, Serializable {
 	private static final long serialVersionUID = -60070018446561686L;
 

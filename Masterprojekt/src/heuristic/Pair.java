@@ -30,7 +30,8 @@ public class Pair<First,Second> {
 	      return false;
 	    }
 
-	    final Pair pair = (Pair) o;
+	    @SuppressWarnings("rawtypes")
+		final Pair pair = (Pair) o;
 
 	    if (first != null ? !first.equals(pair.first) : pair.first != null) {
 	      return false;

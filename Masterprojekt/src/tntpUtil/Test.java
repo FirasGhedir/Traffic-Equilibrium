@@ -55,6 +55,7 @@ public class Test {
 		 * ==========
 		 */
 		network transportationNetwork = network.other;
+		@SuppressWarnings("unused")
 		tntpBuilder builder = new tntpBuilder(g, transportationNetwork);
 		/*
 		 * ==========

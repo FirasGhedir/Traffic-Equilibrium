@@ -84,7 +84,7 @@ public GraphPath<Vertex, Edge> getPath(Vertex source, Vertex sink)
  * @throws NegativeCycleDetectedException in case a negative weight cycle is detected
  */
 @Override
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public SingleSourcePaths<Vertex, Edge> getPaths(Vertex source)
 {
     if (!graph.containsVertex(source)) {

@@ -7,7 +7,6 @@ import graphModel.Graphs;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
-import ilog.cplex.CplexI;
 import ilog.cplex.IloCplex;
 import ilog.cplex.IloCplexModeler;
 
