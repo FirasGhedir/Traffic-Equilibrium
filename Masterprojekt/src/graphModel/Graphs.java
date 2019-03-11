@@ -28,12 +28,12 @@ import player.Player;
 public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
-	final static int d_max = 10;
+	final static int d_max = 5;
 	final static int d_min = 1;
 	final static int b_max = 3;
 	final static int b_min = 0;
 	final static double Pi = 1.57079632679;
-	final static int max_players = 4;
+	final static int max_players = 6;
 	final static int accuracy = 1000;
 
 	public ArrayList<Vertex> vertices;
@@ -78,22 +78,24 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 
 	public void generateEdgesFunctions() {
 		for (int i = 0; i < this.edges.size(); i++) {
-			 this.edges.get(i).setCostA(1);
-			 this.edges.get(i).setCostB(1);
+			// this.edges.get(i).setCostA(1);
+			// this.edges.get(i).setCostB(1);
 			// ax+b is randomly generated
-		//	this.edges.get(i).setCostA(Math.round(Math.tan(Pi * rand.nextDouble())*accuracy )/accuracy);
-			//this.edges.get(i).setCostB(Math.round(b_min + (b_max - b_min) * rand.nextDouble()*accuracy)/accuracy);
+			this.edges.get(i).setCostA(Math.tan(Pi * rand.nextDouble()));
+			this.edges.get(i).setCostB(b_min + (b_max - b_min) * rand.nextDouble());
 
 		}
 	}
 
 	@Override
 	public Edge getEdge(Vertex sourceVertex, Vertex targetVertex) {
-		Edge x = new Edge(sourceVertex, targetVertex, 0);
-		if (edges.contains(x)) {
-			return x;
+		for (int i = 0; i < getEdges().size(); i++) {
+			if (getEdges().get(i).getTo().equals(targetVertex) && getEdges().get(i).getFrom().equals(sourceVertex)) {
+				return getEdges().get(i);}
+
 		}
 		return null;
+
 	}
 
 	@Override

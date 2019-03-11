@@ -55,7 +55,7 @@ public class main {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(10	, 10); // do not change !!
 		test.generateGraph(graph, map);
 
 		

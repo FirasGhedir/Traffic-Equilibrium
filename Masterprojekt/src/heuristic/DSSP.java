@@ -7,8 +7,9 @@ import graphModel.Graphs;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
+import ilog.cplex.CplexI;
 import ilog.cplex.IloCplex;
-import ilog.cplex.IloCplexModeler; 
+import ilog.cplex.IloCplexModeler;
 
 /**
  * University of Ulm
@@ -52,10 +53,13 @@ public class DSSP {
 
 		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
-		
-		m1 = new IloCplexModeler();
 
+		m1 = new IloCplexModeler();
+		cplex.setParam(IloCplex.DoubleParam.EpMrk, 0.9);
+		//cplex.setParam(IloCplex.IntParam.SingLim, 10000);
+		cplex.setParam(IloCplex.IntParam.ScaInd, 1);
 		// cplex.setOut(stream);
+		cplex.setParam(IloCplex.IntParam.PriceLim, 2);
 
 		solveDSSP(this.getGraph());
 	}
@@ -142,8 +146,7 @@ public class DSSP {
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
 
-			System.out.println(true);
-
+			// System.out.println(cplex.toString());
 			this.setDSSPResultSet(getDSSPResultSet() + "obj: " + cplex.getObjValue() + "\n");
 
 			for (int i = 0; i < g.getEdges().size(); i++) {
@@ -158,7 +161,7 @@ public class DSSP {
 			break;
 
 		default:
-			System.out.println(cplex.toString());
+			// System.out.println(cplex.toString());
 
 			throw new IllegalStateException("Problem not solved.");
 		}

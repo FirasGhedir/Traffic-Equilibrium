@@ -173,20 +173,20 @@ public class Main {
 			// --- Graph parameter ---
 			Map<String, Vertex> map = new TreeMap<>();
 			Graphs graph = new Graphs();
-			GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+			GridGraphGenerator test = new GridGraphGenerator(7	, 7); // do not change !!
 			test.generateGraph(graph, map);
 
 			// --- player ---
-			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 10);
-			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 5);
+			Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(3), 3);
+			Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(3), 4);
 
 			ArrayList<Player> x = new ArrayList<>();
 			x.add(0, player1);
 			x.add(1, player2);
 
-			graph.setPlayer(x);
+			//graph.setPlayer(x);
 			graph.generateEdgesFunctions();// edge functions are totally randomized
-
+            graph.generatePlayers();
 			// buildJSON(graph);
 			graph.getPlayers().get(0).setDemand(4);
 			Graphs graphClone = createObjectInstanceFromJSON(new File("./graphData.json"));
@@ -203,7 +203,7 @@ public class Main {
 			DSSP dssp = new DSSP(graph);
 			TestCorrectness correct = new TestCorrectness();
 
-			System.out.println(correct.test(graph, player1.getSource(), player1.getSink()));
+		//	System.out.println(correct.test(graph, player1.getSource(), player1.getSink()));
 
 			// --- RMINTB ---
 			// RMINTB rmintb = new RMINTB(graph);
