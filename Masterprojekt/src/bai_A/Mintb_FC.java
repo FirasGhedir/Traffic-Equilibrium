@@ -19,12 +19,13 @@ public class Mintb_FC {
         ArrayList<Double> xx = new ArrayList<>();
         ArrayList<Double> yy = new ArrayList<>();
 		x = new DSSP(g);
+		x.solveDSSP(g);
         
 		while (true) {
 			System.out.println(l);
 			update(g);
 			xx = g.getBeta();
-			x = new DSSP(g);
+			x.solveDSSP(g);;
 			yy = g.getBeta();
 			if(check(xx,yy) == true) break;
 			l++;

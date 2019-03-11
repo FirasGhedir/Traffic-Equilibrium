@@ -6,7 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+
 import graphModel.Graphs;
+
 import ilog.concert.IloException;
 
 public class GaMINTB {
@@ -43,7 +45,7 @@ public class GaMINTB {
 	
 
 		final long time = System.currentTimeMillis();
-
+       
 		firas.generatechromosomes(graph);
 		for (int i = 0; i < 20; i++) {
 			firas.run(this.getBestsolutions(), graph, firas);
@@ -64,7 +66,8 @@ public class GaMINTB {
 		System.out.printf("\n==========\nThe GAMINTB heuristic took %dms for calculation.\n",
 				System.currentTimeMillis() - time);
 
-
+           
 	}
-
+	
+	
 }

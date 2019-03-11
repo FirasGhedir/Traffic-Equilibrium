@@ -300,7 +300,7 @@ public class Nickerl {
 		graph.generateEdgesFunctions();
 		Nickerl n = new Nickerl(graph);
 		SocialOptimum social = new SocialOptimum(graph);
-	  
+	    social.solveDSSP(graph);
 	        n.run();
 	}
 

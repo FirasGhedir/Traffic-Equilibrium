@@ -60,7 +60,7 @@ public class DSSP {
 		// cplex.setOut(stream);
 		cplex.setParam(IloCplex.IntParam.PriceLim, 2);
 
-		solveDSSP(this.getGraph());
+		//solveDSSP(this.getGraph());
 	}
 
 	/**

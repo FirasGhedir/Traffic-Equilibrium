@@ -107,7 +107,7 @@ public class SiouxFalls {
 		 * =============================================================
 		 */
 
-		GaMINTB start = new GaMINTB();
+		GaMINTB start = new GaMINTB(graph);
 
 		Population population = new Population(40);
 

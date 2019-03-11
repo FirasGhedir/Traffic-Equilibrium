@@ -24,7 +24,7 @@ public class Main{
 		RMINTB solver;
 		try {
 			solver = new RMINTB(graph);
-			solver.run();
+			solver.solve();
 
 		} catch (IloException e) {
 			e.printStackTrace();
