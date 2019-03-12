@@ -205,17 +205,21 @@ public class RMINTB {
 	public static void main(String[] args) throws IloException {
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
+		
+//		@SuppressWarnings("rawtypes")
+//		BarabasiAlbertGraphGenerator test = new BarabasiAlbertGraphGenerator(10,3,100);
+//		test.generateGraph(graph,map);
+
+
 		GridGraphGenerator test = new GridGraphGenerator(6,6); // do not change !!
 		test.generateGraph(graph, map);
 		
 		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 4);
 		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 4);
-
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);
 		x.add(1, player2);
        graph.setPlayer(x);
-       // graph.generatePlayers();
        graph.generateEdgesFunctions();
         SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 		systemOptimalFlow.solveDSSP(graph);

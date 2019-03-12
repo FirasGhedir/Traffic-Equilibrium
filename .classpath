@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Masterprojekt/src"/>
-	<classpathentry kind="lib" path="C:/Program Files/IBM/ILOG/CPLEX_Studio128/cplex/lib/cplex.jar">
+	<classpathentry exported="true" kind="lib" path="C:/Program Files/IBM/ILOG/CPLEX_Studio128/cplex/lib/cplex.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Program Files/IBM/ILOG/CPLEX_Studio128/cplex/bin/x64_win64"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/Ninita/Downloads/jackson-annotations-2.9.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ninita/Downloads/jackson-core-2.9.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ninita/Downloads/jackson-databind-2.9.8.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Ninita/Downloads/jackson-annotations-2.9.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Ninita/Downloads/jackson-core-2.9.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Ninita/Downloads/jackson-databind-2.9.8.jar"/>
 	<classpathentry kind="output" path="Masterprojekt/bin"/>
 </classpath>

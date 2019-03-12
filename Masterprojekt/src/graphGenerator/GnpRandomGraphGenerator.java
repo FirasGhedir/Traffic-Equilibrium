@@ -113,7 +113,8 @@ public class GnpRandomGraphGenerator implements GraphGenerator<Vertex, Edge, Ver
 	        int previousVertexSetSize = target.vertexSet().size();
 	        Map<Integer, Vertex> vertices = new HashMap<>(n);
 	        for (int i = 0; i < n; i++) {
-	            vertices.put(i, target.addVertex());
+	            vertices.put(i, new Vertex(i));
+	            target.addVertex();
 	        }
 
 	        if (target.vertexSet().size() != previousVertexSetSize + n) {
@@ -122,7 +123,7 @@ public class GnpRandomGraphGenerator implements GraphGenerator<Vertex, Edge, Ver
 	        }
 
 	        // check if graph is directed
-	        boolean isDirected = target.getType().isDirected();
+	        boolean isDirected = false;
 
 	        // create edges
 	        for (int i = 0; i < n; i++) {

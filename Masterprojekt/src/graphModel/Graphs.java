@@ -25,7 +25,7 @@ import player.Player;
  * 
  *          A collection of utilities to assist with graph manipulation.
  */
-public class Graphs implements Graph<Vertex, Edge>, Cloneable {
+public class Graphs implements Graph<Vertex, Edge>  {
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
 	final static int d_max = 5;
@@ -35,7 +35,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	final static double Pi = 1.57079632679;
 	final static int max_players = 6;
 	final static int accuracy = 1000;
-
+    Graphe graphe = new Graphe();
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
 	private ArrayList<Player> players = new ArrayList<>();
@@ -192,7 +192,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 
 	@Override
 	public GraphType getType() {
-		return null;
+		return graphe;
 	}
 
 	@Override
@@ -607,5 +607,7 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	public void setP(List<Player> p) {
 		P = p;
 	}
+	
+	
 
 }
