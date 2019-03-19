@@ -21,6 +21,7 @@ import graphGenerator.GridGraphGenerator;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
+import heuristic.*;
 import heuristic.BellmanFordShortestPath;
 import heuristic.SocialOptimum;
 import ilog.concert.IloException;
@@ -158,9 +159,21 @@ public class DC {
 			while (graph.getPlayers().get(i).getDemand() > 0) {
 				x = newgraph(x, i);
 
-				List<Edge> KP = BellmanFordShortestPath
+				/*
+				 * ======================================
+				 */
+
+//				List<Edge> KP = BellmanFordShortestPath
+//						.findPathBetween(x, graph.getPlayers().get(i).getSource(), graph.getPlayers().get(i).getSink())
+//						.getEdgeList();
+
+				List<Edge> KP = DijkstraAlgorithm
 						.findPathBetween(x, graph.getPlayers().get(i).getSource(), graph.getPlayers().get(i).getSink())
 						.getEdgeList();
+
+				/*
+				 * ======================================
+				 */
 
 				graph.getPlayers().get(i).setP(KP);
 				Optional<Edge> fmax = KP.stream().max(Comparator.comparingDouble(Edge::getSum));
@@ -194,10 +207,10 @@ public class DC {
 
 		Graphs g1 = new Graphs();
 		Graphs g2 = new Graphs();
-		
+
 		if (graph.getVertices().size() > 2) {
 			double randomValue = graph.getVertices().size() * r.nextDouble();
-		
+
 			for (int j = 0; j < randomValue; j++) {
 
 				g1.getVertices().add(graph.getVertices().get(j));
@@ -226,52 +239,49 @@ public class DC {
 		} else
 			return;
 		List<Edge> epsilon = new ArrayList<>();
-		while(graph.getP().size() !=0) {
-			Player tmp =  graph.getP().get(0);
+		while (graph.getP().size() != 0) {
+			Player tmp = graph.getP().get(0);
 			graph.getP().remove(0);
 			int idx;
-			if(g1.containsVertex(tmp.getSource())) {
+			if (g1.containsVertex(tmp.getSource())) {
 				idx = 1;
-			}
-			else {
-				idx = 2 ; 
+			} else {
+				idx = 2;
 			}
 			Vertex v = tmp.getSource();
-			while(!v.equals(tmp.getSink())) {
-				for(int j = 0 ; j < graph.getEdges().size() ; j++ ) {
-					 if(graph.getEdges().get(j).getFrom().equals(tmp.getSource())){
-						 if(g1.containsVertex(graph.getEdges().get(j).getTo()) && idx == 1) {
-							 v=graph.getEdges().get(j).getTo();
-							 epsilon.add(graph.getEdges().get(j));
-						 }
-						 else if (g2.containsVertex(graph.getEdges().get(j).getTo()) && idx == 2) {
-							 v=graph.getEdges().get(j).getTo();
-							 epsilon.add(graph.getEdges().get(j));
-						 }
-						 else {
-							 if(!v.equals(tmp.getSource())) {
-								 Player pl = new Player(graph.getPlayers().get(graph.getPlayers().size()-1).getId()+1,tmp.getSource(),v,tmp.getDemand());
-								 
-								 if(idx == 1) {
-									 g1.getP().add(pl);
-								 }
-								 else {
-									 g2.getP().add(pl);
-								 }
-							 }
-							 
-							 
-							 epsilon.clear();
-							 idx = (idx %2) + 1 ; 
-							 v=graph.getEdges().get(j).getTo();
-							 tmp.setSource(graph.getEdges().get(j).getTo());
+			while (!v.equals(tmp.getSink())) {
+				for (int j = 0; j < graph.getEdges().size(); j++) {
+					if (graph.getEdges().get(j).getFrom().equals(tmp.getSource())) {
+						if (g1.containsVertex(graph.getEdges().get(j).getTo()) && idx == 1) {
+							v = graph.getEdges().get(j).getTo();
+							epsilon.add(graph.getEdges().get(j));
+						} else if (g2.containsVertex(graph.getEdges().get(j).getTo()) && idx == 2) {
+							v = graph.getEdges().get(j).getTo();
+							epsilon.add(graph.getEdges().get(j));
+						} else {
+							if (!v.equals(tmp.getSource())) {
+								Player pl = new Player(
+										graph.getPlayers().get(graph.getPlayers().size() - 1).getId() + 1,
+										tmp.getSource(), v, tmp.getDemand());
 
-						 }
-					 }
-				} 
+								if (idx == 1) {
+									g1.getP().add(pl);
+								} else {
+									g2.getP().add(pl);
+								}
+							}
+
+							epsilon.clear();
+							idx = (idx % 2) + 1;
+							v = graph.getEdges().get(j).getTo();
+							tmp.setSource(graph.getEdges().get(j).getTo());
+
+						}
+					}
+				}
 			}
 		}
-		
+
 	}
 
 	/**

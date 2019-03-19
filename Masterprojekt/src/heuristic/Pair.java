@@ -1,67 +1,73 @@
 package heuristic;
 
-public class Pair<First,Second> {
+import java.io.Serializable;
+
+public class Pair<First, Second> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private final First first;
-	  private final Second second;
+	private final Second second;
 
-	  private volatile String toStringResult;
+	private volatile String toStringResult;
 
-	  public Pair(First first, Second second) {
-	    this.first = first;
-	    this.second = second;
-	  }
+	public Pair(First first, Second second) {
+		this.first = first;
+		this.second = second;
+	}
 
-	  public First getFirst() {
-	    return first;
-	  }
+	public First getFirst() {
+		return first;
+	}
 
-	  public Second getSecond() {
-	    return second;
-	  }
+	public Second getSecond() {
+		return second;
+	}
 
-	  @Override
-	  public boolean equals(Object o) {
-	    if (this == o) {
-	      return true;
-	    }
+	public static <A, B> Pair<A, B> of(A a, B b) {
+		return new Pair<>(a, b);
+	}
 
-	    if (o == null || getClass() != o.getClass()) {
-	      return false;
-	    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
 
-	    @SuppressWarnings("rawtypes")
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		@SuppressWarnings("rawtypes")
 		final Pair pair = (Pair) o;
 
-	    if (first != null ? !first.equals(pair.first) : pair.first != null) {
-	      return false;
-	    }
+		if (first != null ? !first.equals(pair.first) : pair.first != null) {
+			return false;
+		}
 
-	    if (second != null ? !second.equals(pair.second) : pair.second != null) {
-	      return false;
-	    }
+		if (second != null ? !second.equals(pair.second) : pair.second != null) {
+			return false;
+		}
 
-	    return true;
-	  }
+		return true;
+	}
 
-	  @Override
-	  public int hashCode() {
-	    int result = first != null ? first.hashCode() : 0;
+	@Override
+	public int hashCode() {
+		int result = first != null ? first.hashCode() : 0;
 
-	    result = 31 * result + (second != null ? second.hashCode() : 0);
+		result = 31 * result + (second != null ? second.hashCode() : 0);
 
-	    return result;
-	  }
+		return result;
+	}
 
-	  @Override
-	  public String toString() {
-	    if (toStringResult == null) {
-	      toStringResult = "Pair{" +
-	        "first=" + first +
-	        ", second=" + second +
-	        '}';
-	    }
+	@Override
+	public String toString() {
+		if (toStringResult == null) {
+			toStringResult = "Pair{" + "first=" + first + ", second=" + second + '}';
+		}
 
-	    return toStringResult;
-	  }
+		return toStringResult;
+	}
+
 }
