@@ -4,7 +4,6 @@ import ilog.concert.IloNumVar;
 
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Universität Ulm
@@ -29,13 +28,12 @@ public class Edge {
 	double costA;
 	double costB; // cost
 	double c; // C
-	@JsonIgnore
 	IloNumVar beta;
 	double Result;
-	@JsonIgnore
+	
 	IloNumVar y;
 	double l; // the real weight after finishing the algorithm
-	@JsonIgnore
+	
 	ArrayList<IloNumVar> players = new ArrayList<IloNumVar>();
 	ArrayList<Double> values = new ArrayList<>();
 	ArrayList<Double> ilist = new ArrayList<>();

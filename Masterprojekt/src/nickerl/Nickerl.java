@@ -11,6 +11,7 @@ import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.BellmanFordShortestPath;
+import heuristic.GraphPath;
 import heuristic.SocialOptimum;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
@@ -61,7 +62,7 @@ public class Nickerl {
 					tmp.add(KP.get(k).getValues().get(i));
 				}
 
-				double fmax = Collections.max(tmp);
+				double fmax = Collections.min(tmp);
 				Player sigma = new Player(players.size(), g.getPlayers().get(i).getSource(),
 						g.getPlayers().get(i).getSink(), fmax);
 				players.add(sigma);
@@ -84,15 +85,14 @@ public class Nickerl {
 			}
 
 		}
-		for (int i = 0; i < g.getPlayers().size(); i++) {
-
-		}
+	
 		step2(0);
 	}
 
-	public void step2(int x) throws IloException {
+	// sublisthead is the id where the sublist begins
+	public void step2(int sublisthead) throws IloException {
 
-		Collections.shuffle(g.getEdges().subList(x, g.getEdges().size()));
+		Collections.shuffle(g.getEdges().subList(sublisthead, g.getEdges().size()));
 		// Collections.shuffle(g.getEdges());
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			g.getEdges().get(i).setBetta(0.0);
@@ -122,9 +122,7 @@ public class Nickerl {
 				flag = false;
 
 				for (int j = 0; j < list.get(i).size(); j++) {
-					System.out.println(list.get(i).get(j).getId() + " " + list.get(i).get(j).getDemand());
 					if (g.getEdges().get(i).getValues().get(list.get(i).get(j).getId()) > 0) {
-						System.out.println(g.getEdges().get(i).getValues().get(g.getPlayers().size() + j - 1));
 						tmp = j;
 						flag = true;
 						check(list.get(i), i, tmp);
@@ -163,33 +161,58 @@ public class Nickerl {
 
 	public void check(ArrayList<Player> alpha, int id, int tmp) {
 
-		Player k1 = new Player(alpha.size(), alpha.get(tmp).getSource(), g.getEdges().get(id).getFrom(),
+		Player k1 = new Player(alpha.get(tmp).getId(), alpha.get(tmp).getSource(), g.getEdges().get(id).getFrom(),
 				alpha.get(tmp).getDemand());
-		Player k2 = new Player(alpha.size() + 1, g.getEdges().get(id).getTo(), alpha.get(tmp).getSink(),
+		Player k2 = new Player(alpha.size() , g.getEdges().get(id).getTo(), alpha.get(tmp).getSink(),
 				alpha.get(tmp).getDemand());
 		g.getEdges().get(id).getValues().set(alpha.get(tmp).getId(), 0.0);
 		Graphs x = newgraph(g, alpha.get(tmp).getId());
-		Graphs y = newgraph(g, alpha.get(tmp).getId());
-		System.err.println(y.getEdges().size());
+
+
+		
+		for (int i = 0; i < x.getAdjacencyMatrix().length; i++) {
+			for (int j = 0; j < x.getAdjacencyMatrix().length; j++) {
+				System.out.print(x.getAdjacencyMatrix()[i][j]);
+				System.out.print(" ");
+			}
+			System.out.println();
+		}
+		GraphPath<Vertex, Edge> tmp2 = BellmanFordShortestPath.findPathBetween(x, k2.getSource(), k2.getSink());
+		
+		System.out.println(k1.getSource().getId() + " " + k1.getSink().getId());
+		System.out.println(k2.getSource().getId() + " " + k2.getSink().getId());
+		for(int i = 0 ; i < x.getEdges().size() ; i++) {
+			System.out.println("fluss im sozialen Optimum" + k1.getId() + " " +  x.getEdges().get(i).getValues().get(k1.getId()));
+			//System.out.println("fluss im sozialen Optimum" + k2.getId() + " " +  x.getEdges().get(i).getValues().get(k2.getId()));
+
+		}
+		
+		
+		System.out.println(tmp2 == null);
+		if(tmp2 == null) {
+			System.out.println(k2.getSource().getId() == k2.getSink().getId());
+		}
+		List<Edge> K2 = tmp2.getEdgeList();
+		System.err.println(K2.size());
 		List<Edge> K1 = BellmanFordShortestPath.findPathBetween(x, k1.getSource(), k1.getSink()).getEdgeList();
-		List<Edge> K2 = BellmanFordShortestPath.findPathBetween(y, k2.getSource(), k2.getSink()).getEdgeList();
+		
 		for (int i = 0; i < K1.size(); i++) {
 			K1.get(i).getValues().add(k1.getId(), K1.get(i).getValues().get(alpha.get(tmp).getId()));
 			K1.get(i).getValues().add(k2.getId(), 0.0);
-			K1.get(i).getValues().set(alpha.get(tmp).getId(), 0.0);
+		//	K1.get(i).getValues().set(alpha.get(tmp).getId(), 0.0);
 
 		}
 
 		for (int i = 0; i < K2.size(); i++) {
 			K2.get(i).getValues().add(k1.getId(), 0.0);
 			K2.get(i).getValues().add(k2.getId(), K2.get(i).getValues().get(alpha.get(tmp).getId()));
-			K2.get(i).getValues().set(alpha.get(tmp).getId(), 0.0);
+			//K2.get(i).getValues().set(alpha.get(tmp).getId(), 0.0);
 		}
 
 		alpha.remove(alpha.get(tmp));
 
-		alpha.add(k1);
-		alpha.add(k2);
+		alpha.add(k1.getId(),k1);
+		alpha.add(k2.getId(),k2);
 
 	}
 
@@ -286,12 +309,12 @@ public class Nickerl {
 	public static void main(String[] args) throws IloException {
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
 		test.generateGraph(graph, map);
 
 		// --- player ---
-		Player player1 = new Player(0, graph.getVertices().get(0), graph.getVertices().get(15), 10);
-		Player player2 = new Player(1, graph.getVertices().get(1), graph.getVertices().get(15), 5);
+		Player player1 = new Player(0, graph.getVertices().get(0), graph.getVertices().get(3), 1000);
+		Player player2 = new Player(1, graph.getVertices().get(1), graph.getVertices().get(3), 500);
 
 		ArrayList<Player> x = new ArrayList<>();
 		x.add(0, player1);

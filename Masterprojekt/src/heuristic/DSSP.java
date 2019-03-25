@@ -54,11 +54,11 @@ public class DSSP {
 		cplex = new IloCplex();
 
 		m1 = new IloCplexModeler();
-		cplex.setParam(IloCplex.DoubleParam.EpMrk, 0.9);
+	//	cplex.setParam(IloCplex.DoubleParam.EpMrk, 0.1);
 		//cplex.setParam(IloCplex.IntParam.SingLim, 10000);
 		cplex.setParam(IloCplex.IntParam.ScaInd, 1);
 		// cplex.setOut(stream);
-		cplex.setParam(IloCplex.IntParam.PriceLim, 2);
+	//	cplex.setParam(IloCplex.IntParam.PriceLim, 2);
 
 		//solveDSSP(this.getGraph());
 	}
@@ -162,7 +162,7 @@ public class DSSP {
 		default:
 			// System.out.println(cplex.toString());
 
-			throw new IllegalStateException("Problem not solved.");
+		//	throw new IllegalStateException("Problem not solved.");
 		}
 	}
 

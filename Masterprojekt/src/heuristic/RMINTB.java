@@ -12,7 +12,6 @@ import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
-import player.Player;
 
 
 /**
@@ -30,7 +29,7 @@ import player.Player;
  *          Solver for the Restricted Minimum Tollbooth Problem (RMINTB)
  */
 public class RMINTB {
-      
+     
 	Graphs g;
 	IloCplex cplex;
 	List<Integer> tolls;
@@ -114,9 +113,12 @@ public class RMINTB {
 	}
 
 	private void end() {
+		int x=0;
        for(int i = 0 ; i < bestsolution.size() ; i++) {
-    	   System.out.println("In The Edger number : " + i + " y = " + bestsolution.get(i));
+    	   System.out.println("In The Edger number : " + i + " y = " + bestsolution.get(i) + "  beta : " + g.getEdges().get(i).getBetta());
+    	   if(bestsolution.get(i)>0) x++;	
        }
+       System.out.println("anzahl von maut : " + x );
 		
 	}
 
@@ -193,12 +195,14 @@ public class RMINTB {
 		cplex.minimize();
 
 		if (cplex.solve()) {
-			
+			for (int i = 0; i < g.getEdges().size(); i++) {
+				g.getEdges().get(i).setBetta(cplex.getValue(g.getEdges().get(i).getBeta()));}
 			cplex.clearModel();
 			return true;
 		} else {
 			cplex.clearModel();
 			return false;
+			
 		} 
 	}
 
@@ -206,24 +210,17 @@ public class RMINTB {
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
 		
-//		@SuppressWarnings("rawtypes")
-//		BarabasiAlbertGraphGenerator test = new BarabasiAlbertGraphGenerator(10,3,100);
-//		test.generateGraph(graph,map);
 
 
-		GridGraphGenerator test = new GridGraphGenerator(6,6); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(2,4); // do not change !!
 		test.generateGraph(graph, map);
 		
-		Player player1 = new Player(1, graph.getVertices().get(0), graph.getVertices().get(15), 4);
-		Player player2 = new Player(2, graph.getVertices().get(1), graph.getVertices().get(15), 4);
-		ArrayList<Player> x = new ArrayList<>();
-		x.add(0, player1);
-		x.add(1, player2);
-       graph.setPlayer(x);
+
        graph.generateEdgesFunctions();
+       graph.generatePlayers();
         SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
 		systemOptimalFlow.solveDSSP(graph);
-
+        
 		RMINTB solver = new RMINTB(graph);
 		solver.solve();
 		TestCorrectness correct = new TestCorrectness();

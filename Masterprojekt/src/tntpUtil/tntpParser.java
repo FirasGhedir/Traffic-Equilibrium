@@ -188,7 +188,6 @@ public class tntpParser {
 	 * 
 	 * @param numVertex
 	 */
-	@SuppressWarnings("resource")
 	public static void parseVertices(int numVertex) {
 
 		id = new int[numVertex];

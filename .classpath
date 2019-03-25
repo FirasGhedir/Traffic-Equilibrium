@@ -8,8 +8,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Ninita/Downloads/jackson-annotations-2.9.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Ninita/Downloads/jackson-core-2.9.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Ninita/Downloads/jackson-databind-2.9.8.jar"/>
 	<classpathentry kind="output" path="Masterprojekt/bin"/>
 </classpath>

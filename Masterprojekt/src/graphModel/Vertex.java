@@ -2,8 +2,7 @@ package graphModel;
 
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import ilog.concert.IloNumVar;
 
@@ -25,7 +24,6 @@ import ilog.concert.IloNumVar;
 public class Vertex {
 
 	int id; // vertex identification number
-	@JsonIgnore
 	ArrayList<IloNumVar> ro = new ArrayList<>();
 
 	/**
@@ -34,7 +32,6 @@ public class Vertex {
 	 * @param id,
 	 *            the identifier number of the vertex
 	 */
-	@JsonCreator
 	public Vertex(int id) {
 		this.id = id;
 	}
