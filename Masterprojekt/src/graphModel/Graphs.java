@@ -28,10 +28,12 @@ import player.Player;
 public class Graphs implements Graph<Vertex, Edge>  {
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
-	final static int d_max = 5;
-	final static int d_min = 1;
-	final static int b_max = 3;
+	final static int d_max = 100;
+	final static int d_min = 10;
+	final static int b_max = 10;
 	final static int b_min = 0;
+	final static int z_max = 10;
+	final static int z_min = 1;
 	final static double Pi = 1.57079632679;
 	final static int max_players = 6;
 	final static int accuracy = 1000;
@@ -473,7 +475,9 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	 */
 	public void generatePlayers() {
 
-		int x = 1 + rand.nextInt(max_players);
+		double max = this.getVertices().size()*0.15;
+		double min = this.getVertices().size()*0.05;
+		int x = (int) ((Math.random()*((max-min)+1))+min);
 
 		for (int i = 0; i < x; i++) {
 			int tmp = rand.nextInt(getVertices().size());
@@ -608,6 +612,10 @@ public class Graphs implements Graph<Vertex, Edge>  {
 		P = p;
 	}
 	
+	public void generatecomodity() {
+		int x = 1 + rand.nextInt(max_players);
+
+	}
 	
 
 }

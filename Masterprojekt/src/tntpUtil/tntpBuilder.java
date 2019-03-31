@@ -75,7 +75,7 @@ public class tntpBuilder {
 		buildNode();
 		buildTrips();
 
-		System.out.println("Building " + getTransportationNetwork().getName() + " tntp files was successful...");
+		System.out.println("Building " + "firas" + " tntp files was successful...");
 
 	}
 
@@ -122,8 +122,8 @@ public class tntpBuilder {
 	 */
 	public void buildFlow() {
 
-		path_flow = "./Masterprojekt/files/TransportationNetworks/" + getTransportationNetwork().getName() + "/"
-				+ getTransportationNetwork().getName() + "_flow.tntp";
+		path_flow = "./Masterprojekt/files/TransportationNetworks/" + "other" + "/"
+				+ "dd" + "_flow.tntp";
 
 		PrintWriter writer;
 		try {
@@ -147,8 +147,8 @@ public class tntpBuilder {
 	 */
 	public void buildNet() {
 
-		path_net = "./Masterprojekt/files/TransportationNetworks/" + getTransportationNetwork().getName() + "/"
-				+ getTransportationNetwork().getName() + "_net.tntp";
+		path_net = "./Masterprojekt/files/TransportationNetworks/" + "other" + "/"
+				+ "firas" + "_net.tntp";
 
 		PrintWriter writer;
 		try {
