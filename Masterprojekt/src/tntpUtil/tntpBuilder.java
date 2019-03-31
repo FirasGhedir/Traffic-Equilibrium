@@ -59,7 +59,7 @@ public class tntpBuilder {
 	/**
 	 * 
 	 */
-	public tntpBuilder(Graphs g, network transportationNetwork) {
+	public tntpBuilder(Graphs g,String graphtype, String nbvertices,String vertices,String commodoties,String id) {
 
 		setGraph(g);
 		setTransportationNetwork(transportationNetwork);
@@ -70,12 +70,12 @@ public class tntpBuilder {
 		readVertexParameters();
 		readEdgeParameters();
 
-		buildFlow();
-		buildNet();
+		buildFlow(graphtype,nbvertices,vertices,commodoties,id);
+		buildNet(graphtype,nbvertices,vertices,commodoties,id);
 		buildNode();
 		buildTrips();
 
-		System.out.println("Building " + "firas" + " tntp files was successful...");
+		System.out.println("Building " + graphtype + " with : " + id + "  was successful...");
 
 	}
 
@@ -120,10 +120,9 @@ public class tntpBuilder {
 	/**
 	 * 
 	 */
-	public void buildFlow() {
+	public void buildFlow(String graphtype, String nbvertices,String vertices,String commodities,String id) {
 
-		path_flow = "./Masterprojekt/files/TransportationNetworks/" + "other" + "/"
-				+ "dd" + "_flow.tntp";
+		path_flow = "./Masterprojekt/files/"+ graphtype + "/" + nbvertices + "/"+ vertices + "." + commodities + ".ID:" +id  + "_flow.tntp";
 
 		PrintWriter writer;
 		try {
@@ -145,10 +144,10 @@ public class tntpBuilder {
 	/**
 	 * 
 	 */
-	public void buildNet() {
+	public void buildNet(String graphtype, String nbvertices,String vertices,String commodities,String id) {
 
-		path_net = "./Masterprojekt/files/TransportationNetworks/" + "other" + "/"
-				+ "firas" + "_net.tntp";
+		path_net = "./Masterprojekt/files/"+ graphtype + "/" + nbvertices + "/"+ vertices + "." + commodities + ".ID:" +id  + "_flow.tntp";
+
 
 		PrintWriter writer;
 		try {
