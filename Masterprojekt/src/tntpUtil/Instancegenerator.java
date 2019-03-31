@@ -34,6 +34,8 @@ public class Instancegenerator {
 		GridGraphGenerator test = new GridGraphGenerator(zeilen, spalten); // do not change !!
 		test.generateGraph(g, map);
 		String path = min + "-" + max;
+		g.generateEdgesFunctions();
+		g.generatePlayers();
 		tnt = new tntpBuilder(g, "Gridinstances", path, Integer.toString(g.getVertices().size()),
 				Integer.toString(g.getPlayers().size()), id);
 
@@ -49,11 +51,19 @@ public class Instancegenerator {
 
 	public static void main(String[] args) {
 		Instancegenerator test = new Instancegenerator();
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 1; i++) {
 
 			test.generategridgraph(100, 400, Integer.toString(i));
 
 		}
+		
+		Map<String, Vertex> map = new TreeMap<>();
+		Graphs gg = new Graphs();
+		GridGraphGenerator tests = new GridGraphGenerator(5	, 5); // do not change !!
+		tests.generateGraph(gg, map);
+		
+		ss tnt = new ss(gg, null);
+		
 
 	}
 
