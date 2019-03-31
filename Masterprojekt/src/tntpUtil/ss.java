@@ -76,7 +76,7 @@ public class ss {
 		buildNode();
 		buildTrips();
 
-	//	System.out.println("Building " + getTransportationNetwork().getName() + " tntp files was successful...");
+		System.out.println("Building " + getTransportationNetwork().getName() + " tntp files was successful...");
 
 	}
 

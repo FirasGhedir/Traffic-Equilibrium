@@ -56,10 +56,15 @@ public class tntpBuilder {
 	static double[] weight;
 	static double[] cost;
 
+	/*
+	 * Debug
+	 */
+	boolean debug = true;
+
 	/**
 	 * 
 	 */
-	public tntpBuilder(Graphs g,String graphtype, String nbvertices,String vertices,String commodoties,String id) {
+	public tntpBuilder(Graphs g, String graphtype, String nbvertices, String vertices, String commodoties, String id) {
 
 		setGraph(g);
 		setTransportationNetwork(transportationNetwork);
@@ -70,12 +75,22 @@ public class tntpBuilder {
 		readVertexParameters();
 		readEdgeParameters();
 
-		buildFlow(graphtype,nbvertices,vertices,commodoties,id);
-		buildNet(graphtype,nbvertices,vertices,commodoties,id);
+		if (debug) {
+			System.out.println("----------------\ntntpBuilder");
+			System.out.println("graphtype:           " + graphtype);
+			System.out.println("number vertices:     " + nbvertices);
+			System.out.println("number players:      " + vertices);
+			System.out.println("number commodoties:  " + commodoties);
+			System.out.println("id                   " + id);
+			System.out.println("----------------");
+		}
+
+		buildFlow(graphtype, nbvertices, vertices, commodoties, id);
+		buildNet(graphtype, nbvertices, vertices, commodoties, id);
 		buildNode();
 		buildTrips();
 
-		System.out.println("Building " + graphtype + " with : " + id + "  was successful...");
+		System.out.println("Building " + graphtype + " with id = " + id + "  was successful...");
 
 	}
 
@@ -83,6 +98,16 @@ public class tntpBuilder {
 	 * 
 	 */
 	public void readVertexParameters() {
+
+		if (debug) {
+			System.out.println("----------------\nreadVertexParameters");
+			int index = 0;
+			for (Vertex vertex : vertices) {
+				System.out.println(vertex.getId());
+				++index;
+			}
+			System.out.println("----------------");
+		}
 
 		id = new int[getVertices().size()];
 
@@ -105,6 +130,20 @@ public class tntpBuilder {
 		weight = new double[getEdges().size()];
 		cost = new double[getEdges().size()];
 
+		if (debug) {
+			System.out.println("----------------\nreadEdgeParameters");
+			int index = 0;
+			for (Edge edge : edges) {
+				System.out.println(index + " -> from  : " + edge.getFrom().getId());
+				System.out.println(index + " -> to    : " + edge.getTo().getId());
+				System.out.println(index + " -> weight: " + edge.getWeight());
+				System.out.println(index + " -> cost:   " + edge.getC());
+				System.out.println("--");
+				++index;
+			}
+			System.out.println("----------------");
+		}
+
 		int index = 0;
 		for (Edge edge : edges) {
 
@@ -120,21 +159,32 @@ public class tntpBuilder {
 	/**
 	 * 
 	 */
-	public void buildFlow(String graphtype, String nbvertices,String vertices,String commodities,String id) {
+	public void buildFlow(String graphtype, String nbvertices, String vertices, String commodities, String id) {
 
-		path_flow = "./Masterprojekt/files/"+ graphtype + "/" + nbvertices + "/"+ vertices + "." + commodities + ".ID:" +id  + "_flow.tntp";
+		path_flow = "./Masterprojekt/files/" + graphtype + "/" + nbvertices + "/" + vertices + "." + commodities
+				+ "_ID_" + id + "_flow.tntp";
 
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter(path_flow + ".txt", "UTF-8");
+		try (PrintWriter buildFlowWriter = new PrintWriter(path_flow + ".txt", "UTF-8")) {
 
-			writer.printf("%-10s %-10s %-15s %-10s\n", "From", "To", "Volume", "Cost");
-
-			for (int i = 0; i < getEdges().size(); i++) {
-				writer.printf("%-10s %-10s %-15s %-10s\n", from[i], to[i], weight[i], cost[i]);
+			if (debug) {
+				System.out.println("----------------\nbuildFlow");
+				System.out.println("path: " + path_flow);
+				System.out.printf("%-10s %-10s %-15s %-10s\n", "From", "To", "Volume", "Cost");
+				for (int i = 0; i < getEdges().size(); i++) {
+					System.out.printf("%-10s %-10s %-15s %-10s\n", from[i], to[i], weight[i], cost[i]);
+				}
+				System.out.println("----------------");
 			}
 
-			writer.close();
+			buildFlowWriter.printf("%-10s %-10s %-15s %-10s\n", "From", "To", "Volume", "Cost");
+
+			for (int i = 0; i < getEdges().size(); i++) {
+				buildFlowWriter.printf("%-10s %-10s %-15s %-10s\n", from[i], to[i], weight[i], cost[i]);
+			}
+
+			buildFlowWriter.flush();
+			buildFlowWriter.close();
+
 		} catch (UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -144,34 +194,51 @@ public class tntpBuilder {
 	/**
 	 * 
 	 */
-	public void buildNet(String graphtype, String nbvertices,String vertices,String commodities,String id) {
+	public void buildNet(String graphtype, String nbvertices, String vertices, String commodities, String id) {
 
-		path_net = "./Masterprojekt/files/"+ graphtype + "/" + nbvertices + "/"+ vertices + "." + commodities + ".ID:" +id  + "_flow.tntp";
+		path_net = "./Masterprojekt/files/" + graphtype + "/" + nbvertices + "/" + vertices + "." + commodities + "_ID_"
+				+ id + "_net.tntp";
 
+		try (PrintWriter buildNetWriter = new PrintWriter(path_net + ".txt", "UTF-8")) {
 
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter(path_net + ".txt", "UTF-8");
+			if (debug) {
+				System.out.println("----------------\nbuildFlow");
+				System.out.println("path: " + path_flow);
+				System.out.printf("%-10s %-10s %-15s %-10s\n", "From", "To", "Volume", "Cost");
+				System.out.printf("%-10s %-10s\n", "<NUMBER OF ZONES>", getVertices().size());
+				System.out.printf("%-10s %-10s\n", "<NUMBER OF NODES>", getVertices().size());
+				System.out.printf("%-10s %-10s\n", "<FIRST THRU NODE>", 1);
+				System.out.printf("%-10s %-10s\n", "<NUMBER OF LINKS>", getEdges().size());
+				System.out.printf("%-10s\n", "<END OF METADATA>\n\n");
+				System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "~", "Init", "node",
+						"Term node", "Capacity", "Length", "Free Flow Time", "B", "Power", "Speed limit", "Toll Type");
+				for (int i = 0; i < getEdges().size(); i++) {
+					System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "", from[i],
+							to[i], "-", weight[i], "-", "-", "-", "-", "-", "-");
+				}
+				System.out.println("----------------");
+			}
 
-			writer.printf("%-10s %-10s\n", "<NUMBER OF ZONES>", getVertices().size());
-			writer.printf("%-10s %-10s\n", "<NUMBER OF NODES>", getVertices().size());
-			writer.printf("%-10s %-10s\n", "<FIRST THRU NODE>", 1);
-			writer.printf("%-10s %-10s\n", "<NUMBER OF LINKS>", getEdges().size());
-			writer.printf("%-10s\n", "<END OF METADATA>");
+			buildNetWriter.printf("%-10s %-10s\n", "<NUMBER OF ZONES>", getVertices().size());
+			buildNetWriter.printf("%-10s %-10s\n", "<NUMBER OF NODES>", getVertices().size());
+			buildNetWriter.printf("%-10s %-10s\n", "<FIRST THRU NODE>", 1);
+			buildNetWriter.printf("%-10s %-10s\n", "<NUMBER OF LINKS>", getEdges().size());
+			buildNetWriter.printf("%-10s\n", "<END OF METADATA>");
 
-			writer.println();
-			writer.println();
+			buildNetWriter.println();
+			buildNetWriter.println();
 
-			writer.printf("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "~", "Init", "node",
+			buildNetWriter.printf("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "~", "Init", "node",
 					"Term node", "Capacity", "Length", "Free Flow Time", "B", "Power", "Speed limit", "Toll Type");
 
 			for (int i = 0; i < getEdges().size(); i++) {
-				writer.printf("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "", from[i], to[i], "-",
-						weight[i], "-", "-", "-", "-", "-", "-");
+				buildNetWriter.printf("%-10s %-10s %-10s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "", from[i],
+						to[i], "-", weight[i], "-", "-", "-", "-", "-", "-");
 
 			}
 
-			writer.close();
+			buildNetWriter.flush();
+			buildNetWriter.close();
 
 		} catch (UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
