@@ -25,6 +25,7 @@ import graphModel.Vertex;
 public class CompleteGraphGenerator implements GraphGenerator<Vertex, Edge, Vertex> {
 
 	private final int size;
+	int[] array;
 
 	/**
 	 * 
@@ -54,11 +55,31 @@ public class CompleteGraphGenerator implements GraphGenerator<Vertex, Edge, Vert
 			nodes.add(vertex);
 		}
 
+		Random r = new Random();
+		UFinit(size);
+		while (check()) {
+			int x = 0;
+			int y = 0;
+			do {
+				x = r.nextInt(nodes.size());
+				y = r.nextInt(nodes.size());
+			} while (x == y);
+
+			Vertex v = nodes.get(x);
+			Vertex u = nodes.get(y);
+			if (!(target.containsEdge(v, u) && target.containsEdge(u, v))) {
+				target.addEdge(v, u);
+				UFunion(x,y);
+				if (isDirected) {
+					target.addEdge(u, v);
+				}
+			}
+		}
+
 		for (int i = 0; i < size; i++) {
 			for (int j = i + 1; j < size; j++) {
 				Vertex v = nodes.get(i);
 				Vertex u = nodes.get(j);
-				System.out.println(v == null);
 				target.addEdge(v, u);
 				if (isDirected) {
 					target.addEdge(u, v);
@@ -67,5 +88,44 @@ public class CompleteGraphGenerator implements GraphGenerator<Vertex, Edge, Vert
 		}
 	}
 
+	public void UFinit(int n) {
+		array = new int[n];
+		for (int i = 0; i < n; i++) {
+			array[i] = i;
+		}
+	}
+
+	public void UFunion(int i, int j) {
+		double z = Math.random();
+		if (z == 0) {
+			array[i] = j;
+		} else {
+			array[j] = i;
+		}
+	}
+
+	public int UFfind(int i) {
+		if (i == this.array[i]) {
+			return i;
+		} else {
+			int j = UFfind(array[i]);
+			array[i] = j;
+			return j;
+		}
+
+	}
+
+	public boolean check() {
+		int count = 0;
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == i)
+				count++;
+		}
+
+		if (count == 1)
+			return false;
+		else
+			return true;
+	}
 
 }

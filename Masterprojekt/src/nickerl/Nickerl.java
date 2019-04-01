@@ -13,6 +13,7 @@ import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.BellmanFordShortestPath;
 import heuristic.GraphPath;
+import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
@@ -537,22 +538,18 @@ public class Nickerl {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(2, 2); // do not change !!
+		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
 		test.generateGraph(graph, map);
 
-		// --- player ---
-		Player player1 = new Player(0, graph.getVertices().get(0), graph.getVertices().get(3), 1000);
-		Player player2 = new Player(1, graph.getVertices().get(1), graph.getVertices().get(3), 500);
+	
 
-		ArrayList<Player> x = new ArrayList<>();
-		x.add(0, player1);
-		x.add(1, player2);
 
-		graph.setPlayer(x);
+	//	graph.setPlayer(x);
 		graph.generateEdgesFunctions();
-		Nickerl n = new Nickerl(graph);
+		graph.generatePlayers();
+		RMINTB n = new RMINTB(graph);
 		SocialOptimum social = new SocialOptimum(graph);
 		social.solveDSSP(graph);
-		n.run();
+		n.solve();
 	}
 }
