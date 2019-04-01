@@ -252,7 +252,7 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	 * @param adjacencymatrix
 	 *            the given adjacency matrix
 	 * 
-	 * @return this.an Arraylist of verteces with all ingoing edges for each vertex
+	 * @return this.an Arraylist of vertices with all ingoing edges for each vertex
 	 */
 	public ArrayList<Vertex> getOutNeighbors(Vertex vertex, int[][] adjacencymatrix) {
 		ArrayList<Vertex> tmp = new ArrayList<>();

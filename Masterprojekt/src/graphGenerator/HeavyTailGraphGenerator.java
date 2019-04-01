@@ -1,6 +1,8 @@
 package graphGenerator;
 
+import graphModel.Edge;
 import graphModel.Graph;
+import graphModel.Vertex;
 
 import java.util.*;
 
@@ -22,7 +24,7 @@ import java.util.*;
  *          See more:
  *          https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model
  */
-public class HeavyTailGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
+public class HeavyTailGraphGenerator  implements GraphGenerator<Vertex, Edge, Vertex> {
 
 	// === relevant parameters ===
 	private Random random;
@@ -129,15 +131,15 @@ public class HeavyTailGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 	 * Method for creating Heavy Tail Graph instance
 	 */
 	@Override
-	public void generateGraph(Graph<V, E> target, Map<String, V> resultMap) {
+	public void generateGraph(Graph<Vertex, Edge> target, Map<String, Vertex> resultMap) {
 
-		Set<V> oldNodes = new HashSet<>(target.vertexSet());
-		Set<V> newNodes = new HashSet<>();
+		Set<Vertex> oldNodes = new HashSet<>(target.vertexSet());
+		Set<Vertex> newNodes = new HashSet<>();
 
-		new CompleteGraphGenerator<V, E>(numberInitialVertices).generateGraph(target, resultMap);
+		new CompleteGraphGenerator(numberInitialVertices).generateGraph(target, resultMap);
 		target.vertexSet().stream().filter(v -> !oldNodes.contains(v)).forEach(newNodes::add);
 
-		List<V> nodes = new ArrayList<>(sumNodes * numberNewEdges);
+		List<Vertex> nodes = new ArrayList<>(sumNodes * numberNewEdges);
 		nodes.addAll(newNodes);
 
 		for (int i = 0; i < numberInitialVertices - 2; i++) {
@@ -145,12 +147,13 @@ public class HeavyTailGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 		}
 
 		for (int i = numberInitialVertices; i < sumNodes; i++) {
-			V v = target.addVertex();
-
-			List<V> newEndpoints = new ArrayList<>();
+			//Vertex v = target.addVertex();
+            Vertex v = new Vertex(i);
+            target.addVertex(v);
+			List<Vertex> newEndpoints = new ArrayList<>();
 			int added = 0;
 			while (added < numberNewEdges) {
-				V u = nodes.get(random.nextInt(nodes.size()));
+				Vertex u = nodes.get(random.nextInt(nodes.size()));
 				if (!target.containsEdge(v, u)) {
 					target.addEdge(v, u);
 					added++;

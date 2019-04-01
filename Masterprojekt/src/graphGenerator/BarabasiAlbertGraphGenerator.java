@@ -1,9 +1,11 @@
 package graphGenerator;
 import java.util.*;
 
+import graphModel.Edge;
 import graphModel.Graph;
+import graphModel.Vertex;
 
-public class BarabasiAlbertGraphGenerator<Vertex,Edge> implements GraphGenerator<Vertex,Edge,Vertex> {
+public class BarabasiAlbertGraphGenerator implements GraphGenerator<Vertex,Edge,Vertex> {
 
 	 private final Random rng;
 	    private final int m0;
@@ -81,7 +83,8 @@ public class BarabasiAlbertGraphGenerator<Vertex,Edge> implements GraphGenerator
 	         */
 	        Set<Vertex> oldNodes = new HashSet<>(target.vertexSet());
 	        Set<Vertex> newNodes = new HashSet<>();
-	        new CompleteGraphGenerator<Vertex, Edge>(m0).generateGraph(target, resultMap);
+			new CompleteGraphGenerator(m0).generateGraph(target, resultMap);
+
 	        target.vertexSet().stream().filter(v -> !oldNodes.contains(v)).forEach(newNodes::add);
 
 	        List<Vertex> nodes = new ArrayList<>(n * m);
@@ -97,8 +100,10 @@ public class BarabasiAlbertGraphGenerator<Vertex,Edge> implements GraphGenerator
 	         * Grow network with preferential attachment
 	         */
 	        for (int i = m0; i < n; i++) {
-	            Vertex v = target.addVertex();
-
+	        	Vertex v = new Vertex(m0);
+	        	target.addVertex(v);
+	            //Vertex v = target.addVertex();
+                
 	            List<Vertex> newEndpoints = new ArrayList<>();
 	            int added = 0;
 	            while (added < m) {

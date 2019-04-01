@@ -2,8 +2,10 @@ package graphGenerator;
 
 import java.util.*;
 
+import graphModel.Edge;
 import graphModel.Graph;
 import graphModel.GraphTests;
+import graphModel.Vertex;
 
 /**
  * Universität Ulm
@@ -20,7 +22,7 @@ import graphModel.GraphTests;
  *          In the class GridGraphGenerator you can create a complete grap of
  *          any size
  */
-public class CompleteGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
+public class CompleteGraphGenerator implements GraphGenerator<Vertex, Edge, Vertex> {
 
 	private final int size;
 
@@ -38,23 +40,25 @@ public class CompleteGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 	/**
 	 * 
 	 */
-	@Override
-	public void generateGraph(Graph<V, E> target, Map<String, V> resultMap) {
+	public void generateGraph(Graph<Vertex, Edge> target, Map<String, Vertex> resultMap) {
 		if (size < 1) {
 			return;
 		}
 		GraphTests.requireDirectedOrUndirected(target);
 		boolean isDirected = target.getType().isDirected();
 
-		List<V> nodes = new ArrayList<>(size);
+		List<Vertex> nodes = new ArrayList<>(size);
 		for (int i = 0; i < size; i++) {
-			nodes.add(target.addVertex());
+			Vertex vertex = new Vertex(i);
+			target.addVertex(vertex);
+			nodes.add(vertex);
 		}
 
 		for (int i = 0; i < size; i++) {
 			for (int j = i + 1; j < size; j++) {
-				V v = nodes.get(i);
-				V u = nodes.get(j);
+				Vertex v = nodes.get(i);
+				Vertex u = nodes.get(j);
+				System.out.println(v == null);
 				target.addEdge(v, u);
 				if (isDirected) {
 					target.addEdge(u, v);
@@ -62,4 +66,6 @@ public class CompleteGraphGenerator<V, E> implements GraphGenerator<V, E, V> {
 			}
 		}
 	}
+
+
 }
