@@ -1,21 +1,20 @@
 package tntpUtil;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import graphGenerator.BarabasiAlbertGraphGenerator;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import graphGenerator.GridGraphGenerator;
-import graphGenerator.HeavyTailGraphGenerator;
-import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
-import heuristic.RMINTB;
-import heuristic.SocialOptimum;
 import ilog.concert.IloException;
-import nickerl.Nickerl;
-import player.Player;
 
 public class Instancegenerator {
 
@@ -45,10 +44,11 @@ public class Instancegenerator {
 		g = new Graphs();
 		GridGraphGenerator test = new GridGraphGenerator(zeilen, spalten); // do not change !!
 		test.generateGraph(g, map);
-
-		String path = min + "-" + max;
 		g.generateEdgesFunctions();
 		g.generatePlayers();
+	//	String path ="./Masterprojekt/files/Gridinstances/" +  min + "-" + max + "/" + g.getVertices().size()+"."+g.getPlayers().size()+"."+id;
+		String path ="./Masterprojekt/files/Gridinstances/" +  min + "-" + max + "/" +id;
+		buildJSON(path,g);
 
 //		if (debug) {
 //			System.out.println("----------------\nInstancegenerator");
@@ -58,9 +58,10 @@ public class Instancegenerator {
 //			System.out.println("id                   " + id);
 //			System.out.println("----------------");
 //		}
-
-		tnt = new tntpBuilder(g, "Gridinstances", path, Integer.toString(g.getVertices().size()),
-				Integer.toString(g.getPlayers().size()), id);
+ 
+		
+		
+		
 
 	}
 
@@ -79,37 +80,69 @@ public class Instancegenerator {
 
 	public static void main(String[] args) throws IloException {
 
-	//	Instancegenerator test = new Instancegenerator();
-//		for (int i = 0; i < 15; i++) {
+		Instancegenerator test = new Instancegenerator();
+		for (int i = 0; i < 50; i++) {
+
+			test.generategridgraph(100, 400, Integer.toString(i));
+
+		}
+
+//		Map<String, Vertex> map = new TreeMap<>();
+//		Graphs gg = new Graphs();
+//	//	BarabasiAlbertGraphGenerator tests = new BarabasiAlbertGraphGenerator(100, 3,200); // do not change !!
+//	//	GridGraphGenerator tests = new GridGraphGenerator(4	, 4); // do not change !!
 //
-//			test.generategridgraph(700, 1000, Integer.toString(i));
+//		GnpRandomGraphGenerator tests = new GnpRandomGraphGenerator(10,0.9);
+//		
+//		
+//		
+//		tests.generateGraph(gg, map);
+//		
+//		System.out.println(gg.getVertices().size());
+//		System.out.println(gg.getEdges().size());
 //
+//		for(int i = 0 ; i < gg.getEdges().size() ; i++) {
+//			System.out.println(gg.getEdges().get(i).getFrom().getId() + " => " + gg.getEdges().get(i).getTo().getId());
 //		}
-
-		Map<String, Vertex> map = new TreeMap<>();
-		Graphs gg = new Graphs();
-		BarabasiAlbertGraphGenerator tests = new BarabasiAlbertGraphGenerator(100, 3,200); // do not change !!
-	//	GridGraphGenerator tests = new GridGraphGenerator(4	, 4); // do not change !!
-
-		tests.generateGraph(gg, map);
-		System.out.println(gg.getVertices().size());
-		System.out.println(gg.getEdges().size());
-
-		Player player1 = new Player(0, gg.getVertices().get(0), gg.getVertices().get(15), 20);
-		Player player2 = new Player(1, gg.getVertices().get(1), gg.getVertices().get(14), 10);
-
-		ArrayList<Player> x = new ArrayList<>();
-		x.add(0, player1);
-		x.add(1, player2);
-
-		gg.setPlayer(x);
-		gg.generateEdgesFunctions();
-		//gg.generatePlayers();
-		SocialOptimum social = new SocialOptimum(gg);
-		social.solveDSSP(gg);
-		RMINTB n = new RMINTB(gg);
-		n.solve();
-
-//		ss tnt = new ss(gg, null);
+//		
+//		Player player1 = new Player(0, gg.getVertices().get(0), gg.getVertices().get(9), 20);
+//		Player player2 = new Player(1, gg.getVertices().get(1), gg.getVertices().get(9), 10);
+//
+//		ArrayList<Player> x = new ArrayList<>();
+//		x.add(0, player1);
+//		x.add(1, player2);
+////
+//	//	gg.setPlayer(x);
+//		gg.generateEdgesFunctions();
+//		gg.generatecomodity();
+//		System.out.println(gg.getPlayers().size());
+//		SocialOptimum social = new SocialOptimum(gg);
+//		social.solveDSSP(gg);
+//		RMINTB n = new RMINTB(gg);
+//		n.solve();
+//
+////		ss tnt = new ss(gg, null);
 	}
+	
+
+	
+	private static void buildJSON(String path,Object obj) {
+
+		final ObjectMapper mapper = new ObjectMapper(); // can use static singleton, inject: just make sure to reuse!
+	//	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		// configure JSON
+		//File file = new File("./Masterprojekt/files/graphData.json");
+		File file = new File(path);
+		try {
+			mapper.writeValue(file, obj); // writes JSON serialization of object instance
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

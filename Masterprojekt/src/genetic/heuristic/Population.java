@@ -151,6 +151,7 @@ public class Population {
 		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
 		IloNumExpr x = cplex.sum(planet1);
 
+	
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 			IloNumExpr tmp = cplex.prod(cplex.constant(g.getPlayers().get(i).getDemand()),
 					cplex.sum(g.getPlayers().get(i).getSource().getRo().get(i),

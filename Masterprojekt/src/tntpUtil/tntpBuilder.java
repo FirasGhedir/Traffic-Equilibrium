@@ -101,10 +101,8 @@ public class tntpBuilder {
 
 		if (debug) {
 			System.out.println("----------------\nreadVertexParameters");
-			int index = 0;
 			for (Vertex vertex : vertices) {
 				System.out.println(vertex.getId());
-				++index;
 			}
 			System.out.println("----------------");
 		}

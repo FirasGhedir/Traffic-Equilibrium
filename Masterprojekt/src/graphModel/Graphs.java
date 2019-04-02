@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import heuristic.BellmanFordShortestPath;
 import player.Player;
 
 /**
@@ -25,7 +26,7 @@ import player.Player;
  * 
  *          A collection of utilities to assist with graph manipulation.
  */
-public class Graphs implements Graph<Vertex, Edge>  {
+public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
 	final static int d_max = 100;
@@ -37,7 +38,7 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	final static double Pi = 1.57079632679;
 	final static int max_players = 6;
 	final static int accuracy = 1000;
-    Graphe graphe = new Graphe();
+	Graphe graphe = new Graphe();
 	public ArrayList<Vertex> vertices;
 	public ArrayList<Edge> edges;
 	private ArrayList<Player> players = new ArrayList<>();
@@ -93,7 +94,8 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	public Edge getEdge(Vertex sourceVertex, Vertex targetVertex) {
 		for (int i = 0; i < getEdges().size(); i++) {
 			if (getEdges().get(i).getTo().equals(targetVertex) && getEdges().get(i).getFrom().equals(sourceVertex)) {
-				return getEdges().get(i);}
+				return getEdges().get(i);
+			}
 
 		}
 		return null;
@@ -475,9 +477,9 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	 */
 	public void generatePlayers() {
 
-		double max = this.getVertices().size()*0.15;
-		double min = this.getVertices().size()*0.05;
-		int x = (int) ((Math.random()*((max-min)+1))+min);
+		double max = this.getVertices().size() * 0.15;
+		double min = this.getVertices().size() * 0.06;
+		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
 
 		for (int i = 0; i < x; i++) {
 			int tmp = rand.nextInt(getVertices().size());
@@ -611,11 +613,44 @@ public class Graphs implements Graph<Vertex, Edge>  {
 	public void setP(List<Player> p) {
 		P = p;
 	}
-	
+
 	public void generatecomodity() {
-		int x = 1 + rand.nextInt(max_players);
+		double max = this.getVertices().size() * 0.15;
+		double min = this.getVertices().size() * 0.05;
+		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
+
+		for (int i = 0; i < x; i++) {
+			int tmp = 0;
+			int tmp1 = 0;
+			boolean flag = true;
+			int count = 10;
+			while (flag && count < 20) {
+				tmp = rand.nextInt(getVertices().size());
+
+				do {
+					tmp1 = rand.nextInt(getVertices().size());
+				} while (tmp == tmp1);
+
+				@SuppressWarnings("unused")
+				List<Edge> KP;
+				System.out.println(tmp + " " + tmp1);
+				count++;
+				try {
+					KP = BellmanFordShortestPath
+							.findPathBetween(this, this.getVertices().get(tmp), this.getVertices().get(tmp1))
+							.getEdgeList();
+
+					flag = false;
+				} catch (NullPointerException e) {
+					flag = true;
+					System.out.println("blabalala");
+				}
+			}
+
+			this.getPlayers().add(new Player(i, this.getVertices().get(tmp), this.getVertices().get(tmp1),
+					d_min + rand.nextInt((d_max - d_min) + 1)));
+		}
 
 	}
-	
 
 }

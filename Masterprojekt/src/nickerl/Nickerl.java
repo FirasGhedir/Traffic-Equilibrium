@@ -3,18 +3,13 @@ package nickerl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-import genetic.heuristic.GaMINTB;
-import graphGenerator.GridGraphGenerator;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
 import heuristic.BellmanFordShortestPath;
 import heuristic.GraphPath;
-import heuristic.RMINTB;
-import heuristic.SocialOptimum;
+
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
@@ -243,9 +238,9 @@ public class Nickerl {
 				// Finds a player and saves him in tmp that has non-zero flow on i
 				for (int j = 0; j < list.get(id).size(); j++) { // go through the player list
 
-					ArrayList<Edge> a = g.getEdges();
-					Edge b = a.get(id);
-					ArrayList<Double> c = b.getValues();
+			//		ArrayList<Edge> a = g.getEdges();
+		//			Edge b = a.get(id);
+		//			ArrayList<Double> c = b.getValues();
 					ArrayList<Player> d = list.get(id);
 					Player e = d.get(j);
 
@@ -261,7 +256,7 @@ public class Nickerl {
 
 					// Error occurs here. Maybe the edges don't get updated properly when a new
 					// commodity is created.
-					Double f = c.get(e.getId());
+		//			Double f = c.get(e.getId());
 
 					// TODO: A indexoutofboundsexpection occurs here. Reason seems to be, that the
 					// list of values of some edges don't get properly updated.
@@ -355,10 +350,10 @@ public class Nickerl {
 			// TODO: A indexoutofboundexception occurs here somewhere
 			// This can't work!! Some of the edges were deleted in the making of x! (fixed)
 
-			ArrayList<Edge> a = g.getEdges();
-			Edge b = a.get(id); // TODO: Error occurs HERE!! Edge Ids aren't properly used it seems. (fixed)
-			ArrayList<Double> c = b.getValues();
-			Double d = c.get(k1.getId());
+		//	ArrayList<Edge> a = g.getEdges();
+		//	Edge b = a.get(id); // TODO: Error occurs HERE!! Edge Ids aren't properly used it seems. (fixed)
+		//	ArrayList<Double> c = b.getValues();
+	//		Double d = c.get(k1.getId());
 
 			// TODO: Lists of values in edges for the new player k2 have not been updated
 			// yet!!
@@ -532,24 +527,5 @@ public class Nickerl {
 		Nickerl.delta = delta;
 	}
 
-	public static void main(String[] args) throws IloException {
 
-		setDelta(0.001);
-
-		Map<String, Vertex> map = new TreeMap<>();
-		Graphs graph = new Graphs();
-		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
-		test.generateGraph(graph, map);
-
-	
-
-
-	//	graph.setPlayer(x);
-		graph.generateEdgesFunctions();
-		graph.generatePlayers();
-		RMINTB n = new RMINTB(graph);
-		SocialOptimum social = new SocialOptimum(graph);
-		social.solveDSSP(graph);
-		n.solve();
-	}
 }

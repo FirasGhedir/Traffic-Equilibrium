@@ -147,6 +147,7 @@ public class SocialOptimum {
 //					setSocialOptimumResultSet(
 //							getSocialOptimumResultSet() + graph.getEdges().get(i).getPlayers().get(j).toString() + " : "
 //									+ cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)) + "\n");
+					System.out.println(cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));
               if(cplex.getValue(graph.getEdges().get(i).getPlayers().get(j))> 0.000001) {
 					graph.getEdges().get(i).getValues()
 							.add(cplex.getValue(graph.getEdges().get(i).getPlayers().get(j)));

@@ -17,11 +17,11 @@ public class GaMINTB {
 	Graphs graph;
 	Population firas;
 
-	public GaMINTB(Graphs graph) {
+	public GaMINTB(Graphs graph,int p) {
 
 		bestsolutions = new ArrayList<>();
 		this.graph = graph;
-		firas = new Population(100);
+		firas = new Population(p);
 	}
 
 	public List<Chromosom> getBestsolutions() {
@@ -40,14 +40,14 @@ public class GaMINTB {
 		}
 	}
 
-	public void run() throws IloException {
+	public void run(int T) throws IloException {
 
 	
 
 		final long time = System.currentTimeMillis();
        
 		firas.generatechromosomes(graph);
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < T; i++) {
 			firas.run(this.getBestsolutions(), graph, firas);
 
 		}

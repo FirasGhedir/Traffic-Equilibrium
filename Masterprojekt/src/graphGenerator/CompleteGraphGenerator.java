@@ -76,16 +76,16 @@ public class CompleteGraphGenerator implements GraphGenerator<Vertex, Edge, Vert
 			}
 		}
 
-		for (int i = 0; i < size; i++) {
-			for (int j = i + 1; j < size; j++) {
-				Vertex v = nodes.get(i);
-				Vertex u = nodes.get(j);
-				target.addEdge(v, u);
-				if (isDirected) {
-					target.addEdge(u, v);
-				}
-			}
-		}
+//		for (int i = 0; i < size; i++) {
+//			for (int j = i + 1; j < size; j++) {
+//				Vertex v = nodes.get(i);
+//				Vertex u = nodes.get(j);
+//				target.addEdge(v, u);
+//				if (isDirected) {
+//					target.addEdge(u, v);
+//				}
+//			}
+//		}
 	}
 
 	public void UFinit(int n) {
@@ -95,7 +95,9 @@ public class CompleteGraphGenerator implements GraphGenerator<Vertex, Edge, Vert
 		}
 	}
 
-	public void UFunion(int i, int j) {
+	public void UFunion(int a, int b) {
+		int i = UFfind(a);
+		int j = UFfind(b);
 		double z = Math.random();
 		if (z == 0) {
 			array[i] = j;

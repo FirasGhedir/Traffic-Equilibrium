@@ -2,12 +2,8 @@ package heuristic;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-import graphGenerator.GridGraphGenerator;
 import graphModel.Graphs;
-import graphModel.Vertex;
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
@@ -206,25 +202,5 @@ public class RMINTB {
 		} 
 	}
 
-	public static void main(String[] args) throws IloException {
-		Map<String, Vertex> map = new TreeMap<>();
-		Graphs graph = new Graphs();
-		
 
-
-		GridGraphGenerator test = new GridGraphGenerator(2,4); // do not change !!
-		test.generateGraph(graph, map);
-		
-
-       graph.generateEdgesFunctions();
-       graph.generatePlayers();
-        SocialOptimum systemOptimalFlow = new SocialOptimum(graph);
-		systemOptimalFlow.solveDSSP(graph);
-        
-		RMINTB solver = new RMINTB(graph);
-		solver.solve();
-		TestCorrectness correct = new TestCorrectness();
-		System.out.println("getPlayers(0): "
-				+ correct.test(graph, graph.getPlayers().get(0).getSource(), graph.getPlayers().get(0).getSink()));
-	}
 }

@@ -105,7 +105,7 @@ public class GnpRandomGraphGenerator implements GraphGenerator<Vertex, Edge, Ver
 	        }
 
 	        // check whether to also create loops
-	        if (createLoops && !target.getType().isAllowingSelfLoops()) {
+        if (createLoops && !target.getType().isAllowingSelfLoops()) {
 	            throw new IllegalArgumentException("Provided graph does not support self-loops");
 	        }
 
@@ -123,7 +123,6 @@ public class GnpRandomGraphGenerator implements GraphGenerator<Vertex, Edge, Ver
 	        }
 
 	        // check if graph is directed
-	        boolean isDirected = false;
 
 	        // create edges
 	        for (int i = 0; i < n; i++) {
@@ -144,18 +143,19 @@ public class GnpRandomGraphGenerator implements GraphGenerator<Vertex, Edge, Ver
 	                    s = vertices.get(i);
 	                    t = vertices.get(j);
 	                    target.addEdge(s, t);
+	                    target.addEdge(t, s);
 	                }
 
-	                if (isDirected) {
-	                    // t->s
-	                    if (rng.nextDouble() < p) {
-	                        if (s == null) {
-	                            s = vertices.get(i);
-	                            t = vertices.get(j);
-	                        }
-	                        target.addEdge(t, s);
-	                    }
-	                }
+//	                if (isDirected) {
+//	                    // t->s
+//	                    if (rng.nextDouble() < p) {
+//	                        if (s == null) {
+//	                            s = vertices.get(i);
+//	                            t = vertices.get(j);
+//	                        }
+//	                        target.addEdge(t, s);
+//	                    }
+//	                }
 	            }
 	        }
 

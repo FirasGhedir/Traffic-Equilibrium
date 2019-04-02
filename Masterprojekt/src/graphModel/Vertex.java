@@ -65,5 +65,12 @@ public class Vertex {
 	public void setRo(ArrayList<IloNumVar> ro) {
 		this.ro = ro;
 	}
+	
+	public boolean equals(Vertex v) {
+		
+		if(this.id == v.id) return true;
+		return false;
+		
+	}
 
 }
