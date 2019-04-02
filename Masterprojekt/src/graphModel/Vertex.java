@@ -2,9 +2,10 @@ package graphModel;
 
 import java.util.ArrayList;
 
-
-
 import ilog.concert.IloNumVar;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Universität Ulm
@@ -24,14 +25,25 @@ import ilog.concert.IloNumVar;
 public class Vertex {
 
 	int id; // vertex identification number
+
+	@JsonIgnore
 	ArrayList<IloNumVar> ro = new ArrayList<>();
 
 	/**
 	 * Constructor, creates a new vertex
 	 * 
-	 * @param id,
-	 *            the identifier number of the vertex
+	 * @param id, the identifier number of the vertex
 	 */
+//	public Vertex(int id) {
+//		this.id = id;
+//	}
+
+	/**
+	 * Constructor, creates a new vertex
+	 * 
+	 * @param id, the identifier number of the vertex
+	 */
+	@JsonCreator
 	public Vertex(int id) {
 		this.id = id;
 	}
@@ -51,8 +63,7 @@ public class Vertex {
 	/**
 	 * Setter method for the id
 	 * 
-	 * @param id,
-	 *            the identifier number of the vertex
+	 * @param id, the identifier number of the vertex
 	 */
 	public void setId(int id) {
 		this.id = id;
