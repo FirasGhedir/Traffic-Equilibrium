@@ -124,42 +124,48 @@ public class Main {
 			System.err.println("The given file is not valid to create an object instance out of it...");
 			break;
 		}
-		matching(graph);
+	//	matching(graph);
 		return graph;
 	}
 
 	public static void main(String[] args) throws IloException {
-		Graphs graph = new Graphs();
-//		 switch (args[0]) {
-//		 case "1":
-//		 graph = getGraph(1, args[1], args[2]);
-//		 break;
-//		 case "2":
-//		 graph = getGraph(2, args[1], args[2]);
-//		 break;
-//		 case "3":
-//		 graph = getGraph(3, args[1], args[2]);
-//		break;
-//		 }
-//		
-//		 switch (args[3]) {
-//		 case "1":
-//		 Mintb(graph);
-//		 break;
-//		 case "2":
-//		 Rmintb(graph);
-//		 break;
-//		 case "3":
-//		 Genetic(graph, Integer.valueOf(args[4]), Integer.valueOf(args[5]));
-//		 break;
-//		 case "4":
-//		 Nickerl(graph);
-//		 break;
-//		 }
+	Graphs graph = new Graphs();
+		 switch (args[0]) {
+		 case "1":
+		 graph = getGraph(1, args[1], args[2]);
+		 matching(graph);
+		 break;
+		 case "2":
+		 graph = getGraph(2, args[1], args[2]);
+		 matching(graph);
+		 break;
+		 case "3":
+		 graph = getGraph(3, args[1], args[2]);
+		 matching(graph);
+		 break;
+		 }
+		
+		 switch (args[3]) {
+		 case "1":
+		 Mintb(graph);
+		 break;
+		 case "2":
+		 Rmintb(graph);
+		 break;
+		 case "3":
+		 Genetic(graph, Integer.valueOf(args[4]), Integer.valueOf(args[5]));
+		 break;
+		 case "4":
+		 Nickerl(graph);
+		 break;
+		 }
 
-		 graph = getGraph(1,"1","1");
-		 System.out.println(graph.getVertices().size());
-
+//		 graph = getGraph(1,"1","1");
+//		System.out.println(graph.getPlayers().get(0).getSource() == (graph.getVertices().get(26)));
+//	  RMINTB solver = new RMINTB(graph);
+//      SocialOptimum ss = new SocialOptimum(graph);
+//      ss.solveDSSP(graph);
+//      solver.solve();
 
 	}
 
@@ -172,6 +178,7 @@ public class Main {
 				}
 				if (graph.getVertices().get(i).equals(graph.getPlayers().get(j).getSource())) {
 					graph.getVertices().set(i, graph.getPlayers().get(j).getSource());
+
 				}
 
 			}
@@ -183,15 +190,12 @@ public class Main {
 				if (graph.getEdges().get(i).getTo().equals(graph.getVertices().get(j))) {
 					graph.getEdges().get(i).setTo(graph.getVertices().get(j));
 				}
-
+				
 				if (graph.getEdges().get(i).getFrom().equals(graph.getVertices().get(j))) {
 					graph.getEdges().get(i).setFrom(graph.getVertices().get(j));
 				}
+				
 			}
-
 		}
-
 	}
-
-
 }

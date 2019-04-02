@@ -86,6 +86,8 @@ public class DSSP {
 
 		}
 
+
+		
 		// --- initialising beta ---
 		for (int i = 0; i < g.getEdges().size(); i++) {
 			g.getEdges().get(i).setBeta(m1.numVar(0, Double.MAX_VALUE, "beta in the edge number : " + i));
@@ -111,7 +113,6 @@ public class DSSP {
 
 		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
 		IloNumExpr x = m1.sum(planet1);
-
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 			IloNumExpr tmp = m1.prod(m1.constant(g.getPlayers().get(i).getDemand()),
 					m1.sum(g.getPlayers().get(i).getSource().getRo().get(i),

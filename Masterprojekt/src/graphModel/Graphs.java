@@ -26,7 +26,7 @@ import player.Player;
  * 
  *          A collection of utilities to assist with graph manipulation.
  */
-public class Graphs implements Graph<Vertex, Edge>, Cloneable {
+public class Graphs implements Graph<Vertex, Edge> {
 	private static String adjacencyMatrixAsString;
 	private static String gridGraphDataAsString;
 	final static int d_max = 100;
@@ -601,10 +601,6 @@ public class Graphs implements Graph<Vertex, Edge>, Cloneable {
 		this.beta = beta;
 	}
 
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
 
 	public List<Player> getP() {
 		return P;
