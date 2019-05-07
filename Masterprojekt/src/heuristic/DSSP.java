@@ -74,7 +74,8 @@ public class DSSP {
 	 *             if a CPLEX error occurs
 	 */
 	public void solveDSSP(Graphs g) throws IloException {
-
+ 
+ 
 		// --- Initializing ro ---
 		for (int i = 0; i < g.getVertices().size(); i++) {
 			for (int j = 0; j < g.getPlayers().size(); j++) {
@@ -85,8 +86,8 @@ public class DSSP {
 			}
 
 		}
-
-
+        
+	
 		
 		// --- initialising beta ---
 		for (int i = 0; i < g.getEdges().size(); i++) {
@@ -114,6 +115,8 @@ public class DSSP {
 		IloNumExpr[] planet1 = s11.toArray(new IloNumExpr[s11.size()]);
 		IloNumExpr x = m1.sum(planet1);
 		for (int i = 0; i < g.getPlayers().size(); i++) {
+		
+
 			IloNumExpr tmp = m1.prod(m1.constant(g.getPlayers().get(i).getDemand()),
 					m1.sum(g.getPlayers().get(i).getSource().getRo().get(i),
 							m1.prod(-1, g.getPlayers().get(i).getSink().getRo().get(i))));
@@ -128,7 +131,6 @@ public class DSSP {
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 
 			for (int j = 0; j < g.getEdges().size(); j++) {
-
 				IloNumExpr tmp = m1.sum(g.getEdges().get(j).getTo().getRo().get(i),
 						m1.prod(-1, g.getEdges().get(j).getFrom().getRo().get(i)));
 				IloNumExpr tmp1 = m1.sum(tmp, g.getEdges().get(j).getResult());
@@ -146,7 +148,7 @@ public class DSSP {
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
 
-			// System.out.println(cplex.toString());
+            System.out.println(cplex.getObjValue());
 			this.setDSSPResultSet(getDSSPResultSet() + "obj: " + cplex.getObjValue() + "\n");
 
 			for (int i = 0; i < g.getEdges().size(); i++) {
@@ -161,8 +163,7 @@ public class DSSP {
 			break;
 
 		default:
-			// System.out.println(cplex.toString());
-
+          cplex.clearModel();
 		//	throw new IllegalStateException("Problem not solved.");
 		}
 	}
@@ -255,5 +256,30 @@ public class DSSP {
 		 * return the string representation of the object
 		 */
 		return (cplexSolverOutputStream + "\n" + dashedLimiter + "\n\n" + this.getDSSPResultSet());
+	}
+	
+	public static  void matching(Graphs g) {
+		for(int i = 0 ;  i < g.getPlayers().size() ; i++) {
+			System.out.println(g.getPlayers().get(i).getSource().getId() + " "  + g.getPlayers().get(i).getSink().getId());
+		}
+		for(int i = 0 ; i < g.getEdges().size() ; i++) {
+			if(!(g.getVertices().contains(g.getEdges().get(i).getFrom()))) {
+				g.getVertices().set(g.getEdges().get(i).getFrom().getId(), g.getEdges().get(i).getFrom());
+			}
+			if(!(g.getVertices().contains(g.getEdges().get(i).getTo()))) {
+				g.getVertices().set(g.getEdges().get(i).getTo().getId(), g.getEdges().get(i).getTo());
+			}
+		}
+		
+		for(int i = 0 ; i < g.getPlayers().size() ; i++) {
+			if(!(g.getVertices().contains(g.getPlayers().get(i).getSource()))) {
+				g.getVertices().set(g.getPlayers().get(i).getSource().getId(), g.getPlayers().get(i).getSource());
+				System.out.println(g.getVertices().contains(g.getPlayers().get(1).getSource())+ " " + "blaba" );
+			}
+			if(!(g.getVertices().contains(g.getPlayers().get(i).getSink()))) {
+				g.getVertices().set(g.getPlayers().get(i).getSink().getId(), g.getPlayers().get(i).getSink());
+			}
+		}
+        System.err.println(g.getVertices().contains(g.getPlayers().get(3).getSource()) + " " + g.getPlayers().get(3).getSource().getId());
 	}
 }

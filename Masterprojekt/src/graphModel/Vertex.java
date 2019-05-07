@@ -66,10 +66,7 @@ public class Vertex {
 	}
 	
 	public boolean equals(Vertex v) {
-		
-		if(this.id == v.id) return true;
-		return false;
-		
+		return  this.id == v.getId();
 	}
 
 }

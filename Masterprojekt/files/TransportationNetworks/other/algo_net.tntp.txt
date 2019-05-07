@@ -1,8 +1,0 @@
-<NUMBER OF ZONES> 0         
-<NUMBER OF NODES> 0         
-<FIRST THRU NODE> 1         
-<NUMBER OF LINKS> 0         
-<END OF METADATA>
-
-
-~          Init       node       Term node       Capacity   Length     Free Flow Time B          Power      Speed limit

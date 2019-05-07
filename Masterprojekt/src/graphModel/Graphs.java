@@ -47,6 +47,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 	private LinkedList<Integer>[] adjListArray;
 	ArrayList<Double> beta;
 	List<Player> P;
+	String path;
 
 	/**
 	 * 
@@ -480,14 +481,21 @@ public class Graphs implements Graph<Vertex, Edge> {
 		double max = this.getVertices().size() * 0.15;
 		double min = this.getVertices().size() * 0.06;
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
+		ArrayList<Integer> idcontainer = new ArrayList<>();
 
 		for (int i = 0; i < x; i++) {
-			int tmp = rand.nextInt(getVertices().size());
-			int tmp1;
+			int tmp = 0;
+			int tmp1 = 0;
 
 			do {
+				tmp = rand.nextInt(getVertices().size());
+
+			} while (idcontainer.contains(tmp));
+			idcontainer.add(tmp);
+			do {
 				tmp1 = rand.nextInt(getVertices().size());
-			} while (tmp == tmp1);
+			} while (idcontainer.contains(tmp1));
+			idcontainer.add(tmp1);
 			this.getPlayers().add(new Player(i, this.getVertices().get(tmp), this.getVertices().get(tmp1),
 					d_min + rand.nextInt((d_max - d_min) + 1)));
 		}
@@ -601,7 +609,6 @@ public class Graphs implements Graph<Vertex, Edge> {
 		this.beta = beta;
 	}
 
-
 	public List<Player> getP() {
 		return P;
 	}
@@ -647,6 +654,14 @@ public class Graphs implements Graph<Vertex, Edge> {
 					d_min + rand.nextInt((d_max - d_min) + 1)));
 		}
 
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getPath() {
+		return this.path;
 	}
 
 }

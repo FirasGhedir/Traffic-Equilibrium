@@ -7,25 +7,27 @@ import java.util.List;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
+import player.Player;
 
 public class TestCorrectness {
 
 	private Graphs graph;
 	private Graphs graph1;
-	final static double default_epsilon = 0.00000;
+	final static double default_epsilon = 0.00001;
+	private String result;
 
 	public TestCorrectness() {
 
 	}
 
-	public Graphs newgraph(Graphs g) {
+	public Graphs newgraph(Graphs g,Player p) {
 		graph = new Graphs(g);
 		ArrayList<Edge> edges = new ArrayList<>();
 		ArrayList<Vertex> vertices = new ArrayList<>();
 
 		for (int i = 0; i < g.getEdges().size(); i++) {
 
-			if (g.getEdges().get(i).getSum() > 0.1)
+			if (g.getEdges().get(i).getValues().get(p.getId()) > 0)
 				edges.add(g.getEdges().get(i));
 		}
 
@@ -69,8 +71,9 @@ public class TestCorrectness {
 
 	}
 
-	public boolean test(Graphs g, Vertex s, Vertex t) {
-				
+	public boolean test(Graphs g, Player player) {
+	    Vertex s = player.getSource();
+	    Vertex t = player.getSink();
 		List<Edge> KP = BellmanFordShortestPath.findPathBetween(g, s, t).getEdgeList();
 
 		double countLP = 0;
@@ -79,7 +82,7 @@ public class TestCorrectness {
 		for (int i = 0; i < KP.size(); i++) {
 			countKP += KP.get(i).getL();
 		}
-		Graphs y = negativgraph(newgraph(g));
+		Graphs y = negativgraph(newgraph(g,player));
 		
 		List<Edge> LP = BellmanFordShortestPath.findPathBetween(y, s, t).getEdgeList();
 		for (int i = 0; i < LP.size(); i++) {
@@ -89,10 +92,18 @@ public class TestCorrectness {
 		for(int i = 0 ; i < y.getEdges().size() ; i++) {
 			y.getEdges().get(i).setL((-1)*y.getEdges().get(i).getL());
 		}
-		System.out.println(countKP + " " + countLP);
+	    setResult(" " +  (!(countKP + default_epsilon < countLP)) + " Commodity ID : "+ player.getId()+ " KP : " +countKP + " LP : " + countLP + "\n");
 		
 		if (countKP + default_epsilon < countLP) return false;
 		return true;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 }

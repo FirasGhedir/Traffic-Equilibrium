@@ -36,6 +36,7 @@ public class SocialOptimum {
 	private String socialOptimumResultSet;
 	ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	String cplexSolverOutputStream;
+	private String cplexobj;
 
 	/**
 	 * Constructor
@@ -51,7 +52,7 @@ public class SocialOptimum {
 
 		this.cplexSolverOutputStream = "";
 		cplex = new IloCplex();
-		cplex.setOut(stream); // store the cplex solver Outputstream in Bytestream
+	//	cplex.setOut(stream); // store the cplex solver Outputstream in Bytestream
 
 		//solveDSSP(this.getGraph());
 	}
@@ -138,8 +139,9 @@ public class SocialOptimum {
 
 		switch (String.valueOf(cplex.solve())) {
 		case "true":
+			setCplexobj("SocialOptimum : " + cplex.getObjValue());
 
-			this.setSocialOptimumResultSet(getSocialOptimumResultSet() + "obj: " + cplex.getObjValue() + "\n--\n");
+		//	this.setSocialOptimumResultSet(getSocialOptimumResultSet() + "obj: " + cplex.getObjValue() + "\n--\n");
 
 			for (int i = 0; i < graph.getEdges().size(); i++) {
 				for (int j = 0; j < graph.getEdges().get(i).getPlayers().size(); j++) {
@@ -158,6 +160,7 @@ public class SocialOptimum {
               }
 			}
 			}
+			cplex.clearModel();
 			break;
 
 		default:
@@ -266,5 +269,13 @@ public class SocialOptimum {
 		 * return the string representation of the object
 		 */
 		return (cplexSolverOutputStream + "\n" + dashedLimiter + "\n\n" + this.getSocialOptimumResultSet());
+	}
+
+	public String getCplexobj() {
+		return cplexobj;
+	}
+
+	public void setCplexobj(String cplexobj) {
+		this.cplexobj = cplexobj;
 	}
 }

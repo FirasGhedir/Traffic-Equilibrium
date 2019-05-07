@@ -3,6 +3,7 @@ package main;
 import java.io.File;
 import java.io.IOException;
 
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -14,14 +15,13 @@ import graphModel.Graphs;
 import heuristic.RMINTB;
 import heuristic.SocialOptimum;
 import ilog.concert.IloException;
-import nickerl.Nickerl;
 
 public class Main {
 
 	public static void Mintb(Graphs graph) throws IloException {
 		SocialOptimum social = new SocialOptimum(graph);
 		social.solveDSSP(graph);
-		Mintb_FC solver = new Mintb_FC();
+		Mintb_FC solver = new Mintb_FC(graph);
 		try {
 			solver.run(graph);
 		} catch (IloException e) {
@@ -31,8 +31,6 @@ public class Main {
 	}
 
 	public static void Rmintb(Graphs graph) throws IloException {
-		SocialOptimum social = new SocialOptimum(graph);
-		social.solveDSSP(graph);
 		RMINTB solver;
 		try {
 			solver = new RMINTB(graph);
@@ -50,18 +48,6 @@ public class Main {
 		GaMINTB solver = new GaMINTB(graph, p);
 		try {
 			solver.run(T);
-		} catch (IloException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void Nickerl(Graphs graph) throws IloException {
-		SocialOptimum social = new SocialOptimum(graph);
-		social.solveDSSP(graph);
-		try {
-			Nickerl solver = new Nickerl(graph);
-			solver.run();
 		} catch (IloException e) {
 			e.printStackTrace();
 		}
@@ -119,29 +105,27 @@ public class Main {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			matching(graph);
+			graph.setPath(path);
 			return graph;
 		default:
 			System.err.println("The given file is not valid to create an object instance out of it...");
 			break;
 		}
-	//	matching(graph);
 		return graph;
 	}
 
 	public static void main(String[] args) throws IloException {
-	Graphs graph = new Graphs();
+		 Graphs graph = new Graphs();
 		 switch (args[0]) {
 		 case "1":
 		 graph = getGraph(1, args[1], args[2]);
-		 matching(graph);
 		 break;
 		 case "2":
 		 graph = getGraph(2, args[1], args[2]);
-		 matching(graph);
 		 break;
 		 case "3":
 		 graph = getGraph(3, args[1], args[2]);
-		 matching(graph);
 		 break;
 		 }
 		
@@ -155,18 +139,23 @@ public class Main {
 		 case "3":
 		 Genetic(graph, Integer.valueOf(args[4]), Integer.valueOf(args[5]));
 		 break;
-		 case "4":
-		 Nickerl(graph);
-		 break;
+		
 		 }
 
-//		 graph = getGraph(1,"1","1");
-//		System.out.println(graph.getPlayers().get(0).getSource() == (graph.getVertices().get(26)));
-//	  RMINTB solver = new RMINTB(graph);
-//      SocialOptimum ss = new SocialOptimum(graph);
-//      ss.solveDSSP(graph);
-//      solver.solve();
-
+//		Map<String, Vertex> map = new TreeMap<>();
+//		Graphs g = new Graphs();
+//		GridGraphGenerator test = new GridGraphGenerator(4, 4); // do not change !!
+//		test.generateGraph(g, map);
+//		g.generateEdgesFunctions();
+//		g.generatePlayers();
+//		g.setPath("./Masterprojekt/files/Gridinstances/100-400/2");
+//	
+//	//	graph = getGraph(1, "1", "1");
+//
+//		RMINTB solver = new RMINTB(g);
+//
+//		solver.solve();
+		
 	}
 
 	public static void matching(Graphs graph) {
@@ -190,11 +179,11 @@ public class Main {
 				if (graph.getEdges().get(i).getTo().equals(graph.getVertices().get(j))) {
 					graph.getEdges().get(i).setTo(graph.getVertices().get(j));
 				}
-				
+
 				if (graph.getEdges().get(i).getFrom().equals(graph.getVertices().get(j))) {
 					graph.getEdges().get(i).setFrom(graph.getVertices().get(j));
 				}
-				
+
 			}
 		}
 	}
