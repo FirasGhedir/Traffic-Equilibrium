@@ -84,7 +84,7 @@ public class Main {
 
 	public static void main(String[] args) throws IloException {
 
-		for (int i = 95; i <100; i++) {
+		for (int i = 100; i <250; i++) {
 			g = getGraph(i);
 			matching(g);
 			Mintb_FC solver = new Mintb_FC(g);
