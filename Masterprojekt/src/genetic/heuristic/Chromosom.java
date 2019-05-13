@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class Chromosom {
 
-	private boolean feasible;
+	private boolean feasible	;
 	public boolean[] vector;
 	private int rank;
 	private int efficiency;

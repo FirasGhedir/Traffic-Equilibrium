@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bai_A.Mintb_FC;
+import genetic.heuristic.GaMINTB;
 import graphModel.Graphs;
 import heuristic.RMINTB;
 import heuristic.SocialOptimum;
@@ -84,13 +85,11 @@ public class Main {
 
 	public static void main(String[] args) throws IloException {
 
-		for (int i = 100; i <250; i++) {
+		for (int i = 40; i <41; i++) {
 			g = getGraph(i);
 			matching(g);
-			Mintb_FC solver = new Mintb_FC(g);
-		    solver.run(g);
-			//RMINTB solver = new RMINTB(g);
-			//solver.solve();
+		    GaMINTB solver = new GaMINTB(g, 100); // size of population p
+		    solver.run(10); // M
 		}
 	}
 

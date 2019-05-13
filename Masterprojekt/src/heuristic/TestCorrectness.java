@@ -13,7 +13,7 @@ public class TestCorrectness {
 
 	private Graphs graph;
 	private Graphs graph1;
-	final static double default_epsilon = 0.00001;
+	final static double default_epsilon = 1;
 	private String result;
 
 	public TestCorrectness() {

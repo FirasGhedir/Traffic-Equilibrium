@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
-import heuristic.BellmanFordShortestPath;
 import player.Player;
 
 /**
@@ -213,6 +213,7 @@ public class Graphs implements Graph<Vertex, Edge> {
 
 	@Override
 	public Vertex getEdgeTarget(Edge e) {
+
 		return e.getTo();
 	}
 
@@ -618,42 +619,43 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	public void generatecomodity() {
+
 		double max = this.getVertices().size() * 0.15;
-		double min = this.getVertices().size() * 0.05;
+		double min = this.getVertices().size() * 0.06;
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
 
-		for (int i = 0; i < x; i++) {
-			int tmp = 0;
-			int tmp1 = 0;
-			boolean flag = true;
-			int count = 10;
-			while (flag && count < 20) {
-				tmp = rand.nextInt(getVertices().size());
-
-				do {
-					tmp1 = rand.nextInt(getVertices().size());
-				} while (tmp == tmp1);
-
-				@SuppressWarnings("unused")
-				List<Edge> KP;
-				System.out.println(tmp + " " + tmp1);
-				count++;
-				try {
-					KP = BellmanFordShortestPath
-							.findPathBetween(this, this.getVertices().get(tmp), this.getVertices().get(tmp1))
-							.getEdgeList();
-
-					flag = false;
-				} catch (NullPointerException e) {
-					flag = true;
-					System.out.println("blabalala");
-				}
+		for (int k = 0; k < x; k++) {
+			int ss = (int) (Math.random() * (this.getVertices().size() + 1 - 1));
+			ArrayList<Integer> list = new ArrayList<>();
+			list.add(ss);
+			while (ss != 0 && list.size() < 10) {
+				ss = recursive(ss);
+				list.add(ss);
 			}
+			List<Integer> deduped = list.stream().distinct().collect(Collectors.toList());
 
-			this.getPlayers().add(new Player(i, this.getVertices().get(tmp), this.getVertices().get(tmp1),
-					d_min + rand.nextInt((d_max - d_min) + 1)));
+			 this.players.add(converter(deduped,k));
+           System.out.println(deduped.get(0) + " " + deduped.get(1));
+			list.clear();
+			deduped.clear();
+			System.out.println("########");
 		}
+	}
 
+	public int recursive(int id) {
+		Vertex v = this.getVertices().get(id);
+		for (int j = 0; j < this.getEdges().size(); j++) {
+			if (this.getEdges().get(j).getFrom().equals(v)) {
+				Vertex u = this.getEdges().get(j).getTo();
+				return u.getId();
+			}
+		}
+		return 0;
+	}
+
+	public Player converter(List<Integer> deduped, int id) {
+		return new Player(id, getVertices().get(deduped.get(0)), getVertices().get(deduped.get(deduped.size()-1)),
+				d_min + rand.nextInt((d_max - d_min) + 1));
 	}
 
 	public void setPath(String path) {

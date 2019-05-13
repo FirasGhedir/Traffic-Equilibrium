@@ -2,19 +2,23 @@ package tntpUtil;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bai_A.Mintb_FC;
+import graphGenerator.GnpRandomGraphGenerator;
 import graphGenerator.GridGraphGenerator;
+import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
+import heuristic.BellmanFordShortestPath;
 import heuristic.RMINTB;
 import ilog.concert.IloException;
 
@@ -67,7 +71,23 @@ public class Instancegenerator {
 
 	}
 
-	public void generatepoisson(int min, int max, double rnd) {
+	public void generatepoisson(int min, int max, double rnd, int id) {
+
+		Map<String, Vertex> map = new TreeMap<>();
+		g = new Graphs();
+		int randomInt = ThreadLocalRandom.current().nextInt(min, max);
+		GnpRandomGraphGenerator test = new GnpRandomGraphGenerator(randomInt, rnd);
+		test.generateGraph(g, map);
+		g.generateEdgesFunctions();
+		g.generatecomodity();
+		for(int i = 0 ; i < g.getEdges().size() ; i++) {
+			System.out.println(g.getEdges().get(i).getFrom().getId() + "  " + g.getEdges().get(i).getTo().getId());
+		}
+//		List<Edge> LP = BellmanFordShortestPath
+//				.findPathBetween(g, g.getPlayers().get(0).getSource(), g.getPlayers().get(0).getSink()).getEdgeList();
+		System.out.println(g.getPlayers().get(0).getSource().getId() + " buuurn "  + g.getPlayers().get(0).getSink().getId());
+		String path = "./Masterprojekt/files/Poissoninstances/" + min + "-" + max + "/" + String.valueOf(id);
+		buildJSON(path, g);
 
 	}
 
@@ -78,12 +98,11 @@ public class Instancegenerator {
 	public static void main(String[] args) throws IloException {
 
 		Instancegenerator tests = new Instancegenerator();
-		for (int i = 0; i < 250; i++) {
+		for (int i = 0; i < 1; i++) {
 
-			tests.generategridgraph(50, 100, Integer.toString(i));
+			tests.generatepoisson(50, 100, 0.3, i);
 
 		}
-		
 
 	}
 

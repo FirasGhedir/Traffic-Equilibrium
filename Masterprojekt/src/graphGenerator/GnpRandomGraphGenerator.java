@@ -143,7 +143,7 @@ public class GnpRandomGraphGenerator implements GraphGenerator<Vertex, Edge, Ver
 	                    s = vertices.get(i);
 	                    t = vertices.get(j);
 	                    target.addEdge(s, t);
-	                    target.addEdge(t, s);
+	                   // target.addEdge(t, s);
 	                }
 
 //	                if (isDirected) {
