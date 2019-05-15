@@ -24,7 +24,7 @@ import ilog.concert.IloNumVar;
 public class Vertex {
 
 	int id; // vertex identification number
-
+    int deg;
 	ArrayList<IloNumVar> ro = new ArrayList<>();
 
 	/**
@@ -68,5 +68,12 @@ public class Vertex {
 	public boolean equals(Vertex v) {
 		return  this.id == v.getId();
 	}
-
+ 
+	public int getDeg() {
+		return deg;
+	}
+	
+	public void setDeg(int deg) {
+		this.deg = deg;
+	}
 }

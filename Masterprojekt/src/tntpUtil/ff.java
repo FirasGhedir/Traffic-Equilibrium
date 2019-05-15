@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import graphGenerator.GeneratorPoisson;
+import graphGenerator.HeavyTail;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
@@ -16,11 +17,11 @@ public class ff {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs g = new Graphs();
-		GeneratorPoisson test = new GeneratorPoisson(1, 99, 0.1);
+		HeavyTail test = new HeavyTail();
 		test.generateGraph(g, map);
 		System.out.println(g.getVertices().size() + "  " + g.getEdges().size());
 		g.generateEdgesFunctions();
-		g.setPlayer(test.getPlayers());
+		g.generatePlayers();
 		for (int i = 0; i < g.getPlayers().size(); i++) {
 			System.out.println(g.getPlayers().get(i).getId() + " Demand : " + g.getPlayers().get(i).getDemand()
 					+ " from : " + g.getPlayers().get(i).getSource().getId() + " to : "

@@ -18,8 +18,6 @@ public class GeneratorPoisson implements GraphGenerator<Vertex, Edge, Vertex> {
 	int Z_max;
 	int Z_min;
 	Random rnd = new Random();
-	public static final String START_VERTEX = "Start Vertex";
-	public static final String END_VERTEX = "End Vertex";
 	ArrayList<Player> players;
 
 	public GeneratorPoisson(int min, int max, double p) {
