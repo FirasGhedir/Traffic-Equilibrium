@@ -15,7 +15,6 @@ public class ToleranceDoubleComparator
      * Default tolerance used by the comparator.
      */
     public static final double DEFAULT_EPSILON = 1e-9;
-
     private final double epsilon;
 
     /**
@@ -33,9 +32,9 @@ public class ToleranceDoubleComparator
      */
     public ToleranceDoubleComparator(double epsilon)
     {
-        if (epsilon <= 0.0) {
-            throw new IllegalArgumentException("Tolerance must be positive");
-        }
+//        if (epsilon <= 0.0) {
+//            throw new IllegalArgumentException("Tolerance must be positive");
+//        }
         this.epsilon = epsilon;
     }
 

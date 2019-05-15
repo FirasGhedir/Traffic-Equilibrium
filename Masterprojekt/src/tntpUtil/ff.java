@@ -16,7 +16,7 @@ public class ff {
 
 		Map<String, Vertex> map = new TreeMap<>();
 		Graphs g = new Graphs();
-		GeneratorPoisson test = new GeneratorPoisson(5, 20, 0.1);
+		GeneratorPoisson test = new GeneratorPoisson(1, 99, 0.1);
 		test.generateGraph(g, map);
 		System.out.println(g.getVertices().size() + "  " + g.getEdges().size());
 		g.generateEdgesFunctions();
@@ -26,7 +26,7 @@ public class ff {
 					+ " from : " + g.getPlayers().get(i).getSource().getId() + " to : "
 					+ g.getPlayers().get(i).getSink().getId());
 		}
-		List<Edge> KP = BellmanFordShortestPath.findPathBetween(g, g.getPlayers().get(0).getSource(), g.getPlayers().get(0).getSink()).getEdgeList();
+		List<Edge> KP = BellmanFordShortestPath.findPathBetween(g, g.getPlayers().get(1).getSource(), g.getPlayers().get(1).getSink()).getEdgeList();
 		System.out.println(KP.size());
         
 		

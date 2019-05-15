@@ -85,17 +85,22 @@ public class Main {
 
 	public static void main(String[] args) throws IloException {
 
-		for (int i = 40; i <41; i++) {
-			g = getGraph(i);
+		for (int j = 3; j <4; j++) {
+			g = getGraph(j);
 			matching(g);
-		    GaMINTB solver = new GaMINTB(g, 100); // size of population p
-		    solver.run(10); // M
+//			for (int i = 0; i < g.getPlayers().size(); i++) {
+//				System.out.println(g.getPlayers().get(i).getId() + " Demand : " + g.getPlayers().get(i).getDemand()
+//						+ " from : " + g.getPlayers().get(i).getSource().getId() + " to : "
+//						+ g.getPlayers().get(i).getSink().getId());
+//			}
+		    Mintb_FC solver = new Mintb_FC(g); // size of population p
+		    // M
 		}
 	}
 
 	public static Graphs getGraph(int i) {
 
-		String path = "./Masterprojekt/files/" + "Gridinstances" + "/" + "50-100" + "/" + Integer.toString(i);
+		String path = "./Masterprojekt/files/" + "Poissoninstances" + "/" + "50-100" + "/" + Integer.toString(i);
 
 		File file = new File(path + ".JSON");
 

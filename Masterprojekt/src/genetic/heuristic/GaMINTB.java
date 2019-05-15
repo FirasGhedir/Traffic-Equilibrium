@@ -68,12 +68,13 @@ public class GaMINTB {
 		this.savebestsolution(graph, alpha.get());
 
 		alpha.get().calculateE();
+		
 
-		 flag = alpha.get().isFeasible();
-	
+        	
 		end =  System.currentTimeMillis();
 		timer = end - start;
 		resultSet();
+		System.err.println(firas.evaluation(graph, alpha.get()) + " sidi sidi ");
 	}
 	
 	public void resultSet() {

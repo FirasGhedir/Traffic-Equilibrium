@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bai_A.Mintb_FC;
+import graphGenerator.GeneratorPoisson;
 import graphGenerator.GnpRandomGraphGenerator;
 import graphGenerator.GridGraphGenerator;
 import graphModel.Edge;
@@ -71,20 +72,15 @@ public class Instancegenerator {
 
 	}
 
-	public void generatepoisson(int min, int max, double rnd, int id) {
+	public void generatepoisson(int min, int max, int id) {
 
 		Map<String, Vertex> map = new TreeMap<>();
-		g = new Graphs();
-		int randomInt = ThreadLocalRandom.current().nextInt(min, max);
-		GnpRandomGraphGenerator test = new GnpRandomGraphGenerator(randomInt, rnd);
+		Graphs g = new Graphs();
+		GeneratorPoisson test = new GeneratorPoisson(1, 99, 0.1);
 		test.generateGraph(g, map);
+		System.out.println(g.getVertices().size() + "  " + g.getEdges().size());
 		g.generateEdgesFunctions();
-		g.generatecomodity();
-		for(int i = 0 ; i < g.getEdges().size() ; i++) {
-			System.out.println(g.getEdges().get(i).getFrom().getId() + "  " + g.getEdges().get(i).getTo().getId());
-		}
-//		List<Edge> LP = BellmanFordShortestPath
-//				.findPathBetween(g, g.getPlayers().get(0).getSource(), g.getPlayers().get(0).getSink()).getEdgeList();
+		g.setPlayer(test.getPlayers());
 		System.out.println(g.getPlayers().get(0).getSource().getId() + " buuurn "  + g.getPlayers().get(0).getSink().getId());
 		String path = "./Masterprojekt/files/Poissoninstances/" + min + "-" + max + "/" + String.valueOf(id);
 		buildJSON(path, g);
@@ -98,9 +94,9 @@ public class Instancegenerator {
 	public static void main(String[] args) throws IloException {
 
 		Instancegenerator tests = new Instancegenerator();
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 250; i++) {
 
-			tests.generatepoisson(50, 100, 0.3, i);
+			tests.generatepoisson(50, 100, i);
 
 		}
 
