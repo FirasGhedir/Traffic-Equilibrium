@@ -10,28 +10,28 @@ close all ;
 
 %% --- read in number of tollbooths ---
 % paths heuristics
-filenameGAMINTB = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\heuristics\gamintb.txt';
-filenameMINTB = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\heuristics\mintb.txt';
+filenameGAMINTB = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\heuristics\50-100\gamintb.txt';
+filenameMINTB = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\heuristics\50-100\mintb.txt';
 % paths characteristics
-%filenameDegeneracy = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\characteristics\degeneracy.txt';
-%filenameDiameter = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\characteristics\diameter.txt';
-%filenameEccentricity = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\characteristics\eccentricity.txt';
-%filenameMaxVertexDegree = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\characteristics\maxVertexDegree.txt';
-%filenameMinVertexDegree = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\characteristics\minVertexDegree.txt';
-%filenameAvgVertexDegree = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\characteristics\avgVertexDegree.txt';
-%filenameRadius = 'C:\Users\julia\OneDrive\Desktop\Projekt Algorithm Engineering Tests\ExtractedData\50-100\characteristics\Radius.txt';
+filenameDegeneracy = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\characteristics\50-100\degeneracy.txt';
+filenameDiameter = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\characteristics\50-100\diameter.txt';
+filenameEccentricity = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\characteristics\50-100\eccentricity.txt';
+filenameMaxVertexDegree = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\characteristics\50-100\maxVertexDegree.txt';
+filenameMinVertexDegree = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\characteristics\50-100\minVertexDegree.txt';
+filenameAvgVertexDegree = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\characteristics\50-100\avgVertexDegree.txt';
+filenameRadius = 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\Masterprojekt\files\Evaluation\characteristics\50-100\Radius.txt';
 
 % vectors heuristics
 vectorGAMINTB = dlmread(filenameGAMINTB,' ',1,0);
 vectorMINTB = dlmread(filenameMINTB,' ',1,0);
 % vectors characteristics
-%vectorDegeneracy = dlmread(filenameDegeneracy,' ',1,0);
-%vectorDiameter = dlmread(filenameDiameter,' ',1,0);
-%vectorEccentricity = dlmread(filenameEccentricity,' ',1,0);
-%vectorMaxVertexDegree = dlmread(filenameMaxVertexDegree,' ',1,0);
-%vectorMinVertexDegree = dlmread(filenameMinVertexDegree,' ',1,0);
-%vectorAvgVertexDegree = dlmread(filenameAvgVertexDegree,' ',1,0);
-%vectorRadius = dlmread(filenameRadius,' ',1,0);
+vectorDegeneracy = dlmread(filenameDegeneracy,' ',1,0);
+vectorDiameter = dlmread(filenameDiameter,' ',1,0);
+vectorEccentricity = dlmread(filenameEccentricity,' ',1,0);
+vectorMaxVertexDegree = dlmread(filenameMaxVertexDegree,' ',1,0);
+vectorMinVertexDegree = dlmread(filenameMinVertexDegree,' ',1,0);
+vectorAvgVertexDegree = dlmread(filenameAvgVertexDegree,' ',1,0);
+vectorRadius = dlmread(filenameRadius,' ',1,0);
 
 %% --- some basic calculations
 size1 = length(vectorGAMINTB);

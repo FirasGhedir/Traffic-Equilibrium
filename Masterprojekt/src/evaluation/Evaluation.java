@@ -10,7 +10,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import org.junit.Test;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import graphCharacteristics.CharacteristicsCalculatorMain;
+import graphCharacteristics.Degeneracy;
+import graphCharacteristics.Diameter;
+import graphCharacteristics.Eccentricity;
+import graphCharacteristics.MaxMinAvgVertexDegree;
+import graphCharacteristics.MinCut;
+import graphCharacteristics.Radius;
+import graphModel.Graphs;
 
 /**
  * University Ulm
@@ -46,11 +65,12 @@ public class Evaluation {
 	static ArrayList<Integer> numbTollboothsMintb = new ArrayList<Integer>();
 	static ArrayList<Integer> Degeneracy = new ArrayList<Integer>();
 	static ArrayList<Integer> Diameter = new ArrayList<Integer>();
-	static ArrayList<Integer> Eccentricity = new ArrayList<Integer>();
+	static ArrayList<Double> Eccentricity = new ArrayList<Double>();
 	static ArrayList<Integer> MaxVertexDegree = new ArrayList<Integer>();
 	static ArrayList<Integer> MinVertexDegree = new ArrayList<Integer>();
-	static ArrayList<Integer> AvgVertexDegree = new ArrayList<Integer>();
+	static ArrayList<Double> AvgVertexDegree = new ArrayList<Double>();
 	static ArrayList<Integer> Radius = new ArrayList<Integer>();
+	static ArrayList<String> MinCut = new ArrayList<String>();
 
 	// --- streams, reader ---
 	static FileInputStream fstream;
@@ -58,15 +78,16 @@ public class Evaluation {
 	static BufferedReader br;
 
 	// --- paths ---
-//	static String pathInstances = "./Masterprojekt/files/Evaluation/Instances/50-100";
-//	static String pathHeuristics = "./Masterprojekt/files/Evaluation/heuristics/50-100";
-//	static String pathCharacteristics = "./Masterprojekt/files/Evaluation/characteristics/50-100";
+	static String pathInstances = "./files/Evaluation/Instances/50-100";
+	static String pathHeuristics = "./files/Evaluation/heuristics/50-100";
+	static String pathCharacteristics = "./files/Evaluation/characteristics/50-100";
 
-	static String pathInstances = "C:\\Users\\julia\\OneDrive\\Desktop\\Projekt Algorithm Engineering Tests\\ExtractedData\\50-100\\Instances\\50-100";
-	static String pathHeuristics = "C:\\Users\\julia\\OneDrive\\Desktop\\Projekt Algorithm Engineering Tests\\ExtractedData\\50-100\\heuristics";
-	static String pathCharacteristics = "C:\\Users\\julia\\OneDrive\\Desktop\\Projekt Algorithm Engineering Tests\\ExtractedData\\50-100\\characteristics";
-	
-	
+	// --- graph ---
+	static Graphs graph;
+
+	// --- characteristic calculator
+	static CharacteristicsCalculatorMain characteristics;
+
 	/**
 	 * 
 	 * @param listOfGamintbFiles
@@ -89,6 +110,14 @@ public class Evaluation {
 	 */
 	public static void setListOfGraphInstanceFiles(ArrayList<File> listOfGraphInstanceFiles) {
 		Evaluation.listOfGraphInstanceFiles = listOfGraphInstanceFiles;
+	}
+
+	/**
+	 * 
+	 * @param graph
+	 */
+	public static void setGraph(Graphs graph) {
+		Evaluation.graph = graph;
 	}
 
 	/**
@@ -197,15 +226,36 @@ public class Evaluation {
 
 		for (File file : listOfGraphInstancesFiles) {
 
-			/*
-			 * TODO
-			 * 
-			 * - generate graph instance out of JSON 
-			 * - run graph characteristics calculator
-			 * - create list with relevant data (degeneracy, diameter, eccentricity,
-			 * maxVertexDegree, minVertexDegree, avgVertexDegree, Radius)
-			 */
+			try {
 
+				setGraph(buildGraph(file));
+
+				characteristics = new CharacteristicsCalculatorMain(graph);
+
+				// --- max/avg/min vertex degree
+				MaxVertexDegree.add(characteristics.getMaxVertexDegree());
+				MinVertexDegree.add(characteristics.getMinVertexDegree());
+				AvgVertexDegree.add(characteristics.getAvgVertexDegree());
+
+				// --- eccentricity
+//				eccentricities = characteristics.getEccentricities();
+				Eccentricity.add(characteristics.getAvgEccentricity());
+
+				// --- Diameter
+				Diameter.add(characteristics.getDiameter());
+
+				// --- Radius
+				Radius.add(characteristics.getRadius());
+
+				// --- Min cut
+				MinCut.add(characteristics.getMinCut());
+
+				// --- Degeneracy
+				Degeneracy.add(characteristics.getDegeneracy());
+
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -339,7 +389,7 @@ public class Evaluation {
 
 		// --- eccentricity ---
 		String contentGraphInstancesEccentricity = "";
-		for (Integer number : Eccentricity) {
+		for (Double number : Eccentricity) {
 			contentGraphInstancesEccentricity += number + "\n";
 		}
 		contentGraphInstancesEccentricity = contentGraphInstancesEccentricity.trim();
@@ -381,7 +431,7 @@ public class Evaluation {
 
 		// --- Avg vertex degree ---
 		String contentGraphInstancesAvgVertexDegree = "";
-		for (Integer number : AvgVertexDegree) {
+		for (Double number : AvgVertexDegree) {
 			contentGraphInstancesAvgVertexDegree += number + "\n";
 		}
 		contentGraphInstancesAvgVertexDegree = contentGraphInstancesAvgVertexDegree.trim();
@@ -406,6 +456,30 @@ public class Evaluation {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 
+	 * @param instance
+	 * @return
+	 */
+	public static Graphs buildGraph(File instance) {
+
+		String path = pathInstances + "/" + instance.getName();
+
+		Graphs graph = new Graphs();// new instance for JSON data
+
+		final ObjectMapper mapper = new ObjectMapper(); // can use static singleton, inject: just make sure to
+		// reuse!
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try {
+			graph = mapper.readValue(new File(path), Graphs.class); // reads object instance of
+			// JSON serialization
+		} catch (IOException  e) {
+			e.printStackTrace();
+		}
+
+		return graph;
 	}
 
 	/**
