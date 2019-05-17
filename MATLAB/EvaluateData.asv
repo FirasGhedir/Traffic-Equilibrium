@@ -55,7 +55,7 @@ grid on
 figure (2);
 plot(vectorDifference, 'b-')
 legend ('Difference of tollbooths')
-title ('Difference GAMINTB | MINTB', 'FontSize', 12)
+title ('Differennce GAMINTB | MINTB', 'FontSize', 12)
 ylabel('Tollbooths')
 xlabel('Instance')
 grid on
@@ -221,8 +221,8 @@ grid on
 
 % vectorMaxVertexDegree./vectorMinVertexDegree
 figure (19);
-plot(vectorMaxVertexDegree./vectorMinVertexDegree, 'r')
-legend ('vectorMaxVertexDegree./vectorMinVertexDegree')
+plot(vectorMaxVertexDegree./vectorMinVertexDegreedius')
+legend ('vectorMaxVertexDegree./vectorMinVertexDegreedius')
 title ('vectorMaxVertexDegree./vectorMinVertexDegree', 'FontSize', 12)
 ylabel('Value')
 xlabel('Instance')
@@ -230,7 +230,7 @@ grid on
 
 % vectorMaxVertexDegree./vectorAvgVertexDegree
 figure (20);
-plot(vectorMaxVertexDegree./vectorAvgVertexDegree, 'r')
+plot(vectorMaxVertexDegree./vectorAvgVertexDegree')
 legend ('vectorMaxVertexDegree./vectorAvgVertexDegree')
 title ('vectorMaxVertexDegree./vectorAvgVertexDegree', 'FontSize', 12)
 ylabel('Value')
@@ -239,7 +239,7 @@ grid on
 
 % vectorMaxVertexDegree./vectorRadius
 figure (21);
-plot(vectorMaxVertexDegree./vectorRadius, 'r')
+plot(vectorMaxVertexDegree./vectorRadius')
 legend ('vectorMaxVertexDegree./vectorRadius')
 title ('vectorMaxVertexDegree./vectorRadius', 'FontSize', 12)
 ylabel('Value')
@@ -247,28 +247,10 @@ xlabel('Instance')
 grid on
 
 % vectorMinVertexDegree./vectorAvgVertexDegree
-figure (22);
-plot(vectorMinVertexDegree./vectorAvgVertexDegree, 'r')
-legend ('vectorMinVertexDegree./vectorAvgVertexDegree')
-title ('vectorMinVertexDegree./vectorAvgVertexDegree', 'FontSize', 12)
-ylabel('Value')
-xlabel('Instance')
-grid on
-
-% vectorMinVertexDegree./vectorRadius
-figure (23);
-plot(vectorMinVertexDegree./vectorRadius, 'r')
-legend ('vectorMinVertexDegree./vectorRadius')
-title ('vectorMinVertexDegree./vectorRadius', 'FontSize', 12)
-ylabel('Value')
-xlabel('Instance')
-grid on
-
-% vectorAvgVertexDegree./vectorRadius
-figure (24);
-plot(vectorAvgVertexDegree./vectorRadius, 'r')
-legend ('vectorAvgVertexDegree./vectorRadius')
-title ('vectorAvgVertexDegree./vectorRadius', 'FontSize', 12)
+figure (21);
+plot(vectorMinVertexDegree./vectorAvgVertexDegree')
+legend ('vectorMaxVertexDegree./vectorRadius')
+title ('vectorMaxVertexDegree./vectorRadius', 'FontSize', 12)
 ylabel('Value')
 xlabel('Instance')
 grid on
