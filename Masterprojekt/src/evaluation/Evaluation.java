@@ -12,6 +12,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 
+import org.omg.PortableInterceptor.SUCCESSFUL;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -65,9 +67,9 @@ public class Evaluation {
 	static BufferedReader br;
 
 	// --- paths ---
-	static String pathInstances = "./files/Evaluation/Instances/50-100";
-	static String pathHeuristics = "./files/Evaluation/heuristics/50-100";
-	static String pathCharacteristics = "./files/Evaluation/characteristics/50-100";
+	static String pathInstances;
+	static String pathHeuristics;
+	static String pathCharacteristics;
 
 	// --- graph ---
 	static Graphs graph;
@@ -121,6 +123,30 @@ public class Evaluation {
 	 */
 	public static void setDebugFlag(boolean debugFlag) {
 		Evaluation.debugFlag = debugFlag;
+	}
+
+	/**
+	 * 
+	 * @param pathHeuristics
+	 */
+	public static void setPathHeuristics(String pathHeuristics) {
+		Evaluation.pathHeuristics = pathHeuristics;
+	}
+
+	/**
+	 * 
+	 * @param pathCharacteristics
+	 */
+	public static void setPathCharacteristics(String pathCharacteristics) {
+		Evaluation.pathCharacteristics = pathCharacteristics;
+	}
+
+	/**
+	 * 
+	 * @param pathInstances
+	 */
+	public static void setPathInstances(String pathInstances) {
+		Evaluation.pathInstances = pathInstances;
 	}
 
 	/**
@@ -208,7 +234,7 @@ public class Evaluation {
 	 * @param listOfGraphInstancesFiles
 	 */
 	public static void buildGraphInstancesData(ArrayList<File> listOfGraphInstancesFiles) {
-
+		
 		setListOfGraphInstanceFiles(listOfGraphInstancesFiles);
 
 		for (File file : listOfGraphInstancesFiles) {
@@ -216,8 +242,6 @@ public class Evaluation {
 			try {
 
 				setGraph(buildGraph(file));
-				
-				
 
 				characteristics = new CharacteristicsCalculatorMain(graph);
 
@@ -240,7 +264,7 @@ public class Evaluation {
 				String minCutTmp = characteristics.getMinCut();
 				String splited[] = minCutTmp.split("\\n");
 				int numberOfMinCuts = splited.length;
-				MinCut.add(numberOfMinCuts); 
+				MinCut.add(numberOfMinCuts);
 
 				// --- Degeneracy
 				Degeneracy.add(characteristics.getDegeneracy());
@@ -262,6 +286,7 @@ public class Evaluation {
 		for (File file : listOfFiles) {
 
 			if (file.isFile()) {
+				
 
 				// --- GAMINTB files ---
 				extension = file.getName().toUpperCase().endsWith(".GAMINTB.TXT");
@@ -294,7 +319,8 @@ public class Evaluation {
 		buildGamintbData(listOfGamintbFiles);
 		buildMintbData(listOfMintbFiles);
 		buildGraphInstancesData(listOfGraphInstanceFiles);
-
+		
+		
 		// --- test ---
 		if (debugFlag) {
 
@@ -341,7 +367,7 @@ public class Evaluation {
 		contentMINTB = contentMINTB.trim();
 
 		try (Writer writer = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(pathCharacteristics + "/mintb.txt"), "utf-8"))) {
+				new OutputStreamWriter(new FileOutputStream(pathHeuristics + "/mintb.txt"), "utf-8"))) {
 			writer.write(contentMINTB);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -448,7 +474,7 @@ public class Evaluation {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// --- MinCut ---
 		String contentGraphInstancesMinCut = "";
 		for (Integer number : MinCut) {
@@ -481,7 +507,7 @@ public class Evaluation {
 		try {
 			graph = mapper.readValue(new File(path), Graphs.class); // reads object instance of
 			// JSON serialization
-		} catch (IOException  e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -497,8 +523,27 @@ public class Evaluation {
 //		setDebugFlag(true);
 		setDebugFlag(false);
 
+		/*
+		 * --- GridGraph ---
+		 */
+		setPathInstances("./files/Evaluation/Instances/GridGraph/50-100");
+		setPathHeuristics("./files/Evaluation/heuristics/GridGraph/50-100");
+		setPathCharacteristics("./files/Evaluation/characteristics/GridGraph/50-100");
+		// start extracting data
 		DataExtractor();
-
 		writeToFile();
+		System.out.println("Extracting GridGraph instance data was successfull...");
+
+		/*
+		 * --- Poisson ---
+		 */
+		setPathInstances("./files/Evaluation/Instances/Poisson/50-100");
+		setPathHeuristics("./files/Evaluation/heuristics/Poisson/50-100");
+		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/50-100");
+		// start extracting data
+		DataExtractor();
+		writeToFile();
+		System.out.println("Extracting Poisson instance data was successfull...");
+
 	}
 }
