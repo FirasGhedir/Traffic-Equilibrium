@@ -10,25 +10,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import org.junit.Test;
-
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import graphCharacteristics.CharacteristicsCalculatorMain;
-import graphCharacteristics.Degeneracy;
-import graphCharacteristics.Diameter;
-import graphCharacteristics.Eccentricity;
-import graphCharacteristics.MaxMinAvgVertexDegree;
-import graphCharacteristics.MinCut;
-import graphCharacteristics.Radius;
 import graphModel.Graphs;
 
 /**
@@ -70,7 +57,7 @@ public class Evaluation {
 	static ArrayList<Integer> MinVertexDegree = new ArrayList<Integer>();
 	static ArrayList<Double> AvgVertexDegree = new ArrayList<Double>();
 	static ArrayList<Integer> Radius = new ArrayList<Integer>();
-	static ArrayList<String> MinCut = new ArrayList<String>();
+	static ArrayList<Integer> MinCut = new ArrayList<Integer>();
 
 	// --- streams, reader ---
 	static FileInputStream fstream;
@@ -229,6 +216,8 @@ public class Evaluation {
 			try {
 
 				setGraph(buildGraph(file));
+				
+				
 
 				characteristics = new CharacteristicsCalculatorMain(graph);
 
@@ -248,7 +237,10 @@ public class Evaluation {
 				Radius.add(characteristics.getRadius());
 
 				// --- Min cut
-				MinCut.add(characteristics.getMinCut());
+				String minCutTmp = characteristics.getMinCut();
+				String splited[] = minCutTmp.split("\\n");
+				int numberOfMinCuts = splited.length;
+				MinCut.add(numberOfMinCuts); 
 
 				// --- Degeneracy
 				Degeneracy.add(characteristics.getDegeneracy());
@@ -453,6 +445,20 @@ public class Evaluation {
 		try (Writer writer = new BufferedWriter(
 				new OutputStreamWriter(new FileOutputStream(pathCharacteristics + "/radius.txt"), "utf-8"))) {
 			writer.write(contentGraphInstancesRadius);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// --- MinCut ---
+		String contentGraphInstancesMinCut = "";
+		for (Integer number : MinCut) {
+			contentGraphInstancesMinCut += number + "\n";
+		}
+		contentGraphInstancesMinCut = contentGraphInstancesMinCut.trim();
+
+		try (Writer writer = new BufferedWriter(
+				new OutputStreamWriter(new FileOutputStream(pathCharacteristics + "/minCut.txt"), "utf-8"))) {
+			writer.write(contentGraphInstancesMinCut);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

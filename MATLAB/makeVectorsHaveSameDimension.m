@@ -1,3 +1,9 @@
+% University Ulm
+% Algorithm Engineering
+% Evaluation
+% @author Julian Bestler (julian.bestler@uni-ulm.de)
+% @version 1.0
+
 function [outputVector1,outputVector2] = makeVectorsHaveSameDimension(inputVector1,inputVector2)
 %This function handles two vectors so that they all have the 
 %   same dimension
@@ -16,7 +22,9 @@ if size2 < size1
             tmp2 = transpose(inputVector2);
             outputVector1 = inputVector1;
             outputVector2 = [tmp1 tmp2];
-end
-
+end            
+if size2 == size1
+            outputVector1 = inputVector1;
+            outputVector2 = inputVector2;
 end
 
