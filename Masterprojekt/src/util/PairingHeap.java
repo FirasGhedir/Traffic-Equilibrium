@@ -1,4 +1,4 @@
-package heuristic;
+package util;
 
 import java.io.Serializable;
 import java.util.Comparator;

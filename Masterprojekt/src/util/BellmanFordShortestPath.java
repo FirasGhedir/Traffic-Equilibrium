@@ -1,4 +1,4 @@
-package heuristic;
+package util;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

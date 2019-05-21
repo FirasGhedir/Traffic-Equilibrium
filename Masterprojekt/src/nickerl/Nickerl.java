@@ -7,14 +7,13 @@ import java.util.List;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
-import heuristic.BellmanFordShortestPath;
-import heuristic.GraphPath;
-
 import ilog.concert.IloAddable;
 import ilog.concert.IloException;
 import ilog.concert.IloNumExpr;
 import ilog.cplex.IloCplex;
 import player.Player;
+import util.BellmanFordShortestPath;
+import util.GraphPath;
 
 public class Nickerl {
 

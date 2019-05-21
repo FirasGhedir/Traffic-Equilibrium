@@ -1,0 +1,298 @@
+% University Ulm
+% Algorithm Engineering
+% Evaluation
+% @author Julian Bestler (julian.bestler@uni-ulm.de)
+% @version 1.0
+
+clc;
+clear all ;
+close all ;
+
+%% --- read in number of tollbooths and feature vectors ---
+dataReader
+
+%% --- some basic calculations
+
+% --- GridGraph ---
+
+% same dimension needed for vectors;
+[vectorGAMINTB_GridGraph, vectorMINTB_GridGraph] = makeVectorsHaveSameDimension(vectorGAMINTB, vectorMINTB);
+% Difference
+vectorDifference_GridGraph = [1,abs(vectorGAMINTB_GridGraph-transpose(vectorMINTB_GridGraph))];
+% Correlation coefficient
+R_correlationcoefficientGridGraph = corrcoef(vectorDegeneracy_GridGraph, vectorDiameter_GridGraph)
+
+% --- Poisson ---
+
+%% --- plot comparison of GAMINTB and MINTB vectors
+
+% --- GridGraph ---
+
+figure;
+plot(vectorGAMINTB_GridGraph, 'g')
+hold on
+plot(vectorMINTB_GridGraph, 'r')
+legend ('GAMINTB','MINTB')
+title ('GAMINTB | MINTB with Gridgraph', 'FontSize', 12)
+ylabel('Number of tollbooths')
+xlabel('Instance')
+grid on
+
+% --- Poisson ---
+
+%% --- plot difference of GAMINTB and MINTB vectors
+
+% --- GridGraph ---
+
+figure;
+plot(vectorDifference_GridGraph, 'b-')
+legend ('Difference of tollbooths')
+title ('Difference GAMINTB | MINTB with GridGraph', 'FontSize', 12)
+ylabel('Tollbooths')
+xlabel('Instance')
+grid on
+
+% --- Poisson ---
+
+%% --- plot distance of GAMINTB and MINTB vectors
+
+% --- GridGraph ---
+
+figure (3);
+plot(diff(vectorGAMINTB), 'g')
+hold on
+plot(diff(vectorMINTB), 'r')
+legend ('GAMINTB','MINTB')
+title ('Distance GAMINTB | MINTB with GridGraph', 'FontSize', 12)
+ylabel('Number of tollbooths')
+xlabel('Instance')
+grid on
+
+
+
+%% --- plot comparison of graph characteristics
+
+% to check:
+% ----------------
+% vectorDegeneracy 
+% vectorDiameter 
+% vectorEccentricity 
+% vectorMaxVertexDegree 
+% vectorMinVertexDegree
+% vectorAvgVertexDegree 
+% vectorRadius
+% vectorMinCut
+% ----------------
+
+% --- GridGraph ---
+
+% vectorDegeneracy_GridGraph, vectorDiameter_GridGraph 
+plotFeatureComparison(vectorDegeneracy_GridGraph, vectorDiameter_GridGraph, 'vectorDegeneracy_GridGraph./vectorDiameter_GridGraph')
+r_1 = plotCorrelationCoefficient(vectorDegeneracy_GridGraph, vectorDiameter_GridGraph, 'Correlation vectorDegeneracy_GridGraph,vectorDiameter_GridGraph');
+
+% vectorDegeneracy_GridGraph, vectorEccentricity_GridGraph 
+plotFeatureComparison(vectorDegeneracy_GridGraph, vectorEccentricity_GridGraph, 'vectorDegeneracy_GridGraph./vectorEccentricity_GridGraph ')
+r_2 = plotCorrelationCoefficient(vectorDegeneracy_GridGraph, vectorEccentricity_GridGraph, 'Correlation vectorDegeneracy_GridGraph,vectorEccentricity_GridGraph');
+
+% vectorDegeneracy_GridGraph, vectorMaxVertexDegree_GridGraph
+plotFeatureComparison(vectorDegeneracy_GridGraph, vectorMaxVertexDegree_GridGraph, 'vectorMaxDegeneracy./vectorMaxVertexDegree_GridGraph')
+r_3 = plotCorrelationCoefficient(vectorDegeneracy_GridGraph, vectorMaxVertexDegree_GridGraph, 'Correlation vectorDegeneracy_GridGraph,vectorMaxVertexDegree_GridGraph');
+
+% vectorDegeneracy_GridGraph, vectorMinVertexDegree_GridGraph
+plotFeatureComparison(vectorDegeneracy_GridGraph, vectorMinVertexDegree_GridGraph, 'vectorDegeneracy_GridGraph./vectorMinVertexDegree_GridGraph')
+r_4 = plotCorrelationCoefficient(vectorDegeneracy_GridGraph, vectorMinVertexDegree_GridGraph, 'Correlation vectorDegeneracy_GridGraph,vectorMinVertexDegree_GridGraph');
+
+% vectorDegeneracy_GridGraph, vectorAvgVertexDegree_GridGraph
+plotFeatureComparison(vectorDegeneracy_GridGraph, vectorAvgVertexDegree_GridGraph, 'vectorDegeneracy_GridGraph./AvgVertexDegree')
+r_5 = plotCorrelationCoefficient(vectorDegeneracy_GridGraph, vectorAvgVertexDegree_GridGraph, 'Correlation vectorDegeneracy_GridGraph,vectorAvgVertexDegree_GridGraph');
+
+% vectorDegeneracy_GridGraph./vectorRadius_GridGraph
+plotFeatureComparison(vectorDegeneracy_GridGraph, vectorRadius_GridGraph, 'vectorDegeneracy_GridGraph./vectorRadius_GridGraph')
+r_6 = plotCorrelationCoefficient(vectorDegeneracy_GridGraph, vectorRadius_GridGraph, 'Correlation vectorDegeneracy_GridGraph,vectorRadius_GridGraph');
+
+% vectorDiameter_GridGraph./vectorEccentricity_GridGraph
+plotFeatureComparison(vectorDiameter_GridGraph, vectorEccentricity_GridGraph, 'vectorDiameter_GridGraph./vectorEccentricity_GridGraph')
+r_7 = plotCorrelationCoefficient(vectorDiameter_GridGraph, vectorEccentricity_GridGraph, 'Correlation vectorDiameter_GridGraph,vectorEccentricity_GridGraph');
+
+% vectorDiameter_GridGraph./vectorMinVertexDegree_GridGraph
+plotFeatureComparison(vectorDiameter_GridGraph, vectorMinVertexDegree_GridGraph, 'vectorDiameter_GridGraph./vectorMinVertexDegree_GridGraph')
+r_8 = plotCorrelationCoefficient(vectorDiameter_GridGraph, vectorMinVertexDegree_GridGraph, 'Correlation vectorDiameter_GridGraph,vectorMinVertexDegree_GridGraph');
+
+% vectorDiameter_GridGraph./vectorAvgVertexDegree_GridGraph
+plotFeatureComparison(vectorDiameter_GridGraph, vectorAvgVertexDegree_GridGraph, 'vectorDiameter_GridGraph./vectorAvgVertexDegree_GridGraph')
+r_9 = plotCorrelationCoefficient(vectorDiameter_GridGraph, vectorAvgVertexDegree_GridGraph, 'Correlation vectorDiameter_GridGraph,vectorAvgVertexDegree_GridGraph');
+
+% vectorDiameter_GridGraph./vectorRadius_GridGraph
+plotFeatureComparison(vectorDiameter_GridGraph, vectorRadius_GridGraph, 'vectorDiameter_GridGraph./vectorRadius_GridGraph')
+r_10 = plotCorrelationCoefficient(vectorDiameter_GridGraph, vectorRadius_GridGraph, 'Correlation vectorDiameter_GridGraph,vectorRadius_GridGraph');
+
+% vectorEccentricity_GridGraph./vectorMaxVertexDegree_GridGraph
+plotFeatureComparison(vectorEccentricity_GridGraph, vectorMaxVertexDegree_GridGraph, 'vectorEccentricity_GridGraph./vectorMaxVertexDegree_GridGraph')
+r_11 = plotCorrelationCoefficient(vectorEccentricity_GridGraph, vectorMaxVertexDegree_GridGraph, 'Correlation vectorEccentricity_GridGraph,vectorRadius_GridGraph');
+
+% vectorEccentricity_GridGraph./vectorMinVertexDegree_GridGraph
+plotFeatureComparison(vectorEccentricity_GridGraph, vectorMinVertexDegree_GridGraph, 'vectorEccentricity_GridGraph./vectorMinVertexDegree_GridGraph')
+r_12 = plotCorrelationCoefficient(vectorEccentricity_GridGraph, vectorMinVertexDegree_GridGraph, 'Correlation vectorEccentricity_GridGraph,vectorMinVertexDegree_GridGraph');
+
+% vectorEccentricity_GridGraph./vectorAvgVertexDegree_GridGraph
+plotFeatureComparison(vectorEccentricity_GridGraph, vectorAvgVertexDegree_GridGraph, 'vectorEccentricity_GridGraph./vectorAvgVertexDegree_GridGraph')
+r_13 = plotCorrelationCoefficient(vectorEccentricity_GridGraph, vectorAvgVertexDegree_GridGraph, 'Correlation vectorEccentricity_GridGraph,vectorAvgVertexDegree_GridGraph');
+
+% vectorEccentricity_GridGraph./vectorRadius_GridGraph
+plotFeatureComparison(vectorEccentricity_GridGraph, vectorRadius_GridGraph, 'vectorEccentricity_GridGraph./vectorRadius_GridGraph')
+r_14 = plotCorrelationCoefficient(vectorEccentricity_GridGraph, vectorRadius_GridGraph, 'Correlation vectorEccentricity_GridGraph,vectorRadius_GridGraph');
+
+% vectorMaxVertexDegree_GridGraph./vectorMinVertexDegree_GridGraph
+plotFeatureComparison(vectorMaxVertexDegree_GridGraph, vectorMinVertexDegree_GridGraph, 'vectorMaxVertexDegree_GridGraph./vectorMinVertexDegree_GridGraph')
+r_15 = plotCorrelationCoefficient(vectorMaxVertexDegree_GridGraph, vectorMinVertexDegree_GridGraph, 'Correlation vectorMaxVertexDegree_GridGraph,vectorMinVertexDegree_GridGraph');
+
+% vectorMaxVertexDegree_GridGraph./vectorAvgVertexDegree_GridGraph
+plotFeatureComparison(vectorMaxVertexDegree_GridGraph, vectorAvgVertexDegree_GridGraph, 'vectorMaxVertexDegree_GridGraph./vectorAvgVertexDegree_GridGraph')
+r_16 = plotCorrelationCoefficient(vectorMaxVertexDegree_GridGraph, vectorAvgVertexDegree_GridGraph, 'Correlation vectorMaxVertexDegree_GridGraph,vectorAvgVertexDegree_GridGraph');
+
+% vectorMaxVertexDegree_GridGraph./vectorRadius_GridGraph
+plotFeatureComparison(vectorMaxVertexDegree_GridGraph, vectorRadius_GridGraph, 'vectorMaxVertexDegree_GridGraph./vectorRadius_GridGraph')
+r_17 = plotCorrelationCoefficient(vectorMaxVertexDegree_GridGraph, vectorRadius_GridGraph, 'Correlation vectorMaxVertexDegree_GridGraph,vectorRadius_GridGraph');
+
+% vectorMinVertexDegree_GridGraph./vectorAvgVertexDegree_GridGraph
+plotFeatureComparison(vectorMinVertexDegree_GridGraph, vectorAvgVertexDegree_GridGraph, 'vectorMinVertexDegree_GridGraph./vectorAvgVertexDegree_GridGraph')
+r_18 = plotCorrelationCoefficient(vectorMinVertexDegree_GridGraph, vectorAvgVertexDegree_GridGraph, 'Correlation vectorMinVertexDegree_GridGraph,vectorAvgVertexDegree_GridGraph');
+
+% vectorAvgVertexDegree_GridGraph./vectorRadius_GridGraph
+plotFeatureComparison(vectorAvgVertexDegree_GridGraph, vectorRadius_GridGraph, 'vectorAvgVertexDegree_GridGraph./vectorRadius_GridGraph')
+r_19 = plotCorrelationCoefficient(vectorAvgVertexDegree_GridGraph, vectorRadius_GridGraph, 'Correlation vectorAvgVertexDegree_GridGraph,vectorRadius_GridGraph');
+
+% vectorMinCut_GridGraph./vectorDegeneracy_GridGraph 
+plotFeatureComparison(vectorMinCut_GridGraph, vectorDegeneracy_GridGraph, 'vectorMinCut_GridGraph./vectorDegeneracy_GridGraph')
+r_20 = plotCorrelationCoefficient(vectorMinCut_GridGraph, vectorDegeneracy_GridGraph, 'Correlation vectorMinCut_GridGraph,vectorDegeneracy_GridGraph');
+
+% vectorMinCut_GridGraph./vectorDiameter_GridGraph 
+plotFeatureComparison(vectorMinCut_GridGraph, vectorDiameter_GridGraph, 'vectorMinCut_GridGraph./vectorDiameter_GridGraph')
+r_21 = plotCorrelationCoefficient(vectorMinCut_GridGraph, vectorDiameter_GridGraph, 'Correlation vectorMinCut_GridGraph,vectorDiameter_GridGraph');
+
+% vectorMinCut_GridGraph./vectorEccentricity_GridGraph
+plotFeatureComparison(vectorMinCut_GridGraph, vectorDiameter_GridGraph, 'vectorMinCut_GridGraph./vectorDiameter_GridGraph')
+r_22 = plotCorrelationCoefficient(vectorMinCut_GridGraph, vectorEccentricity_GridGraph, 'Correlation vectorMinCut_GridGraph,vectorEccentricity_GridGraph');
+
+% vectorMinCut_GridGraph./vectorMaxVertexDegree_GridGraph
+plotFeatureComparison(vectorMinCut_GridGraph, vectorMaxVertexDegree_GridGraph, 'vectorMinCut_GridGraph./vectorMaxVertexDegree_GridGraph')
+r_23 = plotCorrelationCoefficient(vectorMinCut_GridGraph, vectorMaxVertexDegree_GridGraph, 'Correlation vectorMinCut_GridGraph,vectorMaxVertexDegree_GridGraph');
+
+% vectorMinCut_GridGraph./vectorMinVertexDegree_GridGraph
+plotFeatureComparison(vectorMinCut_GridGraph, vectorMinVertexDegree_GridGraph, 'vectorMinCut_GridGraph./vectorMinVertexDegree_GridGraph')
+r_24 = plotCorrelationCoefficient(vectorMinCut_GridGraph, vectorMinVertexDegree_GridGraph, 'Correlation vectorMinCut_GridGraph,vectorMinVertexDegree_GridGraph');
+
+% vectorMinCut_GridGraph./vectorAvgVertexDegree_GridGraph 
+plotFeatureComparison(vectorMinCut_GridGraph, vectorAvgVertexDegree_GridGraph, 'vectorMinCut_GridGraph./vectorAvgVertexDegree_GridGraph')
+r_25 = plotCorrelationCoefficient(vectorMinCut_GridGraph, vectorAvgVertexDegree_GridGraph , 'Correlation vectorMinCut_GridGraph,vectorAvgVertexDegree_GridGraph ');
+
+% vectorMinCut_GridGraph./vectorRadius_GridGraph
+plotFeatureComparison(vectorMinCut_GridGraph, vectorRadius_GridGraph, 'vectorMinCut_GridGraph./vectorRadius_GridGraph')
+r_26 = plotCorrelationCoefficient(vectorMinCut_GridGraph, vectorRadius_GridGraph, 'Correlation vectorMinCut_GridGraph,vectorRadius_GridGraph');
+
+
+% --- Poisson ---
+
+% vectorDegeneracy_Poisson, vectorDiameter_Poisson 
+plotFeatureComparison(vectorDegeneracy_Poisson, vectorDiameter_Poisson, 'vectorDegeneracy_Poisson./vectorDiameter_Poisson')
+r_1 = plotCorrelationCoefficient(vectorDegeneracy_Poisson, vectorDiameter_Poisson, 'Correlation vectorDegeneracy_Poisson,vectorDiameter_Poisson');
+
+% vectorDegeneracy_Poisson, vectorEccentricity_Poisson 
+plotFeatureComparison(vectorDegeneracy_Poisson, vectorEccentricity_Poisson, 'vectorDegeneracy_Poisson./vectorEccentricity_Poisson ')
+r_2 = plotCorrelationCoefficient(vectorDegeneracy_Poisson, vectorEccentricity_Poisson, 'Correlation vectorDegeneracy_Poisson,vectorEccentricity_Poisson');
+
+% vectorDegeneracy_Poisson, vectorMaxVertexDegree_Poisson
+plotFeatureComparison(vectorDegeneracy_Poisson, vectorMaxVertexDegree_Poisson, 'vectorMaxDegeneracy./vectorMaxVertexDegree_Poisson')
+r_3 = plotCorrelationCoefficient(vectorDegeneracy_Poisson, vectorMaxVertexDegree_Poisson, 'Correlation vectorDegeneracy_Poisson,vectorMaxVertexDegree_Poisson');
+
+% vectorDegeneracy_Poisson, vectorMinVertexDegree_Poisson
+plotFeatureComparison(vectorDegeneracy_Poisson, vectorMinVertexDegree_Poisson, 'vectorDegeneracy_Poisson./vectorMinVertexDegree_Poisson')
+r_4 = plotCorrelationCoefficient(vectorDegeneracy_Poisson, vectorMinVertexDegree_Poisson, 'Correlation vectorDegeneracy_Poisson,vectorMinVertexDegree_Poisson');
+
+% vectorDegeneracy_Poisson, vectorAvgVertexDegree_Poisson
+plotFeatureComparison(vectorDegeneracy_Poisson, vectorAvgVertexDegree_Poisson, 'vectorDegeneracy_Poisson./AvgVertexDegree')
+r_5 = plotCorrelationCoefficient(vectorDegeneracy_Poisson, vectorAvgVertexDegree_Poisson, 'Correlation vectorDegeneracy_Poisson,vectorAvgVertexDegree_Poisson');
+
+% vectorDegeneracy_Poisson./vectorRadius_Poisson
+plotFeatureComparison(vectorDegeneracy_Poisson, vectorRadius_Poisson, 'vectorDegeneracy_Poisson./vectorRadius_Poisson')
+r_6 = plotCorrelationCoefficient(vectorDegeneracy_Poisson, vectorRadius_Poisson, 'Correlation vectorDegeneracy_Poisson,vectorRadius_Poisson');
+
+% vectorDiameter_Poisson./vectorEccentricity_Poisson
+plotFeatureComparison(vectorDiameter_Poisson, vectorEccentricity_Poisson, 'vectorDiameter_Poisson./vectorEccentricity_Poisson')
+r_7 = plotCorrelationCoefficient(vectorDiameter_Poisson, vectorEccentricity_Poisson, 'Correlation vectorDiameter_Poisson,vectorEccentricity_Poisson');
+
+% vectorDiameter_Poisson./vectorMinVertexDegree_Poisson
+plotFeatureComparison(vectorDiameter_Poisson, vectorMinVertexDegree_Poisson, 'vectorDiameter_Poisson./vectorMinVertexDegree_Poisson')
+r_8 = plotCorrelationCoefficient(vectorDiameter_Poisson, vectorMinVertexDegree_Poisson, 'Correlation vectorDiameter_Poisson,vectorMinVertexDegree_Poisson');
+
+% vectorDiameter_Poisson./vectorAvgVertexDegree_Poisson
+plotFeatureComparison(vectorDiameter_Poisson, vectorAvgVertexDegree_Poisson, 'vectorDiameter_Poisson./vectorAvgVertexDegree_Poisson')
+r_9 = plotCorrelationCoefficient(vectorDiameter_Poisson, vectorAvgVertexDegree_Poisson, 'Correlation vectorDiameter_Poisson,vectorAvgVertexDegree_Poisson');
+
+% vectorDiameter_Poisson./vectorRadius_Poisson
+plotFeatureComparison(vectorDiameter_Poisson, vectorRadius_Poisson, 'vectorDiameter_Poisson./vectorRadius_Poisson')
+r_10 = plotCorrelationCoefficient(vectorDiameter_Poisson, vectorRadius_Poisson, 'Correlation vectorDiameter_Poisson,vectorRadius_Poisson');
+
+% vectorEccentricity_Poisson./vectorMaxVertexDegree_Poisson
+plotFeatureComparison(vectorEccentricity_Poisson, vectorMaxVertexDegree_Poisson, 'vectorEccentricity_Poisson./vectorMaxVertexDegree_Poisson')
+r_11 = plotCorrelationCoefficient(vectorEccentricity_Poisson, vectorMaxVertexDegree_Poisson, 'Correlation vectorEccentricity_Poisson,vectorRadius_Poisson');
+
+% vectorEccentricity_Poisson./vectorMinVertexDegree_Poisson
+plotFeatureComparison(vectorEccentricity_Poisson, vectorMinVertexDegree_Poisson, 'vectorEccentricity_Poisson./vectorMinVertexDegree_Poisson')
+r_12 = plotCorrelationCoefficient(vectorEccentricity_Poisson, vectorMinVertexDegree_Poisson, 'Correlation vectorEccentricity_Poisson,vectorMinVertexDegree_Poisson');
+
+% vectorEccentricity_Poisson./vectorAvgVertexDegree_Poisson
+plotFeatureComparison(vectorEccentricity_Poisson, vectorAvgVertexDegree_Poisson, 'vectorEccentricity_Poisson./vectorAvgVertexDegree_Poisson')
+r_13 = plotCorrelationCoefficient(vectorEccentricity_Poisson, vectorAvgVertexDegree_Poisson, 'Correlation vectorEccentricity_Poisson,vectorAvgVertexDegree_Poisson');
+
+% vectorEccentricity_Poisson./vectorRadius_Poisson
+plotFeatureComparison(vectorEccentricity_Poisson, vectorRadius_Poisson, 'vectorEccentricity_Poisson./vectorRadius_Poisson')
+r_14 = plotCorrelationCoefficient(vectorEccentricity_Poisson, vectorRadius_Poisson, 'Correlation vectorEccentricity_Poisson,vectorRadius_Poisson');
+
+% vectorMaxVertexDegree_Poisson./vectorMinVertexDegree_Poisson
+plotFeatureComparison(vectorMaxVertexDegree_Poisson, vectorMinVertexDegree_Poisson, 'vectorMaxVertexDegree_Poisson./vectorMinVertexDegree_Poisson')
+r_15 = plotCorrelationCoefficient(vectorMaxVertexDegree_Poisson, vectorMinVertexDegree_Poisson, 'Correlation vectorMaxVertexDegree_Poisson,vectorMinVertexDegree_Poisson');
+
+% vectorMaxVertexDegree_Poisson./vectorAvgVertexDegree_Poisson
+plotFeatureComparison(vectorMaxVertexDegree_Poisson, vectorAvgVertexDegree_Poisson, 'vectorMaxVertexDegree_Poisson./vectorAvgVertexDegree_Poisson')
+r_16 = plotCorrelationCoefficient(vectorMaxVertexDegree_Poisson, vectorAvgVertexDegree_Poisson, 'Correlation vectorMaxVertexDegree_Poisson,vectorAvgVertexDegree_Poisson');
+
+% vectorMaxVertexDegree_Poisson./vectorRadius_Poisson
+plotFeatureComparison(vectorMaxVertexDegree_Poisson, vectorRadius_Poisson, 'vectorMaxVertexDegree_Poisson./vectorRadius_Poisson')
+r_17 = plotCorrelationCoefficient(vectorMaxVertexDegree_Poisson, vectorRadius_Poisson, 'Correlation vectorMaxVertexDegree_Poisson,vectorRadius_Poisson');
+
+% vectorMinVertexDegree_Poisson./vectorAvgVertexDegree_Poisson
+plotFeatureComparison(vectorMinVertexDegree_Poisson, vectorAvgVertexDegree_Poisson, 'vectorMinVertexDegree_Poisson./vectorAvgVertexDegree_Poisson')
+r_18 = plotCorrelationCoefficient(vectorMinVertexDegree_Poisson, vectorAvgVertexDegree_Poisson, 'Correlation vectorMinVertexDegree_Poisson,vectorAvgVertexDegree_Poisson');
+
+% vectorAvgVertexDegree_Poisson./vectorRadius_Poisson
+plotFeatureComparison(vectorAvgVertexDegree_Poisson, vectorRadius_Poisson, 'vectorAvgVertexDegree_Poisson./vectorRadius_Poisson')
+r_19 = plotCorrelationCoefficient(vectorAvgVertexDegree_Poisson, vectorRadius_Poisson, 'Correlation vectorAvgVertexDegree_Poisson,vectorRadius_Poisson');
+
+% vectorMinCut_Poisson./vectorDegeneracy_Poisson 
+plotFeatureComparison(vectorMinCut_Poisson, vectorDegeneracy_Poisson, 'vectorMinCut_Poisson./vectorDegeneracy_Poisson')
+r_20 = plotCorrelationCoefficient(vectorMinCut_Poisson, vectorDegeneracy_Poisson, 'Correlation vectorMinCut_Poisson,vectorDegeneracy_Poisson');
+
+% vectorMinCut_Poisson./vectorDiameter_Poisson 
+plotFeatureComparison(vectorMinCut_Poisson, vectorDiameter_Poisson, 'vectorMinCut_Poisson./vectorDiameter_Poisson')
+r_21 = plotCorrelationCoefficient(vectorMinCut_Poisson, vectorDiameter_Poisson, 'Correlation vectorMinCut_Poisson,vectorDiameter_Poisson');
+
+% vectorMinCut_Poisson./vectorEccentricity_Poisson
+plotFeatureComparison(vectorMinCut_Poisson, vectorDiameter_Poisson, 'vectorMinCut_Poisson./vectorDiameter_Poisson')
+r_22 = plotCorrelationCoefficient(vectorMinCut_Poisson, vectorEccentricity_Poisson, 'Correlation vectorMinCut_Poisson,vectorEccentricity_Poisson');
+
+% vectorMinCut_Poisson./vectorMaxVertexDegree_Poisson
+plotFeatureComparison(vectorMinCut_Poisson, vectorMaxVertexDegree_Poisson, 'vectorMinCut_Poisson./vectorMaxVertexDegree_Poisson')
+r_23 = plotCorrelationCoefficient(vectorMinCut_Poisson, vectorMaxVertexDegree_Poisson, 'Correlation vectorMinCut_Poisson,vectorMaxVertexDegree_Poisson');
+
+% vectorMinCut_Poisson./vectorMinVertexDegree_Poisson
+plotFeatureComparison(vectorMinCut_Poisson, vectorMinVertexDegree_Poisson, 'vectorMinCut_Poisson./vectorMinVertexDegree_Poisson')
+r_24 = plotCorrelationCoefficient(vectorMinCut_Poisson, vectorMinVertexDegree_Poisson, 'Correlation vectorMinCut_Poisson,vectorMinVertexDegree_Poisson');
+
+% vectorMinCut_Poisson./vectorAvgVertexDegree_Poisson 
+plotFeatureComparison(vectorMinCut_Poisson, vectorAvgVertexDegree_Poisson, 'vectorMinCut_Poisson./vectorAvgVertexDegree_Poisson')
+r_25 = plotCorrelationCoefficient(vectorMinCut_Poisson, vectorAvgVertexDegree_Poisson , 'Correlation vectorMinCut_Poisson,vectorAvgVertexDegree_Poisson ');
+
+% vectorMinCut_Poisson./vectorRadius_Poisson
+plotFeatureComparison(vectorMinCut_Poisson, vectorRadius_Poisson, 'vectorMinCut_Poisson./vectorRadius_Poisson')
+r_26 = plotCorrelationCoefficient(vectorMinCut_Poisson, vectorRadius_Poisson, 'Correlation vectorMinCut_Poisson,vectorRadius_Poisson');

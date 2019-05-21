@@ -9,7 +9,7 @@ import graphGenerator.HeavyTail;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
-import heuristic.BellmanFordShortestPath;
+import util.BellmanFordShortestPath;
 
 public class ff {
 

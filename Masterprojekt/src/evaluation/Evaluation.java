@@ -11,14 +11,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-
-import org.omg.PortableInterceptor.SUCCESSFUL;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import graphCharacteristics.CharacteristicsCalculatorMain;
 import graphModel.Graphs;
+import util.FilenameUtils;
 
 /**
  * University Ulm
@@ -47,6 +47,8 @@ public class Evaluation {
 	static File[] listOfFiles;
 
 	// --- lists
+	static ArrayList<File> listFilesTmp = new ArrayList<File>();
+	static ArrayList<File> listFilesFinal = new ArrayList<File>();
 	static ArrayList<File> listOfGamintbFiles = new ArrayList<File>();
 	static ArrayList<File> listOfMintbFiles = new ArrayList<File>();
 	static ArrayList<File> listOfGraphInstanceFiles = new ArrayList<File>();
@@ -234,7 +236,7 @@ public class Evaluation {
 	 * @param listOfGraphInstancesFiles
 	 */
 	public static void buildGraphInstancesData(ArrayList<File> listOfGraphInstancesFiles) {
-		
+
 		setListOfGraphInstanceFiles(listOfGraphInstancesFiles);
 
 		for (File file : listOfGraphInstancesFiles) {
@@ -278,15 +280,64 @@ public class Evaluation {
 	/**
 	 * 
 	 */
-	public static void DataExtractor() {
+	public static void ensureDataIsAvailableForAllHeuristics() {
 
 		folder = new File(pathInstances);
 		listOfFiles = folder.listFiles();
+		listFilesTmp = new ArrayList<>(Arrays.asList(listOfFiles));
 
+		for (int i = 0; i < listFilesTmp.size(); i++) {
+			
+			String fileNameWithOutExt = FilenameUtils.removeExtension(listFilesTmp.get(i).getName());
+			fileNameWithOutExt = FilenameUtils.removeExtension(fileNameWithOutExt);
+			int index = Integer.valueOf(fileNameWithOutExt);
+			
+			int counter = 0;
+			for (int j = 0; j < listOfFiles.length; j++) {
+				String fileNameWithOutExt2 = FilenameUtils.removeExtension(listOfFiles[j].getName());
+				fileNameWithOutExt2 = FilenameUtils.removeExtension(fileNameWithOutExt2);
+				int index2 = Integer.valueOf(fileNameWithOutExt2);
+
+				if (index==index2) {
+					++counter;
+				}
+			}
+			
+			if (counter>2) {
+				listFilesFinal.add(listFilesTmp.get(i));
+			}
+			
+		}
+
+		// List to Array again
+		int listLenght = listFilesFinal.size();
+		listOfFiles = new File[listLenght];
+
+		for (int i = 0; i < listOfFiles.length; i++) {
+			listOfFiles[i] = listFilesFinal.get(i);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public static void DataExtractor() {
+
+		/*
+		 * check, if data for all heuristics available
+		 */
+		ensureDataIsAvailableForAllHeuristics();
+		
+		if (debugFlag) {
+			// --- relevant data files ---
+			System.out.println("\nRelevant data files:\n---------------------");
+			for (File fileIterator : listFilesFinal) {System.err.println(fileIterator.getName());}
+
+		}
+		
 		for (File file : listOfFiles) {
 
 			if (file.isFile()) {
-				
 
 				// --- GAMINTB files ---
 				extension = file.getName().toUpperCase().endsWith(".GAMINTB.TXT");
@@ -319,8 +370,7 @@ public class Evaluation {
 		buildGamintbData(listOfGamintbFiles);
 		buildMintbData(listOfMintbFiles);
 		buildGraphInstancesData(listOfGraphInstanceFiles);
-		
-		
+
 		// --- test ---
 		if (debugFlag) {
 
@@ -516,6 +566,17 @@ public class Evaluation {
 
 	/**
 	 * 
+	 */
+	public static void init() {
+
+		System.out.println("Start extracting data now... Please wait...");
+		DataExtractor();
+		writeToFile();
+		System.out.println("Extracting data was successfull...");
+	}
+
+	/**
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -526,24 +587,22 @@ public class Evaluation {
 		/*
 		 * --- GridGraph ---
 		 */
+		System.out.println("\n ---------------\n|   GridGraph   |\n ---------------\n");
 		setPathInstances("./files/Evaluation/Instances/GridGraph/50-100");
 		setPathHeuristics("./files/Evaluation/heuristics/GridGraph/50-100");
 		setPathCharacteristics("./files/Evaluation/characteristics/GridGraph/50-100");
 		// start extracting data
-		DataExtractor();
-		writeToFile();
-		System.out.println("Extracting GridGraph instance data was successfull...");
+		init();
 
 		/*
 		 * --- Poisson ---
 		 */
+		System.out.println("\n -------------------\n|   Poisson Graph   |\n -------------------\n");
 		setPathInstances("./files/Evaluation/Instances/Poisson/50-100");
 		setPathHeuristics("./files/Evaluation/heuristics/Poisson/50-100");
 		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/50-100");
 		// start extracting data
-		DataExtractor();
-		writeToFile();
-		System.out.println("Extracting Poisson instance data was successfull...");
+		init();
 
 	}
 }

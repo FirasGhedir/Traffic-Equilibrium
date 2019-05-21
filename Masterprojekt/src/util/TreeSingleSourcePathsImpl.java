@@ -1,10 +1,10 @@
-package heuristic;
+package util;
 
 
 
 import graphModel.Graph;
 import graphModel.Graphs;
-import heuristic.ShortestPathAlgorithm.SingleSourcePaths;
+import util.ShortestPathAlgorithm.SingleSourcePaths;
 
 import java.io.*;
 import java.util.*;

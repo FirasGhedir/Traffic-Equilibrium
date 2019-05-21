@@ -19,9 +19,9 @@ import graphGenerator.GridGraphGenerator;
 import graphModel.Edge;
 import graphModel.Graphs;
 import graphModel.Vertex;
-import heuristic.BellmanFordShortestPath;
 import heuristic.RMINTB;
 import ilog.concert.IloException;
+import util.BellmanFordShortestPath;
 
 public class Instancegenerator {
 

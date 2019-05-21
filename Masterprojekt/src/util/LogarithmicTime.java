@@ -1,4 +1,4 @@
-package heuristic;
+package util;
 
 public @interface LogarithmicTime {
 

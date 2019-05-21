@@ -1,4 +1,4 @@
-package heuristic;
+package util;
 
 public interface MergeableAddressableHeap<K, V> extends AddressableHeap<K, V> {
 

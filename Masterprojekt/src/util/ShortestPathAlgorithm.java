@@ -1,4 +1,4 @@
-package heuristic;
+package util;
 
 import graphModel.Graph;
 

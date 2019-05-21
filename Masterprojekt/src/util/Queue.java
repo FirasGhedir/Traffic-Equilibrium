@@ -1,4 +1,4 @@
-package graphCharacteristics;
+package util;
 
 import java.util.Enumeration;
 import java.util.NoSuchElementException;

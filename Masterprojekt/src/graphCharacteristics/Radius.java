@@ -1,6 +1,7 @@
 package graphCharacteristics;
 
 import graphModel.Graphs;
+import util.Queue;
 /**
  * Universität Ulm
  * 

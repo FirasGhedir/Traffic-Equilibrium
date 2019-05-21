@@ -1,4 +1,4 @@
-package heuristic;
+package util;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -7,7 +7,7 @@ import java.util.Objects;
 import graphModel.Edge;
 import graphModel.Graph;
 import graphModel.Vertex;
-import heuristic.ShortestPathAlgorithm.SingleSourcePaths;
+import util.ShortestPathAlgorithm.SingleSourcePaths;
 
 @SuppressWarnings("hiding")
 public class ListSingleSourcePathsImpl<Vertex, Edge> implements SingleSourcePaths<Vertex, Edge>, Serializable {

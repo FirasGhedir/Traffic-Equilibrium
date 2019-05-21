@@ -3,6 +3,7 @@ package graphCharacteristics;
 import java.util.Arrays;
 
 import graphModel.Graphs;
+import util.Queue;
 
 /**
  * Universität Ulm
