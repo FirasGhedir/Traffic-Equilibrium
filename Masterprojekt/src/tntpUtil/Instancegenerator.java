@@ -2,26 +2,20 @@ package tntpUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
-import java.util.concurrent.ThreadLocalRandom;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import bai_A.Mintb_FC;
 import graphGenerator.GeneratorPoisson;
-import graphGenerator.GnpRandomGraphGenerator;
 import graphGenerator.GridGraphGenerator;
-import graphModel.Edge;
+import graphGenerator.HeavyTail;
 import graphModel.Graphs;
 import graphModel.Vertex;
-import heuristic.RMINTB;
 import ilog.concert.IloException;
-import util.BellmanFordShortestPath;
 
 public class Instancegenerator {
 
@@ -87,8 +81,17 @@ public class Instancegenerator {
 
 	}
 
-	public void generateheavytail(int min, int max) {
+	public void generateheavytail(int id) {
 
+		Map<String, Vertex> map = new TreeMap<>();
+		Graphs g = new Graphs();
+		HeavyTail test = new HeavyTail();
+		test.generateGraph(g, map);
+		g.generateEdgesFunctions();
+		g.generatePlayers();
+		System.out.println("done");
+		String path = "./Masterprojekt/files/HeavyTail/" + 50 + "-" + 100 + "/" + String.valueOf(id);
+		buildJSON(path, g);
 	}
 
 	public static void main(String[] args) throws IloException {
@@ -96,7 +99,7 @@ public class Instancegenerator {
 		Instancegenerator tests = new Instancegenerator();
 		for (int i = 0; i < 250; i++) {
 
-			tests.generatepoisson(50, 100, i);
+			tests.generateheavytail( i);
 
 		}
 

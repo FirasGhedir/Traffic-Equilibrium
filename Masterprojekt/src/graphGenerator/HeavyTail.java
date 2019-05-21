@@ -15,25 +15,23 @@ public class HeavyTail implements GraphGenerator<Vertex, Edge, Vertex> {
 	int n;
 	int[] array;
 	Random rnd;
-	int d = 0;
+	double d = 0;
 
 	public HeavyTail() {
 		n = ThreadLocalRandom.current().nextInt(50, 100);
-	    rnd = new Random();
+		rnd = new Random();
 	}
 
 	@Override
 	public void generateGraph(Graph<Vertex, Edge> target, Map<String, Vertex> resultMap) {
-		// TODO Auto-generated method stub
-		boolean isDirected = true;
-		int size = ThreadLocalRandom.current().nextInt(0, (int) ((n * 0.55)));
-		List<Vertex> nodes = new ArrayList<>(size);
+
+		int size = 10;
+		List<Vertex> vertices = new ArrayList<>();
 		for (int i = 0; i < size; i++) {
 			Vertex vertex = new Vertex(i);
 			target.addVertex(vertex);
-			nodes.add(vertex);
+			vertices.add(vertex);
 		}
-		
 
 		Random r = new Random();
 		UFinit(size);
@@ -41,40 +39,50 @@ public class HeavyTail implements GraphGenerator<Vertex, Edge, Vertex> {
 			int x = 0;
 			int y = 0;
 			do {
-				x = r.nextInt(nodes.size());
-				y = r.nextInt(nodes.size());
+				x = r.nextInt(vertices.size());
+				y = r.nextInt(vertices.size());
 			} while (x == y);
 
-			Vertex v = nodes.get(x);
-			Vertex u = nodes.get(y);
+			Vertex v = vertices.get(x);
+			Vertex u = vertices.get(y);
 			if (!(target.containsEdge(v, u) && target.containsEdge(u, v))) {
 				target.addEdge(v, u);
-				v.setDeg(v.getDeg()+1);
-				u.setDeg(u.getDeg()+1);
+				target.addEdge(u, v);
+				v.setDeg(v.getDeg() + 1.0);
+				u.setDeg(u.getDeg() + 1.0);
 				d++;
 				UFunion(x, y);
-				if (isDirected) {
-					target.addEdge(u, v);
-					d++;
-				}
+
 			}
 		}
-          int count = nodes.size()-1;
-		for (int i = count; i < n ; i++) {
-              Vertex vertex = new Vertex(i);
-              target.addVertex(vertex);
-              nodes.add(vertex);
-              int tmp  = 0; 
-              for(int j = 0 ; j < count ; j++) {
-            	  if(rnd.nextDouble()<nodes.get(j).getDeg()/d) {
-            		  target.addEdge(nodes.get(j), vertex);
-            		  target.addEdge(vertex, nodes.get(j));
-            		  nodes.get(j).setDeg(nodes.get(j).getDeg()+1);
-            		  tmp +=2;
-            	  }
-              }
-              d+=tmp;
+
+		for (int i = size; i < n; i++) {
+			Vertex vertex = new Vertex(i);
+			target.addVertex(vertex);
+			vertices.add(vertex);
 		}
+		int tmp = 0;
+		for (int i = size; i < n; i++) {
+			for (int j = 0; j < size; j++) {
+				do {
+					double probability = rnd.nextDouble();
+					double result = vertices.get(j).getDeg() / d;
+					if (probability < result / d) {
+						target.addEdge(vertices.get(j), vertices.get(i));
+						target.addEdge(vertices.get(i), vertices.get(j));
+						tmp++;
+						vertices.get(i).setDeg(vertices.get(i).getDeg() + 1.0);
+						vertices.get(j).setDeg(vertices.get(j).getDeg() + 1.0);
+
+					}
+
+				} while (vertices.get(i).getDeg() == 0);
+			}
+
+			d += tmp;
+			tmp = 0;
+		}
+
 	}
 
 	public void UFinit(int n) {
@@ -120,3 +128,5 @@ public class HeavyTail implements GraphGenerator<Vertex, Edge, Vertex> {
 	}
 
 }
+
+
