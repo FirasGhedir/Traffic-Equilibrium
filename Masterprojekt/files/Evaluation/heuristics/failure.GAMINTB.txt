@@ -1,0 +1,2 @@
+ Execution Time: 0 ms
+Number of Toll Stations: 0

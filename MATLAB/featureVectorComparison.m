@@ -217,3 +217,110 @@ rPoisson25 = plotCorrelationCoefficient(vectorMinCutPoisson, vectorAvgVertexDegr
 % vectorMinCutPoisson./vectorRadiusPoisson
 plotFeatureComparison(vectorMinCutPoisson, vectorRadiusPoisson, 'vectorMinCutPoisson./vectorRadiusPoisson')
 rPoisson26 = plotCorrelationCoefficient(vectorMinCutPoisson, vectorRadiusPoisson, 'Correlation vectorMinCutPoisson,vectorRadiusPoisson');
+
+
+% %% --- HeavyTail ---
+% 
+% % vectorDegeneracyHeavyTail, vectorDiameterHeavyTail 
+% plotFeatureComparison(vectorDegeneracyHeavyTail, vectorDiameterHeavyTail, 'vectorDegeneracyHeavyTail./vectorDiameterHeavyTail')
+% rHeavyTail1 = plotCorrelationCoefficient(vectorDegeneracyHeavyTail, vectorDiameterHeavyTail, 'Correlation vectorDegeneracyHeavyTail,vectorDiameterHeavyTail');
+% 
+% % vectorDegeneracyHeavyTail, vectorEccentricityHeavyTail 
+% plotFeatureComparison(vectorDegeneracyHeavyTail, vectorEccentricityHeavyTail, 'vectorDegeneracyHeavyTail./vectorEccentricityHeavyTail ')
+% rHeavyTail2 = plotCorrelationCoefficient(vectorDegeneracyHeavyTail, vectorEccentricityHeavyTail, 'Correlation vectorDegeneracyHeavyTail,vectorEccentricityHeavyTail');
+% 
+% % vectorDegeneracyHeavyTail, vectorMaxVertexDegreeHeavyTail
+% plotFeatureComparison(vectorDegeneracyHeavyTail, vectorMaxVertexDegreeHeavyTail, 'vectorMaxDegeneracy./vectorMaxVertexDegreeHeavyTail')
+% rHeavyTail3 = plotCorrelationCoefficient(vectorDegeneracyHeavyTail, vectorMaxVertexDegreeHeavyTail, 'Correlation vectorDegeneracyHeavyTail,vectorMaxVertexDegreeHeavyTail');
+% 
+% % vectorDegeneracyHeavyTail, vectorMinVertexDegreeHeavyTail
+% plotFeatureComparison(vectorDegeneracyHeavyTail, vectorMinVertexDegreeHeavyTail, 'vectorDegeneracyHeavyTail./vectorMinVertexDegreeHeavyTail')
+% rHeavyTail4 = plotCorrelationCoefficient(vectorDegeneracyHeavyTail, vectorMinVertexDegreeHeavyTail, 'Correlation vectorDegeneracyHeavyTail,vectorMinVertexDegreeHeavyTail');
+% 
+% % vectorDegeneracyHeavyTail, vectorAvgVertexDegreeHeavyTail
+% plotFeatureComparison(vectorDegeneracyHeavyTail, vectorAvgVertexDegreeHeavyTail, 'vectorDegeneracyHeavyTail./AvgVertexDegree')
+% rHeavyTail5 = plotCorrelationCoefficient(vectorDegeneracyHeavyTail, vectorAvgVertexDegreeHeavyTail, 'Correlation vectorDegeneracyHeavyTail,vectorAvgVertexDegreeHeavyTail');
+% 
+% % vectorDegeneracyHeavyTail./vectorRadiusHeavyTail
+% plotFeatureComparison(vectorDegeneracyHeavyTail, vectorRadiusHeavyTail, 'vectorDegeneracyHeavyTail./vectorRadiusHeavyTail')
+% rHeavyTail6 = plotCorrelationCoefficient(vectorDegeneracyHeavyTail, vectorRadiusHeavyTail, 'Correlation vectorDegeneracyHeavyTail,vectorRadiusHeavyTail');
+% 
+% % vectorDiameterHeavyTail./vectorEccentricityHeavyTail
+% plotFeatureComparison(vectorDiameterHeavyTail, vectorEccentricityHeavyTail, 'vectorDiameterHeavyTail./vectorEccentricityHeavyTail')
+% rHeavyTail7 = plotCorrelationCoefficient(vectorDiameterHeavyTail, vectorEccentricityHeavyTail, 'Correlation vectorDiameterHeavyTail,vectorEccentricityHeavyTail');
+% 
+% % vectorDiameterHeavyTail./vectorMinVertexDegreeHeavyTail
+% plotFeatureComparison(vectorDiameterHeavyTail, vectorMinVertexDegreeHeavyTail, 'vectorDiameterHeavyTail./vectorMinVertexDegreeHeavyTail')
+% rHeavyTail8 = plotCorrelationCoefficient(vectorDiameterHeavyTail, vectorMinVertexDegreeHeavyTail, 'Correlation vectorDiameterHeavyTail,vectorMinVertexDegreeHeavyTail');
+% 
+% % vectorDiameterHeavyTail./vectorAvgVertexDegreeHeavyTail
+% plotFeatureComparison(vectorDiameterHeavyTail, vectorAvgVertexDegreeHeavyTail, 'vectorDiameterHeavyTail./vectorAvgVertexDegreeHeavyTail')
+% rHeavyTail9 = plotCorrelationCoefficient(vectorDiameterHeavyTail, vectorAvgVertexDegreeHeavyTail, 'Correlation vectorDiameterHeavyTail,vectorAvgVertexDegreeHeavyTail');
+% 
+% % vectorDiameterHeavyTail./vectorRadiusHeavyTail
+% plotFeatureComparison(vectorDiameterHeavyTail, vectorRadiusHeavyTail, 'vectorDiameterHeavyTail./vectorRadiusHeavyTail')
+% rHeavyTail10 = plotCorrelationCoefficient(vectorDiameterHeavyTail, vectorRadiusHeavyTail, 'Correlation vectorDiameterHeavyTail,vectorRadiusHeavyTail');
+% 
+% % vectorEccentricityHeavyTail./vectorMaxVertexDegreeHeavyTail
+% plotFeatureComparison(vectorEccentricityHeavyTail, vectorMaxVertexDegreeHeavyTail, 'vectorEccentricityHeavyTail./vectorMaxVertexDegreeHeavyTail')
+% rHeavyTail11 = plotCorrelationCoefficient(vectorEccentricityHeavyTail, vectorMaxVertexDegreeHeavyTail, 'Correlation vectorEccentricityHeavyTail,vectorRadiusHeavyTail');
+% 
+% % vectorEccentricityHeavyTail./vectorMinVertexDegreeHeavyTail
+% plotFeatureComparison(vectorEccentricityHeavyTail, vectorMinVertexDegreeHeavyTail, 'vectorEccentricityHeavyTail./vectorMinVertexDegreeHeavyTail')
+% rHeavyTail12 = plotCorrelationCoefficient(vectorEccentricityHeavyTail, vectorMinVertexDegreeHeavyTail, 'Correlation vectorEccentricityHeavyTail,vectorMinVertexDegreeHeavyTail');
+% 
+% % vectorEccentricityHeavyTail./vectorAvgVertexDegreeHeavyTail
+% plotFeatureComparison(vectorEccentricityHeavyTail, vectorAvgVertexDegreeHeavyTail, 'vectorEccentricityHeavyTail./vectorAvgVertexDegreeHeavyTail')
+% rHeavyTail13 = plotCorrelationCoefficient(vectorEccentricityHeavyTail, vectorAvgVertexDegreeHeavyTail, 'Correlation vectorEccentricityHeavyTail,vectorAvgVertexDegreeHeavyTail');
+% 
+% % vectorEccentricityHeavyTail./vectorRadiusHeavyTail
+% plotFeatureComparison(vectorEccentricityHeavyTail, vectorRadiusHeavyTail, 'vectorEccentricityHeavyTail./vectorRadiusHeavyTail')
+% rHeavyTail14 = plotCorrelationCoefficient(vectorEccentricityHeavyTail, vectorRadiusHeavyTail, 'Correlation vectorEccentricityHeavyTail,vectorRadiusHeavyTail');
+% 
+% % vectorMaxVertexDegreeHeavyTail./vectorMinVertexDegreeHeavyTail
+% plotFeatureComparison(vectorMaxVertexDegreeHeavyTail, vectorMinVertexDegreeHeavyTail, 'vectorMaxVertexDegreeHeavyTail./vectorMinVertexDegreeHeavyTail')
+% rHeavyTail15 = plotCorrelationCoefficient(vectorMaxVertexDegreeHeavyTail, vectorMinVertexDegreeHeavyTail, 'Correlation vectorMaxVertexDegreeHeavyTail,vectorMinVertexDegreeHeavyTail');
+% 
+% % vectorMaxVertexDegreeHeavyTail./vectorAvgVertexDegreeHeavyTail
+% plotFeatureComparison(vectorMaxVertexDegreeHeavyTail, vectorAvgVertexDegreeHeavyTail, 'vectorMaxVertexDegreeHeavyTail./vectorAvgVertexDegreeHeavyTail')
+% rHeavyTail16 = plotCorrelationCoefficient(vectorMaxVertexDegreeHeavyTail, vectorAvgVertexDegreeHeavyTail, 'Correlation vectorMaxVertexDegreeHeavyTail,vectorAvgVertexDegreeHeavyTail');
+% 
+% % vectorMaxVertexDegreeHeavyTail./vectorRadiusHeavyTail
+% plotFeatureComparison(vectorMaxVertexDegreeHeavyTail, vectorRadiusHeavyTail, 'vectorMaxVertexDegreeHeavyTail./vectorRadiusHeavyTail')
+% rHeavyTail17 = plotCorrelationCoefficient(vectorMaxVertexDegreeHeavyTail, vectorRadiusHeavyTail, 'Correlation vectorMaxVertexDegreeHeavyTail,vectorRadiusHeavyTail');
+% 
+% % vectorMinVertexDegreeHeavyTail./vectorAvgVertexDegreeHeavyTail
+% plotFeatureComparison(vectorMinVertexDegreeHeavyTail, vectorAvgVertexDegreeHeavyTail, 'vectorMinVertexDegreeHeavyTail./vectorAvgVertexDegreeHeavyTail')
+% rHeavyTail18 = plotCorrelationCoefficient(vectorMinVertexDegreeHeavyTail, vectorAvgVertexDegreeHeavyTail, 'Correlation vectorMinVertexDegreeHeavyTail,vectorAvgVertexDegreeHeavyTail');
+% 
+% % vectorAvgVertexDegreeHeavyTail./vectorRadiusHeavyTail
+% plotFeatureComparison(vectorAvgVertexDegreeHeavyTail, vectorRadiusHeavyTail, 'vectorAvgVertexDegreeHeavyTail./vectorRadiusHeavyTail')
+% rHeavyTail19 = plotCorrelationCoefficient(vectorAvgVertexDegreeHeavyTail, vectorRadiusHeavyTail, 'Correlation vectorAvgVertexDegreeHeavyTail,vectorRadiusHeavyTail');
+% 
+% % vectorMinCutHeavyTail./vectorDegeneracyHeavyTail 
+% plotFeatureComparison(vectorMinCutHeavyTail, vectorDegeneracyHeavyTail, 'vectorMinCutHeavyTail./vectorDegeneracyHeavyTail')
+% rHeavyTail20 = plotCorrelationCoefficient(vectorMinCutHeavyTail, vectorDegeneracyHeavyTail, 'Correlation vectorMinCutHeavyTail,vectorDegeneracyHeavyTail');
+% 
+% % vectorMinCutHeavyTail./vectorDiameterHeavyTail 
+% plotFeatureComparison(vectorMinCutHeavyTail, vectorDiameterHeavyTail, 'vectorMinCutHeavyTail./vectorDiameterHeavyTail')
+% rHeavyTail21 = plotCorrelationCoefficient(vectorMinCutHeavyTail, vectorDiameterHeavyTail, 'Correlation vectorMinCutHeavyTail,vectorDiameterHeavyTail');
+% 
+% % vectorMinCutHeavyTail./vectorEccentricityHeavyTail
+% plotFeatureComparison(vectorMinCutHeavyTail, vectorDiameterHeavyTail, 'vectorMinCutHeavyTail./vectorDiameterHeavyTail')
+% rHeavyTail22 = plotCorrelationCoefficient(vectorMinCutHeavyTail, vectorEccentricityHeavyTail, 'Correlation vectorMinCutHeavyTail,vectorEccentricityHeavyTail');
+% 
+% % vectorMinCutHeavyTail./vectorMaxVertexDegreeHeavyTail
+% plotFeatureComparison(vectorMinCutHeavyTail, vectorMaxVertexDegreeHeavyTail, 'vectorMinCutHeavyTail./vectorMaxVertexDegreeHeavyTail')
+% rHeavyTail23 = plotCorrelationCoefficient(vectorMinCutHeavyTail, vectorMaxVertexDegreeHeavyTail, 'Correlation vectorMinCutHeavyTail,vectorMaxVertexDegreeHeavyTail');
+% 
+% % vectorMinCutHeavyTail./vectorMinVertexDegreeHeavyTail
+% plotFeatureComparison(vectorMinCutHeavyTail, vectorMinVertexDegreeHeavyTail, 'vectorMinCutHeavyTail./vectorMinVertexDegreeHeavyTail')
+% rHeavyTail24 = plotCorrelationCoefficient(vectorMinCutHeavyTail, vectorMinVertexDegreeHeavyTail, 'Correlation vectorMinCutHeavyTail,vectorMinVertexDegreeHeavyTail');
+% 
+% % vectorMinCutHeavyTail./vectorAvgVertexDegreeHeavyTail 
+% plotFeatureComparison(vectorMinCutHeavyTail, vectorAvgVertexDegreeHeavyTail, 'vectorMinCutHeavyTail./vectorAvgVertexDegreeHeavyTail')
+% rHeavyTail25 = plotCorrelationCoefficient(vectorMinCutHeavyTail, vectorAvgVertexDegreeHeavyTail , 'Correlation vectorMinCutHeavyTail,vectorAvgVertexDegreeHeavyTail ');
+% 
+% % vectorMinCutHeavyTail./vectorRadiusHeavyTail
+% plotFeatureComparison(vectorMinCutHeavyTail, vectorRadiusHeavyTail, 'vectorMinCutHeavyTail./vectorRadiusHeavyTail')
+% rHeavyTail26 = plotCorrelationCoefficient(vectorMinCutHeavyTail, vectorRadiusHeavyTail, 'Correlation vectorMinCutHeavyTail,vectorRadiusHeavyTail');
