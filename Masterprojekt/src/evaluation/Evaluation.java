@@ -12,12 +12,15 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import graphCharacteristics.CharacteristicsCalculatorMain;
 import graphModel.Graphs;
+import util.CollectionUtil;
 import util.FilenameUtils;
 
 /**
@@ -40,28 +43,36 @@ public class Evaluation {
 	// --- flags, iterators etc. ----
 	static boolean extension;
 	static int iterator;
-	static boolean debugFlag = false;
+	static boolean debugFlag;
+	static boolean flagMINTB;
+	static boolean flagGAMINTB;
 
 	// --- files and folders ----
 	static File folder;
 	static File[] listOfFiles;
 
 	// --- lists
-	static ArrayList<File> listFilesTmp = new ArrayList<File>();
-	static ArrayList<File> listFilesFinal = new ArrayList<File>();
-	static ArrayList<File> listOfGamintbFiles = new ArrayList<File>();
-	static ArrayList<File> listOfMintbFiles = new ArrayList<File>();
-	static ArrayList<File> listOfGraphInstanceFiles = new ArrayList<File>();
-	static ArrayList<Integer> numbTollboothsGamintb = new ArrayList<Integer>();
-	static ArrayList<Integer> numbTollboothsMintb = new ArrayList<Integer>();
-	static ArrayList<Integer> Degeneracy = new ArrayList<Integer>();
-	static ArrayList<Integer> Diameter = new ArrayList<Integer>();
-	static ArrayList<Double> Eccentricity = new ArrayList<Double>();
-	static ArrayList<Integer> MaxVertexDegree = new ArrayList<Integer>();
-	static ArrayList<Integer> MinVertexDegree = new ArrayList<Integer>();
-	static ArrayList<Double> AvgVertexDegree = new ArrayList<Double>();
-	static ArrayList<Integer> Radius = new ArrayList<Integer>();
-	static ArrayList<Integer> MinCut = new ArrayList<Integer>();
+	static ArrayList<File> listFailureTmp;
+	static ArrayList<File> listFilesTmp;
+	static ArrayList<File> listFilesFinal;
+	static ArrayList<File> listFilesNotComparable;
+	static ArrayList<File> listOfGamintbFiles;
+	static ArrayList<File> listOfMintbFiles;
+	static ArrayList<File> listOfGraphInstanceFiles;
+
+	static ArrayList<Integer> listOfGamintbRuntime;
+	static ArrayList<Integer> listOfMintbRuntime;
+	static ArrayList<Integer> numbTollboothsGamintb;
+	static ArrayList<Integer> numbTollboothsMintb;
+
+	static ArrayList<Integer> Degeneracy;
+	static ArrayList<Integer> Diameter;
+	static ArrayList<Double> Eccentricity;
+	static ArrayList<Integer> MaxVertexDegree;
+	static ArrayList<Integer> MinVertexDegree;
+	static ArrayList<Double> AvgVertexDegree;
+	static ArrayList<Integer> Radius;
+	static ArrayList<Integer> MinCut;
 
 	// --- streams, reader ---
 	static FileInputStream fstream;
@@ -72,6 +83,12 @@ public class Evaluation {
 	static String pathInstances;
 	static String pathHeuristics;
 	static String pathCharacteristics;
+	static String pathFailure;
+	static String pathRuntime;
+
+	// --- Failure files
+	static File failureFileGAMINTB = new File("./files/Evaluation/heuristics/failure.GAMINTB.txt");
+	static File failureFileMINTB = new File("./files/Evaluation/heuristics/failure.MINTB.txt");
 
 	// --- graph ---
 	static Graphs graph;
@@ -101,6 +118,22 @@ public class Evaluation {
 	 */
 	public static void setListOfGraphInstanceFiles(ArrayList<File> listOfGraphInstanceFiles) {
 		Evaluation.listOfGraphInstanceFiles = listOfGraphInstanceFiles;
+	}
+
+	/**
+	 * 
+	 * @param listOfGamintRuntimeFiles
+	 */
+	public static void setListOfGamintRuntimeFiles(ArrayList<Integer> listOfGamintRuntimeFiles) {
+		Evaluation.listOfGamintbRuntime = listOfGamintRuntimeFiles;
+	}
+
+	/**
+	 * 
+	 * @param listOfMintbRuntimeFiles
+	 */
+	public static void setListOfMintbRuntimeFiles(ArrayList<Integer> listOfMintbRuntimeFiles) {
+		Evaluation.listOfMintbRuntime = listOfMintbRuntimeFiles;
 	}
 
 	/**
@@ -153,6 +186,134 @@ public class Evaluation {
 
 	/**
 	 * 
+	 * @param pathRuntime
+	 */
+	public static void setPathRuntime(String pathRuntime) {
+		Evaluation.pathRuntime = pathRuntime;
+	}
+
+	/**
+	 * 
+	 * @param pathFailure
+	 */
+	public static void setPathFailure(String pathFailure) {
+		Evaluation.pathFailure = pathFailure;
+	}
+
+	/**
+	 * 
+	 * @param listFailureTmp
+	 */
+	public static void setListFailureTmp(ArrayList<File> listFailureTmp) {
+		Evaluation.listFailureTmp = listFailureTmp;
+	}
+
+	/**
+	 * 
+	 * @param listFilesTmp
+	 */
+	public static void setListFilesTmp(ArrayList<File> listFilesTmp) {
+		Evaluation.listFilesTmp = listFilesTmp;
+	}
+
+	/**
+	 * 
+	 * @param listFilesFinal
+	 */
+	public static void setListFilesFinal(ArrayList<File> listFilesFinal) {
+		Evaluation.listFilesFinal = listFilesFinal;
+	}
+
+	/**
+	 * 
+	 * @param listFilesNotComparable
+	 */
+	public static void setListFilesNotComparable(ArrayList<File> listFilesNotComparable) {
+		Evaluation.listFilesNotComparable = listFilesNotComparable;
+	}
+
+	/**
+	 * 
+	 * @param numbTollboothsGamintb
+	 */
+	public static void setNumbTollboothsGamintb(ArrayList<Integer> numbTollboothsGamintb) {
+		Evaluation.numbTollboothsGamintb = numbTollboothsGamintb;
+	}
+
+	/**
+	 * 
+	 * @param numbTollboothsMintb
+	 */
+	public static void setNumbTollboothsMintb(ArrayList<Integer> numbTollboothsMintb) {
+		Evaluation.numbTollboothsMintb = numbTollboothsMintb;
+	}
+
+	/**
+	 * 
+	 * @param degeneracy
+	 */
+	public static void setDegeneracy(ArrayList<Integer> degeneracy) {
+		Degeneracy = degeneracy;
+	}
+
+	/**
+	 * 
+	 * @param diameter
+	 */
+	public static void setDiameter(ArrayList<Integer> diameter) {
+		Diameter = diameter;
+	}
+
+	/**
+	 * 
+	 * @param eccentricity
+	 */
+	public static void setEccentricity(ArrayList<Double> eccentricity) {
+		Eccentricity = eccentricity;
+	}
+
+	/**
+	 * 
+	 * @param maxVertexDegree
+	 */
+	public static void setMaxVertexDegree(ArrayList<Integer> maxVertexDegree) {
+		MaxVertexDegree = maxVertexDegree;
+	}
+
+	/**
+	 * 
+	 * @param minVertexDegree
+	 */
+	public static void setMinVertexDegree(ArrayList<Integer> minVertexDegree) {
+		MinVertexDegree = minVertexDegree;
+	}
+
+	/**
+	 * 
+	 * @param avgVertexDegree
+	 */
+	public static void setAvgVertexDegree(ArrayList<Double> avgVertexDegree) {
+		AvgVertexDegree = avgVertexDegree;
+	}
+
+	/**
+	 * 
+	 * @param minCut
+	 */
+	public static void setMinCut(ArrayList<Integer> minCut) {
+		MinCut = minCut;
+	}
+
+	/**
+	 * 
+	 * @param radius
+	 */
+	public static void setRadius(ArrayList<Integer> radius) {
+		Radius = radius;
+	}
+
+	/**
+	 * 
 	 * @param listOfGamintbFiles
 	 */
 	public static void buildGamintbData(ArrayList<File> listOfGamintbFiles) {
@@ -176,10 +337,16 @@ public class Evaluation {
 					if (strLine.startsWith("Number of Toll Stations:")) {
 						String[] splited = strLine.split("\\s+");
 						numbTollboothsGamintb.add(Integer.valueOf(splited[4]));
+					}
+					if (strLine.startsWith(" Execution Time:")) {
+						String[] splited = strLine.split("\\s+");
+						listOfGamintbRuntime.add(Integer.valueOf(splited[3]));
+						if (debugFlag) {
+							System.out.println(iterator + " " + Integer.valueOf(splited[3]));
+						}
 						++iterator;
 					}
 				}
-
 				// --- close streams, reader ---
 				fstream.close();
 				in.close();
@@ -216,6 +383,13 @@ public class Evaluation {
 					if (strLine.startsWith("Number of Toll Stations:")) {
 						String[] splited = strLine.split("\\s+");
 						numbTollboothsMintb.add(Integer.valueOf(splited[4]));
+					}
+					if (strLine.startsWith(" Execution Time:")) {
+						String[] splited = strLine.split("\\s+");
+						listOfMintbRuntime.add(Integer.valueOf(splited[3]));
+						if (debugFlag) {
+							System.out.println(iterator + " " + Integer.valueOf(splited[3]));
+						}
 						++iterator;
 					}
 				}
@@ -229,6 +403,7 @@ public class Evaluation {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	/**
@@ -285,36 +460,98 @@ public class Evaluation {
 		folder = new File(pathInstances);
 		listOfFiles = folder.listFiles();
 		listFilesTmp = new ArrayList<>(Arrays.asList(listOfFiles));
+		listFilesTmp.sort(Comparator.naturalOrder());
 
 		for (int i = 0; i < listFilesTmp.size(); i++) {
-			
+
 			String fileNameWithOutExt = FilenameUtils.removeExtension(listFilesTmp.get(i).getName());
 			fileNameWithOutExt = FilenameUtils.removeExtension(fileNameWithOutExt);
 			int index = Integer.valueOf(fileNameWithOutExt);
-			
+
 			int counter = 0;
+			flagMINTB = false;
+			flagGAMINTB = false;
+			listFailureTmp = new ArrayList<File>();
+
 			for (int j = 0; j < listOfFiles.length; j++) {
 				String fileNameWithOutExt2 = FilenameUtils.removeExtension(listOfFiles[j].getName());
 				fileNameWithOutExt2 = FilenameUtils.removeExtension(fileNameWithOutExt2);
 				int index2 = Integer.valueOf(fileNameWithOutExt2);
 
-				if (index==index2) {
+				if (index == index2) {
+					if (listOfFiles[j].getName().toUpperCase().endsWith(".MINTB.TXT")) {
+						flagMINTB = true;
+					} else if (listOfFiles[j].getName().toUpperCase().endsWith(".GAMINTB.TXT")) {
+						flagGAMINTB = true;
+					}
 					++counter;
 				}
 			}
-			
-			if (counter>2) {
+
+			// if as well instance file, MINTB file as GMINTB file exists: counter value has
+			// to be equal 3
+			if (counter == 3) {
 				listFilesFinal.add(listFilesTmp.get(i));
+
+				// put failure file into list.
+			} else {
+
+				// --- case 1: gamintb file is missing
+				if (!flagGAMINTB && flagMINTB) {
+					if (listFilesTmp.get(i).getName().toUpperCase().endsWith("MINTB.TXT")) {
+						listFilesFinal.add(listFilesTmp.get(i));
+						listFilesFinal.add(failureFileGAMINTB);
+					} else {
+						listFilesFinal.add(listFilesTmp.get(i));
+					}
+				}
+				// --- case 2: mintb file is missing
+				if (flagGAMINTB && !flagMINTB) {
+					if (listFilesTmp.get(i).getName().toUpperCase().endsWith("GAMINTB.TXT")) {
+						listFilesFinal.add(failureFileMINTB);
+						listFilesFinal.add(listFilesTmp.get(i));
+					} else {
+						listFilesFinal.add(listFilesTmp.get(i));
+					}
+				}
+				// --- case 3: as well mintb as gamintb file is missing
+				if (!flagGAMINTB && !flagMINTB) {
+					listFilesFinal.add(listFilesTmp.get(i));
+					listFilesFinal.add(failureFileGAMINTB);
+					listFilesFinal.add(failureFileMINTB);
+				}
+
+				listFilesNotComparable.add(listFilesTmp.get(i));
 			}
-			
+
+			if (debugFlag) {
+
+				System.out.println("\nFiles which can get compared to each other:\n-------------------------");
+				for (File file : listFilesFinal) {
+					System.out.println(file.getName());
+				}
+				System.out.println("\nFiles which can get not compared to each other:\n-------------------------");
+				for (File file : listFilesNotComparable) {
+					System.out.println(file.getName());
+				}
+			}
+
 		}
 
 		// List to Array again
+
 		int listLenght = listFilesFinal.size();
 		listOfFiles = new File[listLenght];
 
-		for (int i = 0; i < listOfFiles.length; i++) {
-			listOfFiles[i] = listFilesFinal.get(i);
+		for (int i1 = 0; i1 < listOfFiles.length; i1++) {
+			listOfFiles[i1] = listFilesFinal.get(i1);
+		}
+
+		if (debugFlag) {
+			System.out.println("\nFinal file list:\n-----------");
+			for (File file : listFilesFinal) {
+				System.out.println(file.getName());
+			}
 		}
 	}
 
@@ -327,14 +564,16 @@ public class Evaluation {
 		 * check, if data for all heuristics available
 		 */
 		ensureDataIsAvailableForAllHeuristics();
-		
+
 		if (debugFlag) {
 			// --- relevant data files ---
 			System.out.println("\nRelevant data files:\n---------------------");
-			for (File fileIterator : listFilesFinal) {System.err.println(fileIterator.getName());}
+			for (File fileIterator : listFilesFinal) {
+				System.err.println(fileIterator.getName());
+			}
 
 		}
-		
+
 		for (File file : listOfFiles) {
 
 			if (file.isFile()) {
@@ -367,6 +606,10 @@ public class Evaluation {
 			}
 		}
 
+		System.out.println("\n   listOfMintbFile size:          " + listOfMintbFiles.size());
+		System.out.println("   listOfGamintbFiles size:       " + listOfGamintbFiles.size());
+		System.out.println("   	listOfGraphInstanceFiles size: " + listOfGraphInstanceFiles.size() + "\n");
+
 		buildGamintbData(listOfGamintbFiles);
 		buildMintbData(listOfMintbFiles);
 		buildGraphInstancesData(listOfGraphInstanceFiles);
@@ -389,10 +632,25 @@ public class Evaluation {
 	 */
 	public static void writeToFile() {
 
-		/*
-		 * GAMINTB
-		 */
+		/********************
+		 * Failure
+		 ********************/
+		String contentFailure = "";
+		for (File file : listFilesNotComparable) {
+			contentFailure += file.getName() + "\n";
+		}
+		contentFailure = contentFailure.trim();
 
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pathFailure), "utf-8"))) {
+			writer.write(contentFailure);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		/********************
+		 * GAMINTB
+		 ********************/
+		System.out.println("\n -> GAMINTB vector size:         " + numbTollboothsGamintb.size());
 		String contentGAMINTB = "";
 		for (Integer number : numbTollboothsGamintb) {
 			contentGAMINTB += number + "\n";
@@ -406,10 +664,10 @@ public class Evaluation {
 			e.printStackTrace();
 		}
 
-		/*
+		/********************
 		 * MINTB
-		 */
-
+		 ********************/
+		System.out.println(" -> MINTB vector size:           " + numbTollboothsMintb.size());
 		String contentMINTB = "";
 		for (Integer number : numbTollboothsMintb) {
 			contentMINTB += number + "\n";
@@ -423,11 +681,46 @@ public class Evaluation {
 			e.printStackTrace();
 		}
 
-		/*
-		 * Graph Instances
-		 */
+		/********************
+		 * Runtime
+		 ********************/
+
+		// --- GAMINTB ---
+		System.out.println("\n -> GAMINTB Runtime vector size: " + listOfGamintbRuntime.size());
+		String contentRuntimeGAMINTB = "";
+		for (Integer number : listOfGamintbRuntime) {
+			contentRuntimeGAMINTB += number + "\n";
+		}
+		contentRuntimeGAMINTB = contentRuntimeGAMINTB.trim();
+
+		try (Writer writer = new BufferedWriter(
+				new OutputStreamWriter(new FileOutputStream(pathRuntime + "/gamintbRuntime.txt"), "utf-8"))) {
+			writer.write(contentRuntimeGAMINTB);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// --- MINTB ---
+		System.out.println(" -> MINTB Runtime vector size:   " + listOfMintbRuntime.size() + "\n");
+		String contentRuntimeMINTB = "";
+		for (Integer number : listOfMintbRuntime) {
+			contentRuntimeMINTB += number + "\n";
+		}
+		contentRuntimeMINTB = contentRuntimeMINTB.trim();
+
+		try (Writer writer = new BufferedWriter(
+				new OutputStreamWriter(new FileOutputStream(pathRuntime + "/mintbRuntime.txt"), "utf-8"))) {
+			writer.write(contentRuntimeMINTB);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		/******************************
+		 * Graph Characteristics
+		 *****************************/
 
 		// --- degeneracy ---
+		System.out.println("\n -> Degeneracy vector size:      " + Degeneracy.size());
 		String contentGraphInstancesDegeneracy = "";
 		for (Integer number : Degeneracy) {
 			contentGraphInstancesDegeneracy += number + "\n";
@@ -442,6 +735,7 @@ public class Evaluation {
 		}
 
 		// --- diameter ---
+		System.out.println(" -> Diameter   vector size:      " + Diameter.size());
 		String contentGraphInstancesDiameter = "";
 		for (Integer number : Diameter) {
 			contentGraphInstancesDiameter += number + "\n";
@@ -456,6 +750,7 @@ public class Evaluation {
 		}
 
 		// --- eccentricity ---
+		System.out.println(" -> Eccentricity vector size:    " + Eccentricity.size());
 		String contentGraphInstancesEccentricity = "";
 		for (Double number : Eccentricity) {
 			contentGraphInstancesEccentricity += number + "\n";
@@ -470,6 +765,7 @@ public class Evaluation {
 		}
 
 		// --- Max vertex degree ---
+		System.out.println(" -> MaxVertexDegree vector size: " + MaxVertexDegree.size());
 		String contentGraphInstancesMaxVertexDegree = "";
 		for (Integer number : MaxVertexDegree) {
 			contentGraphInstancesMaxVertexDegree += number + "\n";
@@ -484,6 +780,7 @@ public class Evaluation {
 		}
 
 		// --- Min vertex degree ---
+		System.out.println(" -> MinVertexDgree vector size:  " + MinVertexDegree.size());
 		String contentGraphInstancesMinVertexDegree = "";
 		for (Integer number : MinVertexDegree) {
 			contentGraphInstancesMinVertexDegree += number + "\n";
@@ -498,6 +795,7 @@ public class Evaluation {
 		}
 
 		// --- Avg vertex degree ---
+		System.out.println(" -> AvgVertexDegree vector size: " + AvgVertexDegree.size());
 		String contentGraphInstancesAvgVertexDegree = "";
 		for (Double number : AvgVertexDegree) {
 			contentGraphInstancesAvgVertexDegree += number + "\n";
@@ -512,6 +810,7 @@ public class Evaluation {
 		}
 
 		// --- Radius ---
+		System.out.println(" -> Radius vector size:          " + Radius.size());
 		String contentGraphInstancesRadius = "";
 		for (Integer number : Radius) {
 			contentGraphInstancesRadius += number + "\n";
@@ -526,6 +825,7 @@ public class Evaluation {
 		}
 
 		// --- MinCut ---
+		System.out.println(" -> MinCut vector size:          " + MinCut.size() + "\n");
 		String contentGraphInstancesMinCut = "";
 		for (Integer number : MinCut) {
 			contentGraphInstancesMinCut += number + "\n";
@@ -569,6 +869,28 @@ public class Evaluation {
 	 */
 	public static void init() {
 
+		setListFailureTmp(new ArrayList<File>());
+		setListFilesTmp(new ArrayList<File>());
+		setListFilesFinal(new ArrayList<File>());
+		setListFilesNotComparable(new ArrayList<File>());
+		setListOfGamintbFiles(new ArrayList<File>());
+		setListOfMintbFiles(new ArrayList<File>());
+		setListOfGraphInstanceFiles(new ArrayList<File>());
+
+		setListOfGamintRuntimeFiles(new ArrayList<Integer>());
+		setListOfMintbRuntimeFiles(new ArrayList<Integer>());
+		setNumbTollboothsGamintb(new ArrayList<Integer>());
+		setNumbTollboothsMintb(new ArrayList<Integer>());
+
+		setDegeneracy(new ArrayList<Integer>());
+		setDiameter(new ArrayList<Integer>());
+		setEccentricity(new ArrayList<Double>());
+		setMaxVertexDegree(new ArrayList<Integer>());
+		setMinVertexDegree(new ArrayList<Integer>());
+		setAvgVertexDegree(new ArrayList<Double>());
+		setRadius(new ArrayList<Integer>());
+		setMinCut(new ArrayList<Integer>());
+
 		System.out.println("Start extracting data now... Please wait...");
 		DataExtractor();
 		writeToFile();
@@ -591,6 +913,8 @@ public class Evaluation {
 		setPathInstances("./files/Evaluation/Instances/GridGraph/50-100");
 		setPathHeuristics("./files/Evaluation/heuristics/GridGraph/50-100");
 		setPathCharacteristics("./files/Evaluation/characteristics/GridGraph/50-100");
+		setPathRuntime("./files/Evaluation/Runtime/GridGraph/50-100");
+		setPathFailure("./files/Evaluation/heuristics/failureFilesGridGraph.txt");
 		// start extracting data
 		init();
 
@@ -601,6 +925,20 @@ public class Evaluation {
 		setPathInstances("./files/Evaluation/Instances/Poisson/50-100");
 		setPathHeuristics("./files/Evaluation/heuristics/Poisson/50-100");
 		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/50-100");
+		setPathRuntime("./files/Evaluation/Runtime/Poisson/50-100");
+		setPathFailure("./files/Evaluation/heuristics/failureFilesPoisson.txt");
+		// start extracting data
+		init();
+
+		/*
+		 * --- HeavyTail ---
+		 */
+		System.out.println("\n -------------------\n|  HeavyTail Graph  |\n -------------------\n");
+		setPathInstances("./files/Evaluation/Instances/HeavyTail/50-100");
+		setPathHeuristics("./files/Evaluation/heuristics/HeavyTail/50-100");
+		setPathCharacteristics("./files/Evaluation/characteristics/HeavyTail/50-100");
+		setPathRuntime("./files/Evaluation/Runtime/HeavyTail/50-100");
+		setPathFailure("./files/Evaluation/heuristics/failureFilesHeavyTail.txt");
 		// start extracting data
 		init();
 

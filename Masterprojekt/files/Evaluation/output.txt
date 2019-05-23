@@ -1,0 +1,29 @@
+
+ ---------------
+|   GridGraph   |
+ ---------------
+
+Start extracting data now... Please wait...
+
+listOfMintbFile size:          250
+listOfGamintbFiles size:       250
+listOfGraphInstanceFiles size: 250
+
+
+ -> GAMINTB vector size:         250
+ -> MINTB vector size:           250
+
+ -> GAMINTB Runtime vector size: 250
+ -> MINTB Runtime vector size:   250
+
+
+ -> Degeneracy vector size:      250
+ -> Diameter   vector size:      250
+ -> Eccentricity vector size:    250
+ -> MaxVertexDegree vector size: 250
+ -> MinVertexDgree vector size:  250
+ -> AvgVertexDegree vector size: 250
+ -> Radius vector size:          250
+ -> MinCut vector size:          250
+
+Extracting data was successfull...
