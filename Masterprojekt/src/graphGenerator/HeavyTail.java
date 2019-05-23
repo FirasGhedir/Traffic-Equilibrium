@@ -63,8 +63,9 @@ public class HeavyTail implements GraphGenerator<Vertex, Edge, Vertex> {
 		}
 		int tmp = 0;
 		for (int i = size; i < n; i++) {
-			for (int j = 0; j < size; j++) {
-				do {
+			do {
+				for (int j = 0; j < size; j++) {
+
 					double probability = rnd.nextDouble();
 					double result = vertices.get(j).getDeg() / d;
 					if (probability < result / d) {
@@ -75,14 +76,13 @@ public class HeavyTail implements GraphGenerator<Vertex, Edge, Vertex> {
 						vertices.get(j).setDeg(vertices.get(j).getDeg() + 1.0);
 
 					}
-
-				} while (vertices.get(i).getDeg() == 0);
-			}
+				}
+			} while (vertices.get(i).getDeg() == 0);
 
 			d += tmp;
 			tmp = 0;
 		}
-
+System.out.println(" d is : " + d);
 	}
 
 	public void UFinit(int n) {
@@ -128,5 +128,3 @@ public class HeavyTail implements GraphGenerator<Vertex, Edge, Vertex> {
 	}
 
 }
-
-

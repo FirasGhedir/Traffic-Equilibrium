@@ -24,6 +24,7 @@ public class GaMINTB {
 	long start;
 	long end;
 	boolean flag;
+	boolean result;
 
 
 	public GaMINTB(Graphs graph,int p) throws IloException {
@@ -73,8 +74,9 @@ public class GaMINTB {
         	
 		end =  System.currentTimeMillis();
 		timer = end - start;
+	    result = firas.evaluation(graph, alpha.get());
 		resultSet();
-		System.err.println(firas.evaluation(graph, alpha.get()) + " sidi sidi ");
+		System.err.println(firas.evaluation(graph, alpha.get()) + "  => RESULT  ");
 	}
 	
 	public void resultSet() {
@@ -128,7 +130,7 @@ public class GaMINTB {
 
 			}
  
-			String  feasiblity = "Feasibility: " +  flag ; 
+			String  feasiblity = "Feasibility: " +  result ; 
 			buildFlowWriter.printf("%s\n", feasiblity);
 
 			/*

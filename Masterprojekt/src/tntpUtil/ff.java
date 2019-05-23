@@ -27,6 +27,12 @@ public class ff {
 					+ " from : " + g.getPlayers().get(i).getSource().getId() + " to : "
 					+ g.getPlayers().get(i).getSink().getId());
 		}
+		double x = 0.0;
+		for(Vertex v : g.getVertices()) {
+			System.out.println(v.getId() + " Deg : " + v.getDeg());
+			x+=v.getDeg();
+		} 
+		System.err.println(x);
 		List<Edge> KP = BellmanFordShortestPath.findPathBetween(g, g.getPlayers().get(1).getSource(), g.getPlayers().get(1).getSink()).getEdgeList();
 		System.out.println(KP.size());
         

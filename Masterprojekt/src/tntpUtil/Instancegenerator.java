@@ -50,7 +50,7 @@ public class Instancegenerator {
 		g.generatePlayers();
 		// String path ="./Masterprojekt/files/Gridinstances/" + min + "-" + max + "/" +
 		// g.getVertices().size()+"."+g.getPlayers().size()+"."+id;
-		String path = "./Masterprojekt/files/Gridinstances/" + min + "-" + max + "/" + id;
+		String path = "./Masterprojekt/files/Gridinstances/" + 50 + "-" + 100 + "/" + id;
 		buildJSON(path, g);
 
 		// if (debug) {
@@ -97,9 +97,9 @@ public class Instancegenerator {
 	public static void main(String[] args) throws IloException {
 
 		Instancegenerator tests = new Instancegenerator();
-		for (int i = 0; i < 250; i++) {
+		for (int i = 250; i < 251; i++) {
 
-			tests.generateheavytail( i);
+			tests.generategridgraph(5,10,Integer.toString(i));
 
 		}
 
