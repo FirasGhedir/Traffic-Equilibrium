@@ -13,14 +13,11 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import graphCharacteristics.CharacteristicsCalculatorMain;
 import graphModel.Graphs;
-import util.CollectionUtil;
 import util.FilenameUtils;
 
 /**
@@ -43,9 +40,10 @@ public class Evaluation {
 	// --- flags, iterators etc. ----
 	static boolean extension;
 	static int iterator;
-	static boolean debugFlag;
-	static boolean flagMINTB;
-	static boolean flagGAMINTB;
+	static boolean debugFlag = false;
+	static boolean flagMINTB = false;
+	static boolean flagGAMINTB = false;
+	static boolean flagIgnoreuncompleteFiles = false;
 
 	// --- files and folders ----
 	static File folder;
@@ -73,6 +71,7 @@ public class Evaluation {
 	static ArrayList<Double> AvgVertexDegree;
 	static ArrayList<Integer> Radius;
 	static ArrayList<Integer> MinCut;
+	static ArrayList<Integer> GraphNumberVertices;
 
 	// --- streams, reader ---
 	static FileInputStream fstream;
@@ -146,6 +145,14 @@ public class Evaluation {
 
 	/**
 	 * 
+	 * @return
+	 */
+	public static Graphs getGraph() {
+		return Evaluation.graph;
+	}
+
+	/**
+	 * 
 	 * @param iterator
 	 */
 	public static void setIterator(int iterator) {
@@ -158,6 +165,14 @@ public class Evaluation {
 	 */
 	public static void setDebugFlag(boolean debugFlag) {
 		Evaluation.debugFlag = debugFlag;
+	}
+
+	/**
+	 * 
+	 * @param flagIgnoreUncompleteFiles
+	 */
+	public static void setFlagIgnoreUncompleteFiles(boolean flagIgnoreUncompleteFiles) {
+		Evaluation.flagIgnoreuncompleteFiles = flagIgnoreUncompleteFiles;
 	}
 
 	/**
@@ -246,6 +261,14 @@ public class Evaluation {
 	 */
 	public static void setNumbTollboothsMintb(ArrayList<Integer> numbTollboothsMintb) {
 		Evaluation.numbTollboothsMintb = numbTollboothsMintb;
+	}
+
+	/**
+	 * 
+	 * @param graphNumberVertices
+	 */
+	public static void setGraphNumberVertices(ArrayList<Integer> graphNumberVertices) {
+		GraphNumberVertices = graphNumberVertices;
 	}
 
 	/**
@@ -419,6 +442,7 @@ public class Evaluation {
 			try {
 
 				setGraph(buildGraph(file));
+				GraphNumberVertices.add(graph.getVertices().size());
 
 				characteristics = new CharacteristicsCalculatorMain(graph);
 
@@ -473,55 +497,82 @@ public class Evaluation {
 			flagGAMINTB = false;
 			listFailureTmp = new ArrayList<File>();
 
-			for (int j = 0; j < listOfFiles.length; j++) {
-				String fileNameWithOutExt2 = FilenameUtils.removeExtension(listOfFiles[j].getName());
-				fileNameWithOutExt2 = FilenameUtils.removeExtension(fileNameWithOutExt2);
-				int index2 = Integer.valueOf(fileNameWithOutExt2);
+			if (flagIgnoreuncompleteFiles) {
 
-				if (index == index2) {
-					if (listOfFiles[j].getName().toUpperCase().endsWith(".MINTB.TXT")) {
-						flagMINTB = true;
-					} else if (listOfFiles[j].getName().toUpperCase().endsWith(".GAMINTB.TXT")) {
-						flagGAMINTB = true;
+				for (int j = 0; j < listOfFiles.length; j++) {
+					String fileNameWithOutExt2 = FilenameUtils.removeExtension(listOfFiles[j].getName());
+					fileNameWithOutExt2 = FilenameUtils.removeExtension(fileNameWithOutExt2);
+					int index2 = Integer.valueOf(fileNameWithOutExt2);
+
+					if (index == index2) {
+						++counter;
 					}
-					++counter;
 				}
-			}
 
-			// if as well instance file, MINTB file as GMINTB file exists: counter value has
-			// to be equal 3
-			if (counter == 3) {
-				listFilesFinal.add(listFilesTmp.get(i));
+				// if as well instance file, MINTB file as GMINTB file exists: counter value has
+				// to be equal 3
+				if (counter == 3) {
+					listFilesFinal.add(listFilesTmp.get(i));
 
-				// put failure file into list.
+					// put failure file into list.
+				} else {
+
+					listFilesNotComparable.add(listFilesTmp.get(i));
+				}
+
 			} else {
 
-				// --- case 1: gamintb file is missing
-				if (!flagGAMINTB && flagMINTB) {
-					if (listFilesTmp.get(i).getName().toUpperCase().endsWith("MINTB.TXT")) {
-						listFilesFinal.add(listFilesTmp.get(i));
-						listFilesFinal.add(failureFileGAMINTB);
-					} else {
-						listFilesFinal.add(listFilesTmp.get(i));
+				for (int j = 0; j < listOfFiles.length; j++) {
+					String fileNameWithOutExt2 = FilenameUtils.removeExtension(listOfFiles[j].getName());
+					fileNameWithOutExt2 = FilenameUtils.removeExtension(fileNameWithOutExt2);
+					int index2 = Integer.valueOf(fileNameWithOutExt2);
+
+					if (index == index2) {
+						if (listOfFiles[j].getName().toUpperCase().endsWith(".MINTB.TXT")) {
+							flagMINTB = true;
+						} else if (listOfFiles[j].getName().toUpperCase().endsWith(".GAMINTB.TXT")) {
+							flagGAMINTB = true;
+						}
+						++counter;
 					}
-				}
-				// --- case 2: mintb file is missing
-				if (flagGAMINTB && !flagMINTB) {
-					if (listFilesTmp.get(i).getName().toUpperCase().endsWith("GAMINTB.TXT")) {
-						listFilesFinal.add(failureFileMINTB);
-						listFilesFinal.add(listFilesTmp.get(i));
-					} else {
-						listFilesFinal.add(listFilesTmp.get(i));
-					}
-				}
-				// --- case 3: as well mintb as gamintb file is missing
-				if (!flagGAMINTB && !flagMINTB) {
-					listFilesFinal.add(listFilesTmp.get(i));
-					listFilesFinal.add(failureFileGAMINTB);
-					listFilesFinal.add(failureFileMINTB);
 				}
 
-				listFilesNotComparable.add(listFilesTmp.get(i));
+				// if as well instance file, MINTB file as GMINTB file exists: counter value has
+				// to be equal 3
+				if (counter == 3) {
+					listFilesFinal.add(listFilesTmp.get(i));
+
+					// put failure file into list.
+				} else {
+
+					// --- case 1: gamintb file is missing
+					if (!flagGAMINTB && flagMINTB) {
+						if (listFilesTmp.get(i).getName().toUpperCase().endsWith("MINTB.TXT")) {
+							listFilesFinal.add(listFilesTmp.get(i));
+							listFilesFinal.add(failureFileGAMINTB);
+						} else {
+							listFilesFinal.add(listFilesTmp.get(i));
+						}
+					}
+					// --- case 2: mintb file is missing
+					if (flagGAMINTB && !flagMINTB) {
+						if (listFilesTmp.get(i).getName().toUpperCase().endsWith("GAMINTB.TXT")) {
+							listFilesFinal.add(failureFileMINTB);
+							listFilesFinal.add(listFilesTmp.get(i));
+						} else {
+							listFilesFinal.add(listFilesTmp.get(i));
+						}
+					}
+					// --- case 3: as well mintb as gamintb file is missing
+					if (!flagGAMINTB && !flagMINTB) {
+						listFilesFinal.add(listFilesTmp.get(i));
+						listFilesFinal.add(failureFileGAMINTB);
+						listFilesFinal.add(failureFileMINTB);
+					}
+
+					listFilesNotComparable.add(listFilesTmp.get(i));
+				}
+
 			}
 
 			if (debugFlag) {
@@ -608,7 +659,7 @@ public class Evaluation {
 
 		System.out.println("\n   listOfMintbFile size:          " + listOfMintbFiles.size());
 		System.out.println("   listOfGamintbFiles size:       " + listOfGamintbFiles.size());
-		System.out.println("   	listOfGraphInstanceFiles size: " + listOfGraphInstanceFiles.size() + "\n");
+		System.out.println("   listOfGraphInstanceFiles size: " + listOfGraphInstanceFiles.size() + "\n");
 
 		buildGamintbData(listOfGamintbFiles);
 		buildMintbData(listOfMintbFiles);
@@ -842,6 +893,26 @@ public class Evaluation {
 
 	/**
 	 * 
+	 */
+	private static void replaceMissingFileData() {
+
+		// replaces missing Mintb file data
+		for (int i = 0; i < numbTollboothsMintb.size(); i++) {
+			if (numbTollboothsMintb.get(i) == 0) {
+				numbTollboothsMintb.set(i, GraphNumberVertices.get(i));
+			}
+		}
+
+		// replaces missing Gamintb file data
+		for (int i = 0; i < numbTollboothsGamintb.size(); i++) {
+			if (numbTollboothsGamintb.get(i) == 0) {
+				numbTollboothsGamintb.set(i, GraphNumberVertices.get(i));
+			}
+		}
+	}
+
+	/**
+	 * 
 	 * @param instance
 	 * @return
 	 */
@@ -891,9 +962,12 @@ public class Evaluation {
 		setRadius(new ArrayList<Integer>());
 		setMinCut(new ArrayList<Integer>());
 
+		setGraphNumberVertices(new ArrayList<Integer>());
+
 		System.out.println("Start extracting data now... Please wait...");
 		DataExtractor();
 		writeToFile();
+		replaceMissingFileData();
 		System.out.println("Extracting data was successfull...");
 	}
 
@@ -903,8 +977,8 @@ public class Evaluation {
 	 */
 	public static void main(String[] args) {
 
-//		setDebugFlag(true);
 		setDebugFlag(false);
+		setFlagIgnoreUncompleteFiles(true);
 
 		/*
 		 * --- GridGraph ---
@@ -942,5 +1016,17 @@ public class Evaluation {
 		// start extracting data
 		init();
 
+		/*
+		 * edited files below; set missing files of poisson graph as reference
+		 */
+//		System.out.println("\n ------------------------\n| Poisson Graph (edited) |\n ------------------------\n");
+//		setFlagIgnoreUncompleteFiles(true);
+//		setPathInstances("./files/Evaluation/Instances/Poisson/50-100");
+//		setPathHeuristics("./files/Evaluation/heuristics/Poisson/uncomplete/50-100");
+//		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/uncomplete/50-100");
+//		setPathRuntime("./files/Evaluation/Runtime/Poisson/uncomplete/50-100");
+//		setPathFailure("./files/Evaluation/heuristics/failureFilesPoisson.txt");
+//		// start extracting data
+//		init();
 	}
 }

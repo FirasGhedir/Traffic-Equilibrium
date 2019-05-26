@@ -37,12 +37,12 @@ df = r1 + r2 - 2;
 t = av3 / sqrt(((r1-1)*av1 + (r2-1)*av2) / df); 
 
 %Normal Probability Plot
-figure;
-normplot(t)
-title (message, 'FontSize', 12)
-ylabel('probability')
-xlabel('t-value')
-grid on
+% figure;
+% normplot(t)
+% title (message, 'FontSize', 12)
+% ylabel('probability')
+% xlabel('t-value')
+% grid on
 
 end
 

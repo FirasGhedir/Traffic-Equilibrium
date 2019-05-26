@@ -26,13 +26,13 @@ av = (d - v^2 / r) / (r - 1);
 t = (m - gm) * sqrt(r/av);
 df = r - 1;
 
-%Normal Probability Plot
-figure;
-normplot(t)
-title (message, 'FontSize', 12)
-ylabel('probability')
-xlabel('t-value')
-grid on
+% %Normal Probability Plot
+% figure;
+% normplot(t)
+% title (message, 'FontSize', 12)
+% ylabel('probability')
+% xlabel('t-value')
+% grid on
 
 end
 

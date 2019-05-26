@@ -8,28 +8,18 @@ clc;
 clear all ;
 close all ;
 
+
 %% --- read in number of tollbooths and feature vectors ---
 dataReader
 
 
-%% --- heuristic comparison ---
-%heuristicComparison
+%% --- sort vectors by number of tollbooths ---
+sortVectors
 
 
 %% --- plot comparison of graph characteristics ---
-%featureVectorComparison
+featureComparison
 
-% checks combinations of :
-% ----------------
-% -> vectorDegeneracy 
-% -> vectorDiameter 
-% -> vectorEccentricity 
-% -> vectorMaxVertexDegree 
-% -> vectorMinVertexDegree
-% -> vectorAvgVertexDegree 
-% -> vectorRadius
-% -> vectorMinCut
-% ----------------
 
 %% --- performance ---
 performanceComparison
