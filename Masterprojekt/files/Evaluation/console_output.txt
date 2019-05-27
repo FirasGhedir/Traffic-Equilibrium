@@ -1,0 +1,145 @@
+
+ ---------------
+|   GridGraph   |
+ ---------------
+
+Start extracting data now... Please wait...
+
+   listOfMintbFile size:          250
+   listOfGamintbFiles size:       250
+   listOfGraphInstanceFiles size: 250
+
+
+ -> GAMINTB vector size:         250
+ -> MINTB vector size:           250
+
+ -> GAMINTB Runtime vector size: 250
+ -> MINTB Runtime vector size:   250
+
+
+ -> Degeneracy vector size:      250
+ -> Diameter   vector size:      250
+ -> Eccentricity vector size:    250
+ -> MaxVertexDegree vector size: 250
+ -> MinVertexDgree vector size:  250
+ -> AvgVertexDegree vector size: 250
+ -> Radius vector size:          250
+ -> MinCut vector size:          250
+
+Extracting data was successfull...
+
+ -------------------
+|   Poisson Graph   |
+ -------------------
+
+Start extracting data now... Please wait...
+
+   listOfMintbFile size:          250
+   listOfGamintbFiles size:       250
+   listOfGraphInstanceFiles size: 250
+
+
+ -> GAMINTB vector size:         250
+ -> MINTB vector size:           250
+
+ -> GAMINTB Runtime vector size: 250
+ -> MINTB Runtime vector size:   250
+
+
+ -> Degeneracy vector size:      250
+ -> Diameter   vector size:      250
+ -> Eccentricity vector size:    250
+ -> MaxVertexDegree vector size: 250
+ -> MinVertexDgree vector size:  250
+ -> AvgVertexDegree vector size: 250
+ -> Radius vector size:          250
+ -> MinCut vector size:          250
+
+Extracting data was successfull...
+
+ ------------------------
+| Poisson Graph (edited) |
+ ------------------------
+
+Start extracting data now... Please wait...
+
+   listOfMintbFile size:          96
+   listOfGamintbFiles size:       96
+   listOfGraphInstanceFiles size: 96
+
+
+ -> GAMINTB vector size:         96
+ -> MINTB vector size:           96
+
+ -> GAMINTB Runtime vector size: 96
+ -> MINTB Runtime vector size:   96
+
+
+ -> Degeneracy vector size:      96
+ -> Diameter   vector size:      96
+ -> Eccentricity vector size:    96
+ -> MaxVertexDegree vector size: 96
+ -> MinVertexDgree vector size:  96
+ -> AvgVertexDegree vector size: 96
+ -> Radius vector size:          96
+ -> MinCut vector size:          96
+
+Extracting data was successfull...
+
+ -------------------
+|  HeavyTail Graph  |
+ -------------------
+
+Start extracting data now... Please wait...
+
+   listOfMintbFile size:          250
+   listOfGamintbFiles size:       250
+   listOfGraphInstanceFiles size: 250
+
+
+ -> GAMINTB vector size:         155
+ -> MINTB vector size:           166
+
+ -> GAMINTB Runtime vector size: 155
+ -> MINTB Runtime vector size:   166
+
+
+ -> Degeneracy vector size:      250
+ -> Diameter   vector size:      250
+ -> Eccentricity vector size:    250
+ -> MaxVertexDegree vector size: 250
+ -> MinVertexDgree vector size:  250
+ -> AvgVertexDegree vector size: 250
+ -> Radius vector size:          250
+ -> MinCut vector size:          250
+
+Extracting data was successfull...
+
+ --------------------------
+| HeavyTail Graph (edited) |
+ --------------------------
+
+Start extracting data now... Please wait...
+
+   listOfMintbFile size:          188
+   listOfGamintbFiles size:       188
+   listOfGraphInstanceFiles size: 188
+
+
+ -> GAMINTB vector size:         94
+ -> MINTB vector size:           105
+
+ -> GAMINTB Runtime vector size: 94
+ -> MINTB Runtime vector size:   105
+
+
+ -> Degeneracy vector size:      188
+ -> Diameter   vector size:      188
+ -> Eccentricity vector size:    188
+ -> MaxVertexDegree vector size: 188
+ -> MinVertexDgree vector size:  188
+ -> AvgVertexDegree vector size: 188
+ -> Radius vector size:          188
+ -> MinCut vector size:          188
+
+Extracting data was successfull...

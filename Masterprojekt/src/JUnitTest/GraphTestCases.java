@@ -76,7 +76,7 @@ class GraphTestCases {
 		GridGraphGenerator test = new GridGraphGenerator(2, 2);
 		test.generateGraph(graph, map);
 
-		int[] nodePotentialVector = graph.getNodePotentialVector(graph.getAdjacencyMatrix());
+		int[] nodePotentialVector = graph.getNodePotentialVector();
 
 		int[] nodePotentialVectorExpected = { 2, 2, 2, 2 };
 		assertArrayEquals(nodePotentialVectorExpected, nodePotentialVector);

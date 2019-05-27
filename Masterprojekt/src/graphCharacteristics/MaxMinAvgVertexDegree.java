@@ -53,11 +53,11 @@ public class MaxMinAvgVertexDegree {
 	 * @throws InterruptedException if an error occures
 	 */
 	public void calcMaxMinAvgVertexDegree() throws InterruptedException {
-		this.maxVertexDegree = Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).max()
+		this.maxVertexDegree = Arrays.stream(this.G.getNodePotentialVector()).max()
 				.getAsInt();
-		this.minVertexDegree = Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).min()
+		this.minVertexDegree = Arrays.stream(this.G.getNodePotentialVector()).min()
 				.getAsInt();
-		this.avgVertexDegree = Arrays.stream(this.G.getNodePotentialVector(this.G.getAdjacencyMatrix())).average()
+		this.avgVertexDegree = Arrays.stream(this.G.getNodePotentialVector()).average()
 				.orElse(Double.NaN);
 	}
 

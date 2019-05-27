@@ -442,6 +442,7 @@ public class Evaluation {
 			try {
 
 				setGraph(buildGraph(file));
+
 				GraphNumberVertices.add(graph.getVertices().size());
 
 				characteristics = new CharacteristicsCalculatorMain(graph);
@@ -452,7 +453,6 @@ public class Evaluation {
 				AvgVertexDegree.add(characteristics.getAvgVertexDegree());
 
 				// --- eccentricity
-//				eccentricities = characteristics.getEccentricities();
 				Eccentricity.add(characteristics.getAvgEccentricity());
 
 				// --- Diameter
@@ -973,16 +973,16 @@ public class Evaluation {
 
 	/**
 	 * 
-	 * @param args
 	 */
-	public static void main(String[] args) {
-
-		setDebugFlag(false);
+	public static void run() {
 
 		/*
-		 * --- GridGraph ---
+		 * =============================================================
+		 * ----------------------- GridGraph ---------------------------
+		 * =============================================================
 		 */
 		System.out.println("\n ---------------\n|   GridGraph   |\n ---------------\n");
+		setFlagIgnoreUncompleteFiles(false);
 		setPathInstances("./files/Evaluation/Instances/GridGraph/50-100");
 		setPathHeuristics("./files/Evaluation/heuristics/GridGraph/50-100");
 		setPathCharacteristics("./files/Evaluation/characteristics/GridGraph/50-100");
@@ -992,9 +992,12 @@ public class Evaluation {
 		init();
 
 		/*
-		 * --- Poisson ---
+		 * =============================================================
+		 * --------------------- Poisson Graph -------------------------
+		 * =============================================================
 		 */
 		System.out.println("\n -------------------\n|   Poisson Graph   |\n -------------------\n");
+		setFlagIgnoreUncompleteFiles(false);
 		setPathInstances("./files/Evaluation/Instances/Poisson/50-100");
 		setPathHeuristics("./files/Evaluation/heuristics/Poisson/50-100");
 		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/50-100");
@@ -1004,9 +1007,25 @@ public class Evaluation {
 		init();
 
 		/*
-		 * --- HeavyTail ---
+		 * edited files below; set missing files of poisson graph as reference
+		 */
+		System.out.println("\n ------------------------\n| Poisson Graph (edited) |\n ------------------------\n");
+		setFlagIgnoreUncompleteFiles(true);
+		setPathInstances("./files/Evaluation/Instances/Poisson/50-100");
+		setPathHeuristics("./files/Evaluation/heuristics/Poisson/uncomplete/50-100");
+		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/uncomplete/50-100");
+		setPathRuntime("./files/Evaluation/Runtime/Poisson/uncomplete/50-100");
+		setPathFailure("./files/Evaluation/heuristics/failureFilesPoisson.txt");
+		// start extracting data
+		init();
+
+		/*
+		 * =============================================================
+		 * -------------------- HeavyTail Graph ------------------------
+		 * =============================================================
 		 */
 		System.out.println("\n -------------------\n|  HeavyTail Graph  |\n -------------------\n");
+		setFlagIgnoreUncompleteFiles(false);
 		setPathInstances("./files/Evaluation/Instances/HeavyTail/50-100");
 		setPathHeuristics("./files/Evaluation/heuristics/HeavyTail/50-100");
 		setPathCharacteristics("./files/Evaluation/characteristics/HeavyTail/50-100");
@@ -1016,26 +1035,28 @@ public class Evaluation {
 		init();
 
 		/*
-		 * edited files below; set missing files of poisson graph as reference
+		 * edited files below; set missing files of heavy tailed graph as reference
 		 */
-//		System.out.println("\n ------------------------\n| Poisson Graph (edited) |\n ------------------------\n");
-//		setFlagIgnoreUncompleteFiles(true);
-//		setPathInstances("./files/Evaluation/Instances/Poisson/50-100");
-//		setPathHeuristics("./files/Evaluation/heuristics/Poisson/uncomplete/50-100");
-//		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/uncomplete/50-100");
-//		setPathRuntime("./files/Evaluation/Runtime/Poisson/uncomplete/50-100");
-//		setPathFailure("./files/Evaluation/heuristics/failureFilesPoisson.txt");
-//		// start extracting data
-//		init();
-//		
-//		System.out.println("\n --------------------------\n| HeavyTail Graph (edited) |\n --------------------------\n");
-//		setFlagIgnoreUncompleteFiles(true);
-//		setPathInstances("./files/Evaluation/Instances/HeavyTail/50-100");
-//		setPathHeuristics("./files/Evaluation/heuristics/HeavyTail/uncomplete/50-100");
-//		setPathCharacteristics("./files/Evaluation/characteristics/HeavyTail/uncomplete/50-100");
-//		setPathRuntime("./files/Evaluation/Runtime/HeavyTail/uncomplete/50-100");
-//		setPathFailure("./files/Evaluation/heuristics/failureFilesHeavyTail.txt");
-//		// start extracting data
-//		init();
+		System.out
+				.println("\n --------------------------\n| HeavyTail Graph (edited) |\n --------------------------\n");
+		setFlagIgnoreUncompleteFiles(true);
+		setPathInstances("./files/Evaluation/Instances/HeavyTail/50-100");
+		setPathHeuristics("./files/Evaluation/heuristics/HeavyTail/uncomplete/50-100");
+		setPathCharacteristics("./files/Evaluation/characteristics/HeavyTail/uncomplete/50-100");
+		setPathRuntime("./files/Evaluation/Runtime/HeavyTail/uncomplete/50-100");
+		setPathFailure("./files/Evaluation/heuristics/failureFilesHeavyTail.txt");
+		// start extracting data
+		init();
+	}
+
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		setDebugFlag(false);
+
+		run();
 	}
 }

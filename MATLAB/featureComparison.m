@@ -51,8 +51,35 @@ else
     disp('No significant dependency of Degeneracy with MINTB on any Graph.')
 end
 
+% ---- Degeneracy (edited )----
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorDegeneracyPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorDegeneracyHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'Degeneracy (GAMINTB | edited)', vectorDegeneracyGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorDegeneracyPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorDegeneracyHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'Degeneracy (MINTB | edited)', '/plots/featureDegeneracy.fig')
 
-% ---- Diameter ----
+% GAMINTB
+correlationCoefficient_Degeneracy_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorDegeneracyPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_Degeneracy_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorDegeneracyHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Degeneracy_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of Degeneracy with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Degeneracy_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_Degeneracy_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of Degeneracy with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Degeneracy_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of Degeneracy with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_Degeneracy_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorDegeneracyPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_Degeneracy_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorDegeneracyHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Degeneracy_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of Degeneracy with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Degeneracy_PoissonEdited_MINTB)
+elseif correlationCoefficient_Degeneracy_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of Degeneracy with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Degeneracy_HeavyTailEdited_MINTB)
+else
+    disp('No significant dependency of Degeneracy with MINTB on any Graph.')
+end
+
+
+%% ---- Diameter ----
 plotFeatureComparison(vectorDiameterGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorDiameterPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDiameterHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'Diameter (GAMINTB)', vectorDiameterGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorDiameterPoissonSortedByMintb, vectorMintbPoissonSorted, vectorDiameterHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Diameter (MINTB)', '/plots/featureDiameter.fig')
 
 % GAMINTB
@@ -85,7 +112,35 @@ else
     disp('No significant dependency of Diameter with MINTB on any Graph.')
 end
 
-% ---- Eccentricity ----
+% ---- Diameter (edited )----
+plotFeatureComparison(vectorDiameterGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorDiameterPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorDiameterHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'Diameter (GAMINTB | edited)', vectorDiameterGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorDiameterPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorDiameterHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'Diameter (MINTB | edited)', '/plots/featureDiameter.fig')
+
+% GAMINTB
+correlationCoefficient_Diameter_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorDiameterPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_Diameter_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorDiameterHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Diameter_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of Diameter with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Diameter_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_Diameter_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of Diameter with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Diameter_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of Diameter with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_Diameter_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorDiameterPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_Diameter_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorDiameterHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Diameter_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of Diameter with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Diameter_PoissonEdited_MINTB)
+elseif correlationCoefficient_Diameter_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of Diameter with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Diameter_HeavyTailEdited_MINTB)
+else
+    disp('No significant dependency of Diameter with MINTB on any Graph.')
+end
+
+
+%% ---- Eccentricity ----
 plotFeatureComparison(vectorEccentricityGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorEccentricityPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorEccentricityHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'Eccentricity (GAMINTB)', vectorEccentricityGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorEccentricityPoissonSortedByMintb, vectorMintbPoissonSorted, vectorEccentricityHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Eccentricity (MINTB)', '/plots/featureEccentricity.fig')
 
 % GAMINTB
@@ -118,8 +173,35 @@ else
     disp('No significant dependency of Eccentricity with MINTB on any Graph.')
 end
 
+% ---- Eccentricity (edited )----
+plotFeatureComparison(vectorEccentricityGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorEccentricityPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorEccentricityHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'Eccentricity (GAMINTB | edited)', vectorEccentricityGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorEccentricityPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorEccentricityHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'Eccentricity (MINTB | edited)', '/plots/featureEccentricity.fig')
 
-% ---- MaxVertexDegree ----
+% GAMINTB
+correlationCoefficient_Eccentricity_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorEccentricityPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_Eccentricity_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorEccentricityHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Eccentricity_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of Eccentricity with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Eccentricity_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_Eccentricity_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of Eccentricity with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Eccentricity_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of Eccentricity with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_Eccentricity_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorEccentricityPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_Eccentricity_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorEccentricityHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Eccentricity_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of Eccentricity with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Eccentricity_PoissonEdited_MINTB)
+elseif correlationCoefficient_Eccentricity_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of Eccentricity with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Eccentricity_HeavyTailEdited_MINTB)
+else
+    disp('No significant dependency of Eccentricity with MINTB on any Graph.')
+end
+
+
+%% ---- MaxVertexDegree ----
 plotFeatureComparison(vectorMaxVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMaxVertexDegreePoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorMaxVertexDegreeHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'MaxVertexDegree (GAMINTB)', vectorMaxVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMaxVertexDegreePoissonSortedByMintb, vectorMintbPoissonSorted, vectorMaxVertexDegreeHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'MaxVertexDegree (MINTB)', '/plots/featureMaxVertexDegree.fig')
 
 % GAMINTB
@@ -152,8 +234,35 @@ else
     disp('No significant dependency of MaxVertexDegree with MINTB on any Graph.')
 end
 
+% ---- MaxVertexDegree (edited )----
+plotFeatureComparison(vectorMaxVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMaxVertexDegreePoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorMaxVertexDegreeHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'MaxVertexDegree (GAMINTB | edited)', vectorMaxVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMaxVertexDegreePoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorMaxVertexDegreeHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'MaxVertexDegree (MINTB | edited)', '/plots/featureMaxVertexDegree.fig')
 
-% ---- MinVertexDegree ----
+% GAMINTB
+correlationCoefficient_MaxVertexDegree_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreePoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_MaxVertexDegree_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreeHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_MaxVertexDegree_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of MaxVertexDegree with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_MaxVertexDegree_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_MaxVertexDegree_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of MaxVertexDegree with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_MaxVertexDegree_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of MaxVertexDegree with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_MaxVertexDegree_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreePoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_MaxVertexDegree_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreeHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_MaxVertexDegree_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of MaxVertexDegree with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_MaxVertexDegree_PoissonEdited_MINTB)
+elseif correlationCoefficient_MaxVertexDegree_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of MaxVertexDegree with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_MaxVertexDegree_HeavyTailEdited_MINTB)
+else
+    disp('No significant dependency of MaxVertexDegree with MINTB on any Graph.')
+end
+
+
+%% ---- MinVertexDegree ----
 plotFeatureComparison(vectorMinVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMinVertexDegreePoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorMinVertexDegreeHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'MinVertexDegree (GAMINTB)', vectorMinVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMinVertexDegreePoissonSortedByMintb, vectorMintbPoissonSorted, vectorMinVertexDegreeHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'MinVertexDegree (MINTB)', '/plots/featureMinVertexDegree.fig')
 
 % GAMINTB
@@ -186,8 +295,35 @@ else
     disp('No significant dependency of MinVertexDegree with MINTB on any Graph.')
 end
 
+% ---- MinVertexDegree (edited )----
+plotFeatureComparison(vectorMinVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMinVertexDegreePoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorMinVertexDegreeHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'MinVertexDegree (GAMINTB | edited)', vectorMinVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMinVertexDegreePoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorMinVertexDegreeHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'MinVertexDegree (MINTB | edited)', '/plots/featureMinVertexDegree.fig')
 
-% ---- AvgVertexDegree ----
+% GAMINTB
+correlationCoefficient_MinVertexDegree_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorMinVertexDegreePoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_MinVertexDegree_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorMinVertexDegreeHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_MinVertexDegree_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of MinVertexDegree with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_MinVertexDegree_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_MinVertexDegree_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of MinVertexDegree with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_MinVertexDegree_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of MinVertexDegree with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_MinVertexDegree_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorMinVertexDegreePoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_MinVertexDegree_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorMinVertexDegreeHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_MinVertexDegree_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of MinVertexDegree with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_MinVertexDegree_PoissonEdited_MINTB)
+elseif correlationCoefficient_MinVertexDegree_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of MinVertexDegree with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_MinVertexDegree_HeavyTailEdited_MINTB)
+else
+    disp('No significant dependency of MinVertexDegree with MINTB on any Graph.')
+end
+
+
+%% ---- AvgVertexDegree ----
 plotFeatureComparison(vectorAvgVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorAvgVertexDegreePoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorAvgVertexDegreeHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'AvgVertexDegree (GAMINTB)', vectorAvgVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorAvgVertexDegreePoissonSortedByMintb, vectorMintbPoissonSorted, vectorAvgVertexDegreeHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'AvgVertexDegree (MINTB)', '/plots/featureAvgVertexDegree.fig')
 
 % GAMINTB
@@ -220,8 +356,35 @@ else
     disp('No significant dependency of AvgVertexDegree with MINTB on any Graph.')
 end
 
+% ---- AvgVertexDegree (edited )----
+plotFeatureComparison(vectorAvgVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorAvgVertexDegreePoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorAvgVertexDegreeHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'AvgVertexDegree (GAMINTB | edited)', vectorAvgVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorAvgVertexDegreePoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorAvgVertexDegreeHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'AvgVertexDegree (MINTB | edited)', '/plots/featureAvgVertexDegree.fig')
 
-% ---- RadiusGridGraph ----
+% GAMINTB
+correlationCoefficient_AvgVertexDegree_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorAvgVertexDegreePoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_AvgVertexDegree_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorAvgVertexDegreeHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_AvgVertexDegree_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of AvgVertexDegree with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_AvgVertexDegree_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_AvgVertexDegree_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of AvgVertexDegree with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_AvgVertexDegree_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of AvgVertexDegree with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_AvgVertexDegree_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorAvgVertexDegreePoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_AvgVertexDegree_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorAvgVertexDegreeHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_AvgVertexDegree_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of AvgVertexDegree with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_AvgVertexDegree_PoissonEdited_MINTB)
+elseif correlationCoefficient_AvgVertexDegree_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of AvgVertexDegree with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_AvgVertexDegree_HeavyTailEdited_MINTB)
+else
+    disp('No significant dependency of AvgVertexDegree with MINTB on any Graph.')
+end
+
+
+%% ---- Radius ----
 plotFeatureComparison(vectorRadiusGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorRadiusPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorRadiusHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'Radius (GAMINTB)', vectorRadiusGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorRadiusPoissonSortedByMintb, vectorMintbPoissonSorted, vectorRadiusHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Radius (MINTB)', '/plots/featureRadius.fig')
 
 % GAMINTB
@@ -254,8 +417,35 @@ else
     disp('No significant dependency of Radius with MINTB on any Graph.')
 end
 
+% ---- Radius (edited )----
+plotFeatureComparison(vectorRadiusGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorRadiusPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorRadiusHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'Radius (GAMINTB | edited)', vectorRadiusGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorRadiusPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorRadiusHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'Radius (MINTB | edited)', '/plots/featureRadius.fig')
 
-% ---- MinCutGridGraph ----
+% GAMINTB
+correlationCoefficient_Radius_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorRadiusPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_Radius_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorRadiusHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Radius_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of Radius with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Radius_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_Radius_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of Radius with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Radius_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of Radius with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_Radius_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorRadiusPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_Radius_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorRadiusHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_Radius_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of Radius with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_Radius_PoissonEdited_MINTB)
+elseif correlationCoefficient_Radius_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of Radius with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_Radius_HeavyTailEdited_MINTB)
+else
+    disp('No significant dependency of Radius with MINTB on any Graph.')
+end
+
+
+%% ---- MinCut ----
 plotFeatureComparison(vectorMinCutGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMinCutPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorMinCutHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'MinCut (GAMINTB)', vectorMinCutGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMinCutPoissonSortedByMintb, vectorMintbPoissonSorted, vectorMinCutHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'MinCut (MINTB)', '/plots/featureMinCut.fig')
 
 % GAMINTB
@@ -284,6 +474,33 @@ elseif correlationCoefficient_MinCut_Poisson_MINTB > threshold
     fprintf('High dependency of MinCut with MINTB on Poisson Graph: r_correlation = %d\n', correlationCoefficient_MinCut_Poisson_MINTB)
 elseif correlationCoefficient_MinCut_HeavyTail_MINTB > threshold
     fprintf('High dependency of MinCut with MINTB on HeavyTail Graph: r_correlation = %d\n', correlationCoefficient_MinCut_HeavyTail_MINTB)
+else
+    disp('No significant dependency of MinCut with MINTB on any Graph.')
+end
+
+% ---- MinCut (edited )----
+plotFeatureComparison(vectorMinCutGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMinCutPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted, vectorMinCutHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted, 'MinCut (GAMINTB | edited)', vectorMinCutGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMinCutPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted, vectorMinCutHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted, 'MinCut (MINTB | edited)', '/plots/featureMinCut.fig')
+
+% GAMINTB
+correlationCoefficient_MinCut_PoissonEdited_GAMINTB = CalculateCorrelationCoefficient(vectorMinCutPoissonEditedSortedByGamintb, vectorGamintbPoissonEditedSorted);
+correlationCoefficient_MinCut_HeavyTailEdited_GAMINTB = CalculateCorrelationCoefficient(vectorMinCutHeavyTailEditedSortedByGamintb, vectorGamintbHeavyTailEditedSorted);
+
+if correlationCoefficient_MinCut_PoissonEdited_GAMINTB > threshold
+    fprintf('High dependency of MinCut with GAMINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_MinCut_PoissonEdited_GAMINTB)
+elseif correlationCoefficient_MinCut_HeavyTailEdited_GAMINTB > threshold
+    fprintf('High dependency of MinCut with GAMINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_MinCut_HeavyTailEdited_GAMINTB)
+else
+    disp('No significant dependency of MinCut with GAMINTB on any Graph.')
+end
+
+% MINTB
+correlationCoefficient_MinCut_PoissonEdited_MINTB = CalculateCorrelationCoefficient(vectorMinCutPoissonEditedSortedByMintb, vectorMintbPoissonEditedSorted);
+correlationCoefficient_MinCut_HeavyTailEdited_MINTB = CalculateCorrelationCoefficient(vectorMinCutHeavyTailEditedSortedByMintb, vectorMintbHeavyTailEditedSorted);
+
+if correlationCoefficient_MinCut_PoissonEdited_MINTB > threshold
+    fprintf('High dependency of MinCut with MINTB on PoissonEdited Graph: r_correlation = %d\n', correlationCoefficient_MinCut_PoissonEdited_MINTB)
+elseif correlationCoefficient_MinCut_HeavyTailEdited_MINTB > threshold
+    fprintf('High dependency of MinCut with MINTB on HeavyTailEdited Graph: r_correlation = %d\n', correlationCoefficient_MinCut_HeavyTailEdited_MINTB)
 else
     disp('No significant dependency of MinCut with MINTB on any Graph.')
 end

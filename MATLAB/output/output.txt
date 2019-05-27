@@ -981,3 +981,100 @@ One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
 One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
 One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
 doc ttest
+
+=============== Correlation coefficient ===============
+
+-> threshold: 2.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of MinCut with GAMINTB on any Graph.
+High dependency of MinCut with MINTB on HeavyTail Graph: r_correlation = 2.133514e-01
+No significant dependency of MinCut with GAMINTB on any Graph.
+No significant dependency of MinCut with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
+One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
+One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
+One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 2.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of MinCut with GAMINTB on any Graph.
+High dependency of MinCut with MINTB on HeavyTail Graph: r_correlation = 2.133514e-01
+No significant dependency of MinCut with GAMINTB on any Graph.
+No significant dependency of MinCut with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
+One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
+One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
+One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
