@@ -978,7 +978,6 @@ public class Evaluation {
 	public static void main(String[] args) {
 
 		setDebugFlag(false);
-		setFlagIgnoreUncompleteFiles(true);
 
 		/*
 		 * --- GridGraph ---
@@ -1026,6 +1025,16 @@ public class Evaluation {
 //		setPathCharacteristics("./files/Evaluation/characteristics/Poisson/uncomplete/50-100");
 //		setPathRuntime("./files/Evaluation/Runtime/Poisson/uncomplete/50-100");
 //		setPathFailure("./files/Evaluation/heuristics/failureFilesPoisson.txt");
+//		// start extracting data
+//		init();
+//		
+//		System.out.println("\n --------------------------\n| HeavyTail Graph (edited) |\n --------------------------\n");
+//		setFlagIgnoreUncompleteFiles(true);
+//		setPathInstances("./files/Evaluation/Instances/HeavyTail/50-100");
+//		setPathHeuristics("./files/Evaluation/heuristics/HeavyTail/uncomplete/50-100");
+//		setPathCharacteristics("./files/Evaluation/characteristics/HeavyTail/uncomplete/50-100");
+//		setPathRuntime("./files/Evaluation/Runtime/HeavyTail/uncomplete/50-100");
+//		setPathFailure("./files/Evaluation/heuristics/failureFilesHeavyTail.txt");
 //		// start extracting data
 //		init();
 	}

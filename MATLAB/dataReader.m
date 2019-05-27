@@ -174,3 +174,44 @@ vectorMinCutHeavyTail = dlmread(filenameMinCutHeavyTail,' ',1,0);
 %% vectors runtime
 vectorGamintbRuntimeHeavyTail = dlmread(filenameGamintbRuntimeHeavyTail,' ',1,0);
 vectorMintbRuntimeHeavyTail = dlmread(filenameMintbRuntimeHeavyTail,' ',1,0);
+
+
+%% ========== edited data ==========
+
+
+%% paths heuristics
+filenameGAMINTBHeavyTailEdited = '.\Evaluation\heuristics\HeavyTail\uncomplete\50-100\gamintb.txt';
+filenameMINTBHeavyTailEdited = '.\Evaluation\heuristics\HeavyTail\uncomplete\50-100\mintb.txt';
+
+%% paths characteristics
+% hint: set your own filepaths here
+filenameDegeneracyHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\degeneracy.txt';
+filenameDiameterHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\diameter.txt';
+filenameEccentricityHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\eccentricity.txt';
+filenameMaxVertexDegreeHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\maxVertexDegree.txt';
+filenameMinVertexDegreeHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\minVertexDegree.txt';
+filenameAvgVertexDegreeHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\avgVertexDegree.txt';
+filenameRadiusHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\radius.txt';
+filenameMinCutHeavyTailEdited = '.\Evaluation\characteristics\HeavyTail\uncomplete\50-100\minCut.txt';
+
+%% path runtime
+filenameGamintbRuntimeHeavyTailEdited = '.\Evaluation\runtime\HeavyTail\uncomplete\50-100\gamintbRuntime.txt';
+filenameMintbRuntimeHeavyTailEdited = '.\Evaluation\runtime\HeavyTail\uncomplete\50-100\mintbRuntime.txt';
+
+%% vectors heuristics
+vectorGAMINTBHeavyTailEdited = dlmread(filenameGAMINTBHeavyTailEdited,' ',1,0);
+vectorMINTBHeavyTailEdited = dlmread(filenameMINTBHeavyTailEdited,' ',1,0);
+
+%% vectors characteristics
+vectorDegeneracyHeavyTailEdited = dlmread(filenameDegeneracyHeavyTailEdited,' ',1,0);
+vectorDiameterHeavyTailEdited = dlmread(filenameDiameterHeavyTailEdited,' ',1,0);
+vectorEccentricityHeavyTailEdited = dlmread(filenameEccentricityHeavyTailEdited,' ',1,0);
+vectorMaxVertexDegreeHeavyTailEdited = dlmread(filenameMaxVertexDegreeHeavyTailEdited,' ',1,0);
+vectorMinVertexDegreeHeavyTailEdited = dlmread(filenameMinVertexDegreeHeavyTailEdited,' ',1,0);
+vectorAvgVertexDegreeHeavyTailEdited = dlmread(filenameAvgVertexDegreeHeavyTailEdited,' ',1,0);
+vectorRadiusHeavyTailEdited = dlmread(filenameRadiusHeavyTailEdited,' ',1,0);
+vectorMinCutHeavyTailEdited = dlmread(filenameMinCutHeavyTailEdited,' ',1,0);
+
+%% vectors runtime
+vectorGamintbRuntimeHeavyTailEdited = dlmread(filenameGamintbRuntimeHeavyTailEdited,' ',1,0);
+vectorMintbRuntimeHeavyTailEdited = dlmread(filenameMintbRuntimeHeavyTailEdited,' ',1,0);

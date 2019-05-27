@@ -26,14 +26,11 @@ threshold = 0.05;
 %    ->  vectorMinCutGridGraph
 %    ->  vectorGamintbRuntime
 
-% --- Test ---
-vectorGamintbRuntimeHeavyTailSortedByGamintb=1:1:250;
-vectorMintbRuntimeHeavyTailSortedByMintb=1:1:250;
-% --- end of test ---
-
 plotRuntimeComparison(vectorGamintbRuntimeGridGraphSortedByGamintb, vectorGamintbRuntimePoissonSortedByGamintb, vectorGamintbRuntimeHeavyTailSortedByGamintb, 'Runtime (GAMINTB)',vectorMintbRuntimeGridGraphSortedByMintb, vectorMintbRuntimePoissonSortedByMintb, vectorMintbRuntimeHeavyTailSortedByMintb, 'Runtime (MINTB)')
 
-%%
+
+%% t-tests
+fprintf('\n=============== t-tests ===============\n\n-> threshold: %d \n\n', threshold)
 
 % =============================== %
 %            GridGraph            %
@@ -69,6 +66,7 @@ set(gca,'XTickLabel',{'GAMINTB','MINTB'})
 title ('Boxplots with Gridgraph', 'FontSize', 12)
 ylabel('Number of tollbooths')
 grid on
+saveas(figure,[pwd '/plots/boxplotGridGraph.fig']);
 
 
 %% 
@@ -108,6 +106,7 @@ set(gca,'XTickLabel',{'GAMINTB','MINTB'})
 title ('Boxplots with Poisson Graph', 'FontSize', 12)
 ylabel('Number of tollbooths')
 grid on
+saveas(figure,[pwd '/plots/boxplotPoissonGraph.fig']);
 
 group = [ ones(size(vectorGAMINTBPoissonEdited)); 2 * ones(size(vectorMINTBPoissonEdited))];
 figure
@@ -116,7 +115,7 @@ set(gca,'XTickLabel',{'GAMINTB','MINTB'})
 title ('Boxplots with Poisson Graph (edited)', 'FontSize', 12)
 ylabel('Number of tollbooths')
 grid on
-
+saveas(figure,[pwd '/plots/boxplotPoissonGraphEdited.fig']);
 
 %% 
 
@@ -154,3 +153,13 @@ set(gca,'XTickLabel',{'GAMINTB','MINTB'})
 title ('Boxplots with HeavyTail Graph', 'FontSize', 12)
 ylabel('Number of tollbooths')
 grid on
+saveas(figure,[pwd '/plots/boxplotHeavyTailGraph.fig']);
+
+group = [ ones(size(vectorGAMINTBHeavyTailEdited)); 2 * ones(size(vectorMINTBHeavyTailEdited))];
+figure
+boxplot([vectorGAMINTBHeavyTailEdited; vectorMINTBHeavyTailEdited],group,'Labels',{'GAMINTB','MINTB'})
+set(gca,'XTickLabel',{'GAMINTB','MINTB'})
+title ('Boxplots with HeavyTail Graph (edited)', 'FontSize', 12)
+ylabel('Number of tollbooths')
+grid on
+saveas(figure,[pwd '/plots/boxplotHeavyTailGraphEdited.fig']);

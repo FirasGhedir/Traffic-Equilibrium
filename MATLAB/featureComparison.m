@@ -9,7 +9,9 @@
 threshold = 0.5;
 
 
-%%
+%% Correlation coefficient
+fprintf('\n=============== Correlation coefficient ===============\n\n-> threshold: %d \n\n', threshold)
+
 
 % =============================== %
 %           Comparison            %
@@ -136,7 +138,7 @@ end
 
 % MINTB
 correlationCoefficient_MaxVertexDegree_GridGraph_MINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted);
-correlationCoefficient_MaxVertexDegree_Poisson_MINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreePoissonSortedByMintb, vectorGMintbPoissonSorted);
+correlationCoefficient_MaxVertexDegree_Poisson_MINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreePoissonSortedByMintb, vectorMintbPoissonSorted);
 correlationCoefficient_MaxVertexDegree_HeavyTail_MINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreeHeavyTailSortedByMintb, vectorMintbHeavyTailSorted);
 
 if correlationCoefficient_MaxVertexDegree_GridGraph_MINTB > threshold

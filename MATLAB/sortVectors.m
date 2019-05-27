@@ -177,3 +177,122 @@ vectorAvgVertexDegreeHeavyTailSortedByMintb = vectorAvgVertexDegreeHeavyTail(ord
 vectorRadiusHeavyTailSortedByMintb = vectorRadiusHeavyTail(order);
 vectorMinCutHeavyTailSortedByMintb = vectorMinCutHeavyTail(order);
 vectorMintbRuntimeHeavyTailSortedByMintb = vectorMintbRuntimeHeavyTail(order);
+
+
+%% ========== edited files ==========
+
+
+%% 
+
+% =============================== %
+%          PoissonEdited          %
+% =============================== %
+
+% ---- GAMINTB ----
+[vectorGamintbPoissonEditedSorted,order] = sort(vectorGAMINTBPoissonEdited);
+
+% vectors to sort by  number of toolbooths:
+% -----------------------------------------
+%    ->  vectorDegeneracyPoissonEdited
+%    ->  vectorDiameterPoissonEdited
+%    ->  vectorEccentricityPoissonEdited
+%    ->  vectorMaxVertexDegreePoissonEdited
+%    ->  vectorMinVertexDegreePoissonEdited
+%    ->  vectorAvgVertexDegreePoissonEdited
+%    ->  vectorRadiusPoissonEdited
+%    ->  vectorMinCutPoissonEdited
+%    ->  vectorGamintbRuntime
+
+vectorDegeneracyPoissonEditedSortedByGamintb = vectorDegeneracyPoissonEdited(order);
+vectorDiameterPoissonEditedSortedByGamintb = vectorDiameterPoissonEdited(order);
+vectorEccentricityPoissonEditedSortedByGamintb = vectorEccentricityPoissonEdited(order);
+vectorMaxVertexDegreePoissonEditedSortedByGamintb = vectorMaxVertexDegreePoissonEdited(order);
+vectorMinVertexDegreePoissonEditedSortedByGamintb = vectorMinVertexDegreePoissonEdited(order);
+vectorAvgVertexDegreePoissonEditedSortedByGamintb = vectorAvgVertexDegreePoissonEdited(order);
+vectorRadiusPoissonEditedSortedByGamintb = vectorRadiusPoissonEdited(order);
+vectorMinCutPoissonEditedSortedByGamintb = vectorMinCutPoissonEdited(order);
+vectorGamintbRuntimePoissonEditedSortedByGamintb = vectorGamintbRuntimePoissonEdited(order);
+
+
+% ---- MINTB ----
+[vectorMintbPoissonEditedSorted,order] = sort(vectorMINTBPoissonEdited);
+
+% vectors to sort by  number of toolbooths:
+% -----------------------------------------
+%    ->  vectorDegeneracyPoissonEdited
+%    ->  vectorDiameterPoissonEdited
+%    ->  vectorEccentricityPoissonEdited
+%    ->  vectorMaxVertexDegreePoissonEdited
+%    ->  vectorMinVertexDegreePoissonEdited
+%    ->  vectorAvgVertexDegreePoissonEdited
+%    ->  vectorRadiusPoissonEdited
+%    ->  vectorMinCutPoissonEdited
+%    ->  vectorMintbRuntime
+
+vectorDegeneracyPoissonEditedSortedByMintb = vectorDegeneracyPoissonEdited(order);
+vectorDiameterPoissonEditedSortedByMintb = vectorDiameterPoissonEdited(order);
+vectorEccentricityPoissonEditedSortedByMintb = vectorEccentricityPoissonEdited(order);
+vectorMaxVertexDegreePoissonEditedSortedByMintb = vectorMaxVertexDegreePoissonEdited(order);
+vectorMinVertexDegreePoissonEditedSortedByMintb = vectorMinVertexDegreePoissonEdited(order);
+vectorAvgVertexDegreePoissonEditedSortedByMintb = vectorAvgVertexDegreePoissonEdited(order);
+vectorRadiusPoissonEditedSortedByMintb = vectorRadiusPoissonEdited(order);
+vectorMinCutPoissonEditedSortedByMintb = vectorMinCutPoissonEdited(order);
+vectorMintbRuntimePoissonEditedSortedByMintb = vectorMintbRuntimePoissonEdited(order);
+
+
+%% 
+
+% =============================== %
+%         HeavyTailEdited         %
+% =============================== %
+
+% ---- GAMINTB ----
+[vectorGamintbHeavyTailEditedSorted,order] = sort(vectorGAMINTBHeavyTailEdited);
+
+% vectors to sort by  number of toolbooths:
+% -----------------------------------------
+%    ->  vectorDegeneracyHeavyTailEdited
+%    ->  vectorDiameterHeavyTailEdited
+%    ->  vectorEccentricityHeavyTailEdited
+%    ->  vectorMaxVertexDegreeHeavyTailEdited
+%    ->  vectorMinVertexDegreeHeavyTailEdited
+%    ->  vectorAvgVertexDegreeHeavyTailEdited
+%    ->  vectorRadiusHeavyTailEdited
+%    ->  vectorMinCutHeavyTailEdited
+%    ->  vectorGamintbRuntime
+
+vectorDegeneracyHeavyTailEditedSortedByGamintb = vectorDegeneracyHeavyTailEdited(order);
+vectorDiameterHeavyTailEditedSortedByGamintb = vectorDiameterHeavyTailEdited(order);
+vectorEccentricityHeavyTailEditedSortedByGamintb = vectorEccentricityHeavyTailEdited(order);
+vectorMaxVertexDegreeHeavyTailEditedSortedByGamintb = vectorMaxVertexDegreeHeavyTailEdited(order);
+vectorMinVertexDegreeHeavyTailEditedSortedByGamintb = vectorMinVertexDegreeHeavyTailEdited(order);
+vectorAvgVertexDegreeHeavyTailEditedSortedByGamintb = vectorAvgVertexDegreeHeavyTailEdited(order);
+vectorRadiusHeavyTailEditedSortedByGamintb = vectorRadiusHeavyTailEdited(order);
+vectorMinCutHeavyTailEditedSortedByGamintb = vectorMinCutHeavyTailEdited(order);
+vectorGamintbRuntimeHeavyTailEditedSortedByGamintb = vectorGamintbRuntimeHeavyTailEdited(order);
+
+
+% ---- MINTB ----
+[vectorMintbHeavyTailEditedSorted,order] = sort(vectorMINTBHeavyTailEdited);
+
+% vectors to sort by  number of toolbooths:
+% -----------------------------------------
+%    ->  vectorDegeneracyHeavyTailEdited
+%    ->  vectorDiameterHeavyTailEdited
+%    ->  vectorEccentricityHeavyTailEdited
+%    ->  vectorMaxVertexDegreeHeavyTailEdited
+%    ->  vectorMinVertexDegreeHeavyTailEdited
+%    ->  vectorAvgVertexDegreeHeavyTailEdited
+%    ->  vectorRadiusHeavyTailEdited
+%    ->  vectorMinCutHeavyTailEdited
+%    ->  vectorMintbRuntime
+
+vectorDegeneracyHeavyTailEditedSortedByMintb = vectorDegeneracyHeavyTailEdited(order);
+vectorDiameterHeavyTailEditedSortedByMintb = vectorDiameterHeavyTailEdited(order);
+vectorEccentricityHeavyTailEditedSortedByMintb = vectorEccentricityHeavyTailEdited(order);
+vectorMaxVertexDegreeHeavyTailEditedSortedByMintb = vectorMaxVertexDegreeHeavyTailEdited(order);
+vectorMinVertexDegreeHeavyTailEditedSortedByMintb = vectorMinVertexDegreeHeavyTailEdited(order);
+vectorAvgVertexDegreeHeavyTailEditedSortedByMintb = vectorAvgVertexDegreeHeavyTailEdited(order);
+vectorRadiusHeavyTailEditedSortedByMintb = vectorRadiusHeavyTailEdited(order);
+vectorMinCutHeavyTailEditedSortedByMintb = vectorMinCutHeavyTailEdited(order);
+vectorMintbRuntimeHeavyTailEditedSortedByMintb = vectorMintbRuntimeHeavyTailEdited(order);

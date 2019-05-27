@@ -8,6 +8,9 @@ clc;
 clear all ;
 close all ;
 
+%% --- save console output ---
+diary('./output/output.txt')
+
 
 %% --- read in number of tollbooths and feature vectors ---
 dataReader
