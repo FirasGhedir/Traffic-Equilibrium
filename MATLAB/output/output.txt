@@ -1,3 +1,795 @@
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.graphics.axis.Axes/set')" style="font-weight:bold">matlab.graphics.axis.Axes/set</a>
+Invalid or deleted object.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot>renderLabels/setLabelappdata', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 3010)" style="font-weight:bold">boxplot>renderLabels/setLabelappdata</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',3010,0)">line 3010</a>)
+            set(ax,'ActivePositionProperty','OuterPosition');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot>renderLabels', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 2911)" style="font-weight:bold">boxplot>renderLabels</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',2911,0)">line 2911</a>)
+    setLabelappdata()
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 407)" style="font-weight:bold">boxplot</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',407,0)">line 407</a>)
+hlabel = renderLabels (labelDataLocation,labelPtsPosition,labelText,...
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('performanceComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m', 64)" style="font-weight:bold">performanceComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m',64,0)">line 64</a>)
+boxplot([vectorGAMINTBGridGraph; vectorMINTBGridGraph],group,'Labels',{'GAMINTB','MINTB'})
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 28)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',28,0)">line 28</a>)
+performanceComparison
+} 
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
+One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
+One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
+One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+doc scatter
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+doc scatter
+doc lsline
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+scatter
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scatter', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m', 41)" style="font-weight:bold">scatter</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',41,0)">line 41</a>)
+Not enough input arguments.
+} 
+doc scatter
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+[Warning: No allowed line types or scatterplots found. Nothing done.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lsline', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m', 46)" style="font-weight:bold">lsline</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 15)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',15,0)">line 15</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 21)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',21,0)">line 21</a>)] 
+[Warning: No allowed line types or scatterplots found. Nothing done.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lsline', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m', 46)" style="font-weight:bold">lsline</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 18)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',18,0)">line 18</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 21)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',21,0)">line 21</a>)] 
+[Warning: No allowed line types or scatterplots found. Nothing done.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lsline', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m', 46)" style="font-weight:bold">lsline</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 21)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',21,0)">line 21</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 21)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',21,0)">line 21</a>)] 
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+[Warning: No allowed line types or scatterplots found. Nothing done.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lsline', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m', 46)" style="font-weight:bold">lsline</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 15)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',15,0)">line 15</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)] 
+[Warning: No allowed line types or scatterplots found. Nothing done.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lsline', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m', 46)" style="font-weight:bold">lsline</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 18)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',18,0)">line 18</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)] 
+[Warning: No allowed line types or scatterplots found. Nothing done.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lsline', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m', 46)" style="font-weight:bold">lsline</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\lsline.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 21)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',21,0)">line 21</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)] 
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
+One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
+One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
+One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scatter', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m', 130)" style="font-weight:bold">scatter</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',130,0)">line 130</a>)
+There is no LineStyle property on the Scatter class.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 14)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',14,0)">line 14</a>)
+scatter(inputVector2, inputVector1, 'bx:')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted,
+vectorDegeneracyPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDegeneracyHeavyTailSortedByGamintb,
+vectorGamintbHeavyTailSorted, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb,
+vectorMintbGridGraphSorted, vectorDegeneracyPoissonSortedByMintb, vectorMintbPoissonSorted,
+vectorDegeneracyHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Degeneracy (MINTB)')
+} 
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scatter', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m', 130)" style="font-weight:bold">scatter</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',130,0)">line 130</a>)
+There is no LineStyle property on the Scatter class.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 14)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',14,0)">line 14</a>)
+scatter(inputVector2, inputVector1, 'bx:')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted,
+vectorDegeneracyPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDegeneracyHeavyTailSortedByGamintb,
+vectorGamintbHeavyTailSorted, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb,
+vectorMintbGridGraphSorted, vectorDegeneracyPoissonSortedByMintb, vectorMintbPoissonSorted,
+vectorDegeneracyHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Degeneracy (MINTB)')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)
+featureComparison
+} 
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scatter', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m', 130)" style="font-weight:bold">scatter</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',130,0)">line 130</a>)
+There is no LineStyle property on the Scatter class.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 14)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',14,0)">line 14</a>)
+scatter(inputVector2, inputVector1, 'bx:')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted,
+vectorDegeneracyPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDegeneracyHeavyTailSortedByGamintb,
+vectorGamintbHeavyTailSorted, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb,
+vectorMintbGridGraphSorted, vectorDegeneracyPoissonSortedByMintb, vectorMintbPoissonSorted,
+vectorDegeneracyHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Degeneracy (MINTB)')
+} 
+opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',130,0)
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',14,0)
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scatter', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m', 78)" style="font-weight:bold">scatter</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',78,0)">line 78</a>)
+X and Y must be vectors of the same length.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 18)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',18,0)">line 18</a>)
+scatter(inputVector6, inputVector1, 'r')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted,
+vectorDegeneracyPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDegeneracyHeavyTailSortedByGamintb,
+vectorGamintbHeavyTailSorted, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb,
+vectorMintbGridGraphSorted, vectorDegeneracyPoissonSortedByMintb, vectorMintbPoissonSorted,
+vectorDegeneracyHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Degeneracy (MINTB)')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)
+featureComparison
+} 
+plotFeatureComparison
+{Not enough input arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 14)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',14,0)">line 14</a>)
+scatter(inputVector2, inputVector1, 'b')
+} 
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scatter', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m', 78)" style="font-weight:bold">scatter</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',78,0)">line 78</a>)
+X and Y must be vectors of the same length.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 18)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',18,0)">line 18</a>)
+scatter(inputVector6, inputVector3, 'r')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted,
+vectorDegeneracyPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDegeneracyHeavyTailSortedByGamintb,
+vectorGamintbHeavyTailSorted, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb,
+vectorMintbGridGraphSorted, vectorDegeneracyPoissonSortedByMintb, vectorMintbPoissonSorted,
+vectorDegeneracyHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Degeneracy (MINTB)')
+} 
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scatter', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m', 78)" style="font-weight:bold">scatter</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',78,0)">line 78</a>)
+X and Y must be vectors of the same length.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 18)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',18,0)">line 18</a>)
+scatter(inputVector6, inputVector3, 'r')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted,
+vectorDegeneracyPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDegeneracyHeavyTailSortedByGamintb,
+vectorGamintbHeavyTailSorted, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb,
+vectorMintbGridGraphSorted, vectorDegeneracyPoissonSortedByMintb, vectorMintbPoissonSorted,
+vectorDegeneracyHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Degeneracy (MINTB)')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)
+featureComparison
+} 
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)
+opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\specgraph\scatter.m',78,0)
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',18,0)
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.graphics.axis.Axes/set')" style="font-weight:bold">matlab.graphics.axis.Axes/set</a>
+Invalid or deleted object.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot>renderLabels/setLabelappdata', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 3010)" style="font-weight:bold">boxplot>renderLabels/setLabelappdata</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',3010,0)">line 3010</a>)
+            set(ax,'ActivePositionProperty','OuterPosition');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot>renderLabels', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 2911)" style="font-weight:bold">boxplot>renderLabels</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',2911,0)">line 2911</a>)
+    setLabelappdata()
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 407)" style="font-weight:bold">boxplot</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',407,0)">line 407</a>)
+hlabel = renderLabels (labelDataLocation,labelPtsPosition,labelText,...
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('performanceComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m', 64)" style="font-weight:bold">performanceComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m',64,0)">line 64</a>)
+boxplot([vectorGAMINTBGridGraph; vectorMINTBGridGraph],group,'Labels',{'GAMINTB','MINTB'})
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 28)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',28,0)">line 28</a>)
+performanceComparison
+} 
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+[Warning: Ignoring extra legend entries.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>process_inputs', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 566)" style="font-weight:bold">legend>process_inputs</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',566,0)">line 566</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>make_legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 310)" style="font-weight:bold">legend>make_legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',310,0)">line 310</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 261)" style="font-weight:bold">legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',261,0)">line 261</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 21)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',21,0)">line 21</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)] 
+[Warning: Ignoring extra legend entries.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>process_inputs', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 566)" style="font-weight:bold">legend>process_inputs</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',566,0)">line 566</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>make_legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 310)" style="font-weight:bold">legend>make_legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',310,0)">line 310</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 261)" style="font-weight:bold">legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',261,0)">line 261</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 35)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',35,0)">line 35</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)] 
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
+One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
+One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
+One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+[Warning: Ignoring extra legend entries.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>process_inputs', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 566)" style="font-weight:bold">legend>process_inputs</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',566,0)">line 566</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>make_legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 310)" style="font-weight:bold">legend>make_legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',310,0)">line 310</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 261)" style="font-weight:bold">legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',261,0)">line 261</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 30)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',30,0)">line 30</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)] 
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
+One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
+One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
+One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
+doc subplot
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+[Warning: Ignoring extra legend entries.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>process_inputs', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 566)" style="font-weight:bold">legend>process_inputs</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',566,0)">line 566</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>make_legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 310)" style="font-weight:bold">legend>make_legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',310,0)">line 310</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 261)" style="font-weight:bold">legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',261,0)">line 261</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 30)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',30,0)">line 30</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)] 
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+subsubplot
+{Undefined function or variable 'subsubplot'.
+} 
+doc subsubplot
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+[Warning: Ignoring extra legend entries.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>process_inputs', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 566)" style="font-weight:bold">legend>process_inputs</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',566,0)">line 566</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend>make_legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 310)" style="font-weight:bold">legend>make_legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',310,0)">line 310</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('legend', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p', 261)" style="font-weight:bold">legend</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',261,0)">line 261</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 30)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',30,0)">line 30</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 22)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',22,0)">line 22</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)] 
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',566,0)
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',30,0)
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+doc lsline
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+{Undefined function or variable 'GAMINTB'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 58)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',58,0)">line 58</a>)
+GAMINTB
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)
+featureComparison
+} 
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',58,0)
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+{Undefined function or variable 'MINTB'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 208)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',208,0)">line 208</a>)
+MINTB
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)
+featureComparison
+} 
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',208,0)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureMaxVertexDegree.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotPoissonGraphEdited.fig',1)
+doc figure
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\elmat\flipud.m',14,1)">14  </a>x = flip(x,1);
+[Warning: Error occurred while executing the listener callback for event ObjectBeingDestroyed defined for class
+matlab.graphics.illustration.Legend:
+Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.graphics.shape.internal.AxesLayoutManager/MarkDirty')" style="font-weight:bold">matlab.graphics.shape.internal.AxesLayoutManager/MarkDirty</a>
+Attempt to modify the tree during an update traversal
+
+Error in matlab.graphics.shape.internal.AxesLayoutManager>@(~,~)(hObj.MarkDirty('all'))
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('closereq', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m', 18)" style="font-weight:bold">closereq</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m',18,0)">line 18</a>)
+    delete(gcbf);] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('closereq', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m', 18)" style="font-weight:bold">closereq</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m',18,0)">line 18</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('flipud', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\elmat\flipud.m', 14)" style="font-weight:bold">flipud</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\elmat\flipud.m',14,0)">line 14</a>)
+  In matlab.graphics.illustration.Legend/getEntries
+  In matlab.graphics.illustration.Legend/doMethod>layoutEntries
+  In matlab.graphics.illustration.Legend/doMethod
+  In matlab.graphics.illustration.Legend/doUpdate
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('savefig', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\savefig.m', 36)" style="font-weight:bold">savefig</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\savefig.m',36,0)">line 36</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveasfig', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\private\saveasfig.m', 6)" style="font-weight:bold">saveasfig</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\private\saveasfig.m',6,0)">line 6</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveas', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\saveas.m', 153)" style="font-weight:bold">saveas</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\saveas.m',153,0)">line 153</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 61)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',61,0)">line 61</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 89)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',89,0)">line 89</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)] 
+[Warning: Error occurred while executing the listener callback for event ObjectBeingDestroyed defined for class
+matlab.graphics.illustration.Legend:
+Attempt to modify the tree during an update traversal
+
+Error in matlab.graphics.illustration.Legend/doDelete
+
+Error in matlab.graphics.illustration.Legend/doSetup>@(h,e)hObj.doDelete
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('closereq', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m', 18)" style="font-weight:bold">closereq</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m',18,0)">line 18</a>)
+    delete(gcbf);] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('closereq', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m', 18)" style="font-weight:bold">closereq</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\closereq.m',18,0)">line 18</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('flipud', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\elmat\flipud.m', 14)" style="font-weight:bold">flipud</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\elmat\flipud.m',14,0)">line 14</a>)
+  In matlab.graphics.illustration.Legend/getEntries
+  In matlab.graphics.illustration.Legend/doMethod>layoutEntries
+  In matlab.graphics.illustration.Legend/doMethod
+  In matlab.graphics.illustration.Legend/doUpdate
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('savefig', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\savefig.m', 36)" style="font-weight:bold">savefig</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\savefig.m',36,0)">line 36</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveasfig', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\private\saveasfig.m', 6)" style="font-weight:bold">saveasfig</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\private\saveasfig.m',6,0)">line 6</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveas', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\saveas.m', 153)" style="font-weight:bold">saveas</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\saveas.m',153,0)">line 153</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 61)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',61,0)">line 61</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 89)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',89,0)">line 89</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)] 
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureDegeneracy.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureDiameter.fig',1)
+if system_dependent('IsDebugMode')==1, dbquit all; end
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\+matlab\+graphics\+internal\convertUnits.m',10,1)">10  </a>viewport.Units = fromunits;
+if system_dependent('IsDebugMode')==1, dbquit all; end
+
+--------------------------------------------------------------------------------
+           Access violation detected at Mo Mai 27 02:24:53 2019 +0200
+--------------------------------------------------------------------------------
+
+Configuration:
+  Crash Decoding           : Disabled - No sandbox or build area path
+  Crash Mode               : continue (default)
+  Default Encoding         : windows-1252
+  Deployed                 : false
+  Graphics Driver          : Intel Intel(R) HD Graphics 620 Version 4.5.0 - Build 24.20.100.6292
+  Graphics card 1          : Intel Corporation ( 0x8086 ) Intel(R) HD Graphics 620 Version 24.20.100.6292 (2018-9-28)
+  Java Version             : Java 1.8.0_152-b16 with Oracle Corporation Java HotSpot(TM) 64-Bit Server VM mixed mode
+  MATLAB Architecture      : win64
+  MATLAB Entitlement ID    : 1523333
+  MATLAB Root              : C:\Program Files\MATLAB\R2018b
+  MATLAB Version           : 9.5.0.944444 (R2018b)
+  OpenGL                   : hardware
+  Operating System         : Microsoft Windows 10 Home
+  Process ID               : 5912
+  Processor ID             : x86 Family 6 Model 142 Stepping 10, GenuineIntel
+  Session Key              : 03db5be0-d2c5-44ea-a101-c5681c9539ef
+  Window System            : Version 10.0 (Build 17763)
+
+Fault Count: 1
+
+
+Abnormal termination
+
+Register State (from fault):
+  RAX = 0000000000000000  RBX = 0000000000000001
+  RCX = 0000000000000000  RDX = 00000000043f5658
+  RSP = 00000000043f55b0  RBP = 00000000043f5e79
+  RSI = 000000002d6cea60  RDI = 00000000043f5d20
+ 
+   R8 = 0000000000194200   R9 = 0000000000008000
+  R10 = 00000000bd8bc000  R11 = 00000000043f55a0
+  R12 = 0000000000000000  R13 = 00000000043f5cd8
+  R14 = 0000000000000000  R15 = 0000000000000000
+ 
+  RIP = 000000001865909a  EFL = 00010202
+ 
+   CS = 0033   FS = 0053   GS = 002b
+
+Stack Trace (from fault):
+[  0] 0x000000001865909a                      bin\win64\handle_graphics.dll+02592922 graphics::primitive::canvas::Canvas::updateImpl+00000410
+[  1] 0x0000000018656866                      bin\win64\handle_graphics.dll+02582630 graphics::primitive::canvas::Canvas::initiateUpdate+00000294
+[  2] 0x0000000018407f84                      bin\win64\handle_graphics.dll+00163716 graphics::primitive::canvas::JavaCanvas::startUpdate+00000964
+[  3] 0x00000000f78ea1d6                                   bin\win64\hg.dll+02662870 UIClientComponentInterface::requestFocus+01675062
+[  4] 0x00000000f78b5c76                                   bin\win64\hg.dll+02448502 UIClientComponentInterface::requestFocus+01460694
+[  5] 0x00000000f77374f5                                   bin\win64\hg.dll+00881909 gbtutils::MixedModeFigure::operator=+00362021
+[  6] 0x00000000f78e9fa6                                   bin\win64\hg.dll+02662310 UIClientComponentInterface::requestFocus+01674502
+[  7] 0x00000000f76976eb                                   bin\win64\hg.dll+00227051 FigureButtonPressedObserver::keyPressed+00095787
+[  8] 0x00000000f78b5c4f                                   bin\win64\hg.dll+02448463 UIClientComponentInterface::requestFocus+01460655
+[  9] 0x00000000f77374f5                                   bin\win64\hg.dll+00881909 gbtutils::MixedModeFigure::operator=+00362021
+[ 10] 0x00000000f77372c1                                   bin\win64\hg.dll+00881345 gbtutils::MixedModeFigure::operator=+00361457
+[ 11] 0x00000000f788f8ac                                   bin\win64\hg.dll+02291884 UIClientComponentInterface::requestFocus+01304076
+[ 12] 0x00000000f78915f1                                   bin\win64\hg.dll+02299377 UIClientComponentInterface::requestFocus+01311569
+[ 13] 0x000000010022183e                        bin\win64\libmwservices.dll+02299966 svWS_CommitDatabaseUpdates+00000158
+[ 14] 0x0000000100213d6e                        bin\win64\libmwservices.dll+02243950 sysq::getCondition+00002766
+[ 15] 0x000000010021591b                        bin\win64\libmwservices.dll+02251035 svWS_ProcessPendingEvents+00000139
+[ 16] 0x00000000edda0baf                              bin\win64\hgutils.dll+00592815 hgutils::drawnow+00000367
+[ 17] 0x00000000edda0b69                              bin\win64\hgutils.dll+00592745 hgutils::drawnow+00000297
+[ 18] 0x00000000ed520078                           bin\win64\hgbuiltins.dll+00262264 mwboost::serialization::singleton_module::unlock+00215976
+[ 19] 0x0000000009cdb724                     bin\win64\pgo\m_dispatcher.dll+00046884 Mdispatcher::getDispatcher+00002228
+[ 20] 0x0000000009cdcbe7                     bin\win64\pgo\m_dispatcher.dll+00052199 Mfh_MATLAB_fn_impl::dispatch_fh+00000343
+[ 21] 0x000000000aaa4ead                            bin\win64\pgo\m_lxe.dll+00347821
+[ 22] 0x000000000ac3e9b6                            bin\win64\pgo\m_lxe.dll+02025910 MathWorks::lxe::ShutdownLxeEngine+00004034
+[ 23] 0x000000000aaaab16                            bin\win64\pgo\m_lxe.dll+00371478
+[ 24] 0x000000000aaa8e1c                            bin\win64\pgo\m_lxe.dll+00364060
+[ 25] 0x000000000aabb265                            bin\win64\pgo\m_lxe.dll+00438885
+[ 26] 0x000000000aab8e26                            bin\win64\pgo\m_lxe.dll+00429606
+[ 27] 0x000000000aab8a24                            bin\win64\pgo\m_lxe.dll+00428580
+[ 28] 0x0000000009cde007                     bin\win64\pgo\m_dispatcher.dll+00057351 Mfh_file::dispatch_fh_impl+00001111
+[ 29] 0x0000000009cddaf2                     bin\win64\pgo\m_dispatcher.dll+00056050 Mfh_file::dispatch_fh_with_reuse+00000066
+[ 30] 0x000000000c5de19a                            bin\win64\pgo\m_lxe.dll+28893594 mwboost::archive::detail::pointer_oserializer<mwboost::archive::binaryTerm_oarchive,MathWorks::lxe::MatlabIrTree>::save_object_ptr+00752766
+[ 31] 0x000000000aab478f                            bin\win64\pgo\m_lxe.dll+00411535
+[ 32] 0x000000000ab733a5                            bin\win64\pgo\m_lxe.dll+01192869 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00310889
+[ 33] 0x0000000009eebab1                    bin\win64\pgo\m_interpreter.dll+00047793 inFullFevalFcn+00000705
+[ 34] 0x0000000009cdb724                     bin\win64\pgo\m_dispatcher.dll+00046884 Mdispatcher::getDispatcher+00002228
+[ 35] 0x0000000009cdcbe7                     bin\win64\pgo\m_dispatcher.dll+00052199 Mfh_MATLAB_fn_impl::dispatch_fh+00000343
+[ 36] 0x000000000aaa4ead                            bin\win64\pgo\m_lxe.dll+00347821
+[ 37] 0x000000000ac3e9b6                            bin\win64\pgo\m_lxe.dll+02025910 MathWorks::lxe::ShutdownLxeEngine+00004034
+[ 38] 0x000000000aaaab16                            bin\win64\pgo\m_lxe.dll+00371478
+[ 39] 0x000000000aaa8e1c                            bin\win64\pgo\m_lxe.dll+00364060
+[ 40] 0x000000000aabb265                            bin\win64\pgo\m_lxe.dll+00438885
+[ 41] 0x000000000aaba88c                            bin\win64\pgo\m_lxe.dll+00436364
+[ 42] 0x000000000aab8779                            bin\win64\pgo\m_lxe.dll+00427897
+[ 43] 0x000000000aab90eb                            bin\win64\pgo\m_lxe.dll+00430315
+[ 44] 0x000000000aab8a49                            bin\win64\pgo\m_lxe.dll+00428617
+[ 45] 0x0000000009cde007                     bin\win64\pgo\m_dispatcher.dll+00057351 Mfh_file::dispatch_fh_impl+00001111
+[ 46] 0x0000000009cdda9e                     bin\win64\pgo\m_dispatcher.dll+00055966 Mfh_file::dispatch_fh+00000062
+[ 47] 0x000000000aaa4ead                            bin\win64\pgo\m_lxe.dll+00347821
+[ 48] 0x000000000ac3e9b6                            bin\win64\pgo\m_lxe.dll+02025910 MathWorks::lxe::ShutdownLxeEngine+00004034
+[ 49] 0x000000000ab9fd3c                            bin\win64\pgo\m_lxe.dll+01375548 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00493568
+[ 50] 0x000000000aba091c                            bin\win64\pgo\m_lxe.dll+01378588 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00496608
+[ 51] 0x000000000aba1c92                            bin\win64\pgo\m_lxe.dll+01383570 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00501590
+[ 52] 0x000000000aba28f8                            bin\win64\pgo\m_lxe.dll+01386744 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00504764
+[ 53] 0x000000000aba1ddf                            bin\win64\pgo\m_lxe.dll+01383903 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00501923
+[ 54] 0x000000000aba1ede                            bin\win64\pgo\m_lxe.dll+01384158 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00502178
+[ 55] 0x000000000aaa9a7d                            bin\win64\pgo\m_lxe.dll+00367229
+[ 56] 0x000000000aabb265                            bin\win64\pgo\m_lxe.dll+00438885
+[ 57] 0x000000000aaba88c                            bin\win64\pgo\m_lxe.dll+00436364
+[ 58] 0x000000000aab8779                            bin\win64\pgo\m_lxe.dll+00427897
+[ 59] 0x000000000aab90eb                            bin\win64\pgo\m_lxe.dll+00430315
+[ 60] 0x000000000aab8a49                            bin\win64\pgo\m_lxe.dll+00428617
+[ 61] 0x0000000009cde007                     bin\win64\pgo\m_dispatcher.dll+00057351 Mfh_file::dispatch_fh_impl+00001111
+[ 62] 0x0000000009cdda9e                     bin\win64\pgo\m_dispatcher.dll+00055966 Mfh_file::dispatch_fh+00000062
+[ 63] 0x000000000aaa4ead                            bin\win64\pgo\m_lxe.dll+00347821
+[ 64] 0x000000000ac3e9b6                            bin\win64\pgo\m_lxe.dll+02025910 MathWorks::lxe::ShutdownLxeEngine+00004034
+[ 65] 0x000000000ab9fd3c                            bin\win64\pgo\m_lxe.dll+01375548 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00493568
+[ 66] 0x000000000aba091c                            bin\win64\pgo\m_lxe.dll+01378588 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00496608
+[ 67] 0x000000000aba1c92                            bin\win64\pgo\m_lxe.dll+01383570 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00501590
+[ 68] 0x000000000aba28f8                            bin\win64\pgo\m_lxe.dll+01386744 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00504764
+[ 69] 0x000000000aba1ddf                            bin\win64\pgo\m_lxe.dll+01383903 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00501923
+[ 70] 0x000000000aba1ede                            bin\win64\pgo\m_lxe.dll+01384158 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00502178
+[ 71] 0x000000000aaa9a7d                            bin\win64\pgo\m_lxe.dll+00367229
+[ 72] 0x000000000aabb265                            bin\win64\pgo\m_lxe.dll+00438885
+[ 73] 0x000000000aaba88c                            bin\win64\pgo\m_lxe.dll+00436364
+[ 74] 0x000000000aab42a1                            bin\win64\pgo\m_lxe.dll+00410273
+[ 75] 0x000000000aab39c6                            bin\win64\pgo\m_lxe.dll+00408006
+[ 76] 0x000000000aab3ace                            bin\win64\pgo\m_lxe.dll+00408270
+[ 77] 0x000000000ac93780                            bin\win64\pgo\m_lxe.dll+02373504 mwboost::archive::detail::oserializer<mwboost::archive::xml_oarchive,MathWorks::lxe::CodeClearEvent>::oserializer<mwboost::archive::xml_oarchive,MathWorks::lxe::CodeClearEvent>+00012824
+[ 78] 0x000000000ac9372e                            bin\win64\pgo\m_lxe.dll+02373422 mwboost::archive::detail::oserializer<mwboost::archive::xml_oarchive,MathWorks::lxe::CodeClearEvent>::oserializer<mwboost::archive::xml_oarchive,MathWorks::lxe::CodeClearEvent>+00012742
+[ 79] 0x000000000ab734fd                            bin\win64\pgo\m_lxe.dll+01193213 mwboost::archive::detail::iserializer<mwboost::archive::binaryTerm_iarchive,MathWorks::lxe::function_descriptor>::load_object_data+00311233
+[ 80] 0x0000000009f369e7                    bin\win64\pgo\m_interpreter.dll+00354791 inEvalCmdWithLocalReturn+00000063
+[ 81] 0x00000000fb610388                          bin\win64\libmwbridge.dll+00131976 mnParser+00001304
+[ 82] 0x0000000009ad3618                                  bin\win64\mcr.dll+00341528 mcr::runtime::setInterpreterThreadSingletonToCurrent+00020808
+[ 83] 0x0000000009ad414d                                  bin\win64\mcr.dll+00344397 mcr::runtime::setInterpreterThreadSingletonToCurrent+00023677
+[ 84] 0x0000000009a9b1ba                                  bin\win64\mcr.dll+00111034 mcrOptions::set_use_license_manager+00075498
+[ 85] 0x0000000009ab6e74                                  bin\win64\mcr.dll+00224884 mcrOptions::set_use_license_manager+00189348
+[ 86] 0x00000000fd02cfee                                  bin\win64\iqm.dll+00643054 iqm::PackagedTaskPlugin::execute+00000894
+[ 87] 0x00000000fd02ce63                                  bin\win64\iqm.dll+00642659 iqm::PackagedTaskPlugin::execute+00000499
+[ 88] 0x00000000fcffcc07                                  bin\win64\iqm.dll+00445447 iqm::Iqm::setupIqmFcnPtrs+00076215
+[ 89] 0x00000000fcffcc59                                  bin\win64\iqm.dll+00445529 iqm::Iqm::setupIqmFcnPtrs+00076297
+[ 90] 0x00000000fcffca16                                  bin\win64\iqm.dll+00444950 iqm::Iqm::setupIqmFcnPtrs+00075718
+[ 91] 0x00000000fcfd9748                                  bin\win64\iqm.dll+00300872 iqm::Iqm::deliver+00005880
+[ 92] 0x00000000fcfd8eef                                  bin\win64\iqm.dll+00298735 iqm::Iqm::deliver+00003743
+[ 93] 0x00000000fcfdac0d                                  bin\win64\iqm.dll+00306189 iqm::Iqm::deliver+00011197
+[ 94] 0x0000000100203775                        bin\win64\libmwservices.dll+02176885 services::system_events::PpeDispatchHook::dispatchOne+00036213
+[ 95] 0x0000000100212a63                        bin\win64\libmwservices.dll+02239075 sysq::addProcessPendingEventsUnitTestHook+00006035
+[ 96] 0x0000000100214310                        bin\win64\libmwservices.dll+02245392 sysq::getCondition+00004208
+[ 97] 0x000000010021596d                        bin\win64\libmwservices.dll+02251117 svWS_ProcessPendingEvents+00000221
+[ 98] 0x0000000009ad7724                                  bin\win64\mcr.dll+00358180 mcr::runtime::setInterpreterThreadSingletonToCurrent+00037460
+[ 99] 0x0000000009ad7f16                                  bin\win64\mcr.dll+00360214 mcr::runtime::setInterpreterThreadSingletonToCurrent+00039494
+[100] 0x0000000009accabf                                  bin\win64\mcr.dll+00314047 mcr_process_events+00001007
+[101] 0x00000000099dd040                             bin\win64\MVMLocal.dll+00380992 mvm_server::inproc::LocalFactory::terminate+00177312
+[102] 0x00000000fa9d9480           
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('savefig', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\savefig.m', 43)" style="font-weight:bold">savefig</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\savefig.m',43,0)">line 43</a>)
+H must be an array of handles to valid figures.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveasfig', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\private\saveasfig.m', 6)" style="font-weight:bold">saveasfig</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\private\saveasfig.m',6,0)">line 6</a>)
+savefig(h, name);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveas', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\saveas.m', 153)" style="font-weight:bold">saveas</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\general\saveas.m',153,0)">line 153</a>)
+    feval( ['saveas' format], h, name )
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plotFeatureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m', 60)" style="font-weight:bold">plotFeatureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plotFeatureComparison.m',60,0)">line 60</a>)
+saveas(figure,[pwd filename]);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('featureComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m', 89)" style="font-weight:bold">featureComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\featureComparison.m',89,0)">line 89</a>)
+plotFeatureComparison(vectorEccentricityGridGraphSortedByGamintb, vectorGamintbGridGraphSorted,
+vectorEccentricityPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorEccentricityHeavyTailSortedByGamintb,
+vectorGamintbHeavyTailSorted, 'Eccentricity (GAMINTB)', vectorEccentricityGridGraphSortedByMintb,
+vectorMintbGridGraphSorted, vectorEccentricityPoissonSortedByMintb, vectorMintbPoissonSorted,
+vectorEccentricityHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Eccentricity (MINTB)',
+'/plots/featureEccentricity.fig')
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 24)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',24,0)">line 24</a>)
+featureComparison
+} 
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\scribe\legend.p',89,1)">89  </a>args = varargin;
+if system_dependent('IsDebugMode')==1, dbquit all; end
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotGridGraph.fig',1)
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of MinCut with GAMINTB on any Graph.
+No significant dependency of MinCut with MINTB on any Graph.
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 5.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of MinCut with GAMINTB on any Graph.
+No significant dependency of MinCut with MINTB on any Graph.
 Main
 
 =============== Correlation coefficient ===============
@@ -31,15 +823,84 @@ One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
 One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
 One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
 One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
-MATLAB has lost its connection to the license server.
-MATLAB will make 7 more reconnection attempt(s) and then exit. Any unsaved changes will be lost.
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotGridGraph.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureRadius.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotHeavyTailGraph.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotHeavyTailGraphEdited.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotPoissonGraph.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotPoissonGraphEdited.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureAvgVertexDegree.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureDegeneracy.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureDiameter.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureEccentricity.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureMaxVertexDegree.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureMinCut.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureMinVertexDegree.fig',1)
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('uiwait', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\uiwait.m', 48)" style="font-weight:bold">uiwait</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\uiwait.m',48,0)">line 48</a>)
+Input argument must be of type figure
 
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('filemenufcn>localSaveExportHelper', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m', 234)" style="font-weight:bold">filemenufcn>localSaveExportHelper</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m',234,0)">line 234</a>)
+  uiwait(errordlg(ex.getReport('basic','hyperlinks','off'),getString(message('MATLAB:uistring:filemenufcn:ErrorSavingFigureDialog')),'modal'));
+  % Hyperlinks are turned off due to g606408
 
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('filemenufcn>localSaveExport', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m', 348)" style="font-weight:bold">filemenufcn>localSaveExport</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m',348,0)">line 348</a>)
+localSaveExportHelper(hfig, filename, typesorig, typevalueorig, fromExport);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('filemenufcn', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m', 60)" style="font-weight:bold">filemenufcn</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m',60,0)">line 60</a>)
+        localSaveExport(hfig, false)
+} 
+Error while evaluating DestroyedObject Callback.
+
+[Warning: The figure is too large for the page and will be cut off. Resize the figure, adjust the output size by
+setting the figure's PaperPosition property, use the 'print' command with either the  '-bestfit' or '-fillpage'
+options, or use the 'Best fit' or 'Fill page' options on the 'Print Preview' window.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('validate', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\private\validate.m', 142)" style="font-weight:bold">validate</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\private\validate.m',142,0)">line 142</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('print', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\print.m', 67)" style="font-weight:bold">print</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\graphics\print.m',67,0)">line 67</a>)
+  In hgexport
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('filemenufcn>localSaveExportHelper', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m', 223)" style="font-weight:bold">filemenufcn>localSaveExportHelper</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m',223,0)">line 223</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('filemenufcn>localSaveExport', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m', 348)" style="font-weight:bold">filemenufcn>localSaveExport</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m',348,0)">line 348</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('filemenufcn', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m', 60)" style="font-weight:bold">filemenufcn</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\uitools\filemenufcn.m',60,0)">line 60</a>)] 
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotGridGraph.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotHeavyTailGraph.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotHeavyTailGraphEdited.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotPoissonGraph.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\boxplotPoissonGraphEdited.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureAvgVertexDegree.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureDegeneracy.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureDiameter.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureEccentricity.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureMaxVertexDegree.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureMinCut.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureMinVertexDegree.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureRadius.fig',1)
+uiopen('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\plots\featureDiameter.fig',1)
+featureComparison
+
+=============== Correlation coefficient ===============
+
+-> threshold: 4.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of MinCut with GAMINTB on any Graph.
+No significant dependency of MinCut with MINTB on any Graph.
 Main
 
 =============== Correlation coefficient ===============
 
--> threshold: 5.000000e-01 
+-> threshold: 3.000000e-01 
 
 No significant dependency of Degeneracy with GAMINTB on any Graph.
 No significant dependency of Degeneracy with MINTB on any Graph.
@@ -66,5 +927,57 @@ One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
 One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
 One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
 One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.graphics.axis.Axes/set')" style="font-weight:bold">matlab.graphics.axis.Axes/set</a>
+Invalid or deleted object.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot>renderLabels/setLabelappdata', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 3010)" style="font-weight:bold">boxplot>renderLabels/setLabelappdata</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',3010,0)">line 3010</a>)
+            set(ax,'ActivePositionProperty','OuterPosition');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot>renderLabels', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 2911)" style="font-weight:bold">boxplot>renderLabels</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',2911,0)">line 2911</a>)
+    setLabelappdata()
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('boxplot', 'C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m', 407)" style="font-weight:bold">boxplot</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\stats\stats\boxplot.m',407,0)">line 407</a>)
+hlabel = renderLabels (labelDataLocation,labelPtsPosition,labelText,...
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('performanceComparison', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m', 103)" style="font-weight:bold">performanceComparison</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m',103,0)">line 103</a>)
+boxplot([vectorGAMINTBPoisson; vectorMINTBPoisson],group,'Labels',{'GAMINTB','MINTB'})
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Main', 'C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m', 28)" style="font-weight:bold">Main</a> (<a href="matlab: opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\Main.m',28,0)">line 28</a>)
+performanceComparison
+} 
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m',103,0)
+opentoline('C:\Users\julia\Dropbox\Projekt Algorithm Engineering-Projekt\Traffic-Equilibrium\MATLAB\performanceComparison.m',103,0)
+Main
+
+=============== Correlation coefficient ===============
+
+-> threshold: 2.000000e-01 
+
+No significant dependency of Degeneracy with GAMINTB on any Graph.
+No significant dependency of Degeneracy with MINTB on any Graph.
+No significant dependency of Diameter with GAMINTB on any Graph.
+No significant dependency of Diameter with MINTB on any Graph.
+No significant dependency of Eccentricity with GAMINTB on any Graph.
+No significant dependency of Eccentricity with MINTB on any Graph.
+No significant dependency of MaxVertexDegree with GAMINTB on any Graph.
+No significant dependency of MaxVertexDegree with MINTB on any Graph.
+No significant dependency of MinVertexDegree with GAMINTB on any Graph.
+No significant dependency of MinVertexDegree with MINTB on any Graph.
+No significant dependency of AvgVertexDegree with GAMINTB on any Graph.
+No significant dependency of AvgVertexDegree with MINTB on any Graph.
+No significant dependency of Radius with GAMINTB on any Graph.
+No significant dependency of Radius with MINTB on any Graph.
+No significant dependency of MinCut with GAMINTB on any Graph.
+High dependency of MinCut with MINTB on HeavyTail Graph: r_correlation = 2.133514e-01
+
+=============== t-tests ===============
+
+-> threshold: 5.000000e-02 
+
+One sample t-test successful for GAMINTB with GridGraph: t = 6.273672e-141
+One sample t-test successful for MINTB with GridGraph: t = 2.282976e-134
+One sample t-test successful for GAMINTB with Poisson: t = 5.007705e-24
+One sample t-test successful for MINTB with Poisson: t = 4.386869e-140
 One sample t-test successful for GAMINTB with HeavyTail: t = 2.095946e-27
 One sample t-test successful for MINTB with HeavyTail: t = 7.114377e-17
+doc ttest

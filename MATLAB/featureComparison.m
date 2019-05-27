@@ -6,7 +6,7 @@
 
 
 %% threshold
-threshold = 0.5;
+threshold = 0.2;
 
 
 %% Correlation coefficient
@@ -17,8 +17,9 @@ fprintf('\n=============== Correlation coefficient ===============\n\n-> thresho
 %           Comparison            %
 % =============================== %
 
+
 %% ---- Degeneracy ----
-plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb,vectorDegeneracyPoissonSortedByGamintb,vectorDegeneracyHeavyTailSortedByGamintb, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb,vectorDegeneracyPoissonSortedByMintb,vectorDegeneracyHeavyTailSortedByMintb, 'Degeneracy (MINTB)')
+plotFeatureComparison(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorDegeneracyPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDegeneracyHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'Degeneracy (GAMINTB)', vectorDegeneracyGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorDegeneracyPoissonSortedByMintb, vectorMintbPoissonSorted, vectorDegeneracyHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Degeneracy (MINTB)', '/plots/featureDegeneracy.fig')
 
 % GAMINTB
 correlationCoefficient_Degeneracy_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorDegeneracyGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
@@ -51,8 +52,8 @@ else
 end
 
 
-%% ---- Diameter ----
-plotFeatureComparison(vectorDiameterGridGraphSortedByGamintb,vectorDiameterPoissonSortedByGamintb,vectorDiameterHeavyTailSortedByGamintb, 'Diameter (GAMINTB)', vectorDiameterGridGraphSortedByMintb,vectorDiameterPoissonSortedByMintb,vectorDiameterHeavyTailSortedByMintb, 'Diameter (MINTB)')
+% ---- Diameter ----
+plotFeatureComparison(vectorDiameterGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorDiameterPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorDiameterHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'Diameter (GAMINTB)', vectorDiameterGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorDiameterPoissonSortedByMintb, vectorMintbPoissonSorted, vectorDiameterHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Diameter (MINTB)', '/plots/featureDiameter.fig')
 
 % GAMINTB
 correlationCoefficient_Diameter_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorDiameterGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
@@ -84,8 +85,8 @@ else
     disp('No significant dependency of Diameter with MINTB on any Graph.')
 end
 
-%% ---- Eccentricity ----
-plotFeatureComparison(vectorEccentricityGridGraphSortedByGamintb,vectorEccentricityPoissonSortedByGamintb,vectorEccentricityHeavyTailSortedByGamintb, 'Eccentricity (GAMINTB)', vectorEccentricityGridGraphSortedByMintb,vectorEccentricityPoissonSortedByMintb,vectorEccentricityHeavyTailSortedByMintb, 'Eccentricity (MINTB)')
+% ---- Eccentricity ----
+plotFeatureComparison(vectorEccentricityGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorEccentricityPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorEccentricityHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'Eccentricity (GAMINTB)', vectorEccentricityGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorEccentricityPoissonSortedByMintb, vectorMintbPoissonSorted, vectorEccentricityHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Eccentricity (MINTB)', '/plots/featureEccentricity.fig')
 
 % GAMINTB
 correlationCoefficient_Eccentricity_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorEccentricityGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
@@ -118,8 +119,8 @@ else
 end
 
 
-%% ---- MaxVertexDegree ----
-plotFeatureComparison(vectorMaxVertexDegreeGridGraphSortedByGamintb,vectorMaxVertexDegreePoissonSortedByGamintb,vectorMaxVertexDegreeHeavyTailSortedByGamintb, 'MaxVertexDegree (GAMINTB)', vectorMaxVertexDegreeGridGraphSortedByMintb,vectorMaxVertexDegreePoissonSortedByMintb,vectorMaxVertexDegreeHeavyTailSortedByMintb, 'MaxVertexDegree (MINTB)')
+% ---- MaxVertexDegree ----
+plotFeatureComparison(vectorMaxVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMaxVertexDegreePoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorMaxVertexDegreeHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'MaxVertexDegree (GAMINTB)', vectorMaxVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMaxVertexDegreePoissonSortedByMintb, vectorMintbPoissonSorted, vectorMaxVertexDegreeHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'MaxVertexDegree (MINTB)', '/plots/featureMaxVertexDegree.fig')
 
 % GAMINTB
 correlationCoefficient_MaxVertexDegree_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorMaxVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
@@ -152,8 +153,8 @@ else
 end
 
 
-%% ---- MinVertexDegree ----
-plotFeatureComparison(vectorMinVertexDegreeGridGraphSortedByGamintb,vectorMinVertexDegreePoissonSortedByGamintb,vectorMinVertexDegreeHeavyTailSortedByGamintb, 'MinVertexDegree (GAMINTB)', vectorMinVertexDegreeGridGraphSortedByMintb,vectorMinVertexDegreePoissonSortedByMintb,vectorMinVertexDegreeHeavyTailSortedByMintb, 'MinVertexDegree (MINTB)')
+% ---- MinVertexDegree ----
+plotFeatureComparison(vectorMinVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMinVertexDegreePoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorMinVertexDegreeHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'MinVertexDegree (GAMINTB)', vectorMinVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMinVertexDegreePoissonSortedByMintb, vectorMintbPoissonSorted, vectorMinVertexDegreeHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'MinVertexDegree (MINTB)', '/plots/featureMinVertexDegree.fig')
 
 % GAMINTB
 correlationCoefficient_MinVertexDegree_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorMinVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
@@ -186,8 +187,8 @@ else
 end
 
 
-%% ---- AvgVertexDegree ----
-plotFeatureComparison(vectorAvgVertexDegreeGridGraphSortedByGamintb,vectorAvgVertexDegreePoissonSortedByGamintb,vectorAvgVertexDegreeHeavyTailSortedByGamintb, 'AvgVertexDegree (GAMINTB)', vectorAvgVertexDegreeGridGraphSortedByMintb,vectorAvgVertexDegreePoissonSortedByMintb,vectorAvgVertexDegreeHeavyTailSortedByMintb, 'AvgVertexDegree (MINTB)')
+% ---- AvgVertexDegree ----
+plotFeatureComparison(vectorAvgVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorAvgVertexDegreePoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorAvgVertexDegreeHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'AvgVertexDegree (GAMINTB)', vectorAvgVertexDegreeGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorAvgVertexDegreePoissonSortedByMintb, vectorMintbPoissonSorted, vectorAvgVertexDegreeHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'AvgVertexDegree (MINTB)', '/plots/featureAvgVertexDegree.fig')
 
 % GAMINTB
 correlationCoefficient_AvgVertexDegree_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorAvgVertexDegreeGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
@@ -220,8 +221,8 @@ else
 end
 
 
-%% ---- RadiusGridGraph ----
-plotFeatureComparison(vectorRadiusGridGraphSortedByGamintb,vectorRadiusPoissonSortedByGamintb,vectorRadiusHeavyTailSortedByGamintb, 'Radius (GAMINTB)', vectorRadiusGridGraphSortedByMintb,vectorRadiusPoissonSortedByMintb,vectorRadiusHeavyTailSortedByMintb, 'Radius (MINTB)')
+% ---- RadiusGridGraph ----
+plotFeatureComparison(vectorRadiusGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorRadiusPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorRadiusHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'Radius (GAMINTB)', vectorRadiusGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorRadiusPoissonSortedByMintb, vectorMintbPoissonSorted, vectorRadiusHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'Radius (MINTB)', '/plots/featureRadius.fig')
 
 % GAMINTB
 correlationCoefficient_Radius_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorRadiusGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
@@ -254,8 +255,8 @@ else
 end
 
 
-%% ---- MinCutGridGraph ----
-plotFeatureComparison(vectorMinCutGridGraphSortedByGamintb,vectorMinCutPoissonSortedByGamintb,vectorMinCutHeavyTailSortedByGamintb, 'MinCut (GAMINTB)', vectorMinCutGridGraphSortedByMintb,vectorMinCutPoissonSortedByMintb,vectorMinCutHeavyTailSortedByMintb, 'MinCut (MINTB)')
+% ---- MinCutGridGraph ----
+plotFeatureComparison(vectorMinCutGridGraphSortedByGamintb, vectorGamintbGridGraphSorted, vectorMinCutPoissonSortedByGamintb, vectorGamintbPoissonSorted, vectorMinCutHeavyTailSortedByGamintb, vectorGamintbHeavyTailSorted, 'MinCut (GAMINTB)', vectorMinCutGridGraphSortedByMintb, vectorMintbGridGraphSorted, vectorMinCutPoissonSortedByMintb, vectorMintbPoissonSorted, vectorMinCutHeavyTailSortedByMintb, vectorMintbHeavyTailSorted, 'MinCut (MINTB)', '/plots/featureMinCut.fig')
 
 % GAMINTB
 correlationCoefficient_MinCut_GridGraph_GAMINTB = CalculateCorrelationCoefficient(vectorMinCutGridGraphSortedByGamintb, vectorGamintbGridGraphSorted);
