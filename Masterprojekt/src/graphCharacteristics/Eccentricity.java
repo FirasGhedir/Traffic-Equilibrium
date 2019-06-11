@@ -29,6 +29,7 @@ public class Eccentricity {
 
 	Graphs G;
 	private double avgEccentricity; // the average vertex eccentricity of the graph
+	private int maxEccentricity; // the average vertex eccentricity of the graph
 	private int[] eccentricities; // vertex vector with its eccentricity values
 
 	/**
@@ -45,10 +46,14 @@ public class Eccentricity {
 		this.setG(graph);
 		this.setEccentricities(new int[graph.getVertices().size()]);
 		this.setAvgEccentricity(Double.MAX_VALUE);
+		this.setMaxEccentricity(Integer.MAX_VALUE);
 
 		for (int vertex = 0; vertex < graph.getVertices().size(); vertex++) {
 			this.eccentricities[vertex] = breadthFirstSearch(graph, vertex);
 		}
+
+		this.setAvgEccentricity(Arrays.stream(eccentricities).average().orElse(Double.NaN));
+		this.setMaxEccentricity(Arrays.stream(eccentricities).max().getAsInt());
 	}
 
 	/**
@@ -95,8 +100,6 @@ public class Eccentricity {
 				}
 			}
 		}
-
-		this.avgEccentricity = Arrays.stream(eccentricities).average().orElse(Double.NaN);
 
 		return eccentricity;
 	}
@@ -166,4 +169,27 @@ public class Eccentricity {
 	public void setAvgEccentricity(double avgEccentricity) {
 		this.avgEccentricity = avgEccentricity;
 	}
+
+	/**
+	 * Get the maximum eccentricity in the given graph.
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the average eccentricity
+	 */
+	public int getMaxEccentricity() {
+		return this.maxEccentricity;
+	}
+
+	/**
+	 * Get the average eccentricities in the given graph.
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @param avgEccentricity the given average accentricity value
+	 */
+	public void setMaxEccentricity(int maxEccentricity) {
+		this.maxEccentricity = maxEccentricity;
+	}
+
 }

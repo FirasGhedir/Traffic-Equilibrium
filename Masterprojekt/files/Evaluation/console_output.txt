@@ -3,11 +3,13 @@
 |   GridGraph   |
  ---------------
 
-Start extracting data now... Please wait...
+Start extracting data now... 
 
    listOfMintbFile size:          250
    listOfGamintbFiles size:       250
    listOfGraphInstanceFiles size: 250
+
+Please wait, creating the result set will only take a few minutes...
 
 
  -> GAMINTB vector size:         250
@@ -26,17 +28,19 @@ Start extracting data now... Please wait...
  -> Radius vector size:          250
  -> MinCut vector size:          250
 
-Extracting data was successfull...
+Extracting data finished...
 
  -------------------
 |   Poisson Graph   |
  -------------------
 
-Start extracting data now... Please wait...
+Start extracting data now... 
 
    listOfMintbFile size:          250
    listOfGamintbFiles size:       250
    listOfGraphInstanceFiles size: 250
+
+Please wait, creating the result set will only take a few minutes...
 
 
  -> GAMINTB vector size:         250
@@ -55,17 +59,19 @@ Start extracting data now... Please wait...
  -> Radius vector size:          250
  -> MinCut vector size:          250
 
-Extracting data was successfull...
+Extracting data finished...
 
  ------------------------
 | Poisson Graph (edited) |
  ------------------------
 
-Start extracting data now... Please wait...
+Start extracting data now... 
 
    listOfMintbFile size:          96
    listOfGamintbFiles size:       96
    listOfGraphInstanceFiles size: 96
+
+Please wait, creating the result set will only take a few minutes...
 
 
  -> GAMINTB vector size:         96
@@ -84,17 +90,19 @@ Start extracting data now... Please wait...
  -> Radius vector size:          96
  -> MinCut vector size:          96
 
-Extracting data was successfull...
+Extracting data finished...
 
  -------------------
 |  HeavyTail Graph  |
  -------------------
 
-Start extracting data now... Please wait...
+Start extracting data now... 
 
    listOfMintbFile size:          250
    listOfGamintbFiles size:       250
    listOfGraphInstanceFiles size: 250
+
+Please wait, creating the result set will only take a few minutes...
 
 
  -> GAMINTB vector size:         155
@@ -113,17 +121,19 @@ Start extracting data now... Please wait...
  -> Radius vector size:          250
  -> MinCut vector size:          250
 
-Extracting data was successfull...
+Extracting data finished...
 
  --------------------------
 | HeavyTail Graph (edited) |
  --------------------------
 
-Start extracting data now... Please wait...
+Start extracting data now... 
 
    listOfMintbFile size:          188
    listOfGamintbFiles size:       188
    listOfGraphInstanceFiles size: 188
+
+Please wait, creating the result set will only take a few minutes...
 
 
  -> GAMINTB vector size:         94
@@ -142,4 +152,4 @@ Start extracting data now... Please wait...
  -> Radius vector size:          188
  -> MinCut vector size:          188
 
-Extracting data was successfull...
+Extracting data finished...

@@ -2,6 +2,7 @@ package graphModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -559,9 +560,9 @@ public class Graphs implements Graph<Vertex, Edge> {
 	}
 
 	@Override
-	public ArrayList<Edge> outgoingEdgesOf(Vertex v) {
+	public Set<Edge> outgoingEdgesOf(Vertex v) {
 
-		ArrayList<Edge> tmp = new ArrayList<>();
+		Set<graphModel.Edge> tmp = new HashSet<Edge>();
 		for (int i = 0; i < getEdges().size(); i++) {
 			if (getEdges().get(i).getFrom().equals(v))
 				tmp.add(getEdges().get(i));
@@ -631,12 +632,83 @@ public class Graphs implements Graph<Vertex, Edge> {
 				d_min + rand.nextInt((d_max - d_min) + 1));
 	}
 
+	public static <V, E> E addEdgeWithVertices(Graph<V, E> g, V sourceVertex, V targetVertex) {
+		g.addVertex(sourceVertex);
+		g.addVertex(targetVertex);
+
+		return g.addEdge(sourceVertex, targetVertex);
+	}
+
+	public static <V, E> boolean addGraph(Graph<? super V, ? super E> destination, Graph<V, E> source) {
+		boolean modified = addAllVertices(destination, source.vertexSet());
+		modified |= addAllEdges(destination, source, source.edgeSet());
+
+		return modified;
+	}
+
+	public static <V, E> boolean addAllEdges(Graph<? super V, ? super E> destination, Graph<V, E> source,
+			Collection<? extends E> edges) {
+		boolean modified = false;
+
+		for (E e : edges) {
+			V s = source.getEdgeSource(e);
+			V t = source.getEdgeTarget(e);
+			destination.addVertex(s);
+			destination.addVertex(t);
+			modified |= destination.addEdge(s, t, e);
+		}
+
+		return modified;
+	}
+
+	public static <V, E> boolean addAllVertices(Graph<? super V, ? super E> destination,
+			Collection<? extends V> vertices) {
+		boolean modified = false;
+
+		for (V v : vertices) {
+			modified |= destination.addVertex(v);
+		}
+
+		return modified;
+	}
+
 	public void setPath(String path) {
 		this.path = path;
 	}
 
 	public String getPath() {
 		return this.path;
+	}
+
+	@Override
+	public boolean removeAllEdges(Collection<? extends graphModel.Edge> edges) {
+		return false;
+	}
+
+	@Override
+	public Set<graphModel.Edge> removeAllEdges(graphModel.Vertex sourceVertex, graphModel.Vertex targetVertex) {
+		return null;
+	}
+
+	@Override
+	public boolean removeAllVertices(Collection<? extends graphModel.Vertex> vertices) {
+		return false;
+	}
+
+	@Override
+	public Set<graphModel.Edge> getAllEdges(graphModel.Vertex sourceVertex, graphModel.Vertex targetVertex) {
+		return null;
+	}
+
+	@Override
+	public Set<graphModel.Edge> edgesOf(graphModel.Vertex vertex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public graphModel.Edge removeEdge(graphModel.Vertex sourceVertex, graphModel.Vertex targetVertex) {
+		return null;
 	}
 
 }

@@ -1,9 +1,9 @@
 package graphCharacteristics;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
-
 import java.util.Queue;
-
 import graphModel.Graphs;
 
 /**
@@ -32,23 +32,29 @@ import graphModel.Graphs;
  */
 public class MinCut {
 
-	Graphs G = new Graphs();
+	Graphs graph = new Graphs();
+
 	private String mincut;
 	private int source;
 	private int target;
 
+	private int[] minCutList;
+
 	/**
-	 * Constructor
 	 * 
-	 * @param graph the given graph
+	 * @param graph
 	 */
 	public MinCut(Graphs graph) {
 
+		minCutList = new int[graph.getPlayers().size()];
+
 		// --- calculate min cuts vor each player ---
 		for (int i = 0; i < graph.getPlayers().size(); i++) {
+
 			this.setSource(graph.getPlayers().get(i).getSource().getId());
 			this.setTarget(graph.getPlayers().get(i).getSink().getId());
 			this.setMincut(minCut(graph.getAdjacencyMatrix(), getSource(), getTarget()));
+			minCutList[i] = (this.getMinCutValuePlayer());
 		}
 	}
 
@@ -186,6 +192,38 @@ public class MinCut {
 	}
 
 	/**
+	 * Getter method for the specific player
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the value for MinCut
+	 */
+	public int getMinCutValuePlayer() {
+
+		String splited[] = this.mincut.split("\\n");
+		// Create set from array elements
+		LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>(Arrays.asList(splited));
+		// Get back the array without duplicates
+		splited = linkedHashSet.toArray(new String[] {});
+		int numberOfMinCuts = splited.length;
+
+		return numberOfMinCuts;
+
+	}
+
+	/**
+	 * Getter method for the graph
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the value for MinCut
+	 */
+	public int getMinCutValue() {
+
+		return Arrays.stream(this.minCutList).min().getAsInt();
+	}
+
+	/**
 	 * Getter method for the graph
 	 * 
 	 * --------------------------------------------
@@ -193,7 +231,7 @@ public class MinCut {
 	 * @return the given graph
 	 */
 	public Graphs getG() {
-		return this.G;
+		return this.graph;
 	}
 
 	/**
@@ -204,7 +242,7 @@ public class MinCut {
 	 * @param g the given graph
 	 */
 	public void setG(Graphs g) {
-		G = g;
+		graph = g;
 	}
 
 	/**

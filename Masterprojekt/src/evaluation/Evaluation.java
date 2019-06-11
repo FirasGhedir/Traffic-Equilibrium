@@ -13,6 +13,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -65,7 +67,7 @@ public class Evaluation {
 
 	static ArrayList<Integer> Degeneracy;
 	static ArrayList<Integer> Diameter;
-	static ArrayList<Double> Eccentricity;
+	static ArrayList<Integer> Eccentricity;
 	static ArrayList<Integer> MaxVertexDegree;
 	static ArrayList<Integer> MinVertexDegree;
 	static ArrayList<Double> AvgVertexDegree;
@@ -291,7 +293,7 @@ public class Evaluation {
 	 * 
 	 * @param eccentricity
 	 */
-	public static void setEccentricity(ArrayList<Double> eccentricity) {
+	public static void setEccentricity(ArrayList<Integer> eccentricity) {
 		Eccentricity = eccentricity;
 	}
 
@@ -453,7 +455,7 @@ public class Evaluation {
 				AvgVertexDegree.add(characteristics.getAvgVertexDegree());
 
 				// --- eccentricity
-				Eccentricity.add(characteristics.getAvgEccentricity());
+				Eccentricity.add((int) characteristics.getAvgEccentricity());
 
 				// --- Diameter
 				Diameter.add(characteristics.getDiameter());
@@ -462,10 +464,7 @@ public class Evaluation {
 				Radius.add(characteristics.getRadius());
 
 				// --- Min cut
-				String minCutTmp = characteristics.getMinCut();
-				String splited[] = minCutTmp.split("\\n");
-				int numberOfMinCuts = splited.length;
-				MinCut.add(numberOfMinCuts);
+				MinCut.add(characteristics.getMinCutValue());
 
 				// --- Degeneracy
 				Degeneracy.add(characteristics.getDegeneracy());
@@ -660,6 +659,7 @@ public class Evaluation {
 		System.out.println("\n   listOfMintbFile size:          " + listOfMintbFiles.size());
 		System.out.println("   listOfGamintbFiles size:       " + listOfGamintbFiles.size());
 		System.out.println("   listOfGraphInstanceFiles size: " + listOfGraphInstanceFiles.size() + "\n");
+		System.out.println("Please wait, creating the result set will only take a few minutes...\n");
 
 		buildGamintbData(listOfGamintbFiles);
 		buildMintbData(listOfMintbFiles);
@@ -803,7 +803,7 @@ public class Evaluation {
 		// --- eccentricity ---
 		System.out.println(" -> Eccentricity vector size:    " + Eccentricity.size());
 		String contentGraphInstancesEccentricity = "";
-		for (Double number : Eccentricity) {
+		for (Integer number : Eccentricity) {
 			contentGraphInstancesEccentricity += number + "\n";
 		}
 		contentGraphInstancesEccentricity = contentGraphInstancesEccentricity.trim();
@@ -955,7 +955,7 @@ public class Evaluation {
 
 		setDegeneracy(new ArrayList<Integer>());
 		setDiameter(new ArrayList<Integer>());
-		setEccentricity(new ArrayList<Double>());
+		setEccentricity(new ArrayList<Integer>());
 		setMaxVertexDegree(new ArrayList<Integer>());
 		setMinVertexDegree(new ArrayList<Integer>());
 		setAvgVertexDegree(new ArrayList<Double>());
@@ -964,11 +964,11 @@ public class Evaluation {
 
 		setGraphNumberVertices(new ArrayList<Integer>());
 
-		System.out.println("Start extracting data now... Please wait...");
+		System.out.println("Start extracting data now... ");
 		DataExtractor();
 		writeToFile();
 		replaceMissingFileData();
-		System.out.println("Extracting data was successfull...");
+		System.out.println("Extracting data finished...");
 	}
 
 	/**

@@ -61,6 +61,7 @@ public class CharacteristicsCalculatorMain {
 	// --- eccentricity
 	Eccentricity eccentricityObj;
 	private double avgEccentricity; // the average vertex eccentricity of the graph
+	private int maxEccentricity; // the average vertex eccentricity of the graph
 	private int[] eccentricities; // vertex vector with its eccentricity values
 	int[] eccentricityVector;
 	// --- diameter
@@ -71,10 +72,11 @@ public class CharacteristicsCalculatorMain {
 	private int radius; // the minimum eccentricity of any vertex in the graph
 	// --- radius
 	MinCut minCutObj;
-	private String minCut; // the minimum eccentricity of any vertex in the graph
+	private String minCut; // the Min Cut edges of any vertex in the graph
+	private int minCutValue; // the Min Cut value of the graph
 	// --- degeneracy
 	Degeneracy degeneracyObj;
-	private int degeneracy; // the minimum eccentricity of any vertex in the graph
+	private int degeneracy; // the degeneracy of the graph
 
 	/**
 	 * Constructor
@@ -96,6 +98,7 @@ public class CharacteristicsCalculatorMain {
 		this.eccentricityObj = new Eccentricity(graph);
 		this.eccentricities = eccentricityObj.getEccentricities();
 		this.avgEccentricity = eccentricityObj.getAvgEccentricity();
+		this.maxEccentricity = eccentricityObj.getMaxEccentricity();
 
 		// --- Diameter
 		this.diameterObj = new Diameter(graph);
@@ -108,6 +111,7 @@ public class CharacteristicsCalculatorMain {
 		// --- Min cut
 		this.minCutObj = new MinCut(graph);
 		this.minCut = minCutObj.getMincut();
+		this.minCutValue = minCutObj.getMinCutValue();
 
 		// --- Degeneracy
 		this.degeneracyObj = new Degeneracy(graph);
@@ -179,6 +183,17 @@ public class CharacteristicsCalculatorMain {
 	public double getAvgEccentricity() {
 		return this.avgEccentricity;
 	}
+	
+	/**
+	 * Get the maximum eccentricities in the given graph.
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the maximum eccentricity
+	 */
+	public Integer getMaxEccentricity() {
+		return this.maxEccentricity;
+	}
 
 	/**
 	 * Gets the diameter
@@ -212,14 +227,25 @@ public class CharacteristicsCalculatorMain {
 	}
 
 	/**
-	 * Gets the min cut
+	 * Gets the min cut edges
 	 * 
 	 * --------------------------------------------
 	 * 
-	 * @return the mincut
+	 * @return the mincut edges
 	 */
 	public String getMinCut() {
 		return this.minCut;
+	}
+	
+	/**
+	 * Gets the min cut value
+	 * 
+	 * --------------------------------------------
+	 * 
+	 * @return the mincut value
+	 */
+	public int getMinCutValue() {
+		return this.minCutValue;
 	}
 
 	/**

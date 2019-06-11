@@ -1,6 +1,6 @@
 package graphModel;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -229,10 +229,21 @@ public interface Graph<V, E> {
 	 * @return target vertex
 	 */
 	V getEdgeTarget(E e);
-	
-    Set<E> edgeSet();
 
-	ArrayList<E> outgoingEdgesOf(V v);
+	Set<E> edgeSet();
 
+	Set<E> outgoingEdgesOf(V v);
+
+	boolean removeAllEdges(Collection<? extends E> edges);
+
+	Set<E> removeAllEdges(V sourceVertex, V targetVertex);
+
+	boolean removeAllVertices(Collection<? extends V> vertices);
+
+	public Set<E> getAllEdges(V sourceVertex, V targetVertex);
+
+	public Set<E> edgesOf(V vertex);
+
+	public E removeEdge(V sourceVertex, V targetVertex);
 
 }
